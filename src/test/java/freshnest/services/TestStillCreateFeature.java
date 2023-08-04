@@ -34,7 +34,7 @@ public class TestStillCreateFeature {
 		LocalDate currentDate = LocalDate.now();
 		LocalTime currentTime = LocalTime.now();
 
-		Still still = new Still("https://www.example.com", 2, "Supreme", currentDate, currentTime, false, false);
+		Still still = new Still("www.sampleImage.png", 2, "Supreme", currentDate, currentTime, false, false);
 		StillService stillService = new StillService();
 
 		try {
