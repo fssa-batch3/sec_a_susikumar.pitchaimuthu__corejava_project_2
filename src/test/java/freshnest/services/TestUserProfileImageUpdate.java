@@ -9,69 +9,67 @@ import org.junit.jupiter.api.Test;
 import freshnest.model.User;
 import freshnest.services.exceptions.ServiceException;
 
-public class TestLoginFeature {
+public class TestUserProfileImageUpdate {
 
 	public static void main(String[] args) {
-		User user1 = new User("mani@gmail.com", "susi123@SM");
+
+		User user1 = new User("https://example.com/image.jpg", 44);
 		UserService userService = new UserService();
 
 		try {
-			userService.logInUser(user1);
+			userService.profileImageUpdate(user1);
 
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
 		}
-
 	}
 
 	@Test
-	public void testLoginSuccess() {
+	public void testProfileUpdateSuccess() {
+
+		User user1 = new User("https://example.com/image.jpg", 24);
 		UserService userService = new UserService();
-		User user1 = new User("mani@gmail.com", "susi123@SM");
+
 		try {
-			assertTrue(userService.logInUser(user1));
+			assertTrue(userService.profileImageUpdate(user1));
+
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
+
+		}
+	}
+	
+	
+	public void testProfileInvaliedDetailsUpdateSuccess() {
+
+		User user1 = new User("https://example", 24);
+		UserService userService = new UserService();
+
+		try {
+			assertFalse(userService.profileImageUpdate(user1));
+
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			
+
 		}
 	}
 
-	@Test
-	public void testEmailPasswordNull() {
-		UserService userService = new UserService();
+	
+	public void testProfileDetailsNull() {
+
 		User user1 = null;
-		try {
-			assertFalse(userService.logInUser(user1));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-
-		}
-
-	}
-
-	@Test
-	public void testInvalidPassword() {
 		UserService userService = new UserService();
-		User user1 = new User("susikumar@gmail.com", "susi123SM");
+
 		try {
-			assertFalse(userService.logInUser(user1));
+			assertFalse(userService.profileImageUpdate(user1));
+
 		} catch (ServiceException e) {
 			e.printStackTrace();
+			
 
 		}
 	}
-
-	@Test
-	public void testInvalidEmail() {
-		UserService userService = new UserService();
-		User user1 = new User("susikumargmail.com", "susi123@SM");
-		try {
-			assertFalse(userService.logInUser(user1));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-
-		}
-	}
-
 }

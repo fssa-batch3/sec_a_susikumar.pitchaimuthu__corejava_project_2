@@ -1,7 +1,5 @@
 package freshnest.model;
 
-import java.sql.Date;
-
 public class User {
 
 	private String email;
@@ -11,32 +9,46 @@ public class User {
 	private String lastName;
 	private int age;
 	private long mobile_number;
-	private Date dob;
+	private String dob;
 	private String nationality;
 	private String profile_image;
 	private String gender;
 	private boolean is_delete;
+	private int user_id;
 
-	public User(String email, String username, String password, String firstName, String lastName) {
+	// User first registration contrustor
+	public User(String email, String username, String password, String firstName, String lastName,
+			String profile_image) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.profile_image = profile_image;
 	}
 
+	// user second page resgistration constructor
+	public User(String dob, String gender, String email) {
+		this.dob = dob;
+		this.gender = gender;
+		this.email = email;
+	}
+
+	// User login constructor
 	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}
 
+	// User delete data constructor
 	public User(String email, boolean is_delete) {
 		this.email = email;
 		this.is_delete = is_delete;
 	}
 
+	// User update constructor
 	public User(String email, String username, String password, String firstName, String lastName, int age,
-			long mobile_number, Date dob, String nationality, String profile_image, String gender) {
+			long mobile_number, String dob, String nationality, String gender) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
@@ -46,8 +58,22 @@ public class User {
 		this.mobile_number = mobile_number;
 		this.dob = dob;
 		this.nationality = nationality;
-		this.profile_image = profile_image;
 		this.gender = gender;
+	}
+
+	// User profile update constructor
+	public User(String profileImage, int user_id) {
+		this.profile_image = profileImage;
+		this.user_id = user_id;
+
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public boolean getIs_delete() {
@@ -94,11 +120,11 @@ public class User {
 		this.mobile_number = mobile_number;
 	}
 
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 
