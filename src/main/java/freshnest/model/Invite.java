@@ -10,6 +10,11 @@ public class Invite {
 	private String invite_slogan;
 	private String invite_explanation;
 	private int invite_id;
+	private int reactor_id;
+	private boolean is_like;
+	private boolean is_accept;
+	private boolean is_dislike;
+	private String invite_message;
 	// Constructor
 
 	// Invite create constructor
@@ -43,6 +48,55 @@ public class Invite {
 		this.invite_id = invite_id;
 	}
 	// Getters and letters
+
+	public Invite(int invite_id, int reactor_id, boolean is_accept, boolean is_like, boolean is_dislike, String message) {
+		this.invite_id = invite_id;
+		this.reactor_id = reactor_id;
+		this.is_accept = is_accept;
+		this.is_like  = is_like;
+		this.is_dislike = is_dislike;
+        this.invite_message = message;
+	}
+
+	public boolean getIs_like() {
+		return is_like;
+	}
+
+	public void setIs_like(boolean is_like) {
+		this.is_like = is_like;
+	}
+
+	public boolean getIs_accept() {
+		return is_accept;
+	}
+
+	public void setIs_accept(boolean is_accept) {
+		this.is_accept = is_accept;
+	}
+
+	public boolean getIs_dislike() {
+		return is_dislike;
+	}
+
+	public void setIs_dislike(boolean is_dislike) {
+		this.is_dislike = is_dislike;
+	}
+
+	public String getInvite_message() {
+		return invite_message;
+	}
+
+	public void setInvite_message(String invite_message) {
+		this.invite_message = invite_message;
+	}
+
+	public int getReactor_id() {
+		return reactor_id;
+	}
+
+	public void setReactor_id(int reactor_id) {
+		this.reactor_id = reactor_id;
+	}
 
 	public int getInvite_id() {
 		return invite_id;

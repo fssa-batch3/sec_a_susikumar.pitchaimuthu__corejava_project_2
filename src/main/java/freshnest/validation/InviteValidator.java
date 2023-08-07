@@ -30,8 +30,21 @@ public class InviteValidator {
 	}
 
 	// validate delete invite details
-	public static void validateDeleteInvite(Invite invite) {
+	public static boolean validateDeleteInvite(Invite invite) throws InvalidUserException {
+		if (invite != null) {
+			return true;
+		} else {
+			throw new InvalidUserException("User details not valid");
+		}
+	}
 
+	// validate invite reaction
+	public static boolean validateInviteReact(Invite invite) throws InvalidUserException {
+		if (invite != null) {
+			return true;
+		} else {
+			throw new InvalidUserException("User details not valid");
+		}
 	}
 
 	// Invite type validator

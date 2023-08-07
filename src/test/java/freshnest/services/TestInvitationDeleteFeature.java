@@ -15,7 +15,7 @@ public class TestInvitationDeleteFeature {
 		InviteService inviteService = new InviteService();
 
 		try {
-			inviteService.updateInvite(invite);
+			inviteService.deleteInvite(invite);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -28,7 +28,7 @@ public class TestInvitationDeleteFeature {
 		InviteService inviteService = new InviteService();
 
 		try {
-			assertTrue(inviteService.updateInvite(invite));
+			assertTrue(inviteService.deleteInvite(invite));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

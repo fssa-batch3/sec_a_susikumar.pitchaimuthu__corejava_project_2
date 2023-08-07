@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 import freshnest.model.Chat;
+import freshnest.services.exceptions.ServiceException;
 
 public class TestChatUpdateFeature {
 
@@ -25,7 +26,7 @@ public class TestChatUpdateFeature {
 
 		try {
 			chatService.updateChat(chat);
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 	}
@@ -50,7 +51,7 @@ public class TestChatUpdateFeature {
 
 	@Test
 	public void testChatUpdateFailure() {
-		String chatText = "Hello chellam..";
+		String chatText = "Hello chellam.."; 
 		LocalDate currentDate = LocalDate.now();
 		LocalTime currentTime = LocalTime.now();
 		int chatId = 223;
