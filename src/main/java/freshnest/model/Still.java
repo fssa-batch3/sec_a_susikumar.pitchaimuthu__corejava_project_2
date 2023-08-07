@@ -13,6 +13,7 @@ public class Still {
 	private boolean is_delete;
 	private int still_id;
 	private boolean is_update;
+	
 
 	public Still(String still_url, int user_id, String still_name, LocalDate still_date, LocalTime still_time,
 			boolean is_favourite, boolean is_delete) {
@@ -40,6 +41,10 @@ public class Still {
 		this.still_id = still_id;
 		this.user_id = user_id;
 		
+	}
+
+	public Still(int id) {
+		user_id = id;
 	}
 
 	public void set_still_id(int still_id) {

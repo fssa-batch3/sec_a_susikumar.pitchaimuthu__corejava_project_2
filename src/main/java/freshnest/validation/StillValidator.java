@@ -55,14 +55,23 @@ public class StillValidator {
 
 	}
 
-	public static boolean validateImageUrl(String url) {
+	public static boolean validateImageUrl(String url) throws InvalidUserException {
 
 		try {
 			URL value = new URL(url);
 			System.out.println(value + " Image url is valid");
 			return true;
 		} catch (MalformedURLException e) {
-			return false;
+			throw new InvalidUserException("User details not valid");
+		}
+
+	}
+
+	public static boolean validateReadStill(Still still) throws InvalidUserException {
+		if (still != null) {
+			return true;
+		} else {
+			throw new InvalidUserException("User details not valid");
 		}
 
 	}

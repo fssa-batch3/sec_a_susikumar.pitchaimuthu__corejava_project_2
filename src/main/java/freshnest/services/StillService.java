@@ -8,7 +8,7 @@ import freshnest.validation.StillValidator;
 import freshnest.validation.exceptions.InvalidUserException;
 
 public class StillService {
-	
+
 	public boolean TakeStill(Still still) throws ServiceException {
 		StillDAO stillDAO = new StillDAO();
 		try {
@@ -26,9 +26,8 @@ public class StillService {
 
 	}
 
-	
 	// Test still favourite
-	
+
 	public boolean FavouriteStill(Still still) throws ServiceException {
 		StillDAO stillDAO = new StillDAO();
 		try {
@@ -45,9 +44,9 @@ public class StillService {
 		}
 
 	}
-	
-	// Test still Update 
-	
+
+	// Test still Update
+
 	public boolean UpdateStill(Still still) throws ServiceException {
 		StillDAO stillDAO = new StillDAO();
 		try {
@@ -64,8 +63,7 @@ public class StillService {
 		}
 
 	}
-	
-	
+
 	/// Test still Delete
 	public boolean DeleteStill(Still still) throws ServiceException {
 		StillDAO stillDAO = new StillDAO();
@@ -83,6 +81,22 @@ public class StillService {
 		}
 
 	}
-	
-	
+
+	public boolean ReadStill(Still still)throws ServiceException {
+
+		StillDAO stillDAO = new StillDAO();
+		try {
+			StillValidator.validateReadStill(still);
+			if (stillDAO.readStill(still)) {
+				System.out.println(still.getUser_id() + " stills are read!");
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e);
+		}
+	}
+
 }

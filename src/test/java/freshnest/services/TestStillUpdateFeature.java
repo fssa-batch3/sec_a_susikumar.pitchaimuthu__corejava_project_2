@@ -68,7 +68,7 @@ public class TestStillUpdateFeature {
 		LocalTime currentTime = LocalTime.now();
 
 		// Adding the new image to the database
-		Still still2 = new Still("www..example.png", 2, "Supreme", currentDate, currentTime, false, false);
+		Still still2 = new Still("www.example.png", 2, "Supreme", currentDate, currentTime, false, false);
 
 		StillService stillService = new StillService();
 		try {
@@ -77,7 +77,7 @@ public class TestStillUpdateFeature {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	@Test
 	public void testImageNullDetails() {

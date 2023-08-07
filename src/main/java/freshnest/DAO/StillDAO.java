@@ -44,9 +44,9 @@ public class StillDAO {
 			throw new DAOException(e);
 		}
 	}
-	
+
 	// add favourite feature
-	
+
 	public boolean FavouriteStill(Still still) throws DAOException {
 		try {
 			// Get connection
@@ -56,20 +56,20 @@ public class StillDAO {
 			String insertQuery = "UPDATE fresh_cam SET is_favourite = ? WHERE still_id = ?";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setInt(1, still.get_isfavourite() ? 1 : 0);
-            statement.setInt(2, still.get_still_id());
+			statement.setInt(2, still.get_still_id());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
 
-			// Return successful or not 
+			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
-	
+
 	// add Update still
-	
+
 	public boolean UpdateStill(Still still) throws DAOException {
 		try {
 			// Get connection
@@ -79,18 +79,17 @@ public class StillDAO {
 			String insertQuery = "UPDATE fresh_cam SET is_update = ? WHERE still_id = ? ";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setInt(1, still.getIs_update() ? 1 : 0);
-            statement.setInt(2, still.get_still_id());
+			statement.setInt(2, still.get_still_id());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
 
-			// Return successful or not 
+			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
-	
 
 	public boolean DeleteStill(Still still) throws DAOException {
 		try {
@@ -101,19 +100,38 @@ public class StillDAO {
 			String insertQuery = "UPDATE fresh_cam SET is_delete = ? WHERE still_id = ? AND user_id =?  ";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setInt(1, still.get_isdelete() ? 1 : 0);
-            statement.setInt(2, still.get_still_id());
-            statement.setInt(3, still.getUser_id());
+			statement.setInt(2, still.get_still_id());
+			statement.setInt(3, still.getUser_id());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
 
-			// Return successful or not 
+			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
-	
-	
+
+	public boolean readStill(Still still) throws DAOException {
+		try {
+			// Get connection
+			Connection connection = getConnection();
+
+			// Prepare SQL statement
+			String insertQuery = "SELECT image_url from WHERE user_id = ? ";
+			PreparedStatement statement = connection.prepareStatement(insertQuery);
+			statement.setInt(1, still.getUser_id());
+
+			// Execute the query
+			int rows = statement.executeUpdate();
+
+			// Return successful or not
+			return (rows == 1);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+
+	}
 
 }

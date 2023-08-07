@@ -21,7 +21,7 @@ public class TestStillFavouriteFeature {
 			e.printStackTrace();
 
 		}
-
+ 
 	}
 
 	@Test
