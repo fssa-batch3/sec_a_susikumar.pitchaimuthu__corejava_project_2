@@ -13,10 +13,8 @@ import com.fssa.freshnest.model.Chat;
 public class ChatDAO {
 	// Connect to database
 	public Connection getConnection() throws SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freshnest", "root", "root");
-		return connection;
-
-	}
+        return DriverManager.getConnection("jdbc:mysql://localhost:336/freshnest", "root", "root");
+    }
 
 	public boolean createChat(Chat chat) throws DAOException {
 		String insertQuery = "INSERT INTO fresh_chat (chat, chat_time, chat_date, chat_receiver_id, chat_sender_id, is_read, is_delete, is_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

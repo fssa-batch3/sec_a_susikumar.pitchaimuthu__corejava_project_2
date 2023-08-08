@@ -14,10 +14,9 @@ public class StillDAO {
 
 	// Connect to database
 	public Connection getConnection() throws SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freshnest", "root", "root");
-		return connection;
+        return DriverManager.getConnection("jdbc:mysql://localhost:336/freshnest", "root", "root");
+    }
 
-	}
 
 	public boolean createStill(Still still) throws DAOException {
 		String insertQuery = "INSERT INTO fresh_still ( user_id ,still_url, still_name, still_date, still_time, is_favourite, is_delete ) VALUES (?, ?, ?, ?, ?, ?, ?)";

@@ -15,9 +15,7 @@ public class UserDAO {
 
 	// Connect to database
 	public Connection getConnection() throws SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freshnest", "root", "root");
-		return connection;
-
+		return DriverManager.getConnection("jdbc:mysql://localhost:336/freshnest", "root", "root");
 	}
 
 	// Get user from DB - Login
@@ -152,7 +150,7 @@ public class UserDAO {
 		String deleteQuery = "Update users SET is_deleted = ?  WHERE email = ?";
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(deleteQuery);) {
-		
+
 			statement.setInt(1, user.getIs_delete() ? 1 : 0);
 			statement.setString(2, user.getEmail());
 

@@ -15,10 +15,9 @@ import com.fssa.freshnest.model.Invite;
 public class InviteDAO {
 	// Connect to database
 	public Connection getConnection() throws SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/freshnest", "root", "root");
-		return connection;
+        return DriverManager.getConnection("jdbc:mysql://localhost:336/freshnest", "root", "root");
+    }
 
-	}
 
 	// create invite data
 

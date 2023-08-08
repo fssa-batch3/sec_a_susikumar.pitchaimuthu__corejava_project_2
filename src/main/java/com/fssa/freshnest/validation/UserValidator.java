@@ -70,7 +70,7 @@ public class UserValidator {
 
 		}
 	}
-	
+
 	// validate the user details delete details
 
 	public static boolean validateDeleteUser(User user) throws InvalidUserException {
@@ -220,7 +220,7 @@ public class UserValidator {
 
 		if (number != 0) {
 			String numberStr = Long.toString(number);
-			String regex = "^(1[89]|[2-9][0-9]|[1-9][0-9]{2,})$";
+			String regex = "^[0-9]{10}$";
 			Pattern p = Pattern.compile(regex);
 			Matcher m = p.matcher(numberStr);
 			match = m.matches();
