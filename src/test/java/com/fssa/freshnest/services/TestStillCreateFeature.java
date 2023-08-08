@@ -2,6 +2,7 @@ package com.fssa.freshnest.services;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -27,7 +28,6 @@ public class TestStillCreateFeature {
 			e.printStackTrace();
 
 		}
- 
 	}
 
 	@Test
@@ -43,6 +43,7 @@ public class TestStillCreateFeature {
 
 		} catch (ServiceException e) {
 			e.printStackTrace();
+			fail();
 
 		}
 	}

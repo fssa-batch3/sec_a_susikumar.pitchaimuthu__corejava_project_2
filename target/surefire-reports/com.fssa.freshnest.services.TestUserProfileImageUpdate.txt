@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.fssa.freshnest.services.TestUserProfileImageUpdate
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec <<< FAILURE!
+com.fssa.freshnest.services.TestUserProfileImageUpdate.testProfileUpdateSuccess()  Time elapsed: 0.007 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:34)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:116)
+	at com.fssa.freshnest.services.TestUserProfileImageUpdate.testProfileUpdateSuccess(TestUserProfileImageUpdate.java:40)
+

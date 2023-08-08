@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.fssa.freshnest.services.TestRegisterFeature
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec <<< FAILURE!
+com.fssa.freshnest.services.TestRegisterFeature.testRegistrationSuccess()  Time elapsed: 0.003 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:34)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:116)
+	at com.fssa.freshnest.services.TestRegisterFeature.testRegistrationSuccess(TestRegisterFeature.java:40)
+

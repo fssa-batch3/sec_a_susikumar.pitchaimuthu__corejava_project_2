@@ -47,6 +47,10 @@ public class Chat {
 		this.chatId = chatId;
 	}
 
+	public Chat(int i, String string) {
+		
+	}
+
 	public int get_chatId() {
 		return chatId;
 	}

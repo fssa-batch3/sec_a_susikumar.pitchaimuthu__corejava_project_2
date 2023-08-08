@@ -11,13 +11,23 @@
 		<java.version>17</java.version>
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
-		
+
 		<sonar.organization>fssa_batch3</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.organization>fssa-batch3</sonar.organization>
+		<sonar.host.url>
+			https:// sonarcloud.io
+		</sonar.host.url>
+		<sonar.projectKey>fssa-batch3_susikumar_pitchaimuthu_corejava_project_2</sonar.projectKey>
 	</properties>
 
 	<dependencies>
-		<!-- JUnit Jupiter API for writing tests -->  
+
+		<dependency>
+			<groupId>io.github.cdimascio</groupId>
+			<artifactId>java-dotenv</artifactId>
+			<version>5.2.2</version>
+		</dependency>
+		<!-- JUnit Jupiter API for writing tests -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
