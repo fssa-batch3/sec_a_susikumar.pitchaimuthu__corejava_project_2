@@ -1,11 +1,10 @@
 package com.fssa.freshnest.services;
 
 import com.fssa.freshnest.model.User;
-import com.fssa.freshnest.services.UserService;
 
-public class TestDeleteFeature {
+public class TestUserDeleteFeature {
 	public static void main(String[] args) {
-		User user1 = new User("mani@gmail.com", true);
+		User user1 = new User("susi@gmail.com", true);
 
 		UserService userService = new UserService();
 
@@ -15,9 +14,5 @@ public class TestDeleteFeature {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 }
-
-

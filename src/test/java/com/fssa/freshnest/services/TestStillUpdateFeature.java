@@ -24,7 +24,7 @@ public class TestStillUpdateFeature {
 		LocalTime currentTime = LocalTime.now();
 
 		// Adding the new image to the database
-		Still still2 = new Still("https://www.example.com", 2, "Supreme", currentDate, currentTime, false, false);
+		Still still2 = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
 
 		StillService stillService = new StillService();
 

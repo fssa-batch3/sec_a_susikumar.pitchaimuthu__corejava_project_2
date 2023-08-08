@@ -19,29 +19,16 @@ public class UserDAO {
 		return connection;
 
 	}
-	
-	// connection close method
-	public void closeConnection(Connection connection) {
-      
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 	// Get user from DB - Login
 	public boolean checkUserLogin(String email, String password) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
-			String selectQuery = "SELECT * FROM user WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(selectQuery);
+		String selectQuery = "SELECT * FROM users WHERE email = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery);
+				ResultSet resultSet = statement.executeQuery();) {
 			statement.setString(1, email);
 
 			// Execute the query
-			ResultSet resultSet = statement.executeQuery();
 
 			boolean userExists = resultSet.next();
 
@@ -57,10 +44,6 @@ public class UserDAO {
 				System.out.println("User credentials not exists.");
 			}
 
-			resultSet.close();
-			statement.close();
-			connection.close();
-
 			return userExists;
 
 		} catch (SQLException e) {
@@ -70,14 +53,10 @@ public class UserDAO {
 
 	// create user DAO
 	public boolean createUser(User user) throws DAOException {
+		String insertQuery = "Insert INTO users (email,username, password, firstname, lastname, profile_image) VALUES(?, ?,?, ? , ?, ?)";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
-			// Prepare SQL statement
-			String insertQuery = "Insert INTO user (email,username, password, firstname, lastname, profile_image) VALUES(?, ?,?, ? , ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setString(1, user.getEmail());
 			statement.setString(2, user.getUsername());
 			statement.setString(3, user.getPassword());
@@ -98,14 +77,12 @@ public class UserDAO {
 	// Second page user details adding DAO
 
 	public boolean secondPageUserUpdate(User user) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
+		String updateQuery = "UPDATE users SET gender = ?, dob = ? WHERE email = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
 			LocalDate DOB = LocalDate.parse(user.getDob());
 			// Prepare SQL statement
-			String updateQuery = "UPDATE user SET gender = ?, dob = ? WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			statement.setString(1, user.getGender());
 			statement.setDate(2, Date.valueOf(DOB));
 			statement.setString(3, user.getEmail());
@@ -121,14 +98,13 @@ public class UserDAO {
 	}
 
 	public boolean updateUser(User user) throws DAOException {
-		try {
+		String updateQuery = "UPDATE users SET username = ?, firstname = ?, lastname = ?, gender = ?, password = ?, nationality = ?, dob = ?, age = ?, mobile_number = ? WHERE email = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 			// Get connection
-			Connection connection = getConnection();
 			LocalDate DOB = LocalDate.parse(user.getDob());
 
 			// Prepare SQL statement
-			String updateQuery = "UPDATE user SET username = ?, firstname = ?, lastname = ?, gender = ?, password = ?, nationality = ?, dob = ?, age = ?, mobile_number = ? WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			statement.setString(1, user.getUsername());
 			statement.setString(2, user.getFirstName());
 			statement.setString(3, user.getLastName());
@@ -152,13 +128,12 @@ public class UserDAO {
 
 	// User profile image update check
 	public boolean updateProfileImage(User user) throws DAOException {
-		try {
+		String deleteQuery = "Update users SET profile_image = ?  WHERE userid = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(deleteQuery);) {
 			// Get connection
-			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String deleteQuery = "Update user SET profile_image = ?  WHERE userid = ?";
-			PreparedStatement statement = connection.prepareStatement(deleteQuery);
 			statement.setString(1, user.getProfile_image());
 			statement.setInt(2, user.getUser_id());
 
@@ -174,13 +149,10 @@ public class UserDAO {
 	}
 
 	public boolean deleteUser(User user) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
-			// Prepare SQL statement
-			String deleteQuery = "Update user SET is_deleted = ?  WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(deleteQuery);
+		String deleteQuery = "Update users SET is_deleted = ?  WHERE email = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(deleteQuery);) {
+		
 			statement.setInt(1, user.getIs_delete() ? 1 : 0);
 			statement.setString(2, user.getEmail());
 

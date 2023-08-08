@@ -6,19 +6,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.freshnest.model.Still;
-import com.fssa.freshnest.services.StillService;
+import com.fssa.freshnest.services.exceptions.ServiceException;
 
 public class TestStillFavouriteFeature {
 
 	public static void main(String[] args) {
 
-		Still still = new Still(true, 1);
+		Still still = new Still(true, 2);
 		StillService stillService = new StillService();
 
 		try {
 			stillService.FavouriteStill(still);
 
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 
 		}
@@ -33,7 +33,7 @@ public class TestStillFavouriteFeature {
 		try {
 			assertTrue(stillService.FavouriteStill(still));
 
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 
 		}
@@ -48,7 +48,7 @@ public class TestStillFavouriteFeature {
 		try {
 			assertFalse(stillService.FavouriteStill(still));
 
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 
 		}

@@ -23,18 +23,14 @@ public class InviteDAO {
 	// create invite data
 
 	public boolean createInvite(Invite invite) throws DAOException {
+		String insertQuery = "INSERT INTO fresh_invite (user_id, invite_type, invite_date, invite_time, special_person, invite_slogan, invite_explanation) VALUES (?,?,?,?,?,?,?)";
 
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
-			// Getting the date and time data
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 
 			LocalDate invite_date = LocalDate.parse(invite.getInvite_date());
 			LocalTime invite_time = LocalTime.parse(invite.getInvite_time());
 			// Prepare SQL statement
-			String insertQuery = "INSERT INTO fresh_invite (user_id, invite_type, invite_date, invite_time, special_person, invite_slogan, invite_explanation) VALUES (?,?,?,?,?,?,?)";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setInt(1, invite.getUser_id());
 			statement.setString(2, invite.getInvite_type());
 			statement.setDate(3, Date.valueOf(invite_date));
@@ -55,18 +51,14 @@ public class InviteDAO {
 	}
 
 	public boolean updateInvite(Invite invite) throws DAOException {
+		String updateQuery = "UPDATE fresh_invite SET user_id = ?, invite_type = ?, invite_date = ?, invite_time = ?, special_person = ?, invite_slogan = ?, invite_explanation = ? WHERE invite_id = ?";
 
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
-			// Getting the date and time data
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
 			LocalDate invite_date = LocalDate.parse(invite.getInvite_date());
 			LocalTime invite_time = LocalTime.parse(invite.getInvite_time());
 			// Prepare SQL statement
-			String updateQuery = "UPDATE fresh_invite SET user_id = ?, invite_type = ?, invite_date = ?, invite_time = ?, special_person = ?, invite_slogan = ?, invite_explanation = ? WHERE invite_id = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			statement.setInt(1, invite.getUser_id());
 			statement.setString(2, invite.getInvite_type());
 			statement.setDate(3, Date.valueOf(invite_date));
@@ -88,13 +80,10 @@ public class InviteDAO {
 
 	public boolean deleteInvite(Invite invite) throws DAOException {
 
-		try {
-			// Get connection
-			Connection connection = getConnection();
+		String updateQuery = "UPDATE fresh_invite SET is_delete = ?  WHERE invite_id = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
-			// Prepare SQL statement
-			String updateQuery = "UPDATE fresh_invite SET is_delete = ?  WHERE invite_id = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			statement.setInt(1, 1);
 			statement.setInt(2, invite.getInvite_id());
 
@@ -110,13 +99,10 @@ public class InviteDAO {
 	}
 
 	public boolean reactInvite(Invite invite) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
+		String updateQuery = "INSERT INTO invite_react_details ( invite_id, reactor_id , is_accept, is_like  , is_dislike, invite_message) VALUES (?,?,?,?,?,?)";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
-			// Prepare SQL statement
-			String updateQuery = "INSERT INTO invite_react_details ( invite_id, reactor_id , is_accept, is_like  , is_dislike, invite_message) VALUES (?,?,?,?,?,?)";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			statement.setInt(1, invite.getInvite_id());
 			statement.setInt(2, invite.getReactor_id());
 			statement.setInt(3, invite.getIs_accept() ? 1 : 0);

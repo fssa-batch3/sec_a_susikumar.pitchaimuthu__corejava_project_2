@@ -36,6 +36,7 @@ public class StillService {
 				System.out.println(still.get_still_id() + " is added as favourite Successfully!");
 				return true;
 			} else {
+				System.out.println(still.get_still_id() + " is not added as favourite...");
 				return false;
 			}
 

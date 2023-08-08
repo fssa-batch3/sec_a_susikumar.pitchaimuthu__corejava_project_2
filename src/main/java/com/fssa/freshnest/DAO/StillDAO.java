@@ -20,13 +20,12 @@ public class StillDAO {
 	}
 
 	public boolean createStill(Still still) throws DAOException {
-		try {
+		String insertQuery = "INSERT INTO fresh_still ( user_id ,still_url, still_name, still_date, still_time, is_favourite, is_delete ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 			// Get connection
-			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String insertQuery = "INSERT INTO fresh_cam ( user_id ,still_url, still_name, still_date, still_time, is_favourite, is_delete ) VALUES (?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setInt(1, still.getUser_id());
 			statement.setString(2, still.getStill_url());
 			statement.setString(3, still.getStill_name());
@@ -48,13 +47,9 @@ public class StillDAO {
 	// add favourite feature
 
 	public boolean FavouriteStill(Still still) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
-			// Prepare SQL statement
-			String insertQuery = "UPDATE fresh_cam SET is_favourite = ? WHERE still_id = ?";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
+		String insertQuery = "UPDATE fresh_still SET is_favourite = ? WHERE still_id = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 			statement.setInt(1, still.get_isfavourite() ? 1 : 0);
 			statement.setInt(2, still.get_still_id());
 
@@ -71,13 +66,9 @@ public class StillDAO {
 	// add Update still
 
 	public boolean UpdateStill(Still still) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
-			// Prepare SQL statement
-			String insertQuery = "UPDATE fresh_cam SET is_update = ? WHERE still_id = ? ";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
+		String insertQuery = "UPDATE fresh_still SET is_update = ? WHERE still_id = ? ";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 			statement.setInt(1, still.getIs_update() ? 1 : 0);
 			statement.setInt(2, still.get_still_id());
 
@@ -92,13 +83,9 @@ public class StillDAO {
 	}
 
 	public boolean DeleteStill(Still still) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
-			// Prepare SQL statement
-			String insertQuery = "UPDATE fresh_cam SET is_delete = ? WHERE still_id = ? AND user_id =?  ";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
+		String insertQuery = "UPDATE fresh_still SET is_delete = ? WHERE still_id = ? AND user_id =?  ";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 			statement.setInt(1, still.get_isdelete() ? 1 : 0);
 			statement.setInt(2, still.get_still_id());
 			statement.setInt(3, still.getUser_id());
@@ -114,13 +101,9 @@ public class StillDAO {
 	}
 
 	public boolean readStill(Still still) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
-			// Prepare SQL statement
-			String insertQuery = "SELECT image_url from WHERE user_id = ? ";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
+		String insertQuery = "SELECT image_url from fresh_still WHERE user_id = ? ";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 			statement.setInt(1, still.getUser_id());
 
 			// Execute the query

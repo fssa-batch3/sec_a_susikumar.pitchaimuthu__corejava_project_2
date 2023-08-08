@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.freshnest.model.Still;
-import com.fssa.freshnest.services.StillService;
+import com.fssa.freshnest.services.exceptions.ServiceException;
 
 public class TestStillCreateFeature {
 
@@ -17,13 +17,13 @@ public class TestStillCreateFeature {
 		LocalDate currentDate = LocalDate.now();
 		LocalTime currentTime = LocalTime.now();
 
-		Still still = new Still("https://www.example.com", 2, "Supreme", currentDate, currentTime, false, false);
+		Still still = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
 		StillService stillService = new StillService();
 
 		try {
 			stillService.TakeStill(still);
 
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 
 		}
@@ -41,7 +41,7 @@ public class TestStillCreateFeature {
 		try {
 			assertTrue(stillService.TakeStill(still));
 
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 
 		}
@@ -58,7 +58,7 @@ public class TestStillCreateFeature {
 		try {
 			assertFalse(stillService.TakeStill(still));
 
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 
 		}
@@ -72,7 +72,7 @@ public class TestStillCreateFeature {
 		try {
 			assertFalse(stillService.TakeStill(still));
 
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 
 		}

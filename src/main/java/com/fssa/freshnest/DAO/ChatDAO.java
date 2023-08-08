@@ -19,13 +19,10 @@ public class ChatDAO {
 	}
 
 	public boolean createChat(Chat chat) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
+		String insertQuery = "INSERT INTO fresh_chat (chat, chat_time, chat_date, chat_receiver_id, chat_sender_id, is_read, is_delete, is_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 
-			// Prepare SQL statement
-			String insertQuery = "INSERT INTO fresh_chat (chat, chat_time, chat_date, chat_receiver_id, chat_sender_id, is_read, is_delete, is_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setString(1, chat.getChat());
 			statement.setTime(2, Time.valueOf(chat.getChat_time()));
 			statement.setDate(3, Date.valueOf(chat.getChat_date()));
@@ -47,13 +44,10 @@ public class ChatDAO {
 	// Read chat
 
 	public boolean readChat(Chat chat) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
+		String updateQuery = "UPDATE fresh_chat SET chat = ?, chat_time = ?, chat_date = ?, chat_receiver_id = ?, chat_sender_id = ?, is_read = ?, is_delete = ?, is_update  = ? WHERE chat_id = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
-			// Prepare SQL statement
-			String updateQuery = "UPDATE fresh_chat SET chat = ?, chat_time = ?, chat_date = ?, chat_receiver_id = ?, chat_sender_id = ?, is_read = ?, is_delete = ?, is_update  = ? WHERE chat_id = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			statement.setString(1, chat.getChat());
 			statement.setTime(2, Time.valueOf(chat.getChat_time()));
 			statement.setDate(3, Date.valueOf(chat.getChat_date()));
@@ -77,13 +71,11 @@ public class ChatDAO {
 	// Update chat
 
 	public boolean updateChat(Chat chat) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
+		String updateQuery = "UPDATE fresh_chat SET chat = ?, chat_time = ?, chat_date = ?, chat_receiver_id = ?, chat_sender_id = ?, is_read = ?, is_delete = ?, is_update  = ? WHERE chat_id = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
 			// Prepare SQL statement
-			String updateQuery = "UPDATE fresh_chat SET chat = ?, chat_time = ?, chat_date = ?, chat_receiver_id = ?, chat_sender_id = ?, is_read = ?, is_delete = ?, is_update  = ? WHERE chat_id = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			statement.setString(1, chat.getChat());
 			statement.setTime(2, Time.valueOf(chat.getChat_time()));
 			statement.setDate(3, Date.valueOf(chat.getChat_date()));
@@ -107,13 +99,11 @@ public class ChatDAO {
 	// Delete chat
 
 	public boolean deleteChat(Chat chat) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
+		String updateQuery = "UPDATE fresh_chat SET  is_delete = ? WHERE chat_id = ?";
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
 			// Prepare SQL statement
-			String updateQuery = "UPDATE fresh_chat SET  is_delete = ? WHERE chat_id = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			statement.setInt(1, chat.get_isDelete() ? 1 : 0);
 			statement.setInt(2, chat.get_chatId());
 
