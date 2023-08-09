@@ -57,7 +57,7 @@ public class UserDAO {
 			statement.setString(3, user.getPassword());
 			statement.setString(4, user.getFirstName());
 			statement.setString(5, user.getLastName());
-			statement.setString(6, user.getProfile_image());
+			statement.setString(6, user.getProfileImage());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
@@ -108,7 +108,7 @@ public class UserDAO {
 			statement.setString(6, user.getNationality());
 			statement.setDate(7, Date.valueOf(DOB));
 			statement.setInt(8, user.getAge());
-			statement.setLong(9, user.getMobile_number());
+			statement.setLong(9, user.getMobileNumber());
 			statement.setString(10, user.getEmail());
 
 			// Execute the query
@@ -129,8 +129,8 @@ public class UserDAO {
 			// Get connection
 
 			// Prepare SQL statement
-			statement.setString(1, user.getProfile_image());
-			statement.setInt(2, user.getUser_id());
+			statement.setString(1, user.getProfileImage());
+			statement.setInt(2, user.getUserId());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
@@ -148,7 +148,7 @@ public class UserDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(deleteQuery);) {
 
-			statement.setInt(1, user.getIs_delete() ? 1 : 0);
+			statement.setInt(1, user.getIsDelete() ? 1 : 0);
 			statement.setString(2, user.getEmail());
 
 			// Execute the query

@@ -8,23 +8,23 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private int age;
-	private long mobile_number;
+	private long mobileNumber;
 	private String dob;
 	private String nationality;
-	private String profile_image;
+	private String profileImage;
 	private String gender;
-	private boolean is_delete;
-	private int user_id;
+	private boolean isDelete;
+	private int userId;
 
 	// User first registration contrustor
 	public User(String email, String username, String password, String firstName, String lastName,
-			String profile_image) {
+			String profileImage) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.profile_image = profile_image;
+		this.profileImage = profileImage;
 	}
 
 	// user second page resgistration constructor
@@ -41,47 +41,47 @@ public class User {
 	}
 
 	// User delete data constructor
-	public User(String email, boolean is_delete) {
+	public User(String email, boolean isDelete) {
 		this.email = email;
-		this.is_delete = is_delete;
+		this.isDelete = isDelete;
 	}
 
 	// User update constructor
 	public User(String email, String username, String password, String firstName, String lastName, int age,
-			long mobile_number, String dob, String nationality, String gender) {
+			long mobileNumber, String dob, String nationality, String gender) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
-		this.mobile_number = mobile_number;
+		this.mobileNumber = mobileNumber;
 		this.dob = dob;
 		this.nationality = nationality;
 		this.gender = gender;
 	}
 
 	// User profile update constructor
-	public User(String profileImage, int user_id) {
-		this.profile_image = profileImage;
-		this.user_id = user_id;
+	public User(String profileImage, int userId) {
+		this.profileImage = profileImage;
+		this.userId = userId;
 
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public boolean getIs_delete() {
-		return is_delete;
+	public boolean getIsDelete() {
+		return isDelete;
 	}
 
-	public void setIs_delete(boolean is_delete) {
-		this.is_delete = is_delete;
+	public void setIs_delete(boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	public void setEmail(String email) {
@@ -112,12 +112,12 @@ public class User {
 		this.age = age;
 	}
 
-	public long getMobile_number() {
-		return mobile_number;
+	public long getMobileNumber() {
+		return mobileNumber;
 	}
 
-	public void setMobile_number(long mobile_number) {
-		this.mobile_number = mobile_number;
+	public void setMobileNumber(long mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 
 	public String getDob() {
@@ -136,12 +136,12 @@ public class User {
 		this.nationality = nationality;
 	}
 
-	public String getProfile_image() {
-		return profile_image;
+	public String getProfileImage() {
+		return profileImage;
 	}
 
-	public void setProfile_image(String profile_image) {
-		this.profile_image = profile_image;
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 
 	public String getGender() {

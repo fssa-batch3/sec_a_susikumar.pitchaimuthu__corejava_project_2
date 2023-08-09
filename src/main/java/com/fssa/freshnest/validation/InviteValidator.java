@@ -11,7 +11,7 @@ public class InviteValidator {
 	// Invite create details validator
 	public static boolean validateInviteCreate(Invite invite) throws InvalidUserException {
 
-		if (invite != null && validateInviteType(invite.getInvite_type())) {
+		if (invite != null && validateInviteType(invite.getInviteType())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
@@ -21,7 +21,7 @@ public class InviteValidator {
 
 	// Invite update details
 	public static boolean validateInviteUpdate(Invite invite) throws InvalidUserException {
-		if (invite != null && validateInviteType(invite.getInvite_type())) {
+		if (invite != null && validateInviteType(invite.getInviteType())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");

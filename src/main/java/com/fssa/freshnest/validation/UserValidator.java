@@ -17,7 +17,7 @@ public class UserValidator {
 
 		if (user != null && validateFirstName(user.getFirstName()) && validateLastName(user.getLastName())
 				&& validatePassword(user.getPassword()) && validateEmail(user.getEmail())
-				&& validateUserName(user.getUsername()) && validateImageUrl(user.getProfile_image())) {
+				&& validateUserName(user.getUsername()) && validateImageUrl(user.getProfileImage())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
@@ -52,7 +52,7 @@ public class UserValidator {
 	public static boolean validateUpdateUser(User user) throws InvalidUserException {
 		if (user != null && validateFirstName(user.getUsername()) && validatePassword(user.getPassword())
 				&& validateEmail(user.getEmail()) && validateGender(user.getGender())
-				&& validateNationality(user.getNationality()) && validateMobileNumber(user.getMobile_number())
+				&& validateNationality(user.getNationality()) && validateMobileNumber(user.getMobileNumber())
 				&& validateDob(user.getDob())) {
 			return true;
 		} else {
@@ -63,7 +63,7 @@ public class UserValidator {
 
 	// validate the user profile url update
 	public static boolean validateProfileImageUpdate(User user) throws InvalidUserException {
-		if (user != null && validateImageUrl(user.getProfile_image())) {
+		if (user != null && validateImageUrl(user.getProfileImage())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");

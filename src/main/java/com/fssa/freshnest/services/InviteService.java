@@ -14,7 +14,7 @@ public class InviteService {
 		try {
 			InviteValidator.validateInviteCreate(invite);
 			if (inviteDAO.createInvite(invite)) {
-				System.out.println(invite.getUser_id() + " invite is Successfully registered!");
+				System.out.println(invite.getUserId() + " invite is Successfully registered!");
 				return true;
 			} else {
 				return false;
@@ -31,7 +31,7 @@ public class InviteService {
 		try {
 			InviteValidator.validateInviteUpdate(invite);
 			if (inviteDAO.updateInvite(invite)) {
-				System.out.println(invite.getUser_id() + " invite is Successfully updated!");
+				System.out.println(invite.getUserId() + " invite is Successfully updated!");
 				return true;
 			} else {
 				return false;
@@ -48,7 +48,7 @@ public class InviteService {
 		try {
 			InviteValidator.validateDeleteInvite(invite);
 			if (inviteDAO.deleteInvite(invite)) {
-				System.out.println(invite.getInvite_id() + " invite is Successfully updated!");
+				System.out.println(invite.getInviteId() + " invite is Successfully updated!");
 				return true;
 			} else {
 				return false;
@@ -66,10 +66,10 @@ public class InviteService {
 		try {
 			InviteValidator.validateInviteReact(invite);
 			if (inviteDAO.reactInvite(invite)) {
-				System.out.println(invite.getReactor_id() + " invite reaction is successfully stored");
+				System.out.println(invite.getReactorId() + " invite reaction is successfully stored");
 				return true;
 			} else {
-				System.out.println(invite.getReactor_id() + " invite reaction is not  stored");
+				System.out.println(invite.getReactorId() + " invite reaction is not  stored");
 				return false;
 			}
 

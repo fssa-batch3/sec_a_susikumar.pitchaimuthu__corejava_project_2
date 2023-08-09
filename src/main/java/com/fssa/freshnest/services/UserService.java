@@ -105,7 +105,7 @@ public class UserService {
 		try {
 			UserValidator.validateProfileImageUpdate(user);
 			if (userDAO.updateProfileImage(user)) {
-				System.out.println(user.getUser_id() + " profile image is Successfully modified!");
+				System.out.println(user.getUserId() + " profile image is Successfully modified!");
 				return true;
 			} else {
 				return false;

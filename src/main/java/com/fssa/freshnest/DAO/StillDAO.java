@@ -21,13 +21,13 @@ public class StillDAO {
 			// Get connection
 
 			// Prepare SQL statement
-			statement.setInt(1, still.getUser_id());
-			statement.setString(2, still.getStill_url());
-			statement.setString(3, still.getStill_name());
-			statement.setDate(4, Date.valueOf(still.getStill_date()));
-			statement.setTime(5, Time.valueOf(still.getStill_time()));
-			statement.setInt(6, still.get_isfavourite() ? 1 : 0);
-			statement.setInt(7, still.get_isdelete() ? 1 : 0);
+			statement.setInt(1, still.getUserId());
+			statement.setString(2, still.getStillUrl());
+			statement.setString(3, still.getStillName());
+			statement.setDate(4, Date.valueOf(still.getStillDate()));
+			statement.setTime(5, Time.valueOf(still.getStillTime()));
+			statement.setInt(6, still.getIsFavourite() ? 1 : 0);
+			statement.setInt(7, still.getIsDelete() ? 1 : 0);
 
 			// Execute the query
 			int rows = statement.executeUpdate();
@@ -45,8 +45,8 @@ public class StillDAO {
 		String insertQuery = "UPDATE fresh_still SET is_favourite = ? WHERE still_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
-			statement.setInt(1, still.get_isfavourite() ? 1 : 0);
-			statement.setInt(2, still.get_still_id());
+			statement.setInt(1, still.getIsFavourite() ? 1 : 0);
+			statement.setInt(2, still.getStillId());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
@@ -64,8 +64,8 @@ public class StillDAO {
 		String insertQuery = "UPDATE fresh_still SET is_update = ? WHERE still_id = ? ";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
-			statement.setInt(1, still.getIs_update() ? 1 : 0);
-			statement.setInt(2, still.get_still_id());
+			statement.setInt(1, still.getIsUpdate() ? 1 : 0);
+			statement.setInt(2, still.getStillId());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
@@ -81,9 +81,9 @@ public class StillDAO {
 		String insertQuery = "UPDATE fresh_still SET is_delete = ? WHERE still_id = ? AND user_id =?  ";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
-			statement.setInt(1, still.get_isdelete() ? 1 : 0);
-			statement.setInt(2, still.get_still_id());
-			statement.setInt(3, still.getUser_id());
+			statement.setInt(1, still.getIsDelete() ? 1 : 0);
+			statement.setInt(2, still.getStillId());
+			statement.setInt(3, still.getUserId());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
@@ -99,7 +99,7 @@ public class StillDAO {
 		String insertQuery = "SELECT image_url from fresh_still WHERE user_id = ? ";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
-			statement.setInt(1, still.getUser_id());
+			statement.setInt(1, still.getUserId());
 
 			// Execute the query
 			int rows = statement.executeUpdate();

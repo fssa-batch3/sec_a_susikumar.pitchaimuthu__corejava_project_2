@@ -2,164 +2,164 @@ package com.fssa.freshnest.model;
 
 public class Invite {
 
-	private int user_id;
-	private String invite_type;
-	private String invite_date;
-	private String invite_time;
-	private String special_person;
-	private String invite_slogan;
-	private String invite_explanation;
-	private int invite_id;
-	private int reactor_id;
-	private boolean is_like;
-	private boolean is_accept;
-	private boolean is_dislike;
-	private String invite_message;
+	private int userId;
+	private String inviteType;
+	private String inviteDate;
+	private String inviteTime;
+	private String specialPerson;
+	private String inviteSlogan;
+	private String inviteExplanation;
+	private int inviteId;
+	private int reactorId;
+	private boolean isLike;
+	private boolean isAccept;
+	private boolean isDislike;
+	private String inviteMessage;
 	// Constructor
 
 	// Invite create constructor
-	public Invite(int user_id, String invite_type, String invite_date, String invite_time, String special_person,
-			String invite_slogan, String invite_explanation) {
-		this.user_id = user_id;
-		this.invite_type = invite_type;
-		this.invite_date = invite_date;
-		this.invite_time = invite_time;
-		this.special_person = special_person;
-		this.invite_slogan = invite_slogan;
-		this.invite_explanation = invite_explanation;
+	public Invite(int userId, String inviteType, String inviteDate, String inviteTime, String specialPerson,
+			String inviteSlogan, String inviteExplanation) {
+		this.userId = userId;
+		this.inviteType = inviteType;
+		this.inviteDate = inviteDate;
+		this.inviteTime = inviteTime;
+		this.specialPerson = specialPerson;
+		this.inviteSlogan = inviteSlogan;
+		this.inviteExplanation = inviteExplanation;
 	}
 
 	// Invite update constructor
-	public Invite(int user_id, String invite_type, String invite_date, String invite_time, String special_person,
-			String invite_slogan, String invite_explanation, int invite_id) {
-		this.user_id = user_id;
-		this.invite_type = invite_type;
-		this.invite_date = invite_date;
-		this.invite_time = invite_time;
-		this.special_person = special_person;
-		this.invite_slogan = invite_slogan;
-		this.invite_explanation = invite_explanation;
-		this.invite_id = invite_id;
+	public Invite(int userId, String inviteType, String inviteDate, String inviteTime, String specialPerson,
+			String inviteSlogan, String inviteExplanation, int inviteId) {
+		this.userId = userId;
+		this.inviteType = inviteType;
+		this.inviteDate = inviteDate;
+		this.inviteTime = inviteTime;
+		this.specialPerson = specialPerson;
+		this.inviteSlogan = inviteSlogan;
+		this.inviteExplanation = inviteExplanation;
+		this.inviteId = inviteId;
 	}
 
 	// invite delete constructor
 
-	public Invite(int invite_id) {
-		this.invite_id = invite_id;
+	public Invite(int inviteId) {
+		this.inviteId = inviteId;
 	}
 	// Getters and letters
 
-	public Invite(int invite_id, int reactor_id, boolean is_accept, boolean is_like, boolean is_dislike, String message) {
-		this.invite_id = invite_id;
-		this.reactor_id = reactor_id;
-		this.is_accept = is_accept;
-		this.is_like  = is_like;
-		this.is_dislike = is_dislike;
-        this.invite_message = message;
+	public Invite(int inviteId, int reactorId, boolean isAccept, boolean isLike, boolean isDislike, String message) {
+		this.inviteId = inviteId;
+		this.reactorId = reactorId;
+		this.isAccept = isAccept;
+		this.isLike  = isLike;
+		this.isDislike = isDislike;
+        this.inviteMessage = message;
 	}
 
-	public boolean getIs_like() {
-		return is_like;
+	public boolean getIsLike() {
+		return isLike;
 	}
 
-	public void setIs_like(boolean is_like) {
-		this.is_like = is_like;
+	public void setIsLike(boolean isLike) {
+		this.isLike = isLike;
 	}
 
-	public boolean getIs_accept() {
-		return is_accept;
+	public boolean getIsAccept() {
+		return isAccept;
 	}
 
-	public void setIs_accept(boolean is_accept) {
-		this.is_accept = is_accept;
+	public void setIsAccept(boolean isAccept) {
+		this.isAccept = isAccept;
 	}
 
-	public boolean getIs_dislike() {
-		return is_dislike;
+	public boolean getIsDislike() {
+		return isDislike;
 	}
 
-	public void setIs_dislike(boolean is_dislike) {
-		this.is_dislike = is_dislike;
+	public void setIsDislike(boolean isDislike) {
+		this.isDislike = isDislike;
 	}
 
-	public String getInvite_message() {
-		return invite_message;
+	public String getInviteMessage() {
+		return inviteMessage;
 	}
 
-	public void setInvite_message(String invite_message) {
-		this.invite_message = invite_message;
+	public void setInviteMessage(String inviteMessage) {
+		this.inviteMessage = inviteMessage;
 	}
 
-	public int getReactor_id() {
-		return reactor_id;
+	public int getReactorId() {
+		return reactorId;
 	}
 
-	public void setReactor_id(int reactor_id) {
-		this.reactor_id = reactor_id;
+	public void setReactorId(int reactorId) {
+		this.reactorId = reactorId;
 	}
 
-	public int getInvite_id() {
-		return invite_id;
+	public int getInviteId() {
+		return inviteId;
 	}
 
-	public void setInvite_id(int invite_id) {
-		this.invite_id = invite_id;
+	public void setInvite_id(int inviteId) {
+		this.inviteId = inviteId;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser_id(int userId) {
+		this.userId = userId;
 	}
 
-	public String getInvite_type() {
-		return invite_type;
+	public String getInviteType() {
+		return inviteType;
 	}
 
-	public void setInvite_type(String invite_type) {
-		this.invite_type = invite_type;
+	public void setInviteType(String inviteType) {
+		this.inviteType = inviteType;
 	}
 
-	public String getInvite_date() {
-		return invite_date;
+	public String getInviteDate() {
+		return inviteDate;
 	}
 
-	public void setInvite_date(String invite_date) {
-		this.invite_date = invite_date;
+	public void setInviteDate(String inviteDate) {
+		this.inviteDate = inviteDate;
 	}
 
-	public String getInvite_time() {
-		return invite_time;
+	public String getInviteTime() {
+		return inviteTime;
 	}
 
-	public void setInvite_time(String invite_time) {
-		this.invite_time = invite_time;
+	public void setInviteTime(String inviteTime) {
+		this.inviteTime = inviteTime;
 	}
 
-	public String getSpecial_person() {
-		return special_person;
+	public String getSpecialPerson() {
+		return specialPerson;
 	}
 
-	public void setSpecial_person(String special_person) {
-		this.special_person = special_person;
+	public void setSpecialPerson(String specialPerson) {
+		this.specialPerson = specialPerson;
 	}
 
-	public String getInvite_slogan() {
-		return invite_slogan;
+	public String getInviteSlogan() {
+		return inviteSlogan;
 	}
 
-	public void setInvite_slogan(String invite_slogan) {
-		this.invite_slogan = invite_slogan;
+	public void setInviteSlogan(String inviteSlogan) {
+		this.inviteSlogan = inviteSlogan;
 	}
 
-	public String getInvite_explanation() {
-		return invite_explanation;
+	public String getInviteExplanation() {
+		return inviteExplanation;
 	}
 
-	public void setInvite_explanation(String invite_explanation) {
-		this.invite_explanation = invite_explanation;
+	public void setInviteExplanation(String inviteExplanation) {
+		this.inviteExplanation = inviteExplanation;
 	}
 
 }

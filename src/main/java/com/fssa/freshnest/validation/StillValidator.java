@@ -11,9 +11,9 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 public class StillValidator {
 	public static boolean validateTakeStill(Still still) throws InvalidUserException {
 
-		if (still != null && validateStillUrl(still.getStill_url()) && validateStillName(still.getStill_name())
-				&& validateStillId(still.get_still_id()) && validateStillDate(still.getStill_date())
-				&& validateStillTime(still.getStill_time())) {
+		if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
+				&& validateStillId(still.getStillId()) && validateStillDate(still.getStillDate())
+				&& validateStillTime(still.getStillTime())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");

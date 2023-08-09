@@ -14,7 +14,7 @@ public class StillService {
 		try {
 			StillValidator.validateTakeStill(still);
 			if (stillDAO.createStill(still)) {
-				System.out.println(still.getStill_name() + " Successfully Taken!");
+				System.out.println(still.getStillName() + " Successfully Taken!");
 				return true;
 			} else {
 				return false;
@@ -33,10 +33,10 @@ public class StillService {
 		try {
 			StillValidator.validateFavouriteStill(still);
 			if (stillDAO.FavouriteStill(still)) {
-				System.out.println(still.get_still_id() + " is added as favourite Successfully!");
+				System.out.println(still.getStillId() + " is added as favourite Successfully!");
 				return true;
 			} else {
-				System.out.println(still.get_still_id() + " is not added as favourite...");
+				System.out.println(still.getStillId() + " is not added as favourite...");
 				return false;
 			}
 
@@ -53,7 +53,7 @@ public class StillService {
 		try {
 			StillValidator.validateUpdateStill(still);
 			if (stillDAO.UpdateStill(still)) {
-				System.out.println(still.get_still_id() + " is updated Successfully!");
+				System.out.println(still.getStillId() + " is updated Successfully!");
 				return true;
 			} else {
 				return false;
@@ -71,7 +71,7 @@ public class StillService {
 		try {
 			StillValidator.validateDeleteStill(still);
 			if (stillDAO.DeleteStill(still)) {
-				System.out.println(still.get_still_id() + " addde Successfully Taken!");
+				System.out.println(still.getStillId() + " addde Successfully Taken!");
 				return true;
 			} else {
 				return false;
@@ -89,7 +89,7 @@ public class StillService {
 		try {
 			StillValidator.validateReadStill(still);
 			if (stillDAO.readStill(still)) {
-				System.out.println(still.getUser_id() + " stills are read!");
+				System.out.println(still.getUserId() + " stills are read!");
 				return true;
 			} else {
 				return false;

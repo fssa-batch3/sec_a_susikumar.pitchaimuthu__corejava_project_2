@@ -23,16 +23,16 @@ public class InviteDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 
-			LocalDate invite_date = LocalDate.parse(invite.getInvite_date());
-			LocalTime invite_time = LocalTime.parse(invite.getInvite_time());
+			LocalDate invite_date = LocalDate.parse(invite.getInviteDate());
+			LocalTime invite_time = LocalTime.parse(invite.getInviteTime());
 			// Prepare SQL statement
-			statement.setInt(1, invite.getUser_id());
-			statement.setString(2, invite.getInvite_type());
+			statement.setInt(1, invite.getUserId());
+			statement.setString(2, invite.getInviteType());
 			statement.setDate(3, Date.valueOf(invite_date));
 			statement.setTime(4, Time.valueOf(invite_time));
-			statement.setString(5, invite.getSpecial_person());
-			statement.setString(6, invite.getInvite_slogan());
-			statement.setString(7, invite.getInvite_explanation());
+			statement.setString(5, invite.getSpecialPerson());
+			statement.setString(6, invite.getInviteSlogan());
+			statement.setString(7, invite.getInviteExplanation());
 			// Execute the query
 			int rows = statement.executeUpdate();
 
@@ -51,17 +51,17 @@ public class InviteDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
-			LocalDate invite_date = LocalDate.parse(invite.getInvite_date());
-			LocalTime invite_time = LocalTime.parse(invite.getInvite_time());
+			LocalDate invite_date = LocalDate.parse(invite.getInviteDate());
+			LocalTime invite_time = LocalTime.parse(invite.getInviteTime());
 			// Prepare SQL statement
-			statement.setInt(1, invite.getUser_id());
-			statement.setString(2, invite.getInvite_type());
+			statement.setInt(1, invite.getUserId());
+			statement.setString(2, invite.getInviteType());
 			statement.setDate(3, Date.valueOf(invite_date));
 			statement.setTime(4, Time.valueOf(invite_time));
-			statement.setString(5, invite.getSpecial_person());
-			statement.setString(6, invite.getInvite_slogan());
-			statement.setString(7, invite.getInvite_explanation());
-			statement.setInt(8, invite.getInvite_id());
+			statement.setString(5, invite.getSpecialPerson());
+			statement.setString(6, invite.getInviteSlogan());
+			statement.setString(7, invite.getInviteExplanation());
+			statement.setInt(8, invite.getInviteId());
 			// Execute the query
 			int rows = statement.executeUpdate();
 
@@ -80,7 +80,7 @@ public class InviteDAO {
 				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
 			statement.setInt(1, 1);
-			statement.setInt(2, invite.getInvite_id());
+			statement.setInt(2, invite.getInviteId());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
@@ -98,12 +98,12 @@ public class InviteDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
-			statement.setInt(1, invite.getInvite_id());
-			statement.setInt(2, invite.getReactor_id());
-			statement.setInt(3, invite.getIs_accept() ? 1 : 0);
-			statement.setInt(4, invite.getIs_like() ? 1 : 0);
-			statement.setInt(5, invite.getIs_dislike() ? 1 : 0);
-			statement.setString(6, invite.getInvite_message());
+			statement.setInt(1, invite.getInviteId());
+			statement.setInt(2, invite.getReactorId());
+			statement.setInt(3, invite.getIsAccept() ? 1 : 0);
+			statement.setInt(4, invite.getIsLike() ? 1 : 0);
+			statement.setInt(5, invite.getIsDislike() ? 1 : 0);
+			statement.setString(6, invite.getInviteMessage());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
