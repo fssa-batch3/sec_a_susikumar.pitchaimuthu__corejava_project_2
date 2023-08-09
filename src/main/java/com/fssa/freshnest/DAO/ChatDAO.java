@@ -33,8 +33,8 @@ public class ChatDAO {
 		String insertParticipantQuery = "INSERT INTO chat_participants (chat_id, user_id) VALUES (?, ?)";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertParticipantQuery)) {
-			statement.setInt(1, chat.getChat_id());
-			statement.setInt(2, chat.getUser_id());
+			statement.setInt(1, chat.getChatId());
+			statement.setInt(2, chat.getUserId());
 			int rows = statement.executeUpdate();
 			return (rows == 1);
 
@@ -47,8 +47,8 @@ public class ChatDAO {
 		String insertMessageQuery = "INSERT INTO chat_messages (chat_id, sender_id, message) VALUES (?, ?, ?)";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertMessageQuery)) {
-			statement.setInt(1, chat.getChat_id());
-			statement.setInt(2, chat.getSender_id());
+			statement.setInt(1, chat.getChatId());
+			statement.setInt(2, chat.getSenderId());
 			statement.setString(3, chat.getChat_message());
 			int rows = statement.executeUpdate();
 
@@ -68,7 +68,7 @@ public class ChatDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectChatsQuery)) {
 
-			statement.setInt(1, chat.getChat_id());
+			statement.setInt(1, chat.getChatId());
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
 					System.out.println(resultSet.getString("message"));
@@ -91,7 +91,7 @@ public class ChatDAO {
 
 			// Prepare SQL statement
 			statement.setString(1, chat.getChat_message());
-			statement.setInt(2, chat.getChat_id());
+			statement.setInt(2, chat.getChatId());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
@@ -111,8 +111,8 @@ public class ChatDAO {
 				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
 			// Prepare SQL statement
-			statement.setInt(1, chat.get_isDelete() ? 1 : 0);
-			statement.setInt(2, chat.getChat_id());
+			statement.setInt(1, chat.getIsDelete() ? 1 : 0);
+			statement.setInt(2, chat.getChatId());
 
 			// Execute the query
 			int rows = statement.executeUpdate();

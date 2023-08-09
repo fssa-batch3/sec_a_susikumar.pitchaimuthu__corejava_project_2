@@ -37,7 +37,7 @@ public class ChatService {
 
 			ChatValidator.validateReadChat(chat);
 			if (chatDAO.getChatsByUserId(chat)) {
-				System.out.println(chat.getUser_id() + " chat readed Successfully!");
+				System.out.println(chat.getUserId() + " chat readed Successfully!");
 				return true;
 			} else {
 				return false;
@@ -57,7 +57,7 @@ public class ChatService {
 
 			ChatValidator.validateUpdateChat(chat);
 			if (chatDAO.updateChat(chat)) {
-				System.out.println(chat.getChat_id() + " chat updated Successfully!");
+				System.out.println(chat.getChatId() + " chat updated Successfully!");
 				return true;
 			} else {
 				return false;
@@ -76,7 +76,7 @@ public class ChatService {
 
 			ChatValidator.validateDeleteChat(chat);
 			if (chatDAO.deleteChat(chat)) {
-				System.out.println(chat.getChat_id() + " chat deleted Successfully!");
+				System.out.println(chat.getChatId() + " chat deleted Successfully!");
 				return true;
 			} else {
 				return false;
