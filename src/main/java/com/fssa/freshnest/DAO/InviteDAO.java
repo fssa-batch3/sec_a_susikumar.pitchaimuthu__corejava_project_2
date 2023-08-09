@@ -11,20 +11,16 @@ import java.time.LocalTime;
 
 import com.fssa.freshnest.DAO.exceptions.DAOException;
 import com.fssa.freshnest.model.Invite;
+import com.fssa.freshnest.utils.ConnectionUtils;
 
 public class InviteDAO {
-	// Connect to database
-	public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:336/freshnest", "root", "root");
-    }
-
 
 	// create invite data
 
 	public boolean createInvite(Invite invite) throws DAOException {
 		String insertQuery = "INSERT INTO fresh_invite (user_id, invite_type, invite_date, invite_time, special_person, invite_slogan, invite_explanation) VALUES (?,?,?,?,?,?,?)";
 
-		try (Connection connection = getConnection();
+		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery);) {
 
 			LocalDate invite_date = LocalDate.parse(invite.getInvite_date());
@@ -52,7 +48,7 @@ public class InviteDAO {
 	public boolean updateInvite(Invite invite) throws DAOException {
 		String updateQuery = "UPDATE fresh_invite SET user_id = ?, invite_type = ?, invite_date = ?, invite_time = ?, special_person = ?, invite_slogan = ?, invite_explanation = ? WHERE invite_id = ?";
 
-		try (Connection connection = getConnection();
+		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
 			LocalDate invite_date = LocalDate.parse(invite.getInvite_date());
@@ -80,7 +76,7 @@ public class InviteDAO {
 	public boolean deleteInvite(Invite invite) throws DAOException {
 
 		String updateQuery = "UPDATE fresh_invite SET is_delete = ?  WHERE invite_id = ?";
-		try (Connection connection = getConnection();
+		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
 			statement.setInt(1, 1);
@@ -99,7 +95,7 @@ public class InviteDAO {
 
 	public boolean reactInvite(Invite invite) throws DAOException {
 		String updateQuery = "INSERT INTO invite_react_details ( invite_id, reactor_id , is_accept, is_like  , is_dislike, invite_message) VALUES (?,?,?,?,?,?)";
-		try (Connection connection = getConnection();
+		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery);) {
 
 			statement.setInt(1, invite.getInvite_id());

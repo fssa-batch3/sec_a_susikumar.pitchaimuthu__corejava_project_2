@@ -6,15 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.freshnest.model.Chat;
-import com.fssa.freshnest.services.ChatService;
 
 public class TestChatDeleteFeature {
 
 	public static void main(String[] args) {
 
-		int chatId = 2;
+		int chat_id = 1;
 
-		Chat chat = new Chat(true, chatId);
+		Chat chat = new Chat(true,chat_id);
 
 		ChatService chatService = new ChatService();
 

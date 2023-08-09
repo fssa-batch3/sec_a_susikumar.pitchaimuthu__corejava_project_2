@@ -17,11 +17,9 @@ public class TestChatUpdateFeature {
 	public static void main(String[] args) {
 
 		String chatText = "Hello chellam..";
-		LocalDate currentDate = LocalDate.now();
-		LocalTime currentTime = LocalTime.now();
-		int chatId = 2;
+		int chatId = 1;
 
-		Chat chat = new Chat(chatText, currentDate, currentTime, false, false, true, 9, 10, chatId);
+		Chat chat = new Chat(chatText, chatId);
 
 		ChatService chatService = new ChatService();
 
@@ -35,11 +33,9 @@ public class TestChatUpdateFeature {
 	@Test
 	public void testChatUpdateSuccess() {
 		String chatText = "Hello chellam..";
-		LocalDate currentDate = LocalDate.now();
-		LocalTime currentTime = LocalTime.now();
-		int chatId = 2;
+		int chatId = 1;
 
-		Chat chat = new Chat(chatText, currentDate, currentTime, false, false, true, 9, 10, chatId);
+		Chat chat = new Chat(chatText, chatId);
 
 		ChatService chatService = new ChatService();
 
@@ -52,12 +48,10 @@ public class TestChatUpdateFeature {
 
 	@Test
 	public void testChatUpdateFailure() {
-		String chatText = "Hello chellam.."; 
-		LocalDate currentDate = LocalDate.now();
-		LocalTime currentTime = LocalTime.now();
-		int chatId = 223;
+		String chatText = "Hello chellam..";
+		int chatId = 1;
 
-		Chat chat = new Chat(chatText, currentDate, currentTime, false, false, true, 9, 10, chatId);
+		Chat chat = new Chat(chatText, chatId);
 
 		ChatService chatService = new ChatService();
 

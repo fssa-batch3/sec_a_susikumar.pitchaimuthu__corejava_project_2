@@ -9,14 +9,15 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 public class ChatService {
 
-	public boolean createChat(Chat chat) throws ServiceException {
+	public boolean createChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage) throws ServiceException {
 
 		ChatDAO chatDAO = new ChatDAO();
 		try {
 
-			ChatValidator.validateCreateChat(chat);
-			if (chatDAO.createChat(chat)) {
-				System.out.println(chat.getChat_receiverId() + " chat send Successfully!");
+			ChatValidator.validateCreateChat(insertChat, insertChatParticipant, insertMessage);
+			if (chatDAO.insertChat(insertChat) && chatDAO.insertChatParticipant(insertChatParticipant)
+					&& chatDAO.insertChatMessage(insertMessage)) {
+				System.out.println(insertMessage.getChat_message() + " chat send Successfully!");
 				return true;
 			} else {
 				return false;
@@ -35,8 +36,8 @@ public class ChatService {
 		try {
 
 			ChatValidator.validateReadChat(chat);
-			if (chatDAO.readChat(chat)) {
-				System.out.println(chat.getChat_receiverId() + " chat readed Successfully!");
+			if (chatDAO.getChatsByUserId(chat)) {
+				System.out.println(chat.getUser_id() + " chat readed Successfully!");
 				return true;
 			} else {
 				return false;
@@ -56,7 +57,7 @@ public class ChatService {
 
 			ChatValidator.validateUpdateChat(chat);
 			if (chatDAO.updateChat(chat)) {
-				System.out.println(chat.getChat_receiverId() + " chat updated Successfully!");
+				System.out.println(chat.getChat_id() + " chat updated Successfully!");
 				return true;
 			} else {
 				return false;
@@ -74,8 +75,8 @@ public class ChatService {
 		try {
 
 			ChatValidator.validateDeleteChat(chat);
-			if (chatDAO.updateChat(chat)) {
-				System.out.println(chat.get_chatId() + " chat deleted Successfully!");
+			if (chatDAO.deleteChat(chat)) {
+				System.out.println(chat.getChat_id() + " chat deleted Successfully!");
 				return true;
 			} else {
 				return false;

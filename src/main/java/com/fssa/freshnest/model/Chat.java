@@ -1,126 +1,111 @@
 package com.fssa.freshnest.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class Chat {
 
-	private String chat;
-	private LocalDate chat_date;
-	private LocalTime chat_time;
-	private boolean isRead;
-	private boolean isDelete;
-	private boolean isUpdate;
-	private int chat_senderId;
-	private int chat_receiverId;
-	private int chatId;
+	private String chatType;
+	private int chatName;
+	private int chat_id;
+	private int user_id;
+	private int sender_id;
+	private String chat_message;
+	private boolean is_delete;
+	private boolean is_update;
 
-	public Chat(String chat, LocalDate chat_date, LocalTime chat_time, boolean isRead, boolean isDelete,
-			boolean isUpdate, int chat_senderId, int chat_receiverId) {
-		this.chat = chat;
-		this.chat_date = chat_date;
-		this.chat_time = chat_time;
-		this.isRead = isRead;
-		this.chat_senderId = chat_senderId;
-		this.chat_receiverId = chat_receiverId;
-		this.isDelete = isDelete;
-		this.isUpdate = isUpdate;
+	// chat id and user id constructor
+	public Chat(int chat_id, int user_id) {
+		this.chat_id = chat_id;
+		this.user_id = user_id;
 	}
 
-	public Chat(String chat, LocalDate chat_date, LocalTime chat_time, boolean isRead, boolean isDelete,
-		 boolean isUpdate,	int chat_senderId, int chat_receiverId, int chatId) {
-		this.chat = chat;
-		this.chat_date = chat_date;
-		this.chat_time = chat_time;
-		this.isRead = isRead;
-		this.chat_senderId = chat_senderId;
-		this.chat_receiverId = chat_receiverId;
-		this.isDelete = isDelete;
-		this.chatId = chatId;
-		this.isUpdate = isUpdate;
-
+	// chat and sender id setting constructor
+	public Chat(int chat_id, int sender_id, String chat_message) {
+		this.chat_id = chat_id;
+		this.sender_id = sender_id;
+		this.chat_message = chat_message;
+	}
+	// chat data type insert constructor
+	public Chat(String chatType, int chatName) {
+		this.chatType = chatType;
+		this.chatName = chatName;
 	}
 
-	
-	public Chat(boolean isDelete, int chatId) {
-		this.isDelete = isDelete;
-		this.chatId = chatId;
+	// chat read constructor
+	public Chat(int chat_id) {
+		this.chat_id = chat_id;
 	}
 
-	public Chat(int i, String string) {
-		
+	// Delete chat constructor
+	public Chat(boolean is_delete, int chat_id) {
+		this.is_delete = is_delete;
+		this.chat_id = chat_id;
 	}
 
-	public int get_chatId() {
-		return chatId;
+	public String getChatType() {
+		return chatType;
 	}
 
-	public void setChatId(int chatId) {
-		this.chatId = chatId;
-	}
-
-	public String getChat() {
-		return chat;
-	}
-
-	public void setChat(String chat) {
-		this.chat = chat;
-	}
-
-	public LocalDate getChat_date() {
-		return chat_date;
-	}
-
-	public void setChat_date(LocalDate chat_date) {
-		this.chat_date = chat_date;
-	}
-
-	public LocalTime getChat_time() {
-		return chat_time;
-	}
-
-	public void setChat_time(LocalTime chat_time) {
-		this.chat_time = chat_time;
-	}
-
-	public boolean get_isRead() {
-		return isRead;
-	}
-
-	public void setRead(boolean isRead) {
-		this.isRead = isRead;
-	}
-
-	public boolean get_isUpdate() {
-		return isUpdate;
-	}
-
-	public void isUpdate(boolean isUpdate) {
-		this.isUpdate = isUpdate;
+	public void setChatType(String chatType) {
+		this.chatType = chatType;
 	}
 
 	public boolean get_isDelete() {
-		return isDelete;
+		return is_delete;
 	}
 
-	public void isDelete(boolean isDelete) {
-		this.isDelete = isDelete;
+	public void setIs_delete(boolean is_delete) {
+		this.is_delete = is_delete;
 	}
 
-	public int getChat_senderId() {
-		return chat_senderId;
+	public boolean get_isUpdate() {
+		return is_update;
 	}
 
-	public void setChat_senderId(int chat_senderId) {
-		this.chat_senderId = chat_senderId;
+	public void setIs_update(boolean is_update) {
+		this.is_update = is_update;
 	}
 
-	public int getChat_receiverId() {
-		return chat_receiverId;
+	public Chat() {
+
 	}
 
-	public void setChat_receiverId(int chat_receiverId) {
-		this.chat_receiverId = chat_receiverId;
+	public int getChatName() {
+		return chatName;
+	}
+
+	public void setChatName(int chatName) {
+		this.chatName = chatName;
+	}
+
+	public int getChat_id() {
+		return chat_id;
+	}
+
+	public void setChat_id(int chat_id) {
+		this.chat_id = chat_id;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+	public int getSender_id() {
+		return sender_id;
+	}
+
+	public void setSender_id(int sender_id) {
+		this.sender_id = sender_id;
+	}
+
+	public String getChat_message() {
+		return chat_message;
+	}
+
+	public void setChat_message(String chat_message) {
+		this.chat_message = chat_message;
 	}
 
 }
