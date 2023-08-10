@@ -2,174 +2,174 @@ package com.fssa.freshnest.model;
 
 public class User {
 
-	private String email;
-	private String username;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private int age;
-	private long mobileNumber;
-	private String dob;
-	private String nationality;
-	private String profileImage;
-	private String gender;
-	private boolean isDelete;
-	private int userId;
+    private String email;
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private int age;
+    private long mobileNumber;
+    private String dob;
+    private String nationality;
+    private String profileImage;
+    private String gender;
+    private boolean isDelete;
+    private int userId;
 
-	// User first registration contrustor
-	public User(String email, String username, String password, String firstName, String lastName,
-			String profileImage) {
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.profileImage = profileImage;
-	}
+    // User first registration contrustor
+    public User(String email, String username, String password, String firstName, String lastName,
+                String profileImage) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.profileImage = profileImage;
+    }
 
-	// user second page resgistration constructor
-	public User(String dob, String gender, String email) {
-		this.dob = dob;
-		this.gender = gender;
-		this.email = email;
-	}
+    // user second page resgistration constructor
+    public User(String dob, String gender, String email) {
+        this.dob = dob;
+        this.gender = gender;
+        this.email = email;
+    }
 
-	// User login constructor
-	public User(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
+    // User login constructor
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
-	// User delete data constructor
-	public User(String email, boolean isDelete) {
-		this.email = email;
-		this.isDelete = isDelete;
-	}
+    // User delete data constructor
+    public User(String email, boolean isDelete) {
+        this.email = email;
+        this.isDelete = isDelete;
+    }
 
-	// User update constructor
-	public User(String email, String username, String password, String firstName, String lastName, int age,
-			long mobileNumber, String dob, String nationality, String gender) {
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.age = age;
-		this.mobileNumber = mobileNumber;
-		this.dob = dob;
-		this.nationality = nationality;
-		this.gender = gender;
-	}
+    // User update constructor
+    public User(String email, String username, String password, String firstName, String lastName, int age,
+                long mobileNumber, String dob, String nationality, String gender) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.mobileNumber = mobileNumber;
+        this.dob = dob;
+        this.nationality = nationality;
+        this.gender = gender;
+    }
 
-	// User profile update constructor
-	public User(String profileImage, int userId) {
-		this.profileImage = profileImage;
-		this.userId = userId;
+    // User profile update constructor
+    public User(String profileImage, int userId) {
+        this.profileImage = profileImage;
+        this.userId = userId;
 
-	}
+    }
 
-	public int getUserId() {
-		return userId;
-	}
+    public int getUserId() {
+        return userId;
+    }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public boolean getIsDelete() {
-		return isDelete;
-	}
+    public boolean getIsDelete() {
+        return isDelete;
+    }
 
-	public void setIs_delete(boolean isDelete) {
-		this.isDelete = isDelete;
-	}
+    public void setIs_delete(boolean isDelete) {
+        this.isDelete = isDelete;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public int getAge() {
+        return age;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public long getMobileNumber() {
+        return mobileNumber;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setMobileNumber(long mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getDob() {
+        return dob;
+    }
 
-	public int getAge() {
-		return age;
-	}
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public String getNationality() {
+        return nationality;
+    }
 
-	public long getMobileNumber() {
-		return mobileNumber;
-	}
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
 
-	public void setMobileNumber(long mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
+    public String getProfileImage() {
+        return profileImage;
+    }
 
-	public String getDob() {
-		return dob;
-	}
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
 
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
+    public String getGender() {
+        return gender;
+    }
 
-	public String getNationality() {
-		return nationality;
-	}
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getProfileImage() {
-		return profileImage;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setProfileImage(String profileImage) {
-		this.profileImage = profileImage;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getGender() {
-		return gender;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
 }

@@ -1,105 +1,104 @@
 package com.fssa.freshnest.services;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.fssa.freshnest.model.Chat;
+import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 
-import org.junit.jupiter.api.Test;
-
-import com.fssa.freshnest.model.Chat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestChatCreateFeature {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		String chatText = "Hello baby..";
+        String chatText = "Hello baby..";
 
-		// Generate random the user chat name
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		Instant instant = currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant();
-		long currentTimestamp = instant.toEpochMilli();
-		int absoluteX = (int) currentTimestamp;
-		int id = Math.abs(absoluteX);
+        // Generate random the user chat name
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Instant instant = currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant();
+        long currentTimestamp = instant.toEpochMilli();
+        int absoluteX = (int) currentTimestamp;
+        int id = Math.abs(absoluteX);
 
-		// Passing the different table data
-		Chat insertChat = new Chat("direct", id);
-		Chat insertChatParticipant = new Chat(1, 1);
-		Chat insertMessage = new Chat(1, 1, chatText);
+        // Passing the different table data
+        Chat insertChat = new Chat("direct", id);
+        Chat insertChatParticipant = new Chat(1, 1);
+        Chat insertMessage = new Chat(1, 1, chatText);
 
-		ChatService chatService = new ChatService();
+        ChatService chatService = new ChatService();
 
-		try {
-			chatService.createChat(insertChat, insertChatParticipant, insertMessage);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            chatService.createChat(insertChat, insertChatParticipant, insertMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Test
-	public void testChatSuccess() {
+    @Test
+    public void testChatSuccess() {
 
-		String chatText = "Hello baby..";
+        String chatText = "Hello baby..";
 
-		// Generate random the user chat name
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		Instant instant = currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant();
-		long currentTimestamp = instant.toEpochMilli();
-		int absoluteX = (int) currentTimestamp;
-		int id = Math.abs(absoluteX);
+        // Generate random the user chat name
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Instant instant = currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant();
+        long currentTimestamp = instant.toEpochMilli();
+        int absoluteX = (int) currentTimestamp;
+        int id = Math.abs(absoluteX);
 
-		Chat insertChat = new Chat("direct", id);
-		Chat insertChatParticipant = new Chat(1, 1);
-		Chat insertMessage = new Chat(1, 1, chatText);
+        Chat insertChat = new Chat("direct", id);
+        Chat insertChatParticipant = new Chat(1, 1);
+        Chat insertMessage = new Chat(1, 1, chatText);
 
-		ChatService chatService = new ChatService();
+        ChatService chatService = new ChatService();
 
-		try {
-			assertTrue(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            assertTrue(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Test
-	public void testChatFailure() {
+    @Test
+    public void testChatFailure() {
 
-		String chatText = "";
+        String chatText = "";
 
-		// Generate random the user chat name
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		Instant instant = currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant();
-		long currentTimestamp = instant.toEpochMilli();
-		int absoluteX = (int) currentTimestamp;
-		int id = Math.abs(absoluteX);
+        // Generate random the user chat name
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Instant instant = currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant();
+        long currentTimestamp = instant.toEpochMilli();
+        int absoluteX = (int) currentTimestamp;
+        int id = Math.abs(absoluteX);
 
-		Chat insertChat = new Chat("direct", id);
-		Chat insertChatParticipant = new Chat(1, 1);
-		Chat insertMessage = new Chat(1, 1, chatText);
+        Chat insertChat = new Chat("direct", id);
+        Chat insertChatParticipant = new Chat(1, 1);
+        Chat insertMessage = new Chat(1, 1, chatText);
 
-		ChatService chatService = new ChatService();
+        ChatService chatService = new ChatService();
 
-		try {
-			assertFalse(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            assertFalse(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Test
-	public void testChatNullDetails() {
+    @Test
+    public void testChatNullDetails() {
 
-		Chat insertChat = null;
-		Chat insertChatParticipant = null;
-		Chat insertMessage = null;
+        Chat insertChat = null;
+        Chat insertChatParticipant = null;
+        Chat insertMessage = null;
 
-		ChatService chatService = new ChatService();
+        ChatService chatService = new ChatService();
 
-		try {
-			assertFalse(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        try {
+            assertFalse(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 }
