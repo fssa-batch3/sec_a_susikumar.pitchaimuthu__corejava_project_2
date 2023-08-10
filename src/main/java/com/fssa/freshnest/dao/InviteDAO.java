@@ -73,7 +73,6 @@ public class InviteDAO {
 		String updateQuery = "UPDATE fresh_invite SET is_delete = TRUE  WHERE invite_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery)) {
-			System.out.println(invite.getInviteId());
 
 			statement.setInt(1, invite.getInviteId());
 

@@ -22,6 +22,7 @@ public class TestInvitationDeleteFeature {
         }
     }
 
+    // test the invitation test success
     @Test
      void testInvitationDeleteSuccess() {
         Invite invite = new Invite(25);
@@ -36,6 +37,7 @@ public class TestInvitationDeleteFeature {
         }
     }
 
+    // test delete invite with invalid details
     @Test
      void testInvalidIdDelete() {
         Invite invite = new Invite(1);
@@ -50,6 +52,7 @@ public class TestInvitationDeleteFeature {
         }
     }
 
+    // test delete the invite with null details
     @Test
      void testInvalidDeleteNull() {
         Invite invite = null;

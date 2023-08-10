@@ -24,6 +24,7 @@ public class TestInvitationCreationFeature {
 
     }
 
+    // test the invite creation success
     @Test
      void testInvitationSuccess() {
 
@@ -39,6 +40,7 @@ public class TestInvitationCreationFeature {
         }
     }
 
+    // test the invite create with invalid invite type
     @Test
      void testInvalidInvitationType() {
 
@@ -54,6 +56,7 @@ public class TestInvitationCreationFeature {
         }
     }
 
+    // test the invite create with null details
     @Test
      void testInvitationNullDetails() {
         InviteService inviteService = new InviteService();

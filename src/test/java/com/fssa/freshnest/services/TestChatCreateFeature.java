@@ -6,12 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.time.Instant;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestChatCreateFeature {
 	public static void main(String[] args) {
-
 		String chatText = "Hello baby..";
 
 		// Generate random the user chat name
@@ -35,9 +33,9 @@ public class TestChatCreateFeature {
 		}
 	}
 
+	// test the chat success
 	@Test
 	 void testChatSuccess() {
-
 		String chatText = "Hello baby..";
 
 		// Generate random the user chat name
@@ -57,12 +55,13 @@ public class TestChatCreateFeature {
 			assertTrue(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
 		} catch (Exception e) {
 			e.printStackTrace();
+			 fail();
 		}
 	}
 
+	// test invalid chat details create
 	@Test
 	 void testChatFailure() {
-
 		String chatText = "";
 
 		// Generate random the user chat name
@@ -85,17 +84,12 @@ public class TestChatCreateFeature {
 		}
 	}
 
+	// test the null chat creation
 	@Test
 	 void testChatNullDetails() {
-
-		Chat insertChat = null;
-		Chat insertChatParticipant = null;
-		Chat insertMessage = null;
-
 		ChatService chatService = new ChatService();
-
 		try {
-			assertFalse(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
+			assertFalse(chatService.createChat(null, null, null));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

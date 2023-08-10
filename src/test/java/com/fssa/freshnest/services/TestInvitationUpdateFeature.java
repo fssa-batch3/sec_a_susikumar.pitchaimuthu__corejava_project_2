@@ -21,6 +21,7 @@ public class TestInvitationUpdateFeature {
         }
     }
 
+    // test the invitation with correct values
     @Test
      void testInviteUpdateSuccess() {
         Invite invite = new Invite(1, "Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
@@ -35,8 +36,9 @@ public class TestInvitationUpdateFeature {
         }
     }
 
+    // test the invite update feature with invalid user id
     @Test
-     void testInvalidInviteId() {
+     void testUpdateInviteDetailsWithInvalidUserId() {
         Invite invite = new Invite(44, "Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
                 "Ticket block ah vangathinga thangam", 3);
 
@@ -49,6 +51,22 @@ public class TestInvitationUpdateFeature {
         }
     }
 
+    // test the invite update with invalid invite id
+    @Test
+    void testUpdateInviteDetailsWithInvalidInviteId() {
+        Invite invite = new Invite(44, "Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
+                "Ticket block ah vangathinga thangam", 3);
+
+        InviteService inviteService = new InviteService();
+
+        try {
+            assertFalse(inviteService.updateInvite(invite));
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // test update invite details with null details
     @Test
      void testInvalidNullDetails() {
         Invite invite = null;

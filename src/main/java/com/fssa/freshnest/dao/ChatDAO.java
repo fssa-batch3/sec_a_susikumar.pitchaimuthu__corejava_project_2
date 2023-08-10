@@ -9,8 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ChatDAO {
 
+public class ChatDAO {
     // Create the chat details
     public boolean insertChat(Chat chat) throws DAOException {
         String insertChatQuery = "INSERT INTO chats (chat_type, chat_name) VALUES (?, ?)";
@@ -56,7 +56,6 @@ public class ChatDAO {
     }
 
     // Read chat details
-
     public boolean getChatsByUserId(Chat chat) throws DAOException {
         String selectChatsQuery = "SELECT cm.message_id, u.username AS sender, cm.message, cm.timestamp "
                 + "FROM chat_messages cm " + "JOIN users u ON cm.sender_id = u.user_id " + "WHERE cm.chat_id = ? "

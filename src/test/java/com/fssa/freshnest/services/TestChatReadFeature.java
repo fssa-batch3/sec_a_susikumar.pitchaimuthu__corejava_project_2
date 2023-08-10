@@ -21,8 +21,9 @@ public class TestChatReadFeature {
         }
     }
 
+    // test the chat read success
     @Test 
-     void testChatRead() {
+     void testChatReadSuccess() {
         int chat_id = 1;
 
         Chat chat = new Chat(chat_id);
@@ -36,6 +37,7 @@ public class TestChatReadFeature {
         }
     }
 
+    // test the chat null read failure
     @Test
      void testReadChatNullDetails() {
         Chat chat = null;

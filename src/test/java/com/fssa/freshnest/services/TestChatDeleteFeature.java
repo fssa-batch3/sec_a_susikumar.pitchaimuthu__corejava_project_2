@@ -22,7 +22,8 @@ public class TestChatDeleteFeature {
 			e.printStackTrace();
 		}
 	}
- 
+
+	// test the delete chat success or all details correct
 	@Test
 	 void testChatDeleteSuccess() {
 
@@ -39,6 +40,7 @@ public class TestChatDeleteFeature {
 		}
 	}
 
+	// test the delete user details failure
 	@Test
 	 void testDeleteFailure() {
 		int chatId = 224;
@@ -55,6 +57,7 @@ public class TestChatDeleteFeature {
 		}
 	}
 
+	// test the null chat delete
 	@Test
 	 void testChatDeleteNullDetails() {
 		Chat chat = null;
