@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 public class StillValidator {
 
-	private static final String invalidStillMessage = "still details are not valid";
+	private static final String INVALID_STILL_MESSAGE = "still details are not valid";
 
 	public static boolean validateTakeStill(Still still) throws InvalidUserException {
 
@@ -18,7 +18,7 @@ public class StillValidator {
 				&& validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
 			return true;
 		} else {
-			throw new InvalidUserException(invalidStillMessage);
+			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
 	}
@@ -31,7 +31,7 @@ public class StillValidator {
 			System.out.println("Still details valid");
 			return true;
 		} else {
-			throw new InvalidUserException(invalidStillMessage);
+			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
 	}
@@ -43,7 +43,7 @@ public class StillValidator {
 		if (still != null && validateStillName(still.getStillName())) {
 			return true;
 		} else {
-			throw new InvalidUserException(invalidStillMessage);
+			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
 	}
@@ -55,7 +55,7 @@ public class StillValidator {
 		if (still != null && validateStillId(still.getStillId())) {
 			return true;
 		} else {
-			throw new InvalidUserException(invalidStillMessage);
+			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
 	}
@@ -64,7 +64,7 @@ public class StillValidator {
 		if (still != null && validateStillUserId(still.getUserId())) {
 			return true;
 		} else {
-			throw new InvalidUserException(invalidStillMessage);
+			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
 	}
@@ -78,7 +78,7 @@ public class StillValidator {
 			System.out.println(value + " Image url is valid");
 			return true;
 		} catch (MalformedURLException e) {
-			throw new InvalidUserException(invalidStillMessage);
+			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
 	}
@@ -89,7 +89,7 @@ public class StillValidator {
 			System.out.println("The still name is not valid");
 			return false;
 		} else {
-			throw new InvalidUserException(invalidStillMessage);
+			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
 	}
@@ -100,7 +100,7 @@ public class StillValidator {
 			System.out.println("The still id is valid");
 			return true;
 		} else {
-			throw new InvalidUserException(invalidStillMessage);
+			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
 	}
@@ -136,7 +136,7 @@ public class StillValidator {
 			System.out.println("The still id is valid");
 			return true;
 		} else {
-			throw new InvalidUserException(invalidStillMessage);
+			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
 	}

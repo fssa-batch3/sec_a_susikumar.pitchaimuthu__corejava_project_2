@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class InviteValidator {
 
-    private static final String invalidInvalidMessage = "invite details are not valid";
+    private static final String INVALID_INVITE_MESSAGE = "invite details are not valid";
 
     // Invite create details validator
     public static boolean validateInviteCreate(Invite invite) throws InvalidUserException {
@@ -18,7 +18,7 @@ public class InviteValidator {
         if (invite != null && validateInviteType(invite.getInviteType())) {
             return true;
         } else {
-            throw new InvalidUserException(invalidInvalidMessage);
+            throw new InvalidUserException(INVALID_INVITE_MESSAGE);
         }
 
     }
@@ -28,7 +28,7 @@ public class InviteValidator {
         if (invite != null && validateInviteType(invite.getInviteType())) {
             return true;
         } else {
-            throw new InvalidUserException(invalidInvalidMessage);
+            throw new InvalidUserException(INVALID_INVITE_MESSAGE);
         }
 
     }
@@ -38,7 +38,7 @@ public class InviteValidator {
         if (invite != null) {
             return true;
         } else {
-            throw new InvalidUserException(invalidInvalidMessage);
+            throw new InvalidUserException(INVALID_INVITE_MESSAGE);
         }
     }
 
@@ -47,7 +47,7 @@ public class InviteValidator {
         if (invite != null) {
             return true;
         } else {
-            throw new InvalidUserException(invalidInvalidMessage);
+            throw new InvalidUserException(INVALID_INVITE_MESSAGE);
         }
     }
 
