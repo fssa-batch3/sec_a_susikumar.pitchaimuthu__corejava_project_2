@@ -82,7 +82,7 @@ public class User {
         return isDelete;
     }
 
-    public void setIs_delete(boolean isDelete) {
+    public void setDelete(boolean isDelete) {
         this.isDelete = isDelete;
     }
 

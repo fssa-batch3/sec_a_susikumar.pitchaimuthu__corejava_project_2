@@ -47,7 +47,7 @@ public class Still {
         userId = id;
     }
 
-    public void set_still_id(int stillId) {
+    public void setStillId(int stillId) {
         this.stillId = stillId;
 
     }
@@ -100,7 +100,7 @@ public class Still {
         return stillTime;
     }
 
-    public void setStill_time(LocalTime stillTime) {
+    public void setStillTime(LocalTime stillTime) {
         this.stillTime = stillTime;
     }
 

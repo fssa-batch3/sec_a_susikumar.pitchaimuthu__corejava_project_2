@@ -15,7 +15,7 @@ public class TestStillFavouriteFeature {
         StillService stillService = new StillService();
 
         try {
-            stillService.FavouriteStill(still);
+            stillService.favouriteStill(still);
 
         } catch (ServiceException e) {
             e.printStackTrace();
@@ -30,7 +30,7 @@ public class TestStillFavouriteFeature {
         StillService stillService = new StillService();
 
         try {
-            assertTrue(stillService.FavouriteStill(still));
+            assertTrue(stillService.favouriteStill(still));
 
         } catch (ServiceException e) {
             e.printStackTrace();
@@ -45,7 +45,7 @@ public class TestStillFavouriteFeature {
         StillService stillService = new StillService();
 
         try {
-            assertFalse(stillService.FavouriteStill(still));
+            assertFalse(stillService.favouriteStill(still));
 
         } catch (ServiceException e) {
             e.printStackTrace();

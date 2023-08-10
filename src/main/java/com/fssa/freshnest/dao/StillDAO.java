@@ -34,13 +34,13 @@ public class StillDAO {
     }
 
     // add favourite feature still
-    public boolean FavouriteStill(Still still) throws DAOException {
+    public boolean favouriteStill(Still still) throws DAOException {
         String insertQuery = "UPDATE fresh_still SET is_favourite = ? WHERE still_id = ?";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(insertQuery)) {
             statement.setInt(1, still.getIsFavourite() ? 1 : 0);
             statement.setInt(2, still.getStillId());
- 
+
             // Execute the query
             int rows = statement.executeUpdate();
 
@@ -52,7 +52,7 @@ public class StillDAO {
     }
 
     // add Update still feature
-    public boolean UpdateStill(Still still) throws DAOException {
+    public boolean updateStill(Still still) throws DAOException {
         String insertQuery = "UPDATE fresh_still SET is_update = ? WHERE still_id = ? ";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(insertQuery)) {
@@ -70,7 +70,7 @@ public class StillDAO {
     }
 
     // add delete still feature
-    public boolean DeleteStill(Still still) throws DAOException {
+    public boolean deleteStill(Still still) throws DAOException {
         String insertQuery = "UPDATE fresh_still SET is_delete = ? WHERE still_id = ? AND user_id =?  ";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(insertQuery)) {

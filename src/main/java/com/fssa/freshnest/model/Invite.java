@@ -102,7 +102,7 @@ public class Invite {
         return inviteId;
     }
 
-    public void setInvite_id(int inviteId) {
+    public void setInviteId(int inviteId) {
         this.inviteId = inviteId;
     }
 
@@ -110,7 +110,7 @@ public class Invite {
         return userId;
     }
 
-    public void setUser_id(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

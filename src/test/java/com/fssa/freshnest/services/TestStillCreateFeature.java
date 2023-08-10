@@ -19,7 +19,7 @@ public class TestStillCreateFeature {
 		StillService stillService = new StillService();
 
 		try {
-			stillService.TakeStill(still);
+			stillService.takeStill(still);
 
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -36,7 +36,7 @@ public class TestStillCreateFeature {
 		StillService stillService = new StillService();
 
 		try {
-			assertTrue(stillService.TakeStill(still));
+			assertTrue(stillService.takeStill(still));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
@@ -53,7 +53,7 @@ public class TestStillCreateFeature {
 		StillService stillService = new StillService();
 
 		try {
-			assertFalse(stillService.TakeStill(still));
+			assertFalse(stillService.takeStill(still));
 
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class TestStillCreateFeature {
 		StillService stillService = new StillService();
 
 		try {
-			assertFalse(stillService.TakeStill(still));
+			assertFalse(stillService.takeStill(still));
 
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -84,7 +84,7 @@ public class TestStillCreateFeature {
 		StillService stillService = new StillService();
 
 		try {
-			assertFalse(stillService.TakeStill(still));
+			assertFalse(stillService.takeStill(still));
 
 		} catch (ServiceException e) {
 			e.printStackTrace();

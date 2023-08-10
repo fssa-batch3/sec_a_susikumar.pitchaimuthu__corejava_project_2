@@ -71,10 +71,10 @@ public class UserDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
-			LocalDate DOB = LocalDate.parse(user.getDob());
+			LocalDate dob = LocalDate.parse(user.getDob());
 			// Prepare SQL statement
 			statement.setString(1, user.getGender());
-			statement.setDate(2, Date.valueOf(DOB));
+			statement.setDate(2, Date.valueOf(dob));
 			statement.setString(3, user.getEmail());
 
 			// Execute the query
@@ -93,7 +93,7 @@ public class UserDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
-			LocalDate DOB = LocalDate.parse(user.getDob());
+			LocalDate dob = LocalDate.parse(user.getDob());
 
 			// Prepare SQL statement
 			statement.setString(1, user.getUsername());
@@ -102,7 +102,7 @@ public class UserDAO {
 			statement.setString(4, user.getGender());
 			statement.setString(5, user.getPassword());
 			statement.setString(6, user.getNationality());
-			statement.setDate(7, Date.valueOf(DOB));
+			statement.setDate(7, Date.valueOf(dob));
 			statement.setInt(8, user.getAge());
 			statement.setLong(9, user.getMobileNumber());
 			statement.setString(10, user.getEmail());
@@ -144,7 +144,6 @@ public class UserDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(deleteQuery)) {
 
-//			statement.setInt(1, user.getIsDelete() ? 1 : 0);
 			statement.setString(1, user.getEmail());
 
 			// Execute the query

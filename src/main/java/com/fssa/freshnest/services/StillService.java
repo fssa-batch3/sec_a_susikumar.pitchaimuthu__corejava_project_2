@@ -9,7 +9,7 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 public class StillService {
 
-    public boolean TakeStill(Still still) throws ServiceException {
+    public boolean takeStill(Still still) throws ServiceException {
         StillDAO stillDAO = new StillDAO();
         try {
             StillValidator.validateTakeStill(still);
@@ -28,11 +28,11 @@ public class StillService {
 
     // Test still favourite
 
-    public boolean FavouriteStill(Still still) throws ServiceException {
+    public boolean favouriteStill(Still still) throws ServiceException {
         StillDAO stillDAO = new StillDAO();
         try {
             StillValidator.validateFavouriteStill(still);
-            if (stillDAO.FavouriteStill(still)) {
+            if (stillDAO.favouriteStill(still)) {
                 System.out.println(still.getStillId() + " is added as favourite Successfully!");
                 return true;
             } else {
@@ -48,11 +48,11 @@ public class StillService {
 
     // Test still Update
 
-    public boolean UpdateStill(Still still) throws ServiceException {
+    public boolean updateStill(Still still) throws ServiceException {
         StillDAO stillDAO = new StillDAO();
         try {
             StillValidator.validateUpdateStill(still);
-            if (stillDAO.UpdateStill(still)) {
+            if (stillDAO.updateStill(still)) {
                 System.out.println(still.getStillId() + " is updated Successfully!");
                 return true;
             } else {
@@ -66,11 +66,11 @@ public class StillService {
     }
 
     /// Test still Delete
-    public boolean DeleteStill(Still still) throws ServiceException {
+    public boolean deleteStill(Still still) throws ServiceException {
         StillDAO stillDAO = new StillDAO();
         try {
             StillValidator.validateDeleteStill(still);
-            if (stillDAO.DeleteStill(still)) {
+            if (stillDAO.deleteStill(still)) {
                 System.out.println(still.getStillId() + " addde Successfully Taken!");
                 return true;
             } else {
@@ -83,7 +83,7 @@ public class StillService {
 
     }
 
-    public boolean ReadStill(Still still) throws ServiceException {
+    public boolean readStill(Still still) throws ServiceException {
 
         StillDAO stillDAO = new StillDAO();
         try {

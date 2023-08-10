@@ -92,9 +92,9 @@ public class StillValidator {
 
 	}
 
-	public static boolean validateStillId(int still_id) throws InvalidUserException {
+	public static boolean validateStillId(int stillId) throws InvalidUserException {
 
-		if (still_id > 0) {
+		if (stillId > 0) {
 			System.out.println("The still id is valid");
 			return true;
 		} else {
@@ -129,9 +129,9 @@ public class StillValidator {
 	}
 
 	// Validate still user id
-	public static boolean validateStillUserId(int still_id) throws InvalidUserException {
+	public static boolean validateStillUserId(int stillId) throws InvalidUserException {
 
-		if (still_id > 0) {
+		if (stillId > 0) {
 			System.out.println("The still id is valid");
 			return true;
 		} else {

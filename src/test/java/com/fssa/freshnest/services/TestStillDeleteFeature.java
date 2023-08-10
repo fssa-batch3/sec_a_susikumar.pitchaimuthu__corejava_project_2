@@ -17,7 +17,7 @@ public class TestStillDeleteFeature {
         StillService stillService = new StillService();
 
         try {
-            stillService.DeleteStill(still);
+            stillService.deleteStill(still);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,7 +32,7 @@ public class TestStillDeleteFeature {
         StillService stillService = new StillService();
 
         try {
-            assertTrue(stillService.DeleteStill(still));
+            assertTrue(stillService.deleteStill(still));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,7 +46,7 @@ public class TestStillDeleteFeature {
         StillService stillService = new StillService();
 
         try {
-            assertFalse(stillService.DeleteStill(still));
+            assertFalse(stillService.deleteStill(still));
         } catch (Exception e) {
             e.printStackTrace();
         }

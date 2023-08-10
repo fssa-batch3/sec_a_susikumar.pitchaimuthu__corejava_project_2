@@ -14,7 +14,7 @@ public class TestStillReadFeature {
         StillService stillService = new StillService();
 
         try {
-            stillService.ReadStill(still);
+            stillService.readStill(still);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,7 +29,7 @@ public class TestStillReadFeature {
         Still still = new Still(1);
         StillService stillService = new StillService();
         try {
-            assertTrue(stillService.ReadStill(still));
+            assertTrue(stillService.readStill(still));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class TestStillReadFeature {
         Still still = new Still(-1);
         StillService stillService = new StillService();
         try {
-            assertFalse(stillService.ReadStill(still));
+            assertFalse(stillService.readStill(still));
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -55,7 +55,7 @@ public class TestStillReadFeature {
     public void testReadNullStillIdDetails(){
         StillService stillService = new StillService();
         try {
-            assertFalse(stillService.ReadStill(null));
+            assertFalse(stillService.readStill(null));
         } catch (Exception e) {
             e.printStackTrace();
 
