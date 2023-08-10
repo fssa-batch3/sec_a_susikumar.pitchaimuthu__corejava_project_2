@@ -16,7 +16,7 @@ public class TestUserDeleteFeature {
 		UserService userService = new UserService();
 
 		try {
-			userService.DeleteUser(user1);
+			userService.deleteUser(user1);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -28,7 +28,7 @@ public class TestUserDeleteFeature {
 		User user1 = new User("susi@gmail.com", true);
 		UserService userService = new UserService();
 		try {
-			assertTrue(userService.DeleteUser(user1));
+			assertTrue(userService.deleteUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
@@ -42,7 +42,7 @@ public class TestUserDeleteFeature {
 		User user1 = new User("naan@gmail.com", true);
 		UserService userService = new UserService();
 		try {
-			assertFalse(userService.DeleteUser(user1));
+			assertFalse(userService.deleteUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

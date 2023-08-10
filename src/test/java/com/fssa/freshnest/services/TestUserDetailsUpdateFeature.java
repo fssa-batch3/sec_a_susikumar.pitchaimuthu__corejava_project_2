@@ -16,7 +16,7 @@ public class TestUserDetailsUpdateFeature {
 		UserService userService = new UserService();
 
 		try {
-			userService.UpdateUser(user1);
+			userService.updateUser(user1);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -31,7 +31,7 @@ public class TestUserDetailsUpdateFeature {
 		UserService userService = new UserService();
 
 		try {
-			assertTrue(userService.UpdateUser(user1));
+			assertTrue(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
@@ -46,7 +46,7 @@ public class TestUserDetailsUpdateFeature {
 		User user1 = new User("naan@gmail.com", "Kanipapa", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
 				"2003-08-01", "Indian", "Male");
 		try {
-			assertFalse(userService.UpdateUser(user1));
+			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -61,7 +61,7 @@ public class TestUserDetailsUpdateFeature {
 		User user1 = new User("mani@gmail.com", "", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
 				"2003-08-01", "Indian", "Male");
 		try {
-			assertFalse(userService.UpdateUser(user1));
+			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -76,7 +76,7 @@ public class TestUserDetailsUpdateFeature {
 		User user1 = new User("mani@gmail.com", "kanipapa", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
 				"2003-08-01", "Indian", "Male234");
 		try {
-			assertFalse(userService.UpdateUser(user1));
+			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -91,7 +91,7 @@ public class TestUserDetailsUpdateFeature {
 		User user1 = new User("mani@gmail.com", "kanipapa", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
 				"2003-08-12", "Indian", "Male");
 		try {
-			assertFalse(userService.UpdateUser(user1));
+			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -106,7 +106,7 @@ public class TestUserDetailsUpdateFeature {
 		User user1 = new User("mani@gmail.com", "kanipapa", "raji@SM123", "", "Pitchaimuthu", 20, 8870737612L,
 				"2003-08-12", "Indian", "Male");
 		try {
-			assertFalse(userService.UpdateUser(user1));
+			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -121,7 +121,7 @@ public class TestUserDetailsUpdateFeature {
 		User user1 = new User("mani@gmail.com", "kanipapa", "raji@SM123", "Susikumar", "", 20, 8870737612L,
 				"2003-08-12", "Indian", "Male");
 		try {
-			assertFalse(userService.UpdateUser(user1));
+			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 

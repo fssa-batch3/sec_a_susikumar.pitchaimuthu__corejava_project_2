@@ -89,8 +89,7 @@ public class StillValidator {
 			System.out.println("The still name is not valid");
 			return false;
 		} else {
-			System.out.println("The still name is valid.");
-			return true;
+			throw new InvalidUserException(invalidStillMessage);
 		}
 
 	}
@@ -101,8 +100,7 @@ public class StillValidator {
 			System.out.println("The still id is valid");
 			return true;
 		} else {
-			System.out.println("The still id is not valid.");
-			return false;
+			throw new InvalidUserException(invalidStillMessage);
 		}
 
 	}
@@ -138,8 +136,7 @@ public class StillValidator {
 			System.out.println("The still id is valid");
 			return true;
 		} else {
-			System.out.println("The still id is not valid.");
-			return false;
+			throw new InvalidUserException(invalidStillMessage);
 		}
 
 	}

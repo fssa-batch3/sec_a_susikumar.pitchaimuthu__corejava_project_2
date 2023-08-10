@@ -128,8 +128,8 @@ public class UserValidator {
         if (password == null)
             return false;
 
-        String pattern_string = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
-        match = Pattern.matches(pattern_string, password);
+        String patternString = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
+        match = Pattern.matches(patternString, password);
 
         if (match) {
 
@@ -220,14 +220,12 @@ public class UserValidator {
 
     public static boolean validateMobileNumber(long number) {
         boolean match = false;
-
         if (number != 0) {
             String numberStr = Long.toString(number);
-            String regex = "^[0-9]{10}$";
+            String regex = "^\\d{10}$";
             Pattern p = Pattern.compile(regex);
             Matcher m = p.matcher(numberStr);
             match = m.matches();
-
             if (match) {
                 System.out.println("The user mobile number is valid.");
             } else {
@@ -236,10 +234,8 @@ public class UserValidator {
         } else {
             System.out.println("Invalid mobile number: 0");
         }
-
         return match;
     }
-
     public static boolean validateGender(String dob) {
         boolean match = false;
 

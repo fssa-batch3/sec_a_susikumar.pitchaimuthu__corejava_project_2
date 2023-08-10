@@ -65,7 +65,7 @@ public class UserService {
     }
 
     // usre update details service
-    public boolean UpdateUser(User user) throws ServiceException {
+    public boolean updateUser(User user) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateUpdateUser(user);
@@ -83,7 +83,7 @@ public class UserService {
     }
 
     // User delete user service
-    public boolean DeleteUser(User user) throws ServiceException {
+    public boolean deleteUser(User user) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateDeleteUser(user);
