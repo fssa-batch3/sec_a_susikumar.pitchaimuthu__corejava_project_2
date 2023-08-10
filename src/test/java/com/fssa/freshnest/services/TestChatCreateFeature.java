@@ -36,7 +36,7 @@ public class TestChatCreateFeature {
 	}
 
 	@Test
-	public void testChatSuccess() {
+	 void testChatSuccess() {
 
 		String chatText = "Hello baby..";
 
@@ -61,7 +61,7 @@ public class TestChatCreateFeature {
 	}
 
 	@Test
-	public void testChatFailure() {
+	 void testChatFailure() {
 
 		String chatText = "";
 
@@ -86,7 +86,7 @@ public class TestChatCreateFeature {
 	}
 
 	@Test
-	public void testChatNullDetails() {
+	 void testChatNullDetails() {
 
 		Chat insertChat = null;
 		Chat insertChatParticipant = null;

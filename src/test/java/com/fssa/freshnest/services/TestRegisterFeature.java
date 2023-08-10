@@ -25,7 +25,7 @@ public class TestRegisterFeature {
     }
 
     @Test
-    public void testRegistrationSuccess() {
+     void testRegistrationSuccess() {
         UserService userService = new UserService();
         User user1 = new User("susi@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu", "https://example.com/image.jpg");
         try {
@@ -39,7 +39,7 @@ public class TestRegisterFeature {
     }
 
     @Test
-    public void testInvalidPassword() {
+     void testInvalidPassword() {
 
         UserService userService = new UserService();
         User user1 = new User("Susi@gmail.com", "Kani Papa", "susi123SM", "Susikumar", "Pitchaimuthu", "https://example.com/image.jpg");
@@ -52,7 +52,7 @@ public class TestRegisterFeature {
     }
 
     @Test
-    public void testUserNull() {
+     void testUserNull() {
 
         UserService userService = new UserService();
         User user1 = null;

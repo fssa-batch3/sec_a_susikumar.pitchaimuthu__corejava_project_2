@@ -23,7 +23,7 @@ public class TestUserSecondPageRegistrationFeatre {
 	}
 
 	@Test
-	public void validateUserSecondRegistrationSuccess() {
+	 void validateUserSecondRegistrationSuccess() {
 
 		User user1 = new User("2003-08-29", "Male", "susi@gmail.com");
 		UserService userService = new UserService();
@@ -40,7 +40,7 @@ public class TestUserSecondPageRegistrationFeatre {
 
 	@Test
 
-	public void testUserSecondRegistrationNullDetails() {
+	 void testUserSecondRegistrationNullDetails() {
 		User user1 = null;
 		UserService userService = new UserService();
 

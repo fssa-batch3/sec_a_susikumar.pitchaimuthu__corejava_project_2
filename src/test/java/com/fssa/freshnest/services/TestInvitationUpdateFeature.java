@@ -22,7 +22,7 @@ public class TestInvitationUpdateFeature {
     }
 
     @Test
-    public void testInviteUpdateSuccess() {
+     void testInviteUpdateSuccess() {
         Invite invite = new Invite(1, "Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
                 "Ticket block ah vangathinga thangam", 25);
 
@@ -36,7 +36,7 @@ public class TestInvitationUpdateFeature {
     }
 
     @Test
-    public void testInvalidInviteId() {
+     void testInvalidInviteId() {
         Invite invite = new Invite(44, "Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
                 "Ticket block ah vangathinga thangam", 3);
 
@@ -50,7 +50,7 @@ public class TestInvitationUpdateFeature {
     }
 
     @Test
-    public void testInvalidNullDetails() {
+     void testInvalidNullDetails() {
         Invite invite = null;
 
         InviteService inviteService = new InviteService();

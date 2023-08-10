@@ -23,7 +23,7 @@ public class TestLoginFeature {
     }
 
     @Test
-    public void testLoginSuccess() {
+     void testLoginSuccess() {
         UserService userService = new UserService();
         User user1 = new User("susi@gmail.com", "susi123@SM");
         try {
@@ -35,7 +35,7 @@ public class TestLoginFeature {
     }
 
     @Test
-    public void testEmailPasswordNull() {
+     void testEmailPasswordNull() {
         UserService userService = new UserService();
         User user1 = null;
         try {
@@ -48,7 +48,7 @@ public class TestLoginFeature {
     }
 
     @Test
-    public void testInvalidPassword() {
+     void testInvalidPassword() {
         UserService userService = new UserService();
         User user1 = new User("susi@gmail.com", "susi123SM");
         try {
@@ -60,7 +60,7 @@ public class TestLoginFeature {
     }
 
     @Test
-    public void testInvalidEmail() {
+     void testInvalidEmail() {
         UserService userService = new UserService();
         User user1 = new User("susigmail.com", "susi123@SM");
         try {

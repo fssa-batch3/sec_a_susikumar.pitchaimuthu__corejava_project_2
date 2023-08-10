@@ -24,7 +24,7 @@ public class TestChatDeleteFeature {
 	}
  
 	@Test
-	public void testChatDeleteSuccess() {
+	 void testChatDeleteSuccess() {
 
 		int chatId = 1;
 		int messageId = 2;
@@ -40,7 +40,7 @@ public class TestChatDeleteFeature {
 	}
 
 	@Test
-	public void testDeleteFailure() {
+	 void testDeleteFailure() {
 		int chatId = 224;
 		int messageId = 2;
 
@@ -56,7 +56,7 @@ public class TestChatDeleteFeature {
 	}
 
 	@Test
-	public void testChatDeleteNullDetails() {
+	 void testChatDeleteNullDetails() {
 		Chat chat = null;
 
 		ChatService chatService = new ChatService();

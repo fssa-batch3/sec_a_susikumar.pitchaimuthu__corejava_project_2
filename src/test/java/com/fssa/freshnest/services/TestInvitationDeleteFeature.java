@@ -23,7 +23,7 @@ public class TestInvitationDeleteFeature {
     }
 
     @Test
-    public void testInvitationDeleteSuccess() {
+     void testInvitationDeleteSuccess() {
         Invite invite = new Invite(25);
 
         InviteService inviteService = new InviteService();
@@ -37,7 +37,7 @@ public class TestInvitationDeleteFeature {
     }
 
     @Test
-    public void testInvalidIdDelete() {
+     void testInvalidIdDelete() {
         Invite invite = new Invite(1);
 
         InviteService inviteService = new InviteService();
@@ -51,7 +51,7 @@ public class TestInvitationDeleteFeature {
     }
 
     @Test
-    public void testInvalidDeleteNull() {
+     void testInvalidDeleteNull() {
         Invite invite = null;
 
         InviteService inviteService = new InviteService();

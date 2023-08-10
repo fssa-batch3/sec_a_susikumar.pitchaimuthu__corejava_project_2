@@ -28,7 +28,7 @@ public class TestStillCreateFeature {
 	}
 
 	@Test
-	public void testStillCreateSuccess() {
+	 void testStillCreateSuccess() {
 		LocalDate currentDate = LocalDate.now();
 		LocalTime currentTime = LocalTime.now();
 
@@ -45,7 +45,7 @@ public class TestStillCreateFeature {
 	}
 
 	@Test
-	public void testInvalidImageUrl() {
+	 void testInvalidImageUrl() {
 		LocalDate currentDate = LocalDate.now();
 		LocalTime currentTime = LocalTime.now();
 
@@ -62,7 +62,7 @@ public class TestStillCreateFeature {
 	}
 
 	@Test
-	public void testInvalidImageName() {
+	 void testInvalidImageName() {
 		LocalDate currentDate = LocalDate.now();
 		LocalTime currentTime = LocalTime.now();
 
@@ -79,7 +79,7 @@ public class TestStillCreateFeature {
 	}
 
 	@Test
-	public void testNullImgeDetails() {
+	 void testNullImgeDetails() {
 		Still still = null;
 		StillService stillService = new StillService();
 

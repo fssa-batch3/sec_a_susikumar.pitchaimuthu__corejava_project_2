@@ -23,7 +23,7 @@ public class TestUserDetailsUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateSuccess() {
+	 void testUpdateSuccess() {
 
 		User user1 = new User("susi@gmail.com", "Kanipapa", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
 				"2003-08-01", "Indian", "Male");
@@ -40,7 +40,7 @@ public class TestUserDetailsUpdateFeature {
 
 	// test invalid email address update
 	@Test
-	public void testEmailNotExistInDatabaseUpdate() {
+	 void testEmailNotExistInDatabaseUpdate() {
 		UserService userService = new UserService();
 
 		User user1 = new User("naan@gmail.com", "Kanipapa", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
@@ -55,7 +55,7 @@ public class TestUserDetailsUpdateFeature {
 
 	// test invalid user name update
 	@Test
-	public void testUpdateInvalidUserName() {
+	 void testUpdateInvalidUserName() {
 		UserService userService = new UserService();
 
 		User user1 = new User("mani@gmail.com", "", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
@@ -70,7 +70,7 @@ public class TestUserDetailsUpdateFeature {
 
 	// test invalid user gender details
 	@Test
-	public void testUpdateInvalidGenderDetails() {
+	 void testUpdateInvalidGenderDetails() {
 		UserService userService = new UserService();
 
 		User user1 = new User("mani@gmail.com", "kanipapa", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
@@ -85,7 +85,7 @@ public class TestUserDetailsUpdateFeature {
 
 	// test invalid nationality details
 	@Test
-	public void testInvalidNationalityDetails() {
+	 void testInvalidNationalityDetails() {
 		UserService userService = new UserService();
 
 		User user1 = new User("mani@gmail.com", "kanipapa", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
@@ -100,7 +100,7 @@ public class TestUserDetailsUpdateFeature {
 
 	// test invalid first name details
 	@Test
-	public void testInvalidUserFirstNameDetails() {
+	 void testInvalidUserFirstNameDetails() {
 		UserService userService = new UserService();
 
 		User user1 = new User("mani@gmail.com", "kanipapa", "raji@SM123", "", "Pitchaimuthu", 20, 8870737612L,
@@ -115,7 +115,7 @@ public class TestUserDetailsUpdateFeature {
 
 	// test invalid last name details
 	@Test
-	public void testInvalidUserLastNameDetails() {
+	 void testInvalidUserLastNameDetails() {
 		UserService userService = new UserService();
 
 		User user1 = new User("mani@gmail.com", "kanipapa", "raji@SM123", "Susikumar", "", 20, 8870737612L,

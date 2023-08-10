@@ -22,7 +22,7 @@ public class TestChatReadFeature {
     }
 
     @Test 
-    public void testChatRead() {
+     void testChatRead() {
         int chat_id = 1;
 
         Chat chat = new Chat(chat_id);
@@ -37,7 +37,7 @@ public class TestChatReadFeature {
     }
 
     @Test
-    public void testReadChatNullDetails() {
+     void testReadChatNullDetails() {
         Chat chat = null;
 
         ChatService chatService = new ChatService();

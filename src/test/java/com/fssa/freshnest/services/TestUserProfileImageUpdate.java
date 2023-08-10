@@ -26,7 +26,7 @@ public class TestUserProfileImageUpdate {
     }
 
     @Test
-    public void testProfileUpdateSuccess() {
+     void testProfileUpdateSuccess() {
 
         User user1 = new User("https://example.com/image.jpg", 1);
         UserService userService = new UserService();
@@ -42,7 +42,7 @@ public class TestUserProfileImageUpdate {
     }
 
 
-    public void testProfileInvaliedDetailsUpdateSuccess() {
+     void testProfileInvaliedDetailsUpdateSuccess() {
 
         User user1 = new User("https://example", 24);
         UserService userService = new UserService();
@@ -57,7 +57,7 @@ public class TestUserProfileImageUpdate {
     }
 
 
-    public void testProfileDetailsNull() {
+     void testProfileDetailsNull() {
 
         User user1 = null;
         UserService userService = new UserService();

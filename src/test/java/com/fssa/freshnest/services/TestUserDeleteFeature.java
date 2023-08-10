@@ -24,7 +24,7 @@ public class TestUserDeleteFeature {
 
 	// test delete all details success
 	@Test
-	public void testUserDeleteSuccess() {
+	 void testUserDeleteSuccess() {
 		User user1 = new User("susi@gmail.com", true);
 		UserService userService = new UserService();
 		try {
@@ -38,7 +38,7 @@ public class TestUserDeleteFeature {
 
 	// test delete user invalid email
 	@Test
-	public void testDeleteNotExistsEmail() {
+	 void testDeleteNotExistsEmail() {
 		User user1 = new User("naan@gmail.com", true);
 		UserService userService = new UserService();
 		try {

@@ -28,7 +28,7 @@ public class TestChatUpdateFeature {
     }
 
     @Test
-    public void testChatUpdateSuccess() {
+     void testChatUpdateSuccess() {
     	String chatText = "Hello chellam..";
         int chatId = 1;
         int messageId = 1;
@@ -45,7 +45,7 @@ public class TestChatUpdateFeature {
     }
 
     @Test
-    public void testChatUpdateFailure() {
+     void testChatUpdateFailure() {
         String chatText = "Hello chellam..";
         int chatId = 1;
 
@@ -61,7 +61,7 @@ public class TestChatUpdateFeature {
     }
 
     @Test
-    public void testChatNullDetails() {
+     void testChatNullDetails() {
         Chat chat = null;
 
         ChatService chatService = new ChatService();

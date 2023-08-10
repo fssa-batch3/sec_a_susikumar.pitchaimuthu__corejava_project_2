@@ -36,7 +36,7 @@ public class TestStillUpdateFeature {
 
     // test image update details
     @Test
-    public void testImageUpdateSuccess() {
+     void testImageUpdateSuccess() {
         int still_id = 2;
 
         // Adding that image is updated
@@ -58,7 +58,7 @@ public class TestStillUpdateFeature {
     }
 
     @Test
-    public void testImageUpdateFailure() {
+     void testImageUpdateFailure() {
         int still_id = 2;
 
         // Adding that image is updated
@@ -80,7 +80,7 @@ public class TestStillUpdateFeature {
     }
 
     @Test
-    public void testImageNullDetails() {
+     void testImageNullDetails() {
         // Adding that image is updated
         Still still = null;
 

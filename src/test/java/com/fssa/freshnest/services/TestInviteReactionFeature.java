@@ -25,7 +25,7 @@ public class TestInviteReactionFeature {
     // test invite 
     
     @Test
-    public void testInviteReactionSuccess() {
+     void testInviteReactionSuccess() {
     	Invite invite = new Invite(4, 1, true, false, false, "Hello buddy I will come.");
         InviteService inviteService = new InviteService();
 
