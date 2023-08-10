@@ -1,13 +1,11 @@
-package com.fssa.freshnest.DAO;
+package com.fssa.freshnest.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.fssa.freshnest.DAO.exceptions.DAOException;
+import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.utils.ConnectionUtils;
 

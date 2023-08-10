@@ -7,7 +7,7 @@ public class TestStillReadFeature {
 
 	public static void main(String[] args) {
 
-		Still still = new Still( 44);
+		Still still = new Still(1);
 		StillService stillService = new StillService();
 
 		try {

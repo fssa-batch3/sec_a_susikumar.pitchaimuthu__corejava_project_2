@@ -1,7 +1,7 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.DAO.ChatDAO;
-import com.fssa.freshnest.DAO.exceptions.DAOException;
+import com.fssa.freshnest.dao.ChatDAO;
+import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.ChatValidator;

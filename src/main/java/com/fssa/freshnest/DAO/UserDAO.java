@@ -1,14 +1,13 @@
-package com.fssa.freshnest.DAO;
+package com.fssa.freshnest.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import com.fssa.freshnest.DAO.exceptions.DAOException;
+import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.User;
 import com.fssa.freshnest.utils.ConnectionUtils;
 

@@ -1,7 +1,7 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.DAO.StillDAO;
-import com.fssa.freshnest.DAO.exceptions.DAOException;
+import com.fssa.freshnest.dao.StillDAO;
+import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Still;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.StillValidator;

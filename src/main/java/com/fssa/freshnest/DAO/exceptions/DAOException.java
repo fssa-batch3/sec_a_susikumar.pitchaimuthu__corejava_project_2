@@ -1,4 +1,4 @@
-package com.fssa.freshnest.DAO.exceptions;
+package com.fssa.freshnest.dao.exceptions;
 
 public class DAOException extends Exception {
 

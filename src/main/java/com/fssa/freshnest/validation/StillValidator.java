@@ -25,7 +25,7 @@ public class StillValidator {
 
 	public static boolean validateFavouriteStill(Still still) throws InvalidUserException {
 
-		if (still != null) {
+		if (still != null  && validateStillId(still.getStillId())) {
 			System.out.println("Still details valid");
 			return true;
 		} else {
@@ -38,7 +38,7 @@ public class StillValidator {
 
 	public static boolean validateUpdateStill(Still still) throws InvalidUserException {
 
-		if (still != null) {
+		if (still != null && validateStillName(still.getStillName())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
@@ -50,7 +50,7 @@ public class StillValidator {
 
 	public static boolean validateDeleteStill(Still still) throws InvalidUserException {
 
-		if (still != null) {
+		if (still != null && validateStillId(still.getStillId())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
@@ -59,7 +59,7 @@ public class StillValidator {
 	}
 
 	public static boolean validateReadStill(Still still) throws InvalidUserException {
-		if (still != null) {
+		if (still != null  && validateStillUserId(still.getUserId())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
@@ -97,10 +97,10 @@ public class StillValidator {
 
 		if (still_id > 0) {
 			System.out.println("The still id is valid");
-			return false;
+			return true;
 		} else {
 			System.out.println("The still id is not valid.");
-			return true;
+			return false;
 		}
 
 	}
@@ -128,5 +128,16 @@ public class StillValidator {
 			return false;
 		}
 	}
+	// Validate still user id
+	public static boolean validateStillUserId(int still_id) throws InvalidUserException {
 
+		if (still_id > 0) {
+			System.out.println("The still id is valid");
+			return true;
+		} else {
+			System.out.println("The still id is not valid.");
+			return false;
+		}
+
+	}
 }

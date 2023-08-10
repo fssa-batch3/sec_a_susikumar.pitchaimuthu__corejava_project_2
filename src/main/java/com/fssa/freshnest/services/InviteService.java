@@ -1,7 +1,7 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.DAO.InviteDAO;
-import com.fssa.freshnest.DAO.exceptions.DAOException;
+import com.fssa.freshnest.dao.InviteDAO;
+import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Invite;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.InviteValidator;

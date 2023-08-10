@@ -12,7 +12,7 @@ public class TestStillFavouriteFeature {
 
 	public static void main(String[] args) {
 
-		Still still = new Still(true, 2);
+		Still still = new Still(true, 1);
 		StillService stillService = new StillService();
 
 		try {

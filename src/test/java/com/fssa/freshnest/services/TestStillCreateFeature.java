@@ -66,6 +66,23 @@ public class TestStillCreateFeature {
 	}
 
 	@Test
+	public void testInvalidImageName() {
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
+
+		Still still = new Still("www.sampleImage.com", 2, "", currentDate, currentTime, false, false);
+		StillService stillService = new StillService();
+
+		try {
+			assertFalse(stillService.TakeStill(still));
+
+		} catch (ServiceException e) {
+			e.printStackTrace();
+
+		}
+	}
+
+	@Test
 	public void testNullImgeDetails() {
 		Still still = null;
 		StillService stillService = new StillService();
