@@ -16,7 +16,7 @@ public class InviteDAO {
         String insertQuery = "INSERT INTO fresh_invite (user_id, invite_type, invite_date, invite_time, special_person, invite_slogan, invite_explanation) VALUES (?,?,?,?,?,?,?)";
 
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insertQuery);) {
+             PreparedStatement statement = connection.prepareStatement(insertQuery)) {
 
             LocalDate invite_date = LocalDate.parse(invite.getInviteDate());
             LocalTime invite_time = LocalTime.parse(invite.getInviteTime());
@@ -44,7 +44,7 @@ public class InviteDAO {
         String updateQuery = "UPDATE fresh_invite SET user_id = ?, invite_type = ?, invite_date = ?, invite_time = ?, special_person = ?, invite_slogan = ?, invite_explanation = ? WHERE invite_id = ?";
 
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateQuery);) {
+             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
             LocalDate invite_date = LocalDate.parse(invite.getInviteDate());
             LocalTime invite_time = LocalTime.parse(invite.getInviteTime());
@@ -72,7 +72,7 @@ public class InviteDAO {
 
         String updateQuery = "UPDATE fresh_invite SET is_delete = ?  WHERE invite_id = ?";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateQuery);) {
+             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
             statement.setInt(1, 1);
             statement.setInt(2, invite.getInviteId());
@@ -91,7 +91,7 @@ public class InviteDAO {
     public boolean reactInvite(Invite invite) throws DAOException {
         String updateQuery = "INSERT INTO invite_react_details ( invite_id, reactor_id , is_accept, is_like  , is_dislike, invite_message) VALUES (?,?,?,?,?,?)";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateQuery);) {
+             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
             statement.setInt(1, invite.getInviteId());
             statement.setInt(2, invite.getReactorId());

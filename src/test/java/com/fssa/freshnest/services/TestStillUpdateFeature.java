@@ -34,6 +34,7 @@ public class TestStillUpdateFeature {
         }
     }
 
+    // test image update details
     @Test
     public void testImageUpdateSuccess() {
         int still_id = 2;

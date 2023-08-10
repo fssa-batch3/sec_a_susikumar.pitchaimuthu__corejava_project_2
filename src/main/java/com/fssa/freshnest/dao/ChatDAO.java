@@ -12,11 +12,10 @@ import java.sql.SQLException;
 public class ChatDAO {
 
     // Create the chat details
-
     public boolean insertChat(Chat chat) throws DAOException {
         String insertChatQuery = "INSERT INTO chats (chat_type, chat_name) VALUES (?, ?)";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insertChatQuery);) {
+             PreparedStatement statement = connection.prepareStatement(insertChatQuery)) {
             statement.setString(1, chat.getChatType());
             statement.setInt(2, chat.getChatName());
             int rows = statement.executeUpdate();
@@ -69,7 +68,9 @@ public class ChatDAO {
             statement.setInt(1, chat.getChatId());
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    System.out.println(resultSet.getString("message"));
+                    String chatMessage = resultSet.getString("message");
+                    int chatId = resultSet.getInt("chat_id");
+                    System.out.println("chatId is : " + chatId + " correspond message is : " + chatMessage);
                     return true;
                 } else {
                     return false;
@@ -85,7 +86,7 @@ public class ChatDAO {
     public boolean updateChat(Chat chat) throws DAOException {
         String updateQuery = "UPDATE chat_messages SET message = ? WHERE chat_id = ?";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateQuery);) {
+             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
             // Prepare SQL statement
             statement.setString(1, chat.getChat_message());
@@ -106,7 +107,7 @@ public class ChatDAO {
     public boolean deleteChat(Chat chat) throws DAOException {
         String updateQuery = "UPDATE chat_messages SET is_delete = ? WHERE chat_id = ?";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateQuery);) {
+             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
             // Prepare SQL statement
             statement.setInt(1, chat.getIsDelete() ? 1 : 0);

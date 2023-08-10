@@ -88,8 +88,7 @@ public class ChatValidator {
 
     // validate chat group name
     public static boolean validateChatGroupName(String name) {
-
-        if (name != "" || !name.isEmpty()) {
+        if (!name.isEmpty()) {
             System.out.println("The chat name is valid");
             return true;
         } else {

@@ -53,7 +53,7 @@ public class Invite {
         this.inviteId = inviteId;
         this.reactorId = reactorId;
         this.isAccept = isAccept;
-        this.isLike = isLike; 
+        this.isLike = isLike;
         this.isDislike = isDislike;
         this.inviteMessage = message;
     }

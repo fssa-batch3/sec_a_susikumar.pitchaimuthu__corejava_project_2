@@ -55,14 +55,11 @@ public class TestInvitationCreationFeature {
     }
 
     @Test
-    public void testInvitaionNullDetails() {
-
-        Invite invite = null;
-
+    public void testInvitationNullDetails() {
         InviteService inviteService = new InviteService();
 
         try {
-            assertFalse(inviteService.createInvite(invite));
+            assertFalse(inviteService.createInvite(null));
         } catch (ServiceException e) {
             e.printStackTrace();
         }

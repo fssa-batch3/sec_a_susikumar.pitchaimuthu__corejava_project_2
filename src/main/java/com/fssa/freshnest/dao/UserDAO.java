@@ -9,17 +9,15 @@ import java.time.LocalDate;
 
 public class UserDAO {
 
-
     // Get user from DB - Login
     public boolean checkUserLogin(String email, String password) throws DAOException {
         String selectQuery = "SELECT * FROM users WHERE email = ?";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(selectQuery);
-             ResultSet resultSet = statement.executeQuery();) {
+             ResultSet resultSet = statement.executeQuery()) {
             statement.setString(1, email);
 
             // Execute the query
-
             boolean userExists = resultSet.next();
 
             if (userExists) {
@@ -45,7 +43,7 @@ public class UserDAO {
     public boolean createUser(User user) throws DAOException {
         String insertQuery = "Insert INTO users (email,username, password, firstname, lastname, profile_image) VALUES(?, ?,?, ? , ?, ?)";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insertQuery);) {
+             PreparedStatement statement = connection.prepareStatement(insertQuery)) {
 
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getUsername());
@@ -69,7 +67,7 @@ public class UserDAO {
     public boolean secondPageUserUpdate(User user) throws DAOException {
         String updateQuery = "UPDATE users SET gender = ?, dob = ? WHERE email = ?";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateQuery);) {
+             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
             LocalDate DOB = LocalDate.parse(user.getDob());
             // Prepare SQL statement
@@ -87,11 +85,12 @@ public class UserDAO {
         }
     }
 
+    // Update user data
     public boolean updateUser(User user) throws DAOException {
         String updateQuery = "UPDATE users SET username = ?, firstname = ?, lastname = ?, gender = ?, password = ?, nationality = ?, dob = ?, age = ?, mobile_number = ? WHERE email = ?";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateQuery);) {
-            // Get connection
+             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
+
             LocalDate DOB = LocalDate.parse(user.getDob());
 
             // Prepare SQL statement
@@ -120,8 +119,7 @@ public class UserDAO {
     public boolean updateProfileImage(User user) throws DAOException {
         String deleteQuery = "Update users SET profile_image = ?  WHERE userid = ?";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(deleteQuery);) {
-            // Get connection
+             PreparedStatement statement = connection.prepareStatement(deleteQuery)) {
 
             // Prepare SQL statement
             statement.setString(1, user.getProfileImage());
@@ -138,10 +136,11 @@ public class UserDAO {
 
     }
 
+    // Delete user dao
     public boolean deleteUser(User user) throws DAOException {
         String deleteQuery = "Update users SET is_deleted = ?  WHERE email = ?";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(deleteQuery);) {
+             PreparedStatement statement = connection.prepareStatement(deleteQuery)) {
 
             statement.setInt(1, user.getIsDelete() ? 1 : 0);
             statement.setString(2, user.getEmail());
