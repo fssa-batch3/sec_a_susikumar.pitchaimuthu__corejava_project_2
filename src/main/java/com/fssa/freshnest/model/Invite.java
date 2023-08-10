@@ -47,7 +47,7 @@ public class Invite {
     public Invite(int inviteId) {
         this.inviteId = inviteId;
     }
-    // Getters and letters
+    // Getters and letters 
 
     public Invite(int inviteId, int reactorId, boolean isAccept, boolean isLike, boolean isDislike, String message) {
         this.inviteId = inviteId;

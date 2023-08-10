@@ -8,50 +8,49 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestUserSecondPageRegistrationFeatre {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        User user1 = new User("2003-08-29", "Male", "susi@gmail.com");
-        UserService userService = new UserService();
+		User user1 = new User("2003-08-29", "Male", "susi@gmail.com");
+		UserService userService = new UserService();
 
-        try {
-            userService.secondPageRegisterUser(user1);
+		try {
+			userService.secondPageRegisterUser(user1);
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
+		} catch (ServiceException e) {
+			e.printStackTrace();
 
-        }
-    }
+		}
+	}
 
-    @Test
-    public void validateUserSecondRegistrationSuccess() {
-        User user1 = new User("2003-08-29", "Male", "susikumar@gmail.com");
-        UserService userService = new UserService();
+	@Test
+	public void validateUserSecondRegistrationSuccess() {
 
-        try {
-            assertTrue(userService.secondPageRegisterUser(user1));
+		User user1 = new User("2003-08-29", "Male", "susi@gmail.com");
+		UserService userService = new UserService();
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
+		try {
+			assertTrue(userService.secondPageRegisterUser(user1));
 
-        }
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
 
-    }
+	}
 
-    @Test
+	@Test
 
-    public void testUserSecondRegistrationNullDetails() {
-        User user1 = null;
-        UserService userService = new UserService();
+	public void testUserSecondRegistrationNullDetails() {
+		User user1 = null;
+		UserService userService = new UserService();
 
-        try {
-            assertFalse(userService.secondPageRegisterUser(user1));
+		try {
+			assertFalse(userService.secondPageRegisterUser(user1));
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
 
-        }
-    }
+		}
+	}
 
 }

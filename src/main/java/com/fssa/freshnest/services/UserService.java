@@ -27,7 +27,7 @@ public class UserService {
 
     }
 
-    // User second page reagistration service
+    // User second page reagistration service 
     public boolean secondPageRegisterUser(User user) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {
@@ -91,6 +91,7 @@ public class UserService {
                 System.out.println(user.getEmail() + " Detials are Successfully deleted successfully!");
                 return true;
             } else {
+                System.out.println(user.getEmail() + " Detials are not Successfully deleted successfully!");
                 return false;
             }
 

@@ -17,7 +17,7 @@ public class ChatService {
             ChatValidator.validateCreateChat(insertChat, insertChatParticipant, insertMessage);
             if (chatDAO.insertChat(insertChat) && chatDAO.insertChatParticipant(insertChatParticipant)
                     && chatDAO.insertChatMessage(insertMessage)) {
-                System.out.println(insertMessage.getChat_message() + " chat send Successfully!");
+                System.out.println(insertMessage.getChatMessage() + " chat send Successfully!");
                 return true;
             } else {
                 return false;
@@ -74,15 +74,16 @@ public class ChatService {
         ChatDAO chatDAO = new ChatDAO();
         try {
 
-            ChatValidator.validateDeleteChat(chat);
+            ChatValidator.validateDeleteChat(chat); 
             if (chatDAO.deleteChat(chat)) {
                 System.out.println(chat.getChatId() + " chat deleted Successfully!");
                 return true;
             } else {
-                return false;
+            	System.out.println(chat.getChatId() + " chat is not deleted");
+                return false; 
             }
 
-        } catch (DAOException | InvalidUserException e) {
+        } catch (DAOException | InvalidUserException e) { 
             throw new ServiceException(e);
         }
 

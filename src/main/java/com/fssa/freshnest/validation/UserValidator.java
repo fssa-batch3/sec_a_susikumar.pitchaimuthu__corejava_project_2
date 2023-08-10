@@ -33,7 +33,7 @@ public class UserValidator {
         } else {
             throw new InvalidUserException("User details not valid");
         }
-    }
+    }  
 
     // Checking the loginUser present or not
 

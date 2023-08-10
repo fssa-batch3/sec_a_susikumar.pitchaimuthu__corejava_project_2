@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestChatReadFeature {
     public static void main(String[] args) {
         int chat_id = 1;
-
         Chat chat = new Chat(chat_id);
 
         ChatService chatService = new ChatService();
@@ -22,11 +21,11 @@ public class TestChatReadFeature {
         }
     }
 
-    @Test
+    @Test 
     public void testChatRead() {
-        int user_id = 2;
+        int chat_id = 1;
 
-        Chat chat = new Chat(user_id);
+        Chat chat = new Chat(chat_id);
 
         ChatService chatService = new ChatService();
 

@@ -10,7 +10,7 @@ public class TestStillDeleteFeature {
 
     public static void main(String[] args) {
 
-        int still_id = 2;
+        int still_id = 1;
 
         Still still = new Still(true, still_id, 2);
 
@@ -25,9 +25,9 @@ public class TestStillDeleteFeature {
 
     @Test
     public void testStillDeleteSuccess() {
-        int still_id = 2;
+        int still_id = 1;
 
-        Still still = new Still(true, still_id, 2);
+        Still still = new Still(true, still_id, 1);
 
         StillService stillService = new StillService();
 

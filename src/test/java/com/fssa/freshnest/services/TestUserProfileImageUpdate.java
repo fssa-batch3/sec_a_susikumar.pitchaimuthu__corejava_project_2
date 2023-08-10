@@ -1,16 +1,19 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.model.User;
-import com.fssa.freshnest.services.exceptions.ServiceException;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.fssa.freshnest.model.User;
+import com.fssa.freshnest.services.exceptions.ServiceException;
 
 public class TestUserProfileImageUpdate {
 
     public static void main(String[] args) {
 
-        User user1 = new User("https://example.com/image.jpg", 44);
+        User user1 = new User("https://example.com/image.jpg", 1);
         UserService userService = new UserService();
 
         try {
@@ -25,7 +28,7 @@ public class TestUserProfileImageUpdate {
     @Test
     public void testProfileUpdateSuccess() {
 
-        User user1 = new User("https://example.com/image.jpg", 24);
+        User user1 = new User("https://example.com/image.jpg", 1);
         UserService userService = new UserService();
 
         try {
@@ -49,8 +52,7 @@ public class TestUserProfileImageUpdate {
 
         } catch (ServiceException e) {
             e.printStackTrace();
-
-
+            
         }
     }
 

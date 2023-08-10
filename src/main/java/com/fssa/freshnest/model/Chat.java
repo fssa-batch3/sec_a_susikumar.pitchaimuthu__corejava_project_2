@@ -7,14 +7,15 @@ public class Chat {
     private int chatId;
     private int userId;
     private int senderId;
-    private String chatMessage;
+    private int messageId;
+	private String chatMessage;
     private boolean isDelete;
     private boolean isUpdate;
 
     // chat id and user id constructor
     public Chat(int chatId, int userId) {
         this.chatId = chatId;
-        this.userId = userId;
+        this.userId = userId; 
     }
 
     // chat and sender id setting constructor
@@ -36,77 +37,91 @@ public class Chat {
     }
 
     // Delete chat constructor
-    public Chat(boolean isDelete, int chatId) {
+    public Chat(boolean isDelete, int chatId, int messageId) {
         this.isDelete = isDelete;
         this.chatId = chatId;
+        this.messageId = messageId;
     }
+    
+    public Chat(String chatText, int chatId, int messageId) {
+	    this.chatMessage = chatText;
+	    this.chatId = chatId;
+	    this.messageId = messageId;
+	}
 
-    public Chat() {
+	// getters and setters
+	public String getChatType() {
+		return chatType;
+	}
 
-    }
+	public void setChatType(String chatType) {
+		this.chatType = chatType;
+	}
 
-    public String getChatType() {
-        return chatType;
-    }
+	public int getChatName() {
+		return chatName;
+	}
 
-    public void setChatType(String chatType) {
-        this.chatType = chatType;
-    }
+	public void setChatName(int chatName) {
+		this.chatName = chatName;
+	}
 
-    public boolean getIsDelete() {
-        return isDelete;
-    }
+	public int getChatId() {
+		return chatId;
+	}
 
-    public void setIsDelete(boolean isDelete) {
-        this.isDelete = isDelete;
-    }
+	public void setChatId(int chatId) {
+		this.chatId = chatId;
+	}
 
-    public boolean getIsUpdate() {
-        return isUpdate;
-    }
+	public int getUserId() {
+		return userId;
+	}
 
-    public void setIsUpdate(boolean is_update) {
-        this.isUpdate = is_update;
-    }
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
-    public int getChatName() {
-        return chatName;
-    }
+	public int getSenderId() {
+		return senderId;
+	}
 
-    public void setChatName(int chatName) {
-        this.chatName = chatName;
-    }
+	public void setSenderId(int senderId) {
+		this.senderId = senderId;
+	}
 
-    public int getChatId() {
-        return chatId;
-    }
+	public int getMessageId() {
+		return messageId;
+	}
 
-    public void setChatId(int chatId) {
-        this.chatId = chatId;
-    }
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
+	}
 
-    public int getUserId() {
-        return userId;
-    }
+	public String getChatMessage() {
+		return chatMessage;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public void setChatMessage(String chatMessage) {
+		this.chatMessage = chatMessage;
+	}
 
-    public int getSenderId() {
-        return senderId;
-    }
+	public boolean getDelete() {
+		return isDelete;
+	}
 
-    public void setSenderId(int senderId) {
-        this.senderId = senderId;
-    }
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
 
-    public String getChat_message() {
-        return chatMessage;
-    }
+	public boolean getUpdate() {
+		return isUpdate;
+	}
 
-    public void setChat_message(String chatMessage) {
-        this.chatMessage = chatMessage;
-    }
+	public void setUpdate(boolean isUpdate) {
+		this.isUpdate = isUpdate;
+	}
+
+    
 
 }

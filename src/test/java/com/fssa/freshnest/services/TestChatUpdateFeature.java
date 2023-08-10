@@ -1,11 +1,12 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.model.Chat;
-import com.fssa.freshnest.services.exceptions.ServiceException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import com.fssa.freshnest.model.Chat;
+import com.fssa.freshnest.services.exceptions.ServiceException;
 
 public class TestChatUpdateFeature {
 
@@ -13,8 +14,9 @@ public class TestChatUpdateFeature {
 
         String chatText = "Hello chellam..";
         int chatId = 1;
+        int messageId = 1;
 
-        Chat chat = new Chat(chatText, chatId);
+        Chat chat = new Chat(chatText, chatId, messageId);
 
         ChatService chatService = new ChatService();
 
@@ -27,16 +29,17 @@ public class TestChatUpdateFeature {
 
     @Test
     public void testChatUpdateSuccess() {
-        String chatText = "Hello chellam..";
+    	String chatText = "Hello chellam..";
         int chatId = 1;
+        int messageId = 1;
 
-        Chat chat = new Chat(chatText, chatId);
+        Chat chat = new Chat(chatText, chatId, messageId);
 
         ChatService chatService = new ChatService();
 
         try {
             assertTrue(chatService.updateChat(chat));
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
     }

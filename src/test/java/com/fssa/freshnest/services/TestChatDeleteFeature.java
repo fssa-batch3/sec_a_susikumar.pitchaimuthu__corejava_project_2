@@ -1,71 +1,71 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.model.Chat;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import com.fssa.freshnest.model.Chat;
 
 public class TestChatDeleteFeature {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
+		int chatId = 1;
+		int messageId = 2;
+		
+		Chat chat = new Chat(true, chatId, messageId);
+		ChatService chatService = new ChatService();
+		try {
+			chatService.deleteChat(chat);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+ 
+	@Test
+	public void testChatDeleteSuccess() {
 
-        int chat_id = 1;
+		int chatId = 1;
+		int messageId = 2;
 
-        Chat chat = new Chat(true, chat_id);
+		Chat chat = new Chat(true, chatId, messageId);
+		ChatService chatService = new ChatService();
+		try {
+			assertTrue(chatService.deleteChat(chat));
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-        ChatService chatService = new ChatService();
+	@Test
+	public void testDeleteFailure() {
+		int chatId = 224;
+		int messageId = 2;
 
-        try {
-            chatService.deleteChat(chat);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		Chat chat = new Chat(true, chatId, messageId);
 
-    @Test
-    public void testDeleteSuccess() {
+		ChatService chatService = new ChatService();
 
-        int chatId = 2;
+		try {
+			assertFalse(chatService.deleteChat(chat));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-        Chat chat = new Chat(true, chatId);
+	@Test
+	public void testChatDeleteNullDetails() {
+		Chat chat = null;
 
-        ChatService chatService = new ChatService();
+		ChatService chatService = new ChatService();
 
-        try {
-            assertTrue(chatService.deleteChat(chat));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testDeleteFailure() {
-
-        int chatId = 2232;
-
-        Chat chat = new Chat(true, chatId);
-
-        ChatService chatService = new ChatService();
-
-        try {
-            assertFalse(chatService.deleteChat(chat));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testChatDeleteNullDetails() {
-        Chat chat = null;
-
-        ChatService chatService = new ChatService();
-
-        try {
-            assertFalse(chatService.deleteChat(chat));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			assertFalse(chatService.deleteChat(chat));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

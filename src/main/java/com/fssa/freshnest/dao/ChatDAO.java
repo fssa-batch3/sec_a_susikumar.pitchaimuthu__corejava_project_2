@@ -23,7 +23,7 @@ public class ChatDAO {
             return (rows == 1);
         } catch (SQLException e) {
             throw new DAOException(e);
-        }
+        } 
     }
 
     public boolean insertChatParticipant(Chat chat) throws DAOException {
@@ -46,7 +46,7 @@ public class ChatDAO {
              PreparedStatement statement = connection.prepareStatement(insertMessageQuery)) {
             statement.setInt(1, chat.getChatId());
             statement.setInt(2, chat.getSenderId());
-            statement.setString(3, chat.getChat_message());
+            statement.setString(3, chat.getChatMessage());
             int rows = statement.executeUpdate();
 
             return (rows == 1);
@@ -69,7 +69,7 @@ public class ChatDAO {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     String chatMessage = resultSet.getString("message");
-                    int chatId = resultSet.getInt("chat_id");
+                    int chatId = resultSet.getInt("message_id");
                     System.out.println("chatId is : " + chatId + " correspond message is : " + chatMessage);
                     return true;
                 } else {
@@ -84,13 +84,14 @@ public class ChatDAO {
     // Update chat
 
     public boolean updateChat(Chat chat) throws DAOException {
-        String updateQuery = "UPDATE chat_messages SET message = ? WHERE chat_id = ?";
+        String updateQuery = "UPDATE chat_messages SET message = ? WHERE chat_id = ?  AND message_id = ?";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
             // Prepare SQL statement
-            statement.setString(1, chat.getChat_message());
+            statement.setString(1, chat.getChatMessage());
             statement.setInt(2, chat.getChatId());
+            statement.setInt(3, chat.getMessageId());
 
             // Execute the query
             int rows = statement.executeUpdate();
@@ -105,20 +106,21 @@ public class ChatDAO {
     // Delete chat
 
     public boolean deleteChat(Chat chat) throws DAOException {
-        String updateQuery = "UPDATE chat_messages SET is_delete = ? WHERE chat_id = ?";
+        String updateQuery = "UPDATE chat_messages SET message = ? WHERE chat_id = ? AND message_id = ? ";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateQuery)) {
-
+ 
             // Prepare SQL statement
-            statement.setInt(1, chat.getIsDelete() ? 1 : 0);
+            statement.setInt(1, chat.getDelete() ? 1 : 0);
             statement.setInt(2, chat.getChatId());
+            statement.setInt(3, chat.getMessageId());
 
             // Execute the query
             int rows = statement.executeUpdate();
 
             // Return successful or not
             return (rows == 1);
-        } catch (SQLException e) {
+        } catch (SQLException e) { 
             throw new DAOException(e);
         }
     }

@@ -40,7 +40,7 @@ public class StillDAO {
              PreparedStatement statement = connection.prepareStatement(insertQuery)) {
             statement.setInt(1, still.getIsFavourite() ? 1 : 0);
             statement.setInt(2, still.getStillId());
-
+ 
             // Execute the query
             int rows = statement.executeUpdate();
 
@@ -90,16 +90,21 @@ public class StillDAO {
 
     // read still dao
     public boolean readStill(Still still) throws DAOException {
-        String insertQuery = "SELECT image_url from fresh_still WHERE user_id = ? ";
+        String insertQuery = "SELECT still_url from fresh_still WHERE user_id = ? ";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+             PreparedStatement statement = connection.prepareStatement(insertQuery)
+        ) {
             statement.setInt(1, still.getUserId());
 
-            // Execute the query
-            int rows = statement.executeUpdate();
-
-            // Return successful or not
-            return (rows == 1);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String imageUrl = resultSet.getString("still_url");
+                    System.out.println("Image url is : " + imageUrl);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         } catch (SQLException e) {
             throw new DAOException(e);
         }
