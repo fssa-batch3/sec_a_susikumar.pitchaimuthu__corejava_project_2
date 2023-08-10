@@ -18,14 +18,14 @@ public class StillService {
                 return true;
             } else {
                 return false;
-            }
+            } 
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
         }
 
     }
-
+ 
     // Test still favourite
 
     public boolean favouriteStill(Still still) throws ServiceException {

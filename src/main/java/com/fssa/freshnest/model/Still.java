@@ -21,7 +21,7 @@ public class Still {
         this.userId = userId;
         this.stillName = stillName;
         this.stillDate = stillDate;
-        this.stillTime = stillTime;
+        this.stillTime = stillTime; 
         this.isFavourite = isFavourite;
         this.isDelete = isDelete;
     }

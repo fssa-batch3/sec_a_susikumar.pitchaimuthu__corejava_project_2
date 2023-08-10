@@ -21,7 +21,7 @@ public class StillValidator {
 			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}
 
-	}
+	} 
 
 	// validate favourite image
 
@@ -85,9 +85,9 @@ public class StillValidator {
 
 	public static boolean validateStillName(String name) throws InvalidUserException {
 
-		if (name == null || name.isEmpty()) {
-			System.out.println("The still name is not valid");
-			return false;
+		if (!name.isEmpty()) {
+			System.out.println("The still name is  valid");
+			return true;
 		} else {
 			throw new InvalidUserException(INVALID_STILL_MESSAGE);
 		}

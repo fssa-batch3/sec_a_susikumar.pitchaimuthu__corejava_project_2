@@ -11,64 +11,52 @@ import com.fssa.freshnest.services.exceptions.ServiceException;
 
 public class TestUserProfileImageUpdate {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
+		User user1 = new User("https://example.com/image.jpg", 1);
+		UserService userService = new UserService();
 
-        User user1 = new User("https://example.com/image.jpg", 1);
-        UserService userService = new UserService();
+		try {
+			userService.profileImageUpdate(user1);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 
-        try {
-            userService.profileImageUpdate(user1);
+	@Test
+	void testProfileUpdateSuccess() {
+		User user1 = new User("https://example.com/image.jpg", 1);
+		UserService userService = new UserService();
+		try {
+			assertTrue(userService.profileImageUpdate(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
+		}
+	}
 
-        }
-    }
+	// test the invalid image url update
+	void testProfileInvalidImageUrl() {
+		User user1 = new User("https://example", 1);
+		UserService userService = new UserService();
+		try {
+			assertFalse(userService.profileImageUpdate(user1));
 
-    @Test
-     void testProfileUpdateSuccess() {
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 
-        User user1 = new User("https://example.com/image.jpg", 1);
-        UserService userService = new UserService();
+	
+    // test the null profile details
+	void testProfileDetailsNull() {
+		User user1 = null;
+		UserService userService = new UserService();
 
-        try {
-            assertTrue(userService.profileImageUpdate(user1));
-
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-
-        }
-    }
-
-
-     void testProfileInvaliedDetailsUpdateSuccess() {
-
-        User user1 = new User("https://example", 24);
-        UserService userService = new UserService();
-
-        try {
-            assertFalse(userService.profileImageUpdate(user1));
-
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            
-        }
-    }
-
-
-     void testProfileDetailsNull() {
-
-        User user1 = null;
-        UserService userService = new UserService();
-
-        try {
-            assertFalse(userService.profileImageUpdate(user1));
-
-        } catch (ServiceException e) {
-            e.printStackTrace();
-
-
-        }
-    }
+		try {
+			assertFalse(userService.profileImageUpdate(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 }
