@@ -9,13 +9,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class StillValidator {
+
+	private static final String invalidStillMessage = "still details are not valid";
+
 	public static boolean validateTakeStill(Still still) throws InvalidUserException {
 
 		if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
 				&& validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException(invalidStillMessage);
 		}
 
 	}
@@ -28,7 +31,7 @@ public class StillValidator {
 			System.out.println("Still details valid");
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException(invalidStillMessage);
 		}
 
 	}
@@ -40,7 +43,7 @@ public class StillValidator {
 		if (still != null && validateStillName(still.getStillName())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException(invalidStillMessage);
 		}
 
 	}
@@ -52,7 +55,7 @@ public class StillValidator {
 		if (still != null && validateStillId(still.getStillId())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException(invalidStillMessage);
 		}
 
 	}
@@ -61,7 +64,7 @@ public class StillValidator {
 		if (still != null && validateStillUserId(still.getUserId())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException(invalidStillMessage);
 		}
 
 	}
@@ -75,7 +78,7 @@ public class StillValidator {
 			System.out.println(value + " Image url is valid");
 			return true;
 		} catch (MalformedURLException e) {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException(invalidStillMessage);
 		}
 
 	}

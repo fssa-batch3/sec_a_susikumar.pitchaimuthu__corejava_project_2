@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 
 public class UserValidator {
 
+    private static final String invalidUserMessage = "invite details are not valid";
+
     public static boolean validateUser(User user) throws InvalidUserException {
 
         if (user != null && validateFirstName(user.getFirstName()) && validateLastName(user.getLastName())
@@ -19,7 +21,7 @@ public class UserValidator {
                 && validateUserName(user.getUsername()) && validateImageUrl(user.getProfileImage())) {
             return true;
         } else {
-            throw new InvalidUserException("User details not valid");
+            throw new InvalidUserException(invalidUserMessage);
         }
 
     }
@@ -31,7 +33,7 @@ public class UserValidator {
         if (user != null && validateDob(user.getDob()) && validateGender(user.getGender())) {
             return true;
         } else {
-            throw new InvalidUserException("User details not valid");
+            throw new InvalidUserException(invalidUserMessage);
         }
     }  
 
@@ -41,7 +43,7 @@ public class UserValidator {
         if (user != null && validateEmail(user.getEmail()) && validatePassword(user.getPassword())) {
             return true;
         } else {
-            throw new InvalidUserException("User details not valid");
+            throw new InvalidUserException(invalidUserMessage);
 
         }
     }
@@ -55,7 +57,7 @@ public class UserValidator {
                 && validateDob(user.getDob())) {
             return true;
         } else {
-            throw new InvalidUserException("User details not valid");
+            throw new InvalidUserException(invalidUserMessage);
 
         }
     }
@@ -65,7 +67,7 @@ public class UserValidator {
         if (user != null && validateImageUrl(user.getProfileImage())) {
             return true;
         } else {
-            throw new InvalidUserException("User details not valid");
+            throw new InvalidUserException(invalidUserMessage);
 
         }
     }
@@ -76,7 +78,7 @@ public class UserValidator {
         if (user != null && validateEmail(user.getEmail())) {
             return true;
         } else {
-            throw new InvalidUserException("User details not valid");
+            throw new InvalidUserException(invalidUserMessage);
 
         }
     }

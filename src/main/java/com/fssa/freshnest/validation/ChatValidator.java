@@ -5,6 +5,7 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 public class ChatValidator {
 
+	private static final String invalidInviteMessage = "chat details are not valid";
 	// create chat
 	public static boolean validateCreateChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage)
 			throws InvalidUserException {
@@ -14,7 +15,7 @@ public class ChatValidator {
 				&& validateChatGroupName(insertChat.getChatName())) {
 			return true;
 		} else {
-			throw new InvalidUserException("chat details is not valid");
+			throw new InvalidUserException(invalidInviteMessage);
 		}
 
 	}
@@ -25,7 +26,7 @@ public class ChatValidator {
 		if (chat != null) {
 			return true;
 		} else {
-			throw new InvalidUserException("chat details is not valid");
+			throw new InvalidUserException(invalidInviteMessage);
 		}
 
 	}
@@ -37,7 +38,7 @@ public class ChatValidator {
 		if (chat != null) {
 			return true;
 		} else {
-			throw new InvalidUserException("chat details is not valid");
+			throw new InvalidUserException(invalidInviteMessage);
 		}
 
 	}
@@ -49,7 +50,7 @@ public class ChatValidator {
 		if (chat != null) {
 			return true;
 		} else {
-			throw new InvalidUserException("chat details is not valid");
+			throw new InvalidUserException(invalidInviteMessage);
 		}
 
 	}
