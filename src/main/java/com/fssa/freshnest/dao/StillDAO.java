@@ -97,13 +97,7 @@ public class StillDAO {
             statement.setInt(1, still.getUserId());
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    String imageUrl = resultSet.getString("still_url");
-                    System.out.println("Image url is : " + imageUrl);
-                    return true;
-                } else {
-                    return false;
-                }
+                return resultSet.next();
             }
         } catch (SQLException e) {
             throw new DAOException(e);

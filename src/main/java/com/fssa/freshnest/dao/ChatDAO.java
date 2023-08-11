@@ -66,14 +66,7 @@ public class ChatDAO {
 
             statement.setInt(1, chat.getChatId());
             try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    String chatMessage = resultSet.getString("message");
-                    int chatId = resultSet.getInt("message_id");
-                    System.out.println("chatId is : " + chatId + " correspond message is : " + chatMessage);
-                    return true;
-                } else {
-                    return false;
-                }
+                return resultSet.next();
             }
         } catch (SQLException e) {
             throw new DAOException(e);

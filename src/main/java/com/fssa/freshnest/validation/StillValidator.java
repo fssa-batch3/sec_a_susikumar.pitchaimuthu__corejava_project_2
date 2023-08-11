@@ -28,7 +28,6 @@ public class StillValidator {
     public static boolean validateFavouriteStill(Still still) throws InvalidUserException {
 
         if (still != null && validateStillId(still.getStillId())) {
-            System.out.println("Still details valid");
             return true;
         } else {
             throw new InvalidUserException(INVALID_STILL_MESSAGE);
@@ -75,7 +74,6 @@ public class StillValidator {
 
         try {
             URL value = new URL(url);
-            System.out.println(value + " Image url is valid");
             return true;
         } catch (MalformedURLException e) {
             throw new InvalidUserException(INVALID_STILL_MESSAGE);
@@ -86,7 +84,6 @@ public class StillValidator {
     public static boolean validateStillName(String name) throws InvalidUserException {
 
         if (!name.isEmpty()) {
-            System.out.println("The still name is  valid");
             return true;
         } else {
             throw new InvalidUserException(INVALID_STILL_MESSAGE);
