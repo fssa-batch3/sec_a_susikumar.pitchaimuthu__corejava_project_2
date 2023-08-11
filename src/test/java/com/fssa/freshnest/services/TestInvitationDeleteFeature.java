@@ -7,17 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestInvitationDeleteFeature {
-    public static void main(String[] args) {
-        Invite invite = new Invite(25);
 
-        InviteService inviteService = new InviteService();
 
-        try {
-            inviteService.deleteInvite(invite);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
 
     // test the invitation test success
     @Test

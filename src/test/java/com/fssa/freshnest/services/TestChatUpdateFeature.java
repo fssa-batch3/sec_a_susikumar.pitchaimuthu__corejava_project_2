@@ -9,22 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestChatUpdateFeature {
 
-    public static void main(String[] args) {
-
-        String chatText = "Hello chellam..";
-        int chatId = 1;
-        int messageId = 1;
-
-        Chat chat = new Chat(chatText, chatId, messageId);
-
-        ChatService chatService = new ChatService();
-
-        try {
-            chatService.updateChat(chat);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
+  
 
     // test the chat update success details
     @Test

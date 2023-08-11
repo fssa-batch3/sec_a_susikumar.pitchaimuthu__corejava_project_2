@@ -11,28 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestStillUpdateFeature {
 
-    public static void main(String[] args) {
 
-        int still_id = 2;
 
-        // Adding that image is updated
-        Still still = new Still(still_id, true);
-
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-
-        // Adding the new image to the database
-        Still still2 = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
-
-        StillService stillService = new StillService();
-
-        try {
-            stillService.updateStill(still);
-            stillService.takeStill(still2);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     // test image update details
     @Test

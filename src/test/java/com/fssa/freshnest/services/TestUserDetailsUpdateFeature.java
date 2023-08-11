@@ -8,19 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestUserDetailsUpdateFeature {
 
-    public static void main(String[] args) {
 
-        User user1 = new User("susi@gmail.com", "Kanipapa", "raji@SM123", "Susikumar", "Pitchaimuthu", 20, 8870737612L,
-                "2003-08-01", "Indian", "Male");
 
-        UserService userService = new UserService();
-
-        try {
-            userService.updateUser(user1);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Test
     void testUpdateSuccess() {

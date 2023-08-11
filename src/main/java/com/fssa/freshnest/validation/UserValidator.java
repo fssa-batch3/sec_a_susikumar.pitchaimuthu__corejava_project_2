@@ -155,7 +155,7 @@ public class UserValidator {
     }
 
     public static boolean validateUserName(String name) throws InvalidUserException {
-        boolean match;
+        boolean match; 
 
         if (name == null)
             return false;

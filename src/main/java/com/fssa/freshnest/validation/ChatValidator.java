@@ -58,18 +58,19 @@ public class ChatValidator {
 
     public static boolean validateChat(String chat) throws InvalidUserException {
 
-        if (chat == null || chat.equals(" ") || chat.isEmpty())
+        boolean match = false;
+        if (chat == null ||chat.isEmpty())
             return false;
         String regex = "^.+$";
 
         String chatMessage = "...";
         if (chatMessage.matches(regex)) {
-            return true;
+            match = true;
         } else {
             throw new InvalidUserException("The chat message is not valid");
         }
 
-
+        return match;
     }
 
     // validate chat type
@@ -85,10 +86,11 @@ public class ChatValidator {
 
     // validate chat group name
     public static boolean validateChatGroupName(int name) throws InvalidUserException {
-        if (name <= 0) {
+        if (name > 0) {
+            return true;
+        } else {
             throw new InvalidUserException("The chat name is not valid");
         }
-        return true;
 
     }
 

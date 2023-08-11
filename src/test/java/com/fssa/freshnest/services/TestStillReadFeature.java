@@ -1,28 +1,17 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.model.Still;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.fssa.freshnest.model.Still;
+import com.fssa.freshnest.services.exceptions.ServiceException;
 
 public class TestStillReadFeature {
 
-    // Still read main feature main method
-    public static void main(String[] args) {
-
-        Still still = new Still(1);
-        StillService stillService = new StillService();
-
-        try {
-            stillService.readStill(still);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-
-    }
-
+  
     // test the still read success
     @Test
     void testStillReadSuccess() {
@@ -31,7 +20,7 @@ public class TestStillReadFeature {
         try {
             assertTrue(stillService.readStill(still));
 
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             e.printStackTrace();
             fail();
         }
@@ -44,7 +33,7 @@ public class TestStillReadFeature {
         StillService stillService = new StillService();
         try {
             assertFalse(stillService.readStill(still));
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             e.printStackTrace();
 
         }
@@ -56,7 +45,7 @@ public class TestStillReadFeature {
         StillService stillService = new StillService();
         try {
             assertFalse(stillService.readStill(null));
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             e.printStackTrace();
 
         }

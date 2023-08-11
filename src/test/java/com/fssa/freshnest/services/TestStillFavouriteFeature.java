@@ -9,21 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestStillFavouriteFeature {
 
-    public static void main(String[] args) {
-
-        Still still = new Still(true, 1);
-        StillService stillService = new StillService();
-
-        try {
-            stillService.favouriteStill(still);
-
-        } catch (ServiceException e) {
-            e.printStackTrace();
-
-        }
-
-    }
-
+   
+ 
     @Test
     void testImageFavouriteSuccess() {
         Still still = new Still(true, 1);

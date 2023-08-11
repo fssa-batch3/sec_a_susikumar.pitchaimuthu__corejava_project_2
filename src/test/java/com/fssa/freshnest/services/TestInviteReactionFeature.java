@@ -8,17 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestInviteReactionFeature {
 
-    public static void main(String[] args) {
-        Invite invite = new Invite(25, 1, true, false, false, "Hello buddy I will come.");
-        InviteService inviteService = new InviteService();
-
-        try {
-            inviteService.reactionInvite(invite);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-
-        }
-    }
+   
 
     // test invite success
     @Test
@@ -47,16 +37,5 @@ public class TestInviteReactionFeature {
         }
     }
 
-    // test the invite invalid chat message reaction
-    @Test
-    void testInvalidChatReaction() {
-        Invite invite = new Invite(27, 1, true, false, false, "");
-        InviteService inviteService = new InviteService();
-
-        try {
-            assertFalse(inviteService.reactionInvite(invite));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
+    
 }

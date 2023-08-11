@@ -11,84 +11,68 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestStillCreateFeature {
 
-    public static void main(String[] args) {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+	@Test
+	void testStillCreateSuccess() {
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
 
-        Still still = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
-        StillService stillService = new StillService();
+		Still still = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
+		StillService stillService = new StillService();
 
-        try {
-            stillService.takeStill(still);
+		try {
+			assertTrue(stillService.takeStill(still));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
+		}
+	}
 
-        }
-    }
+	@Test
+	void testInvalidImageUrl() {
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
 
-    @Test
-    void testStillCreateSuccess() {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+		Still still = new Still("www.sampleImage.com", 2, "Supreme", currentDate, currentTime, false, false);
+		StillService stillService = new StillService();
 
-        Still still = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
-        StillService stillService = new StillService();
+		try {
+			assertFalse(stillService.takeStill(still));
 
-        try {
-            assertTrue(stillService.takeStill(still));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
+		} catch (ServiceException e) {
+			e.printStackTrace();
 
-        }
-    }
+		}
+	}
 
-    @Test
-    void testInvalidImageUrl() {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+	@Test
+	void testInvalidImageName() {
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
 
-        Still still = new Still("www.sampleImage.com", 2, "Supreme", currentDate, currentTime, false, false);
-        StillService stillService = new StillService();
+		Still still = new Still("www.sampleImage.com", 2, "", currentDate, currentTime, false, false);
+		StillService stillService = new StillService();
 
-        try {
-            assertFalse(stillService.takeStill(still));
+		try {
+			assertFalse(stillService.takeStill(still));
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
 
-        }
-    }
+		}
+	}
 
-    @Test
-    void testInvalidImageName() {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+	@Test
+	void testNullImgeDetails() {
+		Still still = null;
+		StillService stillService = new StillService();
 
-        Still still = new Still("www.sampleImage.com", 2, "", currentDate, currentTime, false, false);
-        StillService stillService = new StillService();
+		try {
+			assertFalse(stillService.takeStill(still));
 
-        try {
-            assertFalse(stillService.takeStill(still));
+		} catch (ServiceException e) {
+			e.printStackTrace();
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
-
-        }
-    }
-
-    @Test
-    void testNullImgeDetails() {
-        Still still = null;
-        StillService stillService = new StillService();
-
-        try {
-            assertFalse(stillService.takeStill(still));
-
-        } catch (ServiceException e) {
-            e.printStackTrace();
-
-        }
-    }
+		}
+	}
 }

@@ -8,21 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestRegisterFeature {
 
-    public static void main(String[] args) {
 
-        User user1 = new User("susi@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu", "https://example.com/image.jpg");
-        UserService userService = new UserService();
 
-        try {
-            userService.registerUser(user1);
-
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-
-        }
-
-    }
 
     @Test
     void testRegistrationSuccess() {

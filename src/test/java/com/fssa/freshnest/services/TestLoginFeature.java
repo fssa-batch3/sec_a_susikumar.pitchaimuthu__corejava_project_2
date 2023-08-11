@@ -8,24 +8,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestLoginFeature {
 
-    public static void main(String[] args) {
-        User user1 = new User("susi@gmail.com", "susi123@SM");
-        UserService userService = new UserService();
 
-        try {
-            userService.logInUser(user1);
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
-
-        }
-
-    }
 
     @Test
     void testLoginSuccess() {
         UserService userService = new UserService();
-        User user1 = new User("susi@gmail.com", "susi123@SM");
+        User user1 = new User("susi@gmail.com", "raji@SM123");
         try {
             assertTrue(userService.logInUser(user1));
         } catch (ServiceException e) {

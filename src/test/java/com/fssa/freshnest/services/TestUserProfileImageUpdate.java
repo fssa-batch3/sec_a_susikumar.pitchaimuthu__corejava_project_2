@@ -8,16 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestUserProfileImageUpdate {
 
-    public static void main(String[] args) {
-        User user1 = new User("https://example.com/image.jpg", 1);
-        UserService userService = new UserService();
-
-        try {
-            userService.profileImageUpdate(user1);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Test
     void testProfileUpdateSuccess() {

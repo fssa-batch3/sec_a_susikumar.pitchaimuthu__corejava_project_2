@@ -32,7 +32,7 @@ public class StillService {
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
         }
-
+ 
     }
 
     // Test still Update

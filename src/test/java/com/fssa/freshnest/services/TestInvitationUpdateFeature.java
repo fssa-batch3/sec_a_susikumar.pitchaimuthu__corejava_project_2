@@ -8,18 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestInvitationUpdateFeature {
-    public static void main(String[] args) {
-        Invite invite = new Invite(1, "Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
-                "Ticket block ah vangathinga thangam", 25);
 
-        InviteService inviteService = new InviteService();
 
-        try {
-            inviteService.updateInvite(invite);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
 
     // test the invitation with correct values
     @Test

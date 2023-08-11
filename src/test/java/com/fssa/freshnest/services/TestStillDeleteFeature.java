@@ -1,29 +1,16 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.model.Still;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
+import com.fssa.freshnest.model.Still;
+import com.fssa.freshnest.services.exceptions.ServiceException;
+
 public class TestStillDeleteFeature {
 
-    public static void main(String[] args) {
-
-        int still_id = 1;
-
-        Still still = new Still(true, still_id, 2);
-
-        StillService stillService = new StillService();
-
-        try {
-            stillService.deleteStill(still);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
+       @Test
     void testStillDeleteSuccess() {
         int still_id = 1;
 
@@ -33,7 +20,7 @@ public class TestStillDeleteFeature {
 
         try {
             assertTrue(stillService.deleteStill(still));
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
     }
@@ -47,7 +34,7 @@ public class TestStillDeleteFeature {
 
         try {
             assertFalse(stillService.deleteStill(still));
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             e.printStackTrace();
         }
     }

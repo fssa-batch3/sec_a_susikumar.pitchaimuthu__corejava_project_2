@@ -7,18 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestChatDeleteFeature {
 
-    public static void main(String[] args) {
-        int chatId = 1;
-        int messageId = 2;
-
-        Chat chat = new Chat(true, chatId, messageId);
-        ChatService chatService = new ChatService();
-        try {
-            chatService.deleteChat(chat);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+   
 
     // test the delete chat success or all details correct
     @Test

@@ -22,7 +22,7 @@ public class UserService {
 
     }
 
-    // User second page reagistration service 
+    // User second page registration service
     public boolean secondPageRegisterUser(User user) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {

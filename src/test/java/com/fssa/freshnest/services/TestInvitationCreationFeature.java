@@ -9,20 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestInvitationCreationFeature {
 
-    public static void main(String[] args) {
-
-        Invite invite = new Invite(1, "Birthday party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
-                "Ticket block the vangathinga thangam");
-
-        InviteService inviteService = new InviteService();
-
-        try {
-            inviteService.createInvite(invite);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-
-    }
+   
 
     // test the invite creation success
     @Test

@@ -51,7 +51,7 @@ public class StillValidator {
 
     public static boolean validateDeleteStill(Still still) throws InvalidUserException {
 
-        if (still != null && validateStillId(still.getStillId())) {
+        if (still != null && validateStillId(still.getStillId()) && validateStillUserId(still.getUserId())) {
             return true;
         } else {
             throw new InvalidUserException(INVALID_STILL_MESSAGE);

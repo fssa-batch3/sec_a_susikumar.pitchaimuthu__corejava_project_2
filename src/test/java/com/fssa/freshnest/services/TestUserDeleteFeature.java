@@ -7,17 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestUserDeleteFeature {
-    public static void main(String[] args) {
-        User user1 = new User("susi@gmail.com", true);
 
-        UserService userService = new UserService();
-
-        try {
-            userService.deleteUser(user1);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
 
     // test delete all details success
     @Test
