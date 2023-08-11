@@ -52,7 +52,7 @@ public class InviteValidator {
     }
 
     // Invite type validator
-    public static boolean validateInviteType(String inviteType) {
+    public static boolean validateInviteType(String inviteType) throws InvalidUserException {
 
         if (inviteType == null)
             return false;
@@ -62,37 +62,32 @@ public class InviteValidator {
         Matcher m = p.matcher(inviteType);
         boolean match = m.matches();
         if (match) {
-            System.out.println("The username is valid.");
+            return  true;
         } else {
-            System.out.println("The username is not valid");
+            throw  new InvalidUserException("The username is not valid");
         }
 
-        return match;
+
     }
 
     // validate the invite date
-    public static boolean validateInviteDate(String date) {
+    public static boolean validateInviteDate(String date) throws InvalidUserException {
         try {
             LocalDate.parse(date);
-            System.out.println("Still date is valid");
             return true;
         } catch (Exception e) {
-            System.out.println("Still date is not valid");
+            throw  new InvalidUserException("Still date is not valid");
 
-            return false;
         }
     }
 
     // validate the invite time
-    public static boolean validateInviteTime(String time) {
+    public static boolean validateInviteTime(String time) throws InvalidUserException {
         try {
             LocalTime.parse(time);
-            System.out.println("Still time is valid");
             return true;
         } catch (Exception e) {
-            System.out.println("Still time is not valid");
-
-            return false;
+            throw new InvalidUserException("Still time is not valid");
         }
     }
 
@@ -100,7 +95,6 @@ public class InviteValidator {
     // validate the invite Explanation
     public static boolean validateInviteExplanation(String explanation) throws InvalidUserException {
         if (explanation != null) {
-            System.out.println("Invite explanation detail is valid.");
             return true;
         } else {
             throw new InvalidUserException("Invite explanation detail is not valid");
@@ -110,7 +104,6 @@ public class InviteValidator {
     // validate the invite message
     public static boolean validateInviteMessage(String message) throws InvalidUserException {
         if (message != null) {
-            System.out.println("Invite message detail is valid.");
             return true;
         } else {
             throw new InvalidUserException("Invite message detail is not valid");

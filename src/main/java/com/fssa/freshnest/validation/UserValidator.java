@@ -26,7 +26,7 @@ public class UserValidator {
 
     }
 
-    // validate user second regisration
+    // validate user second registration
 
     public static boolean validateUserSecondRegistration(User user) throws InvalidUserException {
 
@@ -85,7 +85,7 @@ public class UserValidator {
 
     // check the first name and last name details
     public static boolean validateFirstName(String name) throws InvalidUserException {
-        boolean match = false;
+        boolean match;
 
         if (name == null)
             return false;
@@ -123,7 +123,7 @@ public class UserValidator {
     }
 
     public static boolean validatePassword(String password) throws InvalidUserException {
-        boolean match = false;
+        boolean match;
 
         if (password == null)
             return false;
@@ -140,7 +140,7 @@ public class UserValidator {
     }
 
     public static boolean validateEmail(String email) throws InvalidUserException {
-        boolean isMatch = false;
+        boolean isMatch;
 
         if (email == null)
             return false;
@@ -152,12 +152,10 @@ public class UserValidator {
         } else {
             throw new InvalidUserException("The email address is: Invalid");
         }
-
-
     }
 
     public static boolean validateUserName(String name) throws InvalidUserException {
-        boolean match = false;
+        boolean match;
 
         if (name == null)
             return false;
@@ -211,7 +209,7 @@ public class UserValidator {
     }
 
     public static boolean validateMobileNumber(long number) throws InvalidUserException {
-        boolean match = false;
+        boolean match;
         if (number != 0) {
             String numberStr = Long.toString(number);
             String regex = "^\\d{10}$";
@@ -229,7 +227,7 @@ public class UserValidator {
     }
 
     public static boolean validateGender(String dob) throws InvalidUserException {
-        boolean match = false;
+        boolean match;
 
         if (dob == null)
             return false;

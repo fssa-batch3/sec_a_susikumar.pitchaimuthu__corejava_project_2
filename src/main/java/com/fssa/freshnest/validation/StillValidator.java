@@ -73,7 +73,7 @@ public class StillValidator {
     public static boolean validateStillUrl(String url) throws InvalidUserException {
 
         try {
-            URL value = new URL(url);
+            new URL(url);
             return true;
         } catch (MalformedURLException e) {
             throw new InvalidUserException(INVALID_STILL_MESSAGE);
