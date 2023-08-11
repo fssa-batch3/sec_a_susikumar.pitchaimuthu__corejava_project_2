@@ -71,13 +71,15 @@ public class StillValidator {
     // validator for the still
 
     public static boolean validateStillUrl(String url) throws InvalidUserException {
-
+        if(url == null || url.isEmpty()){
+            throw new InvalidUserException("Image url is empty");
+        }
         try {
             new URL(url);
-            return true;
         } catch (MalformedURLException e) {
             throw new InvalidUserException(INVALID_STILL_MESSAGE);
         }
+        return true;
 
     }
 
@@ -93,12 +95,10 @@ public class StillValidator {
 
     public static boolean validateStillId(int stillId) throws InvalidUserException {
 
-        if (stillId > 0) {
-            return true;
-        } else {
+        if (stillId <= 0) {
             throw new InvalidUserException(INVALID_STILL_MESSAGE);
         }
-
+            return true;
     }
 
     public static boolean validateStillDate(LocalDate date) throws InvalidUserException {
@@ -121,12 +121,10 @@ public class StillValidator {
 
     // Validate still user id
     public static boolean validateStillUserId(int stillId) throws InvalidUserException {
-
-        if (stillId > 0) {
-            return true;
-        } else {
+        if (stillId <= 0) {
             throw new InvalidUserException(INVALID_STILL_MESSAGE);
         }
+        return true;
 
     }
 }

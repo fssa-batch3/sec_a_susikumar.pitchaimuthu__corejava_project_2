@@ -243,14 +243,16 @@ public class UserValidator {
         }
     }
 
-    public static boolean validateImageUrl(String imageUrl) throws InvalidUserException {
-        try {
-            new URL(imageUrl);
-            return true;
-        } catch (MalformedURLException e) {
-            throw new InvalidUserException("Image url is not valid");
-
+    public static boolean validateImageUrl(String url) throws InvalidUserException {
+        if(url == null || url.isEmpty()){
+            throw new InvalidUserException("Image url is empty");
         }
+        try {
+            new URL(url);
+        } catch (MalformedURLException e) {
+            throw new InvalidUserException(INVALID_USER_MESSAGE);
+        }
+        return true;
     }
 
 }
