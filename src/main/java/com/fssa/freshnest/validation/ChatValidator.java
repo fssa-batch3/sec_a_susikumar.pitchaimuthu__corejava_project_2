@@ -55,7 +55,7 @@ public class ChatValidator {
 
 	}
 
-	public static boolean validateChat(String chat) {
+	public static boolean validateChat(String chat) throws InvalidUserException {
 
 		boolean match = false;
 		if (chat == null || chat.equals(" ") || chat.isEmpty())
@@ -65,37 +65,30 @@ public class ChatValidator {
 		String chatMessage = "...";
 		if (chatMessage.matches(regex)) {
 			match = true;
-			System.out.println("The chat message is valid");
 		} else {
-			match = false;
-			System.out.println("The chat message is not valid");
+			throw new InvalidUserException("The chat message is not valid");
 		}
 
 		return match;
 	}
 
 	// validate chat type
-	public static boolean validateChatType(String type) {
+	public static boolean validateChatType(String type) throws InvalidUserException {
 
 		if (type.equals("direct") || type.equals("group")) {
-			System.out.println("The chat type is valid");
 			return true;
 		} else {
-
-			System.out.println("The chat type is not valid");
-			return false;
+			throw new InvalidUserException("The chat type is not valid");
 		}
 
 	}
 
 	// validate chat group name
-	public static boolean validateChatGroupName(int name) {
+	public static boolean validateChatGroupName(int name) throws InvalidUserException {
 		if (name > 0) {
-			System.out.println("The chat name is valid");
 			return true;
 		} else {
-			System.out.println("The chat name is not valid");
-			return false;
+			throw new InvalidUserException("The chat name is not valid");
 		}
 
 	}

@@ -70,7 +70,7 @@ public class ChatDAO {
                     String chatMessage = resultSet.getString("message");
                     int chatId = resultSet.getInt("message_id");
                     System.out.println("chatId is : " + chatId + " correspond message is : " + chatMessage);
-                    return true;
+                    return true; 
                 } else {
                     return false;
                 }
