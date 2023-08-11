@@ -15,13 +15,8 @@ public class ChatService {
         try {
 
             ChatValidator.validateCreateChat(insertChat, insertChatParticipant, insertMessage);
-            if (chatDAO.insertChat(insertChat) && chatDAO.insertChatParticipant(insertChatParticipant)
-                    && chatDAO.insertChatMessage(insertMessage)) {
-                System.out.println(insertMessage.getChatMessage() + " chat send Successfully!");
-                return true;
-            } else {
-                return false;
-            }
+            return chatDAO.insertChat(insertChat) && chatDAO.insertChatParticipant(insertChatParticipant)
+                    && chatDAO.insertChatMessage(insertMessage);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
@@ -36,12 +31,7 @@ public class ChatService {
         try {
 
             ChatValidator.validateReadChat(chat);
-            if (chatDAO.getChatsByUserId(chat)) {
-                System.out.println(chat.getUserId() + " chat readed Successfully!");
-                return true;
-            } else {
-                return false;
-            }
+            return chatDAO.getChatsByUserId(chat);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
@@ -56,12 +46,7 @@ public class ChatService {
         try {
 
             ChatValidator.validateUpdateChat(chat);
-            if (chatDAO.updateChat(chat)) {
-                System.out.println(chat.getChatId() + " chat updated Successfully!");
-                return true;
-            } else {
-                return false;
-            }
+            return chatDAO.updateChat(chat);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
@@ -75,13 +60,7 @@ public class ChatService {
         try {
 
             ChatValidator.validateDeleteChat(chat);
-            if (chatDAO.deleteChat(chat)) {
-                System.out.println(chat.getChatId() + " chat deleted Successfully!");
-                return true;
-            } else {
-                System.out.println(chat.getChatId() + " chat is not deleted");
-                return false;
-            }
+            return chatDAO.deleteChat(chat);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);

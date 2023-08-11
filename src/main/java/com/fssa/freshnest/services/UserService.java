@@ -14,12 +14,7 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateUser(user);
-            if (userDAO.createUser(user)) {
-                System.out.println(user.getUsername() + " Successfully registered!");
-                return true;
-            } else {
-                return false;
-            }
+            return userDAO.createUser(user);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
@@ -32,12 +27,7 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateUserSecondRegistration(user);
-            if (userDAO.secondPageUserUpdate(user)) {
-                System.out.println(user.getEmail() + " Successfully registered!");
-                return true;
-            } else {
-                return false;
-            }
+            return userDAO.secondPageUserUpdate(user);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
@@ -51,12 +41,7 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateLogIn(user);
-            if (userDAO.checkUserLogin(user.getEmail(), user.getPassword())) {
-                System.out.println(user.getEmail() + " Successfully Logged In!");
-                return true;
-            } else {
-                return false;
-            }
+            return userDAO.checkUserLogin(user.getEmail(), user.getPassword());
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
@@ -69,12 +54,7 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateUpdateUser(user);
-            if (userDAO.updateUser(user)) {
-                System.out.println(user.getEmail() + " Detials are Successfully Modified!");
-                return true;
-            } else {
-                return false;
-            }
+            return userDAO.updateUser(user);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
@@ -87,13 +67,7 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateDeleteUser(user);
-            if (userDAO.deleteUser(user)) {
-                System.out.println(user.getEmail() + " Detials are Successfully deleted successfully!");
-                return true;
-            } else {
-                System.out.println(user.getEmail() + " Detials are not Successfully deleted successfully!");
-                return false;
-            }
+            return userDAO.deleteUser(user);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
@@ -105,12 +79,7 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateProfileImageUpdate(user);
-            if (userDAO.updateProfileImage(user)) {
-                System.out.println(user.getUserId() + " profile image is Successfully modified!");
-                return true;
-            } else {
-                return false;
-            }
+            return userDAO.updateProfileImage(user);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
