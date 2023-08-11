@@ -244,7 +244,7 @@ public class UserValidator {
     }
 
     public static boolean validateImageUrl(String url) throws InvalidUserException {
-        if(url == null || url.isEmpty()){
+        if (url == null || url.isEmpty()) {
             throw new InvalidUserException("Image url is empty");
         }
         try {

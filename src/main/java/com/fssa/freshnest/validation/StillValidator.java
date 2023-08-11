@@ -71,7 +71,7 @@ public class StillValidator {
     // validator for the still
 
     public static boolean validateStillUrl(String url) throws InvalidUserException {
-        if(url == null || url.isEmpty()){
+        if (url == null || url.isEmpty()) {
             throw new InvalidUserException("Image url is empty");
         }
         try {
@@ -98,7 +98,7 @@ public class StillValidator {
         if (stillId <= 0) {
             throw new InvalidUserException(INVALID_STILL_MESSAGE);
         }
-            return true;
+        return true;
     }
 
     public static boolean validateStillDate(LocalDate date) throws InvalidUserException {

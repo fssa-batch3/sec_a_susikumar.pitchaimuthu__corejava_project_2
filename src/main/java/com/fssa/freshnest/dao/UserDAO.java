@@ -25,12 +25,12 @@ public class UserDAO {
                 if (userExists) {
                     String storedPassword = resultSet.getString("password");
                     if (storedPassword.equals(password)) {
-                        return  true;
+                        return true;
                     } else {
-                        throw  new DAOException("Incorrect password.");
+                        throw new DAOException("Incorrect password.");
                     }
                 } else {
-                    throw  new DAOException("User credentials do not exist.");
+                    throw new DAOException("User credentials do not exist.");
                 }
             }
         } catch (SQLException e) {

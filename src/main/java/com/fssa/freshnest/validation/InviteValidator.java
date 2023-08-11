@@ -62,9 +62,9 @@ public class InviteValidator {
         Matcher m = p.matcher(inviteType);
         boolean match = m.matches();
         if (match) {
-            return  true;
+            return true;
         } else {
-            throw  new InvalidUserException("The username is not valid");
+            throw new InvalidUserException("The username is not valid");
         }
 
 
@@ -76,7 +76,7 @@ public class InviteValidator {
             LocalDate.parse(date);
             return true;
         } catch (Exception e) {
-            throw  new InvalidUserException("Still date is not valid");
+            throw new InvalidUserException("Still date is not valid");
 
         }
     }

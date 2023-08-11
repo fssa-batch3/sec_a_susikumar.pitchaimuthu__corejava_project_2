@@ -64,7 +64,7 @@ public class ChatValidator {
 
         String chatMessage = "...";
         if (chatMessage.matches(regex)) {
-          return true;
+            return true;
         } else {
             throw new InvalidUserException("The chat message is not valid");
         }
@@ -88,7 +88,7 @@ public class ChatValidator {
         if (name <= 0) {
             throw new InvalidUserException("The chat name is not valid");
         }
-            return true;
+        return true;
 
     }
 
