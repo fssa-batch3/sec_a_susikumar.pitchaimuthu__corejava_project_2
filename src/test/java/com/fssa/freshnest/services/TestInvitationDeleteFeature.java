@@ -1,13 +1,10 @@
 package com.fssa.freshnest.services;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import org.junit.jupiter.api.Test;
-
 import com.fssa.freshnest.model.Invite;
 import com.fssa.freshnest.services.exceptions.ServiceException;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestInvitationDeleteFeature {
     public static void main(String[] args) {
@@ -24,7 +21,7 @@ public class TestInvitationDeleteFeature {
 
     // test the invitation test success
     @Test
-     void testInvitationDeleteSuccess() {
+    void testInvitationDeleteSuccess() {
         Invite invite = new Invite(25);
 
         InviteService inviteService = new InviteService();
@@ -39,7 +36,7 @@ public class TestInvitationDeleteFeature {
 
     // test delete invite with invalid details
     @Test
-     void testInvalidIdDelete() {
+    void testInvalidIdDelete() {
         Invite invite = new Invite(1);
 
         InviteService inviteService = new InviteService();
@@ -54,7 +51,7 @@ public class TestInvitationDeleteFeature {
 
     // test delete the invite with null details
     @Test
-     void testInvalidDeleteNull() {
+    void testInvalidDeleteNull() {
         Invite invite = null;
 
         InviteService inviteService = new InviteService();

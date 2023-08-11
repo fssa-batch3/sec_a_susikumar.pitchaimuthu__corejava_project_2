@@ -25,7 +25,7 @@ public class TestStillFavouriteFeature {
     }
 
     @Test
-     void testImageFavouriteSuccess() {
+    void testImageFavouriteSuccess() {
         Still still = new Still(true, 1);
         StillService stillService = new StillService();
 
@@ -40,7 +40,7 @@ public class TestStillFavouriteFeature {
 
 
     @Test
-     void testImageFavouriteNullDetails() {
+    void testImageFavouriteNullDetails() {
         Still still = null;
         StillService stillService = new StillService();
 

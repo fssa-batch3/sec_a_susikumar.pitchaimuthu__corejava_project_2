@@ -1,12 +1,11 @@
 package com.fssa.freshnest.services;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Test;
-
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.services.exceptions.ServiceException;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestChatUpdateFeature {
 
@@ -29,8 +28,8 @@ public class TestChatUpdateFeature {
 
     // test the chat update success details
     @Test
-     void testChatUpdateSuccess() {
-    	String chatText = "Hello chellam..";
+    void testChatUpdateSuccess() {
+        String chatText = "Hello chellam..";
         int chatId = 1;
         int messageId = 1;
 
@@ -47,11 +46,11 @@ public class TestChatUpdateFeature {
 
     // test the chat update failure
     @Test
-     void testChatUpdateInvalidMessageIdFailure() {
+    void testChatUpdateInvalidMessageIdFailure() {
         String chatText = "Hello chellam..";
         int chatId = 1;
         int messageId = -3;
-        Chat chat = new Chat(chatText, chatId,messageId );
+        Chat chat = new Chat(chatText, chatId, messageId);
 
         ChatService chatService = new ChatService();
 
@@ -64,7 +63,7 @@ public class TestChatUpdateFeature {
 
     // test the null details failure
     @Test
-     void testChatNullDetails() {
+    void testChatNullDetails() {
         Chat chat = null;
         ChatService chatService = new ChatService();
 

@@ -26,7 +26,7 @@ public class TestInvitationCreationFeature {
 
     // test the invite creation success
     @Test
-     void testInvitationSuccess() {
+    void testInvitationSuccess() {
 
         Invite invite = new Invite(1, "Birthday party", "2023-08-24", "12:34", "Manjal veeran", "Thangam",
                 "Ticket block the vangathinga thangam");
@@ -42,7 +42,7 @@ public class TestInvitationCreationFeature {
 
     // test the invite create with invalid invite type
     @Test
-     void testInvalidInvitationType() {
+    void testInvalidInvitationType() {
 
         Invite invite = new Invite(44, "Birthday party", "2023-08-24", "12:34", "Manjal veeran", "Thangam",
                 "Ticket block the vangathinga thangam");
@@ -58,7 +58,7 @@ public class TestInvitationCreationFeature {
 
     // test the invite create with null details
     @Test
-     void testInvitationNullDetails() {
+    void testInvitationNullDetails() {
         InviteService inviteService = new InviteService();
 
         try {

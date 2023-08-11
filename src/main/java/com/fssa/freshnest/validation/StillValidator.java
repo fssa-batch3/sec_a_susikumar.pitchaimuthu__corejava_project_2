@@ -10,134 +10,126 @@ import java.time.LocalTime;
 
 public class StillValidator {
 
-	private static final String INVALID_STILL_MESSAGE = "still details are not valid";
+    private static final String INVALID_STILL_MESSAGE = "still details are not valid";
 
-	public static boolean validateTakeStill(Still still) throws InvalidUserException {
+    public static boolean validateTakeStill(Still still) throws InvalidUserException {
 
-		if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
-				&& validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_STILL_MESSAGE);
-		}
+        if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
+                && validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+        }
 
-	} 
+    }
 
-	// validate favourite image
+    // validate favourite image
 
-	public static boolean validateFavouriteStill(Still still) throws InvalidUserException {
+    public static boolean validateFavouriteStill(Still still) throws InvalidUserException {
 
-		if (still != null && validateStillId(still.getStillId())) {
-			System.out.println("Still details valid");
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_STILL_MESSAGE);
-		}
+        if (still != null && validateStillId(still.getStillId())) {
+            System.out.println("Still details valid");
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+        }
 
-	}
+    }
 
-	// validate Update Image
+    // validate Update Image
 
-	public static boolean validateUpdateStill(Still still) throws InvalidUserException {
+    public static boolean validateUpdateStill(Still still) throws InvalidUserException {
 
-		if (still != null && validateStillName(still.getStillName())) {
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_STILL_MESSAGE);
-		}
+        if (still != null && validateStillName(still.getStillName())) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+        }
 
-	}
+    }
 
-	// validate Delete image
+    // validate Delete image
 
-	public static boolean validateDeleteStill(Still still) throws InvalidUserException {
+    public static boolean validateDeleteStill(Still still) throws InvalidUserException {
 
-		if (still != null && validateStillId(still.getStillId())) {
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_STILL_MESSAGE);
-		}
+        if (still != null && validateStillId(still.getStillId())) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+        }
 
-	}
+    }
 
-	public static boolean validateReadStill(Still still) throws InvalidUserException {
-		if (still != null && validateStillUserId(still.getUserId())) {
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_STILL_MESSAGE);
-		}
+    public static boolean validateReadStill(Still still) throws InvalidUserException {
+        if (still != null && validateStillUserId(still.getUserId())) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+        }
 
-	}
+    }
 
-	// validator for the still
+    // validator for the still
 
-	public static boolean validateStillUrl(String url) throws InvalidUserException {
+    public static boolean validateStillUrl(String url) throws InvalidUserException {
 
-		try {
-			URL value = new URL(url);
-			System.out.println(value + " Image url is valid");
-			return true;
-		} catch (MalformedURLException e) {
-			throw new InvalidUserException(INVALID_STILL_MESSAGE);
-		}
+        try {
+            URL value = new URL(url);
+            System.out.println(value + " Image url is valid");
+            return true;
+        } catch (MalformedURLException e) {
+            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+        }
 
-	}
+    }
 
-	public static boolean validateStillName(String name) throws InvalidUserException {
+    public static boolean validateStillName(String name) throws InvalidUserException {
 
-		if (!name.isEmpty()) {
-			System.out.println("The still name is  valid");
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_STILL_MESSAGE);
-		}
+        if (!name.isEmpty()) {
+            System.out.println("The still name is  valid");
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+        }
 
-	}
+    }
 
-	public static boolean validateStillId(int stillId) throws InvalidUserException {
+    public static boolean validateStillId(int stillId) throws InvalidUserException {
 
-		if (stillId > 0) {
-			System.out.println("The still id is valid");
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_STILL_MESSAGE);
-		}
+        if (stillId > 0) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+        }
 
-	}
+    }
 
-	public static boolean validateStillDate(LocalDate date) {
-		try {
-			LocalDate.parse(date.toString());
-			System.out.println("Still date is valid");
-			return true;
-		} catch (Exception e) {
-			System.out.println("Still date is not valid");
+    public static boolean validateStillDate(LocalDate date) throws InvalidUserException {
+        try {
+            LocalDate.parse(date.toString());
+            return true;
+        } catch (Exception e) {
+            throw new InvalidUserException("Still date is not valid");
+        }
+    }
 
-			return false;
-		}
-	}
+    public static boolean validateStillTime(LocalTime time) throws InvalidUserException {
+        try {
+            LocalTime.parse(time.toString());
+            return true;
+        } catch (Exception e) {
+            throw new InvalidUserException("Still time is not valid");
+        }
+    }
 
-	public static boolean validateStillTime(LocalTime time) {
-		try {
-			LocalTime.parse(time.toString());
-			System.out.println("Still time is valid");
-			return true;
-		} catch (Exception e) {
-			System.out.println("Still time is not valid");
+    // Validate still user id
+    public static boolean validateStillUserId(int stillId) throws InvalidUserException {
 
-			return false;
-		}
-	}
+        if (stillId > 0) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+        }
 
-	// Validate still user id
-	public static boolean validateStillUserId(int stillId) throws InvalidUserException {
-
-		if (stillId > 0) {
-			System.out.println("The still id is valid");
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_STILL_MESSAGE);
-		}
-
-	}
+    }
 }

@@ -24,7 +24,7 @@ public class TestStillDeleteFeature {
     }
 
     @Test
-     void testStillDeleteSuccess() {
+    void testStillDeleteSuccess() {
         int still_id = 1;
 
         Still still = new Still(true, still_id, 1);
@@ -39,7 +39,7 @@ public class TestStillDeleteFeature {
     }
 
     @Test
-     void testStillDetailsNull() {
+    void testStillDetailsNull() {
 
         Still still = null;
 

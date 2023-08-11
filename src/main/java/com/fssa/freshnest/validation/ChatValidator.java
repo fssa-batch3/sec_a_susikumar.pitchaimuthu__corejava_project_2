@@ -5,92 +5,93 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 public class ChatValidator {
 
-	private static final String INVALID_CHAT_MESSAGE = "chat details are not valid";
-	// create chat
-	public static boolean validateCreateChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage)
-			throws InvalidUserException {
+    private static final String INVALID_CHAT_MESSAGE = "chat details are not valid";
 
-		if (insertChat != null && insertChatParticipant != null && insertMessage != null
-				&& validateChat(insertMessage.getChatMessage()) && validateChatType(insertChat.getChatType())
-				&& validateChatGroupName(insertChat.getChatName())) {
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_CHAT_MESSAGE);
-		}
+    // create chat
+    public static boolean validateCreateChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage)
+            throws InvalidUserException {
 
-	}
+        if (insertChat != null && insertChatParticipant != null && insertMessage != null
+                && validateChat(insertMessage.getChatMessage()) && validateChatType(insertChat.getChatType())
+                && validateChatGroupName(insertChat.getChatName())) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_CHAT_MESSAGE);
+        }
 
-	// read chat
-	public static boolean validateReadChat(Chat chat) throws InvalidUserException {
+    }
 
-		if (chat != null) {
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_CHAT_MESSAGE);
-		}
+    // read chat
+    public static boolean validateReadChat(Chat chat) throws InvalidUserException {
 
-	}
+        if (chat != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_CHAT_MESSAGE);
+        }
 
-	// update chat
+    }
 
-	public static boolean validateUpdateChat(Chat chat) throws InvalidUserException {
+    // update chat
 
-		if (chat != null) {
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_CHAT_MESSAGE);
-		}
+    public static boolean validateUpdateChat(Chat chat) throws InvalidUserException {
 
-	}
+        if (chat != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_CHAT_MESSAGE);
+        }
 
-	// Delete chat
+    }
 
-	public static boolean validateDeleteChat(Chat chat) throws InvalidUserException {
+    // Delete chat
 
-		if (chat != null) {
-			return true;
-		} else {
-			throw new InvalidUserException(INVALID_CHAT_MESSAGE);
-		}
+    public static boolean validateDeleteChat(Chat chat) throws InvalidUserException {
 
-	}
+        if (chat != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(INVALID_CHAT_MESSAGE);
+        }
 
-	public static boolean validateChat(String chat) throws InvalidUserException {
+    }
 
-		boolean match = false;
-		if (chat == null || chat.equals(" ") || chat.isEmpty())
-			return false;
-		String regex = "^.+$";
+    public static boolean validateChat(String chat) throws InvalidUserException {
 
-		String chatMessage = "...";
-		if (chatMessage.matches(regex)) {
-			match = true;
-		} else {
-			throw new InvalidUserException("The chat message is not valid");
-		}
+        boolean match = false;
+        if (chat == null || chat.equals(" ") || chat.isEmpty())
+            return false;
+        String regex = "^.+$";
 
-		return match;
-	}
+        String chatMessage = "...";
+        if (chatMessage.matches(regex)) {
+            match = true;
+        } else {
+            throw new InvalidUserException("The chat message is not valid");
+        }
 
-	// validate chat type
-	public static boolean validateChatType(String type) throws InvalidUserException {
+        return match;
+    }
 
-		if (type.equals("direct") || type.equals("group")) {
-			return true;
-		} else {
-			throw new InvalidUserException("The chat type is not valid");
-		}
+    // validate chat type
+    public static boolean validateChatType(String type) throws InvalidUserException {
 
-	}
+        if (type.equals("direct") || type.equals("group")) {
+            return true;
+        } else {
+            throw new InvalidUserException("The chat type is not valid");
+        }
 
-	// validate chat group name
-	public static boolean validateChatGroupName(int name) throws InvalidUserException {
-		if (name > 0) {
-			return true;
-		} else {
-			throw new InvalidUserException("The chat name is not valid");
-		}
+    }
 
-	}
+    // validate chat group name
+    public static boolean validateChatGroupName(int name) throws InvalidUserException {
+        if (name > 0) {
+            return true;
+        } else {
+            throw new InvalidUserException("The chat name is not valid");
+        }
+
+    }
 
 }

@@ -25,7 +25,7 @@ public class TestStillReadFeature {
 
     // test the still read success
     @Test
-     void testStillReadSuccess(){
+    void testStillReadSuccess() {
         Still still = new Still(1);
         StillService stillService = new StillService();
         try {
@@ -39,7 +39,7 @@ public class TestStillReadFeature {
 
     // test the still invalid still id read
     @Test
-     void testInvalidStillIdRead(){
+    void testInvalidStillIdRead() {
         Still still = new Still(-1);
         StillService stillService = new StillService();
         try {
@@ -52,7 +52,7 @@ public class TestStillReadFeature {
 
     // test the null still details
     @Test
-     void testReadNullStillIdDetails(){
+    void testReadNullStillIdDetails() {
         StillService stillService = new StillService();
         try {
             assertFalse(stillService.readStill(null));

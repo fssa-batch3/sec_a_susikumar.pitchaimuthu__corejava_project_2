@@ -94,7 +94,7 @@ public class InviteValidator {
 
             return false;
         }
-    } 
+    }
 
 
     // validate the invite Explanation

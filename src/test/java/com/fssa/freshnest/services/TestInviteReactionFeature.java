@@ -1,9 +1,8 @@
 package com.fssa.freshnest.services;
 
-import org.junit.jupiter.api.Test;
-
 import com.fssa.freshnest.model.Invite;
 import com.fssa.freshnest.services.exceptions.ServiceException;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,21 +16,21 @@ public class TestInviteReactionFeature {
             inviteService.reactionInvite(invite);
         } catch (ServiceException e) {
             e.printStackTrace();
- 
+
         }
-    } 
-    
+    }
+
     // test invite success
     @Test
-     void testInviteReactionSuccess() {
-    	Invite invite = new Invite(27, 1, true, false, false, "Hello buddy I will come.");
+    void testInviteReactionSuccess() {
+        Invite invite = new Invite(27, 1, true, false, false, "Hello buddy I will come.");
         InviteService inviteService = new InviteService();
 
         try {
             assertTrue(inviteService.reactionInvite(invite));
         } catch (ServiceException e) {
             e.printStackTrace();
-           fail();
+            fail();
         }
     }
 

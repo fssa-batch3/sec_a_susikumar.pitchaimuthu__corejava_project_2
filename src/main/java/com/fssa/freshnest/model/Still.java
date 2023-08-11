@@ -21,7 +21,7 @@ public class Still {
         this.userId = userId;
         this.stillName = stillName;
         this.stillDate = stillDate;
-        this.stillTime = stillTime; 
+        this.stillTime = stillTime;
         this.isFavourite = isFavourite;
         this.isDelete = isDelete;
     }
@@ -47,13 +47,13 @@ public class Still {
         userId = id;
     }
 
+    public int getStillId() {
+        return stillId;
+    }
+
     public void setStillId(int stillId) {
         this.stillId = stillId;
 
-    }
-
-    public int getStillId() {
-        return stillId;
     }
 
     public String getStillUrl() {

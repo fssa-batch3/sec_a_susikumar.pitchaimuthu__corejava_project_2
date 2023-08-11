@@ -1,46 +1,51 @@
 package com.fssa.freshnest.validation;
 
+import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestValidatePassword {
 
     @Test
-     void testValidPassword() {
+    void testValidPassword() {
 
-        assertTrue(UserValidator.validatePassword("Password@123"));
-
-    }
- 
-    @Test
-     void testInvalidPasswordWithoutSpecialCharacters() {
-        assertFalse(UserValidator.validatePassword("Password123"));
-
-    }
-
-    @Test
-     void testInvalidPasswordWithoutNumbers() {
-        assertFalse(UserValidator.validatePassword("Password@"));
+        try {
+            assertTrue(UserValidator.validatePassword("Password@123"));
+        } catch (InvalidUserException e) {
+            e.printStackTrace();
+            fail();
+        }
 
     }
 
     @Test
-     void testInvalidPasswordWithoutCapitalLetters() {
-        assertFalse(UserValidator.validatePassword("password123"));
+    void testInvalidPasswordWithoutSpecialCharacters() {
+        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("Password123"));
 
     }
 
     @Test
-     void testInvalidPasswordWithoutSmallLetters() {
-        assertFalse(UserValidator.validatePassword("PASSWORD@123"));
+    void testInvalidPasswordWithoutNumbers() {
+        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("Password@"));
 
     }
 
     @Test
-     void testInvalidPasswordShorterLength() {
-        assertFalse(UserValidator.validatePassword("Pas@123"));
+    void testInvalidPasswordWithoutCapitalLetters() {
+        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("password123"));
+
+    }
+
+    @Test
+    void testInvalidPasswordWithoutSmallLetters() {
+        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("PASSWORD@123"));
+
+    }
+
+    @Test
+    void testInvalidPasswordShorterLength() {
+        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("Pas@123"));
 
     }
 

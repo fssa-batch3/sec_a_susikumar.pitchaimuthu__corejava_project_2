@@ -33,7 +33,7 @@ public class User {
         this.gender = gender;
         this.email = email;
     }
-    
+
 
     // User login constructor
     public User(String email, String password) {
@@ -67,7 +67,7 @@ public class User {
         this.profileImage = profileImage;
         this.userId = userId;
     }
-    
+
     // Getters and setters
 
     public int getUserId() {

@@ -23,7 +23,7 @@ public class ChatDAO {
             return (rows == 1);
         } catch (SQLException e) {
             throw new DAOException(e);
-        } 
+        }
     }
 
     public boolean insertChatParticipant(Chat chat) throws DAOException {
@@ -70,7 +70,7 @@ public class ChatDAO {
                     String chatMessage = resultSet.getString("message");
                     int chatId = resultSet.getInt("message_id");
                     System.out.println("chatId is : " + chatId + " correspond message is : " + chatMessage);
-                    return true; 
+                    return true;
                 } else {
                     return false;
                 }
@@ -108,7 +108,7 @@ public class ChatDAO {
         String updateQuery = "UPDATE chat_messages SET message = ? WHERE chat_id = ? AND message_id = ? ";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateQuery)) {
- 
+
             // Prepare SQL statement
             statement.setInt(1, chat.getDelete() ? 1 : 0);
             statement.setInt(2, chat.getChatId());
@@ -119,7 +119,7 @@ public class ChatDAO {
 
             // Return successful or not
             return (rows == 1);
-        } catch (SQLException e) { 
+        } catch (SQLException e) {
             throw new DAOException(e);
         }
     }

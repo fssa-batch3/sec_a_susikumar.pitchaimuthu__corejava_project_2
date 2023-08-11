@@ -74,16 +74,16 @@ public class ChatService {
         ChatDAO chatDAO = new ChatDAO();
         try {
 
-            ChatValidator.validateDeleteChat(chat); 
+            ChatValidator.validateDeleteChat(chat);
             if (chatDAO.deleteChat(chat)) {
                 System.out.println(chat.getChatId() + " chat deleted Successfully!");
                 return true;
             } else {
-            	System.out.println(chat.getChatId() + " chat is not deleted");
-                return false; 
+                System.out.println(chat.getChatId() + " chat is not deleted");
+                return false;
             }
 
-        } catch (DAOException | InvalidUserException e) { 
+        } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
         }
 

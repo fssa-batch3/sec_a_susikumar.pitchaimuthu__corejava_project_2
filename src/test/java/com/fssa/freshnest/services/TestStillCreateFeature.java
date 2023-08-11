@@ -10,85 +10,85 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestStillCreateFeature {
- 
-	public static void main(String[] args) {
-		LocalDate currentDate = LocalDate.now();
-		LocalTime currentTime = LocalTime.now();
 
-		Still still = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
-		StillService stillService = new StillService();
+    public static void main(String[] args) {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
 
-		try {
-			stillService.takeStill(still);
+        Still still = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
+        StillService stillService = new StillService();
 
-		} catch (ServiceException e) {
-			e.printStackTrace();
+        try {
+            stillService.takeStill(still);
 
-		}
-	}
+        } catch (ServiceException e) {
+            e.printStackTrace();
 
-	@Test
-	 void testStillCreateSuccess() {
-		LocalDate currentDate = LocalDate.now();
-		LocalTime currentTime = LocalTime.now();
+        }
+    }
 
-		Still still = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
-		StillService stillService = new StillService();
+    @Test
+    void testStillCreateSuccess() {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
 
-		try {
-			assertTrue(stillService.takeStill(still));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			fail();
+        Still still = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
+        StillService stillService = new StillService();
 
-		}
-	}
+        try {
+            assertTrue(stillService.takeStill(still));
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            fail();
 
-	@Test
-	 void testInvalidImageUrl() {
-		LocalDate currentDate = LocalDate.now();
-		LocalTime currentTime = LocalTime.now();
+        }
+    }
 
-		Still still = new Still("www.sampleImage.com", 2, "Supreme", currentDate, currentTime, false, false);
-		StillService stillService = new StillService();
+    @Test
+    void testInvalidImageUrl() {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
 
-		try {
-			assertFalse(stillService.takeStill(still));
+        Still still = new Still("www.sampleImage.com", 2, "Supreme", currentDate, currentTime, false, false);
+        StillService stillService = new StillService();
 
-		} catch (ServiceException e) {
-			e.printStackTrace();
+        try {
+            assertFalse(stillService.takeStill(still));
 
-		}
-	}
+        } catch (ServiceException e) {
+            e.printStackTrace();
 
-	@Test
-	 void testInvalidImageName() {
-		LocalDate currentDate = LocalDate.now();
-		LocalTime currentTime = LocalTime.now();
+        }
+    }
 
-		Still still = new Still("www.sampleImage.com", 2, "", currentDate, currentTime, false, false);
-		StillService stillService = new StillService();
+    @Test
+    void testInvalidImageName() {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
 
-		try {
-			assertFalse(stillService.takeStill(still));
+        Still still = new Still("www.sampleImage.com", 2, "", currentDate, currentTime, false, false);
+        StillService stillService = new StillService();
 
-		} catch (ServiceException e) {
-			e.printStackTrace();
+        try {
+            assertFalse(stillService.takeStill(still));
 
-		}
-	}
+        } catch (ServiceException e) {
+            e.printStackTrace();
 
-	@Test
-	 void testNullImgeDetails() {
-		Still still = null;
-		StillService stillService = new StillService();
+        }
+    }
 
-		try {
-			assertFalse(stillService.takeStill(still));
+    @Test
+    void testNullImgeDetails() {
+        Still still = null;
+        StillService stillService = new StillService();
 
-		} catch (ServiceException e) {
-			e.printStackTrace();
+        try {
+            assertFalse(stillService.takeStill(still));
 
-		}
-	}
+        } catch (ServiceException e) {
+            e.printStackTrace();
+
+        }
+    }
 }

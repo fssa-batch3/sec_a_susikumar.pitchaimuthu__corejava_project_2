@@ -35,7 +35,7 @@ public class UserValidator {
         } else {
             throw new InvalidUserException(INVALID_USER_MESSAGE);
         }
-    }  
+    }
 
     // Checking the loginUser present or not
 
@@ -84,7 +84,7 @@ public class UserValidator {
     }
 
     // check the first name and last name details
-    public static boolean validateFirstName(String name) {
+    public static boolean validateFirstName(String name) throws InvalidUserException {
         boolean match = false;
 
         if (name == null)
@@ -95,16 +95,16 @@ public class UserValidator {
         Matcher m = p.matcher(name);
         match = m.matches();
         if (match) {
-            System.out.println("The user firstname is valid.");
+            return true;
         } else {
-            System.out.println("The user firstname is not valid");
+            throw new InvalidUserException("The user firstname is not valid");
         }
 
-        return match;
+
     }
 
-    public static boolean validateLastName(String name) {
-        boolean match = false;
+    public static boolean validateLastName(String name) throws InvalidUserException {
+        boolean match;
 
         if (name == null)
             return false;
@@ -114,15 +114,15 @@ public class UserValidator {
         Matcher m = p.matcher(name);
         match = m.matches();
         if (match) {
-            System.out.println("The user lastname is valid.");
+            return true;
         } else {
-            System.out.println("The user lastname is not valid");
+            throw new InvalidUserException("The user lastname is not valid");
         }
 
-        return match;
+
     }
 
-    public static boolean validatePassword(String password) {
+    public static boolean validatePassword(String password) throws InvalidUserException {
         boolean match = false;
 
         if (password == null)
@@ -132,16 +132,14 @@ public class UserValidator {
         match = Pattern.matches(patternString, password);
 
         if (match) {
-
-            System.out.println("Valid password.");
+            return true;
         } else {
-            System.out.println("Invalid password.");
+            throw new InvalidUserException("Invalid password.");
         }
 
-        return match;
     }
 
-    public static boolean validateEmail(String email) {
+    public static boolean validateEmail(String email) throws InvalidUserException {
         boolean isMatch = false;
 
         if (email == null)
@@ -150,16 +148,15 @@ public class UserValidator {
         isMatch = Pattern.matches(regex, email);
 
         if (isMatch) {
-            System.out.println("The email address is: Valid");
+            return true;
         } else {
-            System.out.println("The email address is: Invalid");
+            throw new InvalidUserException("The email address is: Invalid");
         }
 
-        return isMatch;
 
     }
 
-    public static boolean validateUserName(String name) {
+    public static boolean validateUserName(String name) throws InvalidUserException {
         boolean match = false;
 
         if (name == null)
@@ -170,16 +167,14 @@ public class UserValidator {
         Matcher m = p.matcher(name);
         match = m.matches();
         if (match) {
-            System.out.println("The username is valid.");
+            return true;
         } else {
-            System.out.println("The username is not valid");
+            throw new InvalidUserException("The username is not valid");
         }
 
-        return match;
     }
 
-    public static boolean validateDob(String dob) {
-        boolean match = false;
+    public static boolean validateDob(String dob) throws InvalidUserException {
         if (dob == null)
             return false;
 
@@ -189,18 +184,16 @@ public class UserValidator {
         int age = Period.between(parsedDate, currentDate).getYears();
 
         if (!parsedDate.isAfter(currentDate) && age >= 18) {
-            System.out.println("The user date of birth is valid.");
-            match = true;
+            return true;
         } else {
-            System.out.println("The user date of birth is not valid");
+            throw new InvalidUserException("The user date of birth is not valid");
         }
 
-        return match;
 
     }
 
-    public static boolean validateNationality(String dob) {
-        boolean match = false;
+    public static boolean validateNationality(String dob) throws InvalidUserException {
+        boolean match;
 
         if (dob == null)
             return false;
@@ -210,15 +203,14 @@ public class UserValidator {
         Matcher m = p.matcher(dob);
         match = m.matches();
         if (match) {
-            System.out.println("The user nationality is valid.");
+            return true;
         } else {
-            System.out.println("The user nationality is not valid");
+            throw new InvalidUserException("The user nationality is not valid");
         }
 
-        return match;
     }
 
-    public static boolean validateMobileNumber(long number) {
+    public static boolean validateMobileNumber(long number) throws InvalidUserException {
         boolean match = false;
         if (number != 0) {
             String numberStr = Long.toString(number);
@@ -227,16 +219,16 @@ public class UserValidator {
             Matcher m = p.matcher(numberStr);
             match = m.matches();
             if (match) {
-                System.out.println("The user mobile number is valid.");
+                return true;
             } else {
-                System.out.println("The user mobile number is not valid");
+                throw new InvalidUserException("The user mobile number is not valid");
             }
         } else {
-            System.out.println("Invalid mobile number: 0");
+            throw new InvalidUserException("Invalid mobile number: 0");
         }
-        return match;
     }
-    public static boolean validateGender(String dob) {
+
+    public static boolean validateGender(String dob) throws InvalidUserException {
         boolean match = false;
 
         if (dob == null)
@@ -247,22 +239,19 @@ public class UserValidator {
         Matcher m = p.matcher(dob);
         match = m.matches();
         if (match) {
-            System.out.println("The user gender is valid.");
+            return true;
         } else {
-            System.out.println("The user gender is not valid");
+            throw new InvalidUserException("The user gender is not valid");
         }
-
-        return match;
     }
 
-    public static boolean validateImageUrl(String imageUrl) {
+    public static boolean validateImageUrl(String imageUrl) throws InvalidUserException {
         try {
             new URL(imageUrl);
-            System.out.println("Image url is valid");
             return true;
         } catch (MalformedURLException e) {
-            System.out.println("Image url is not valid");
-            return false;
+            throw new InvalidUserException("Image url is not valid");
+
         }
     }
 

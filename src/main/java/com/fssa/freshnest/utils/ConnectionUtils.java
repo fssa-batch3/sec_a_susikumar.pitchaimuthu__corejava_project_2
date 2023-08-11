@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class ConnectionUtils {
 
-	// Connect to database
-	public static Connection getConnection() throws SQLException {
+    // Connect to database
+    public static Connection getConnection() throws SQLException {
 //        String DB_URL;
 //        String DB_USER;
 //        String DB_PASSWORD;
@@ -22,7 +22,7 @@ public class ConnectionUtils {
 //            DB_USER = env.get("DB_USER");
 //            DB_PASSWORD = env.get("DB_PASSWORD");
 //        }
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/freshnest", "root", "root");
-	}
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/freshnest", "root", "root");
+    }
 
 }
