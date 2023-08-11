@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestUserSecondPageRegistrationFeatre {
+ class TestUserSecondPageRegistrationFeatre {
 
     public static void main(String[] args) {
 

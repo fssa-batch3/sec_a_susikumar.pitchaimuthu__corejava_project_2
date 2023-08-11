@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.freshnest.model.Still;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 
-public class TestStillDeleteFeature {
+ class TestStillDeleteFeature {
 
        @Test
     void testStillDeleteSuccess() {

@@ -9,7 +9,7 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestStillCreateFeature {
+ class TestStillCreateFeature {
 
 	@Test
 	void testStillCreateSuccess() {
