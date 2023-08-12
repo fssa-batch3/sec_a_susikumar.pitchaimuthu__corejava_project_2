@@ -1,11 +1,11 @@
 package com.fssa.freshnest.validation;
 
+import com.fssa.freshnest.constraints.ChatConstraints;
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 public class ChatValidator {
 
-    private static final String INVALID_CHAT_MESSAGE = "chat details are not valid";
 
     // create chat
     public static boolean validateCreateChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage)
@@ -16,7 +16,7 @@ public class ChatValidator {
                 && validateChatGroupName(insertChat.getChatName())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_CHAT_MESSAGE);
+            throw new InvalidUserException(ChatConstraints.getInvalidChatSendMessage());
         }
 
     }
@@ -27,7 +27,7 @@ public class ChatValidator {
         if (chat != null) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_CHAT_MESSAGE);
+            throw new InvalidUserException(ChatConstraints.getInvalidChatReadMessage());
         }
 
     }
@@ -39,7 +39,7 @@ public class ChatValidator {
         if (chat != null) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_CHAT_MESSAGE);
+            throw new InvalidUserException(ChatConstraints.getInvalidChatUpdateMessage());
         }
 
     }
@@ -51,14 +51,14 @@ public class ChatValidator {
         if (chat != null) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_CHAT_MESSAGE);
+            throw new InvalidUserException(ChatConstraints.getInvalidChatDeleteMessage());
         }
 
     }
 
     public static boolean validateChat(String chat) throws InvalidUserException {
 
-        boolean match = false;
+        boolean match;
         if (chat == null ||chat.isEmpty())
             return false;
         String regex = "^.+$";
@@ -67,7 +67,7 @@ public class ChatValidator {
         if (chatMessage.matches(regex)) {
             match = true;
         } else {
-            throw new InvalidUserException("The chat message is not valid");
+            throw new InvalidUserException(ChatConstraints.getInvalidChatTextMessage());
         }
 
         return match;
@@ -79,7 +79,7 @@ public class ChatValidator {
         if (type.equals("direct") || type.equals("group")) {
             return true;
         } else {
-            throw new InvalidUserException("The chat type is not valid");
+            throw new InvalidUserException(ChatConstraints.getInvalidChatTypeMessage());
         }
 
     }
@@ -89,7 +89,7 @@ public class ChatValidator {
         if (name > 0) {
             return true;
         } else {
-            throw new InvalidUserException("The chat name is not valid");
+            throw new InvalidUserException(ChatConstraints.getInvalidChatGroupNameMessage());
         }
 
     }

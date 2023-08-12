@@ -1,5 +1,7 @@
 package com.fssa.freshnest.validation;
 
+import com.fssa.freshnest.constraints.StillConstraints;
+import com.fssa.freshnest.constraints.UserConstraints;
 import com.fssa.freshnest.model.Still;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
@@ -10,7 +12,6 @@ import java.time.LocalTime;
 
 public class StillValidator {
 
-    private static final String INVALID_STILL_MESSAGE = "still details are not valid";
 
     public static boolean validateTakeStill(Still still) throws InvalidUserException {
 
@@ -18,7 +19,7 @@ public class StillValidator {
                 && validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+            throw new InvalidUserException(StillConstraints.getInvalidStillTakeMessage());
         }
 
     }
@@ -30,7 +31,7 @@ public class StillValidator {
         if (still != null && validateStillId(still.getStillId())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+            throw new InvalidUserException(StillConstraints.getInvalidStillFavouriteMessage());
         }
 
     }
@@ -42,7 +43,7 @@ public class StillValidator {
         if (still != null && validateStillName(still.getStillName())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+            throw new InvalidUserException(StillConstraints.getInvalidStillUpdateMessage());
         }
 
     }
@@ -54,7 +55,7 @@ public class StillValidator {
         if (still != null && validateStillId(still.getStillId()) && validateStillUserId(still.getUserId())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+            throw new InvalidUserException(StillConstraints.getInvalidStillDeleteMessage());
         }
 
     }
@@ -63,7 +64,7 @@ public class StillValidator {
         if (still != null && validateStillUserId(still.getUserId())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+            throw new InvalidUserException(StillConstraints.getInvalidStillReadMessage());
         }
 
     }
@@ -77,7 +78,7 @@ public class StillValidator {
         try {
             new URL(url);
         } catch (MalformedURLException e) {
-            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+            throw new InvalidUserException(StillConstraints.getInvalidStillUrlMessage());
         }
         return true;
 
@@ -88,7 +89,7 @@ public class StillValidator {
         if (!name.isEmpty()) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+            throw new InvalidUserException(StillConstraints.getInvalidStillNameMessage());
         }
 
     }
@@ -96,7 +97,7 @@ public class StillValidator {
     public static boolean validateStillId(int stillId) throws InvalidUserException {
 
         if (stillId <= 0) {
-            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+            throw new InvalidUserException(StillConstraints.getInvalidStillIdMessage());
         }
         return true;
     }
@@ -106,7 +107,7 @@ public class StillValidator {
             LocalDate.parse(date.toString());
             return true;
         } catch (Exception e) {
-            throw new InvalidUserException("Still date is not valid");
+            throw new InvalidUserException(StillConstraints.getInvalidStillDateMessage());
         }
     }
 
@@ -115,14 +116,14 @@ public class StillValidator {
             LocalTime.parse(time.toString());
             return true;
         } catch (Exception e) {
-            throw new InvalidUserException("Still time is not valid");
+            throw new InvalidUserException(StillConstraints.getInvalidStillTimeMessage());
         }
     }
 
     // Validate still user id
-    public static boolean validateStillUserId(int stillId) throws InvalidUserException {
-        if (stillId <= 0) {
-            throw new InvalidUserException(INVALID_STILL_MESSAGE);
+    public static boolean validateStillUserId(int userId) throws InvalidUserException {
+        if (userId <= 0) {
+            throw new InvalidUserException(StillConstraints.getInvalidStillUseridMessage());
         }
         return true;
 
