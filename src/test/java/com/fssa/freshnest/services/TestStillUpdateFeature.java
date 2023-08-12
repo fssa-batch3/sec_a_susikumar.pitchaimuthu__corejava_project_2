@@ -9,9 +9,7 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
- class TestStillUpdateFeature {
-
-
+class TestStillUpdateFeature {
 
 
     // test image update details

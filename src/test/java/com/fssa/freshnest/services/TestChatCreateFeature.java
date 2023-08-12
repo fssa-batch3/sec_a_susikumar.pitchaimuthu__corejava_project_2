@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
- class TestChatCreateFeature {
-  
+class TestChatCreateFeature {
+
 
     // test the chat success
     @Test

@@ -58,38 +58,36 @@ public class ChatValidator {
 
     public static boolean validateChat(String chat) throws InvalidUserException {
 
-        boolean match;
-        if (chat == null ||chat.isEmpty())
+
+        if (chat == null || chat.isEmpty())
             return false;
         String regex = "^.+$";
 
         String chatMessage = "...";
         if (chatMessage.matches(regex)) {
-            match = true;
+            return true;
         } else {
             throw new InvalidUserException(ChatConstraints.getInvalidChatTextMessage());
         }
 
-        return match;
     }
 
     // validate chat type
     public static boolean validateChatType(String type) throws InvalidUserException {
-
         if (type.equals("direct") || type.equals("group")) {
             return true;
         } else {
             throw new InvalidUserException(ChatConstraints.getInvalidChatTypeMessage());
         }
-
     }
+
 
     // validate chat group name
     public static boolean validateChatGroupName(int name) throws InvalidUserException {
-        if (name > 0) {
-            return true;
-        } else {
+        if (name <=  0) {
             throw new InvalidUserException(ChatConstraints.getInvalidChatGroupNameMessage());
+        } else {
+            return true;
         }
 
     }

@@ -1,7 +1,6 @@
 package com.fssa.freshnest.validation;
 
 import com.fssa.freshnest.constraints.StillConstraints;
-import com.fssa.freshnest.constraints.UserConstraints;
 import com.fssa.freshnest.model.Still;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
@@ -73,7 +72,7 @@ public class StillValidator {
 
     public static boolean validateStillUrl(String url) throws InvalidUserException {
         if (url == null || url.isEmpty()) {
-            throw new InvalidUserException("Image url is empty");
+            return false;
         }
         try {
             new URL(url);

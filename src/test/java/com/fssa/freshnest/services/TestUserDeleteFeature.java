@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
- class TestUserDeleteFeature {
+class TestUserDeleteFeature {
 
 
     // test delete all details success

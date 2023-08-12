@@ -6,9 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
- class TestInviteReactionFeature {
+class TestInviteReactionFeature {
 
-   
 
     // test invite success
     @Test
@@ -37,5 +36,5 @@ import static org.junit.jupiter.api.Assertions.*;
         }
     }
 
-    
+
 }

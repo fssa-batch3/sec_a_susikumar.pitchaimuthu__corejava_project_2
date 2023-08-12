@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
- class TestChatReadFeature {
-    
+class TestChatReadFeature {
+
     // test the chat read success
     @Test
     void testChatReadSuccess() {

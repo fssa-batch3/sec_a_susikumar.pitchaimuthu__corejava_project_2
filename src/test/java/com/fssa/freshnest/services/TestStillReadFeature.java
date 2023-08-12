@@ -1,17 +1,14 @@
 package com.fssa.freshnest.services;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import org.junit.jupiter.api.Test;
-
 import com.fssa.freshnest.model.Still;
 import com.fssa.freshnest.services.exceptions.ServiceException;
+import org.junit.jupiter.api.Test;
 
- class TestStillReadFeature {
+import static org.junit.jupiter.api.Assertions.*;
 
-  
+class TestStillReadFeature {
+
+
     // test the still read success
     @Test
     void testStillReadSuccess() {

@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
- class TestChatDeleteFeature {
+class TestChatDeleteFeature {
 
-   
 
     // test the delete chat success or all details correct
     @Test

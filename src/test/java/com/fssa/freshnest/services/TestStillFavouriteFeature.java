@@ -7,10 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
- class TestStillFavouriteFeature {
+class TestStillFavouriteFeature {
 
-   
- 
+
     @Test
     void testImageFavouriteSuccess() {
         Still still = new Still(true, 1);
