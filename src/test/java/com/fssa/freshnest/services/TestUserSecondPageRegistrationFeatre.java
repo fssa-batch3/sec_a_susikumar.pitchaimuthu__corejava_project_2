@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
- class TestUserSecondPageRegistrationFeatre {
+ class TestUserSecondPageRegistrationFeature {
 
     public static void main(String[] args) {
 
@@ -40,11 +40,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
     @Test
     void testUserSecondRegistrationNullDetails() {
-        User user1 = null;
         UserService userService = new UserService();
 
         try {
-            assertFalse(userService.secondPageRegisterUser(user1));
+            assertFalse(userService.secondPageRegisterUser(null));
 
         } catch (ServiceException e) {
             e.printStackTrace();

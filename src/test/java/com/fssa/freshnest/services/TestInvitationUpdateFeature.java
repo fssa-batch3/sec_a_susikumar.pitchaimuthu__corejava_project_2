@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 
-    // test the invitation with correct values
+    // test the invitation with correct values  
     @Test
     void testInviteUpdateSuccess() {
         Invite invite = new Invite(1, "Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",

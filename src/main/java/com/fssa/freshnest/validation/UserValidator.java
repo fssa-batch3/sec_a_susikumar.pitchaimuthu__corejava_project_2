@@ -1,5 +1,6 @@
 package com.fssa.freshnest.validation;
 
+import com.fssa.freshnest.constraints.UserConstraints;
 import com.fssa.freshnest.model.User;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
@@ -18,10 +19,10 @@ public class UserValidator {
 
         if (user != null && validateFirstName(user.getFirstName()) && validateLastName(user.getLastName())
                 && validatePassword(user.getPassword()) && validateEmail(user.getEmail())
-                && validateUserName(user.getUsername()) && validateImageUrl(user.getProfileImage())) {
+                && validateUserName(user.getUsername()) && validateProfileImageUrl(user.getProfileImage())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_USER_MESSAGE);
+            throw new InvalidUserException(UserConstraints.getInvalidUserRegistrationMessage());
         }
 
     }
@@ -33,7 +34,7 @@ public class UserValidator {
         if (user != null && validateDob(user.getDob()) && validateGender(user.getGender())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_USER_MESSAGE);
+            throw new InvalidUserException(UserConstraints.getInvalidUserSecondPageRegistrationMessage());
         }
     }
 
@@ -43,7 +44,7 @@ public class UserValidator {
         if (user != null && validateEmail(user.getEmail()) && validatePassword(user.getPassword())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_USER_MESSAGE);
+            throw new InvalidUserException(UserConstraints.getInvalidUserLoginMessage());
 
         }
     }
@@ -57,17 +58,17 @@ public class UserValidator {
                 && validateDob(user.getDob())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_USER_MESSAGE);
+            throw new InvalidUserException(UserConstraints.getInvalidUserUpdateMessage());
 
         }
     }
 
     // validate the user profile url update
     public static boolean validateProfileImageUpdate(User user) throws InvalidUserException {
-        if (user != null && validateImageUrl(user.getProfileImage())) {
+        if (user != null && validateProfileImageUrl(user.getProfileImage())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_USER_MESSAGE);
+            throw new InvalidUserException(UserConstraints.getInvalidUserProfileImageUpdateMessage());
 
         }
     }
@@ -78,7 +79,7 @@ public class UserValidator {
         if (user != null && validateEmail(user.getEmail())) {
             return true;
         } else {
-            throw new InvalidUserException(INVALID_USER_MESSAGE);
+            throw new InvalidUserException(UserConstraints.getInvalidUserDeleteMessage());
 
         }
     }
@@ -97,7 +98,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException("The user firstname is not valid");
+            throw new InvalidUserException(UserConstraints.getInvalidUserFirstNameMessage());
         }
 
 
@@ -116,7 +117,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException("The user lastname is not valid");
+            throw new InvalidUserException(UserConstraints.getInvalidUserLastNameMessage());
         }
 
 
@@ -134,7 +135,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException("Invalid password.");
+            throw new InvalidUserException(UserConstraints.getInvalidUserPasswordMessage());
         }
 
     }
@@ -150,7 +151,7 @@ public class UserValidator {
         if (isMatch) {
             return true;
         } else {
-            throw new InvalidUserException("The email address is: Invalid");
+            throw new InvalidUserException(UserConstraints.getInvalidUserEmailMessage());
         }
     }
 
@@ -167,7 +168,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException("The username is not valid");
+            throw new InvalidUserException(UserConstraints.getInvalidUserUserNameMessage());
         }
 
     }
@@ -184,7 +185,7 @@ public class UserValidator {
         if (!parsedDate.isAfter(currentDate) && age >= 18) {
             return true;
         } else {
-            throw new InvalidUserException("The user date of birth is not valid");
+            throw new InvalidUserException(UserConstraints.getInvalidUserDobMessage());
         }
 
 
@@ -203,7 +204,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException("The user nationality is not valid");
+            throw new InvalidUserException(UserConstraints.getInvalidUserNationalityMessage());
         }
 
     }
@@ -219,7 +220,7 @@ public class UserValidator {
             if (match) {
                 return true;
             } else {
-                throw new InvalidUserException("The user mobile number is not valid");
+                throw new InvalidUserException(UserConstraints.getInvalidUserMobileNumberMessage());
             }
         } else {
             throw new InvalidUserException("Invalid mobile number: 0");
@@ -239,18 +240,18 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException("The user gender is not valid");
+            throw new InvalidUserException(UserConstraints.getInvalidUserGenderMessage());
         }
     }
 
-    public static boolean validateImageUrl(String url) throws InvalidUserException {
+    public static boolean validateProfileImageUrl(String url) throws InvalidUserException {
         if (url == null || url.isEmpty()) {
             throw new InvalidUserException("Image url is empty");
         }
         try {
             new URL(url);
         } catch (MalformedURLException e) {
-            throw new InvalidUserException(INVALID_USER_MESSAGE);
+            throw new InvalidUserException(UserConstraints.getInvalidUserProfileImageUrlMessage());
         }
         return true;
     }
