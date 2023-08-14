@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestInvitationCreationFeature {
 
-
     // test the invite creation success
     @Test
     void testInvitationSuccess() {
