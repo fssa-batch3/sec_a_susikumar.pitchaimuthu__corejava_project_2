@@ -26,7 +26,7 @@ public class StillValidator {
 
 	public static boolean validateFavouriteStill(Still still) throws InvalidUserException {
 
-		if (still != null && validateStillId(still.getStillId())) {
+		if (still != null) {
 			return true;
 		} else {
 			throw new InvalidUserException(StillConstraints.getInvalidStillFavouriteMessage());
@@ -47,7 +47,7 @@ public class StillValidator {
 	}
 
 	// validate Delete image
-
+	
 	public static boolean validateDeleteStill(Still still) throws InvalidUserException {
 
 		if (still != null) {
@@ -55,7 +55,6 @@ public class StillValidator {
 		} else {
 			throw new InvalidUserException(StillConstraints.getInvalidStillDeleteMessage());
 		}
-
 	}
 
 	public static boolean validateReadStill(Still still) throws InvalidUserException {
