@@ -70,7 +70,7 @@ public class StillValidator {
 
 	public static boolean validateStillUrl(String url) throws InvalidUserException {
 		if (url == null || url.isEmpty()) {
-			return false;
+			throw new InvalidUserException(StillConstraints.getInvalidStillUrlMessage());
 		}
 		try {
 			new URL(url);
@@ -83,13 +83,13 @@ public class StillValidator {
 
 	public static boolean validateStillName(String name) throws InvalidUserException {
 
-		if (!name.isEmpty()) {
-			return true;
-		} else {
+		if (name.isEmpty()) {
 			throw new InvalidUserException(StillConstraints.getInvalidStillNameMessage());
+		} else {
+			return true;
 		}
 
-	}
+	} 
 
 	public static boolean validateStillDate(LocalDate date) throws InvalidUserException {
 		try {

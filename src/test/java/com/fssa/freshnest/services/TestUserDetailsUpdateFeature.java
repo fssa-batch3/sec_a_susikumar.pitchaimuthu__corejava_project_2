@@ -51,7 +51,6 @@ class TestUserDetailsUpdateFeature {
             assertFalse(userService.updateUser(user1));
         } catch (ServiceException e) {
             e.printStackTrace();
-
         }
     }
 
@@ -60,7 +59,7 @@ class TestUserDetailsUpdateFeature {
     void testUpdateInvalidGenderDetails() {
         UserService userService = new UserService();
 
-        User user1 = new User("mani@gmail.com", "kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
+        User user1 = new User("susi@gmail.com", "kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
                 "2003-08-01", "Indian", "Male234");
         try {
             assertFalse(userService.updateUser(user1));

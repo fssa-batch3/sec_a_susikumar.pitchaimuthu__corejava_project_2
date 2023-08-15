@@ -57,7 +57,7 @@ public class ChatValidator {
 	public static boolean validateChat(String chat) throws InvalidUserException {
 
 		if (chat == null || chat.isEmpty())
-			return false;
+			throw new InvalidUserException(ChatConstraints.getInvalidChatTextMessage());
 		String regex = "^.+$";
 
 		String chatMessage = "...";

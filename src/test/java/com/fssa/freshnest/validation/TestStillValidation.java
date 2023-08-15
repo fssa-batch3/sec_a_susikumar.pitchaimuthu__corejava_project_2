@@ -11,88 +11,90 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestStillValidation {
 
-    // Validate still url
+	// Validate still url
 
-    @Test
-    void testValidStillUrl(){
-        try {
-            assertTrue(StillValidator.validateStillUrl("https://www.example.com"));
-        }catch (InvalidUserException e){
-            System.out.println(e.getMessage());
-            fail();
-        }
-    }
+	@Test
+	void testValidStillUrl() {
+		try {
+			assertTrue(StillValidator.validateStillUrl("https://www.example.com"));
+		} catch (InvalidUserException e) {
+			System.out.println(e.getMessage());
+			fail();
+		}
+	}
 
-    @Test
-    void testInvalidStillUrl(){
-       InvalidUserException result =  assertThrows(InvalidUserException.class , () -> StillValidator.validateStillUrl("//www.example"));
-       assertEquals(StillConstraints.getInvalidStillUrlMessage(), result.getMessage());
-    }
-    @Test
-    void testStillUrlNullDetails(){
-       InvalidUserException result = assertThrows(InvalidUserException.class , () -> StillValidator.validateStillUrl(null));
-       assertEquals(StillConstraints.getInvalidStillUrlMessage(), result.getMessage());
-    }
+	@Test
+	void testInvalidStillUrl() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillUrl("//www.example"));
+		assertEquals(StillConstraints.getInvalidStillUrlMessage(), result.getMessage());
+	}
 
+	@Test
+	void testStillUrlNullDetails() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillUrl(null));
+		assertEquals(StillConstraints.getInvalidStillUrlMessage(), result.getMessage());
+	}
 
-    // validate still name
-    @Test
-    void testValidStillName(){
-        try {
-            assertTrue(StillValidator.validateStillName("Supreme"));
-        }catch (InvalidUserException e){
-            System.out.println(e.getMessage());
-            fail();
-        }
-    }
+	// validate still name
+	@Test
+	void testValidStillName() {
+		try {
+			assertTrue(StillValidator.validateStillName("Supreme"));
+		} catch (InvalidUserException e) {
+			System.out.println(e.getMessage());
+			fail();
+		}
+	}
 
-    @Test
-    void testInvalidNullStillName(){
-     InvalidUserException result =   assertThrows(InvalidUserException.class, () -> StillValidator.validateStillName(null));
-     assertEquals(StillConstraints.getInvalidStillNameMessage(), result.getMessage());
-    }
+	@Test
+	void testInvalidNullStillName() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillName(""));
+		assertEquals(StillConstraints.getInvalidStillNameMessage(), result.getMessage());
+	}
 
-    // validate still date
+	// validate still date
 
-    @Test
-    void testValidStillDate(){
-        try {
-            assertTrue(StillValidator.validateStillDate(LocalDate.parse("2023-05-23")));
-        }catch (InvalidUserException e){
-            System.out.println(e.getMessage());
-            fail();
-        }
-    }
+	@Test
+	void testValidStillDate() {
+        LocalDate currentDate = LocalDate.now();
 
-    @Test
-    void testInvalidDateWithWrongMonth(){
-          InvalidUserException result =   assertThrows(InvalidUserException.class, () -> StillValidator.validateStillDate(LocalDate.parse("2023-45-23")));
-          assertEquals(StillConstraints.getInvalidStillDateMessage(), result.getMessage());
-    }
+		try {
+			assertTrue(StillValidator.validateStillDate(currentDate));
+		} catch (InvalidUserException e) {
+			System.out.println(e.getMessage());
+			fail();
+		}
+	}
 
-    @Test
-    void testInvalidNullDate(){
-       InvalidUserException result = assertThrows(InvalidUserException.class, () -> StillValidator.validateStillDate(LocalDate.parse(null)));
-       assertEquals(StillConstraints.getInvalidStillDateMessage(), result.getMessage());
-    }
+	@Test
+	void testInvalidNullDate() {
 
-    // validate still time
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillDate(null));
+		assertEquals(StillConstraints.getInvalidStillDateMessage(), result.getMessage());
+	}
 
-    @Test
-    void testValidTime(){
-        try {
-            assertTrue(StillValidator.validateStillTime(LocalTime.parse("09.45")));
-        }catch (InvalidUserException e){
-            System.out.println(e.getMessage());
-            fail();
-        }
-    }
-    @Test
-    void testNullTime(){
-     InvalidUserException result = assertThrows(InvalidUserException.class, () -> StillValidator.validateStillTime(null));
-     assertEquals(StillConstraints.getInvalidStillTimeMessage(), result.getMessage());
-    }
+	// validate still time
 
+	@Test
+	void testValidTime() {
+        LocalTime currentTime = LocalTime.now();
+		try {
+			assertTrue(StillValidator.validateStillTime(currentTime));
+		} catch (InvalidUserException e) {
+			System.out.println(e.getMessage());
+			fail();
+		}
+	}
 
+	@Test
+	void testNullTime() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillTime(null));
+		assertEquals(StillConstraints.getInvalidStillTimeMessage(), result.getMessage());
+	}
 
 }

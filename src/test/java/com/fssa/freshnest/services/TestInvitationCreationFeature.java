@@ -29,7 +29,7 @@ class TestInvitationCreationFeature {
     @Test
     void testInvalidInvitationType() {
 
-        Invite invite = new Invite(44, "Birthday party", "2023-08-24", "12:34", "Manjal veeran", "Thangam",
+        Invite invite = new Invite(44, "", "2023-08-24", "12:34", "Manjal veeran", "Thangam",
                 "Ticket block the vangathinga thangam");
 
         InviteService inviteService = new InviteService();

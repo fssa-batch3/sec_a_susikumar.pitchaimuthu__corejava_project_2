@@ -22,9 +22,8 @@ class TestChatValidation {
     // test invalid null chat details
     @Test
     void testInvalidNullChat() {
-
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChat(null));
-        assertEquals(ChatConstraints.getInvalidChatSendMessage(), result.getMessage());
+        assertEquals(ChatConstraints.getInvalidChatTextMessage(), result.getMessage());
     }
 
     // test valid chat type

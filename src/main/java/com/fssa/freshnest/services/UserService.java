@@ -49,7 +49,7 @@ public class UserService {
 
     }
 
-    // usre update details service
+    // user update details service
     public boolean updateUser(User user) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {

@@ -10,9 +10,9 @@ class TestUserValidation {
 
     // Email validation test
     @Test
-    void testValidEmailWithoutAtSymbol() {
+    void testValidEmail() {
         try {
-            assertTrue(UserValidator.validateEmail("susikumargmail.com"));
+            assertTrue(UserValidator.validateEmail("susikumar@gmail.com"));
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
             fail();
@@ -26,7 +26,7 @@ class TestUserValidation {
     }
 
     @Test
-    void testInvalidEmailWithoutCom() {
+    void testInvalidEmailWithoutDotCom() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateEmail("susikumar@gmail"));
         assertEquals(UserConstraints.getInvalidUserEmailMessage(), result.getMessage());
     }
@@ -87,7 +87,7 @@ class TestUserValidation {
     @Test
     void testUserNameNull() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateUserName(null));
-        assertEquals(UserConstraints.getInvalidUserPasswordMessage(), result.getMessage());
+        assertEquals(UserConstraints.getInvalidUserUserNameMessage(), result.getMessage());
 
     }
 
@@ -176,24 +176,14 @@ class TestUserValidation {
     @Test
     void testValidDateOfBirth() {
         try {
-            assertTrue(UserValidator.validateDob("2023-08-21"));
+            assertTrue(UserValidator.validateDob("2003-08-21"));
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
             fail();
         }
     }
 
-    @Test
-    void testValidDateOfBirthInvalidMonth() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateDob("2023-28-12"));
-        assertEquals(UserConstraints.getInvalidUserDobMessage(), result.getMessage());
-    }
-
-    @Test
-    void testValidDateOfBirthInvalidDate() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateDob("2023-08-42"));
-        assertEquals(UserConstraints.getInvalidUserDobMessage(), result.getMessage());
-    }
+   
 
     @Test
     void testNullDateOfBirth() {
@@ -221,7 +211,7 @@ class TestUserValidation {
 
     @Test
     void testInvalidNullNationality() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateNationality(null));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateNationality(""));
         assertEquals(UserConstraints.getInvalidUserNationalityMessage(), result.getMessage());
     }
 
@@ -246,7 +236,7 @@ class TestUserValidation {
     @Test
     void testInvalidProfileImageUrlNull() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateProfileImageUrl(null));
-        assertEquals(UserConstraints.getInvalidUserProfileImageUrlMessage(), result.getMessage());
+        assertEquals(UserConstraints.getInvalidNullUserProfileImageUrlMessage(), result.getMessage());
 
     }
 

@@ -94,19 +94,19 @@ public class InviteValidator {
 
     // validate the invite Explanation
     public static boolean validateInviteExplanation(String explanation) throws InvalidUserException {
-        if (explanation != null) {
-            return true;
+        if (explanation.isEmpty()) {
+        	throw new InvalidUserException(InviteConstraints.getInvalidInviteExplanationMessage());
         } else {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteExplanationMessage());
+        	return true;
         }
     }
 
     // validate the invite message
     public static boolean validateInviteMessage(String message) throws InvalidUserException {
-        if (message != null) {
-            return true;
+        if (message.isEmpty()) {
+        	throw new InvalidUserException(InviteConstraints.getInvalidInviteChatMessage());
         } else {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteChatMessage());
+            return true;
         }
     }
 

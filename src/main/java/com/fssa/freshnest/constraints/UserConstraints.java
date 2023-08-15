@@ -23,6 +23,7 @@ public class UserConstraints {
     private static final String INVALID_USER_MOBILE_NUMBER_MESSAGE = "User mobile number is not valid";
     private static final String INVALID_USER_GENDER_MESSAGE = "User gender is not valid";
     private static final String INVALID_USER_PROFILE_IMAGE_URL_MESSAGE = "User profile image url is not valid";
+    private static final String NULL_USER_PROFILE_IMAGE_URL_MESSAGE = "User profile image url is not valid";
 
     // creating the getters and setter to get the message
 
@@ -89,6 +90,10 @@ public class UserConstraints {
 
     public static String getInvalidUserProfileImageUrlMessage() {
         return INVALID_USER_PROFILE_IMAGE_URL_MESSAGE;
+    }
+
+    public static String getInvalidNullUserProfileImageUrlMessage() {
+        return NULL_USER_PROFILE_IMAGE_URL_MESSAGE;
     }
 
 }

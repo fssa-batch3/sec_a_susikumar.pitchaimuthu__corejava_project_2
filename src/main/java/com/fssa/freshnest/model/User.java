@@ -16,7 +16,7 @@ public class User {
     private boolean isDelete;
     private int userId;
 
-    // User first registration contrustor
+    // User first registration constructor
     public User(String email, String username, String password, String firstName, String lastName,
                 String profileImage) {
         this.email = email;
@@ -27,7 +27,7 @@ public class User {
         this.profileImage = profileImage;
     }
 
-    // user second page resgistration constructor
+    // user second page registration constructor
     public User(String dob, String gender, String email) {
         this.dob = dob;
         this.gender = gender;
