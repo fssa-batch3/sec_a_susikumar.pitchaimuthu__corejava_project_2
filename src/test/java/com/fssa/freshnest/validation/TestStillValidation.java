@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestStillValidation {
+ class TestStillValidation {
 
     // Validate still url
 
