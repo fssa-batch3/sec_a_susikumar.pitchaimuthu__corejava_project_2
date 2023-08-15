@@ -30,9 +30,8 @@ public class Invite {
     }
 
     // Invite update constructor
-    public Invite(int userId, String inviteType, String inviteDate, String inviteTime, String specialPerson,
+    public Invite( String inviteType, String inviteDate, String inviteTime, String specialPerson,
                   String inviteSlogan, String inviteExplanation, int inviteId) {
-        this.userId = userId;
         this.inviteType = inviteType;
         this.inviteDate = inviteDate;
         this.inviteTime = inviteTime;

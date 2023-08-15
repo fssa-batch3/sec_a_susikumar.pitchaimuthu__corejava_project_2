@@ -86,7 +86,7 @@ public class UserDAO {
 
     // Update user data
     public boolean updateUser(User user) throws DAOException {
-        String updateQuery = "UPDATE users SET username = ?, firstname = ?, lastname = ?, gender = ?, password = ?, nationality = ?, dob = ?, age = ?, mobile_number = ? WHERE email = ?";
+        String updateQuery = "UPDATE users SET username = ?, firstname = ?, lastname = ?, gender = ?, nationality = ?, dob = ?, mobile_number = ? WHERE email = ?";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
@@ -97,12 +97,10 @@ public class UserDAO {
             statement.setString(2, user.getFirstName());
             statement.setString(3, user.getLastName());
             statement.setString(4, user.getGender());
-            statement.setString(5, user.getPassword());
-            statement.setString(6, user.getNationality());
-            statement.setDate(7, Date.valueOf(dob));
-            statement.setInt(8, user.getAge());
-            statement.setLong(9, user.getMobileNumber());
-            statement.setString(10, user.getEmail());
+            statement.setString(5, user.getNationality());
+            statement.setDate(6, Date.valueOf(dob));
+            statement.setLong(7, user.getMobileNumber());
+            statement.setString(8, user.getEmail());
 
             // Execute the query
             int rows = statement.executeUpdate();

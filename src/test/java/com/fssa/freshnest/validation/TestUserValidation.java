@@ -1,5 +1,6 @@
 package com.fssa.freshnest.validation;
 
+import com.fssa.freshnest.constraints.UserConstraints;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 import org.junit.jupiter.api.Test;
 
@@ -14,17 +15,20 @@ class TestUserValidation {
             assertTrue(UserValidator.validateEmail("susikumargmail.com"));
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
+            fail();
         }
     }
 
     @Test
     void testInvalidEmailWithoutAtSymbol() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateEmail("susikumar123gmail.com"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateEmail("susikumar123gmail.com"));
+        assertEquals(UserConstraints.getInvalidUserEmailMessage(), result.getMessage());
     }
 
     @Test
     void testInvalidEmailWithoutCom() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateEmail("susikumar@gmail"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateEmail("susikumar@gmail"));
+        assertEquals(UserConstraints.getInvalidUserEmailMessage(), result.getMessage());
     }
 
     // Password validation test
@@ -40,35 +44,40 @@ class TestUserValidation {
 
     @Test
     void testInvalidPasswordWithoutSpecialCharacters() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("Password123"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("Password123"));
+        assertEquals(UserConstraints.getInvalidUserPasswordMessage(), result.getMessage());
     }
 
     @Test
     void testInvalidPasswordWithoutNumbers() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("Password@"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("Password@"));
+        assertEquals(UserConstraints.getInvalidUserPasswordMessage(), result.getMessage());
     }
 
     @Test
     void testInvalidPasswordWithoutCapitalLetters() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("password123"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("password123"));
+        assertEquals(UserConstraints.getInvalidUserPasswordMessage(), result.getMessage());
     }
 
     @Test
     void testInvalidPasswordWithoutSmallLetters() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("PASSWORD@123"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("PASSWORD@123"));
+        assertEquals(UserConstraints.getInvalidUserPasswordMessage(), result.getMessage());
     }
 
     @Test
     void testInvalidPasswordShorterLength() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("Pas@123"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword("Pas@123"));
+        assertEquals(UserConstraints.getInvalidUserPasswordMessage(), result.getMessage());
     }
 
 
     // User name validation test
     @Test
-    public void testValidUsername() {
+    void testValidUsername() {
         try {
-            assertTrue(UserValidator.validateUserName("Soffan"));
+            assertTrue(UserValidator.validateUserName("susikumar"));
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
             fail();
@@ -77,103 +86,119 @@ class TestUserValidation {
 
     @Test
     void testUserNameNull() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateUserName(null));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateUserName(null));
+        assertEquals(UserConstraints.getInvalidUserPasswordMessage(), result.getMessage());
+
     }
 
     @Test
     void testUserNameLengthLessThanTwo() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateUserName("ra"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateUserName("ra"));
+        assertEquals(UserConstraints.getInvalidUserUserNameMessage(), result.getMessage());
     }
 
 // First name validation test
 
     @Test
-     void testValidUserFirstname() {
+    void testValidUserFirstname() {
         try {
-
             assertTrue(UserValidator.validateFirstName("Susikumar"));
             System.out.println("username is valid");
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
+            fail();
         }
     }
 
     @Test
-     void testInvalidFirstnameStartingWithNumber() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateFirstName("3Mama"));
+    void testInvalidFirstnameStartingWithNumber() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateFirstName("3Mama"));
+        assertEquals(UserConstraints.getInvalidUserFirstNameMessage(), result.getMessage());
     }
 
     @Test
-     void testInvalidFirstnameStartingWithSpecialCharacter() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateFirstName("4Machi"));
+    void testInvalidFirstnameStartingWithSpecialCharacter() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateFirstName("4Machi"));
+        assertEquals(UserConstraints.getInvalidUserFirstNameMessage(), result.getMessage());
     }
 
     @Test
-     void testInvalidFirstnameTooShort() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateFirstName("ra"));
+    void testInvalidFirstnameTooShort() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateFirstName("ra"));
+        assertEquals(UserConstraints.getInvalidUserFirstNameMessage(), result.getMessage());
     }
 
     @Test
-     void testInvalidUsernameTooLong() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateFirstName("AyyampettaiArivudainambiMahanIndhiranNaan"));
+    void testInvalidUsernameTooLong() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateFirstName("AyyampettaiArivudainambiMahanIndhiranNaan"));
+        assertEquals(UserConstraints.getInvalidUserFirstNameMessage(), result.getMessage());
     }
 
     // Last name validation test
 
     @Test
-     void testValidUserLastname() {
+    void testValidUserLastname() {
         try {
-
             assertTrue(UserValidator.validateFirstName("Pitchaimuthu"));
             System.out.println("username is valid");
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
+            fail();
         }
     }
 
     @Test
-     void testInvalidLastnameStartingWithNumber() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateLastName("3Mama"));
+    void testInvalidLastnameStartingWithNumber() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateLastName("3Mama"));
+        assertEquals(UserConstraints.getInvalidUserLastNameMessage(), result.getMessage());
     }
 
     @Test
-     void testInvalidLastnameStartingWithSpecialCharacter() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateLastName("4Machi"));
+    void testInvalidLastnameStartingWithSpecialCharacter() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateLastName("4Machi"));
+        assertEquals(UserConstraints.getInvalidUserLastNameMessage(), result.getMessage());
     }
 
     @Test
-     void testInvalidLastnameTooShort() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateLastName("ra"));
+    void testInvalidLastnameTooShort() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateLastName("ra"));
+        assertEquals(UserConstraints.getInvalidUserLastNameMessage(), result.getMessage());
     }
 
     @Test
-     void testInvalidLastnameTooLong() {
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateLastName("AyyampettaiArivudainambiMahanIndhiranNaan"));
+    void testInvalidLastnameTooLong() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateLastName("AyyampettaiArivudainambiMahanIndhiranNaan"));
+        assertEquals(UserConstraints.getInvalidUserLastNameMessage(), result.getMessage());
     }
 
 
     // Validate date of birth
     @Test
-    void testValidDateOfBirth(){
+    void testValidDateOfBirth() {
         try {
             assertTrue(UserValidator.validateDob("2023-08-21"));
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
+            fail();
         }
     }
+
     @Test
-    void testValidDateOfBirthInvalidMonth(){
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateDob("2023-28-12"));
+    void testValidDateOfBirthInvalidMonth() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateDob("2023-28-12"));
+        assertEquals(UserConstraints.getInvalidUserDobMessage(), result.getMessage());
     }
 
     @Test
-    void testValidDateOfBirthInvalidDate(){
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateDob("2023-08-42"));
+    void testValidDateOfBirthInvalidDate() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateDob("2023-08-42"));
+        assertEquals(UserConstraints.getInvalidUserDobMessage(), result.getMessage());
     }
 
     @Test
-    void testNullDateOfBirth(){
-        assertThrows(InvalidUserException.class, () -> UserValidator.validateDob(null));
+    void testNullDateOfBirth() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateDob(null));
+        assertEquals(UserConstraints.getInvalidUserDobMessage(), result.getMessage());
     }
 
     // Validate nationality
@@ -184,37 +209,45 @@ class TestUserValidation {
             assertTrue(UserValidator.validateNationality("India"));
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
+            fail();
         }
     }
+
     @Test
     void testInvalidNationalityLengthLessThanTwo() {
-            assertThrows(InvalidUserException.class , () -> UserValidator.validateNationality("I"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateNationality("I"));
+        assertEquals(UserConstraints.getInvalidUserNationalityMessage(), result.getMessage());
     }
+
     @Test
     void testInvalidNullNationality() {
-        assertThrows(InvalidUserException.class , () -> UserValidator.validateNationality(null));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateNationality(null));
+        assertEquals(UserConstraints.getInvalidUserNationalityMessage(), result.getMessage());
     }
 
     // Validate profile image url
 
     @Test
-    void testValidaProfileImageUrl(){
+    void testValidaProfileImageUrl() {
         try {
             assertTrue(UserValidator.validateProfileImageUrl("https://example.com/image.jpg"));
-        }catch (InvalidUserException e){
+        } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
             fail();
         }
     }
 
     @Test
-    void testInvalidProfileImageUrl(){
-        assertThrows(InvalidUserException.class , () -> UserValidator.validateProfileImageUrl("//example.com/"));
+    void testInvalidProfileImageUrl() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateProfileImageUrl("//example.com/"));
+        assertEquals(UserConstraints.getInvalidUserProfileImageUrlMessage(), result.getMessage());
     }
 
     @Test
-    void testInvalidProfileImageUrlNull(){
-        assertThrows(InvalidUserException.class , () -> UserValidator.validateProfileImageUrl(null));
+    void testInvalidProfileImageUrlNull() {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateProfileImageUrl(null));
+        assertEquals(UserConstraints.getInvalidUserProfileImageUrlMessage(), result.getMessage());
+
     }
 
 }

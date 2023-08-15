@@ -48,14 +48,12 @@ public class User {
     }
 
     // User update constructor
-    public User(String email, String username, String password, String firstName, String lastName, int age,
+    public User(String email, String username, String firstName, String lastName,
                 long mobileNumber, String dob, String nationality, String gender) {
         this.email = email;
         this.username = username;
-        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
         this.mobileNumber = mobileNumber;
         this.dob = dob;
         this.nationality = nationality;

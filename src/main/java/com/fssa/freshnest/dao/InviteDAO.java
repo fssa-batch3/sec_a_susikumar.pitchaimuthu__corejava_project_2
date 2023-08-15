@@ -41,7 +41,7 @@ public class InviteDAO {
     }
 
     public boolean updateInvite(Invite invite) throws DAOException {
-        String updateQuery = "UPDATE fresh_invite SET user_id = ?, invite_type = ?, invite_date = ?, invite_time = ?, special_person = ?, invite_slogan = ?, invite_explanation = ? WHERE invite_id = ?";
+        String updateQuery = "UPDATE fresh_invite SET  invite_type = ?, invite_date = ?, invite_time = ?, special_person = ?, invite_slogan = ?, invite_explanation = ? WHERE invite_id = ?";
 
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateQuery)) {
@@ -49,14 +49,13 @@ public class InviteDAO {
             LocalDate inviteDate = LocalDate.parse(invite.getInviteDate());
             LocalTime inviteTime = LocalTime.parse(invite.getInviteTime());
             // Prepare SQL statement
-            statement.setInt(1, invite.getUserId());
-            statement.setString(2, invite.getInviteType());
-            statement.setDate(3, Date.valueOf(inviteDate));
-            statement.setTime(4, Time.valueOf(inviteTime));
-            statement.setString(5, invite.getSpecialPerson());
-            statement.setString(6, invite.getInviteSlogan());
-            statement.setString(7, invite.getInviteExplanation());
-            statement.setInt(8, invite.getInviteId());
+            statement.setString(1, invite.getInviteType());
+            statement.setDate(2, Date.valueOf(inviteDate));
+            statement.setTime(3, Time.valueOf(inviteTime));
+            statement.setString(4, invite.getSpecialPerson());
+            statement.setString(5, invite.getInviteSlogan());
+            statement.setString(6, invite.getInviteExplanation());
+            statement.setInt(7, invite.getInviteId());
             // Execute the query
             int rows = statement.executeUpdate();
 

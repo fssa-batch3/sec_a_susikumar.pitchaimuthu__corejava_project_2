@@ -1,10 +1,10 @@
 package com.fssa.freshnest.validation;
 
+import com.fssa.freshnest.constraints.ChatConstraints;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestChatValidation {
 
@@ -15,13 +15,16 @@ class TestChatValidation {
             assertTrue(ChatValidator.validateChat("Hello chellam"));
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
+            fail();
         }
     }
 
     // test invalid null chat details
     @Test
     void testInvalidNullChat() {
-        assertThrows(InvalidUserException.class, () -> ChatValidator.validateChat(null));
+
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChat(null));
+        assertEquals(ChatConstraints.getInvalidChatSendMessage(), result.getMessage());
     }
 
     // test valid chat type
@@ -31,19 +34,22 @@ class TestChatValidation {
             assertTrue(ChatValidator.validateChatType("direct"));
         } catch (InvalidUserException e) {
             System.out.println(e.getMessage());
+            fail();
         }
     }
 
     // test the invalid chat type
     @Test
     void testInvalidWrongChatType() {
-        assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType("Conversation"));
+     InvalidUserException result =    assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType("Conversation"));
+        assertEquals(ChatConstraints.getInvalidChatTypeMessage(), result.getMessage());
     }
 
     // test the null chat type
     @Test
     void testInvalidNullChatType() {
-        assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType(""));
+       InvalidUserException result =  assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType(""));
+        assertEquals(ChatConstraints.getInvalidChatTypeMessage(), result.getMessage());
     }
 
 }
