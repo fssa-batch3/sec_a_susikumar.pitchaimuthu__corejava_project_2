@@ -14,7 +14,7 @@ class TestInviteValidation {
         try {
             assertTrue(InviteValidator.validateInviteType("Birthday"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -32,7 +32,7 @@ class TestInviteValidation {
         try {
             assertTrue(InviteValidator.validateInviteDate("2030-08-23"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -65,7 +65,7 @@ class TestInviteValidation {
         try {
             assertTrue(InviteValidator.validateInviteTime("09:45"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -82,7 +82,7 @@ class TestInviteValidation {
         try {
             assertTrue(InviteValidator.validateInviteExplanation("Hello buddy, this is the party of heaven"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -99,7 +99,7 @@ class TestInviteValidation {
         try {
             assertTrue(InviteValidator.validateInviteMessage("I will come buddy"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }

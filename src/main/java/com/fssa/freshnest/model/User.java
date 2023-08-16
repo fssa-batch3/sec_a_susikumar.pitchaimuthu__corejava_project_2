@@ -49,7 +49,7 @@ public class User {
 
 
     // User update constructor
-    public User( String username, String firstName, String lastName,
+    public User(String username, String firstName, String lastName,
                 long mobileNumber, String dob, String nationality, String gender) {
         this.username = username;
         this.firstName = firstName;
@@ -62,7 +62,7 @@ public class User {
 
     // Email constructor
 
-    public User(String email){
+    public User(String email) {
         this.email = email;
     }
 

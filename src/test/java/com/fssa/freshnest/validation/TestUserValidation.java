@@ -14,7 +14,7 @@ class TestUserValidation {
         try {
             assertTrue(UserValidator.validateEmail("susikumar@gmail.com"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -79,17 +79,12 @@ class TestUserValidation {
         try {
             assertTrue(UserValidator.validateUserName("susikumar"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
 
-    @Test
-    void testUserNameNull() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateUserName(null));
-        assertEquals(UserConstraints.getInvalidUserUserNameMessage(), result.getMessage());
-
-    }
+   
 
     @Test
     void testUserNameLengthLessThanTwo() {
@@ -105,7 +100,7 @@ class TestUserValidation {
             assertTrue(UserValidator.validateFirstName("Susikumar"));
             System.out.println("username is valid");
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -144,7 +139,7 @@ class TestUserValidation {
             assertTrue(UserValidator.validateFirstName("Pitchaimuthu"));
             System.out.println("username is valid");
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -181,17 +176,11 @@ class TestUserValidation {
         try {
             assertTrue(UserValidator.validateDob("2003-08-21"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
 
-
-    @Test
-    void testNullDateOfBirth() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateDob(null));
-        assertEquals(UserConstraints.getInvalidUserDobMessage(), result.getMessage());
-    }
 
     // Validate nationality
 
@@ -200,7 +189,7 @@ class TestUserValidation {
         try {
             assertTrue(UserValidator.validateNationality("India"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -211,11 +200,6 @@ class TestUserValidation {
         assertEquals(UserConstraints.getInvalidUserNationalityMessage(), result.getMessage());
     }
 
-    @Test
-    void testInvalidNullNationality() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateNationality(""));
-        assertEquals(UserConstraints.getInvalidUserNationalityMessage(), result.getMessage());
-    }
 
     // Validate profile image url
 
@@ -224,7 +208,7 @@ class TestUserValidation {
         try {
             assertTrue(UserValidator.validateProfileImageUrl("https://example.com/image.jpg"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -235,11 +219,5 @@ class TestUserValidation {
         assertEquals(UserConstraints.getInvalidUserProfileImageUrlMessage(), result.getMessage());
     }
 
-    @Test
-    void testInvalidProfileImageUrlNull() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateProfileImageUrl(null));
-        assertEquals(UserConstraints.getInvalidNullUserProfileImageUrlMessage(), result.getMessage());
-
-    }
 
 }

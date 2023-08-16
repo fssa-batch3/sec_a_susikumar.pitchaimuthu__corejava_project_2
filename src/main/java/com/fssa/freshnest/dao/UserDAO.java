@@ -30,7 +30,7 @@ public class UserDAO {
                         throw new DAOException("Incorrect password.");
                     }
                 } else {
-                    throw new DAOException("User credentials do not exist.");
+                    throw new DAOException("User credentials not exist.");
                 }
             }
         } catch (SQLException e) {
@@ -85,7 +85,7 @@ public class UserDAO {
     }
 
     // Update user data
-    public boolean updateUser(User user) throws DAOException {
+    public boolean updateUser(User user, User email) throws DAOException {
         String updateQuery = "UPDATE users SET username = ?, firstname = ?, lastname = ?, gender = ?, nationality = ?, dob = ?, mobile_number = ? WHERE email = ?";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(updateQuery)) {
@@ -100,7 +100,7 @@ public class UserDAO {
             statement.setString(5, user.getNationality());
             statement.setDate(6, Date.valueOf(dob));
             statement.setLong(7, user.getMobileNumber());
-            statement.setString(8, user.getEmail());
+            statement.setString(8, email.getEmail());
 
             // Execute the query
             int rows = statement.executeUpdate();

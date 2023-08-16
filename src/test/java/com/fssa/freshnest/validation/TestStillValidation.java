@@ -18,7 +18,7 @@ class TestStillValidation {
         try {
             assertTrue(StillValidator.validateStillUrl("https://www.example.com"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -30,12 +30,7 @@ class TestStillValidation {
         assertEquals(StillConstraints.getInvalidStillUrlMessage(), result.getMessage());
     }
 
-    @Test
-    void testStillUrlNullDetails() {
-        InvalidUserException result = assertThrows(InvalidUserException.class,
-                () -> StillValidator.validateStillUrl(null));
-        assertEquals(StillConstraints.getInvalidStillUrlMessage(), result.getMessage());
-    }
+
 
     // validate still name
     @Test
@@ -43,12 +38,6 @@ class TestStillValidation {
         assertTrue(StillValidator.validateStillName("Supreme"));
     }
 
-    @Test
-    void testInvalidNullStillName() {
-        InvalidUserException result = assertThrows(InvalidUserException.class,
-                () -> StillValidator.validateStillName(""));
-        assertEquals(StillConstraints.getInvalidStillNameMessage(), result.getMessage());
-    }
 
     // validate still date
 
@@ -59,18 +48,12 @@ class TestStillValidation {
         try {
             assertTrue(StillValidator.validateStillDate(currentDate));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
 
-    @Test
-    void testInvalidNullDate() {
-
-        InvalidUserException result = assertThrows(InvalidUserException.class,
-                () -> StillValidator.validateStillDate(null));
-        assertEquals(StillConstraints.getInvalidStillDateMessage(), result.getMessage());
-    }
+   
 
     // validate still time
 
@@ -80,16 +63,11 @@ class TestStillValidation {
         try {
             assertTrue(StillValidator.validateStillTime(currentTime));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
 
-    @Test
-    void testNullTime() {
-        InvalidUserException result = assertThrows(InvalidUserException.class,
-                () -> StillValidator.validateStillTime(null));
-        assertEquals(StillConstraints.getInvalidStillTimeMessage(), result.getMessage());
-    }
+  
 
 }

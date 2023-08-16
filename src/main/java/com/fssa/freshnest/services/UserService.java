@@ -54,7 +54,7 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateUpdateUser(user, email);
-            return userDAO.updateUser(user);
+            return userDAO.updateUser(user, email);
 
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);

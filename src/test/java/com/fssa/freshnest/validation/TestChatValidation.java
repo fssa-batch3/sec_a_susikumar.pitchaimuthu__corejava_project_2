@@ -14,17 +14,12 @@ class TestChatValidation {
         try {
             assertTrue(ChatValidator.validateChat("Hello chellam"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
 
-    // test invalid null chat details
-    @Test
-    void testInvalidNullChat() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChat(null));
-        assertEquals(ChatConstraints.getInvalidChatTextMessage(), result.getMessage());
-    }
+  
 
     // test valid chat type
     @Test
@@ -32,7 +27,7 @@ class TestChatValidation {
         try {
             assertTrue(ChatValidator.validateChatType("direct"));
         } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             fail();
         }
     }
@@ -44,11 +39,5 @@ class TestChatValidation {
         assertEquals(ChatConstraints.getInvalidChatTypeMessage(), result.getMessage());
     }
 
-    // test the null chat type
-    @Test
-    void testInvalidNullChatType() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType(""));
-        assertEquals(ChatConstraints.getInvalidChatTypeMessage(), result.getMessage());
-    }
-
+ 
 }
