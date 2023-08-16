@@ -83,7 +83,6 @@ public class StillValidator {
 
     public static boolean validateStillName(String name) {
         return !name.isEmpty();
-
     }
 
     public static boolean validateStillDate(LocalDate date) throws InvalidUserException {

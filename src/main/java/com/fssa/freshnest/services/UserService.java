@@ -50,10 +50,10 @@ public class UserService {
     }
 
     // user update details service
-    public boolean updateUser(User user) throws ServiceException {
+    public boolean updateUser(User user, User email) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {
-            UserValidator.validateUpdateUser(user);
+            UserValidator.validateUpdateUser(user, email);
             return userDAO.updateUser(user);
 
         } catch (DAOException | InvalidUserException e) {

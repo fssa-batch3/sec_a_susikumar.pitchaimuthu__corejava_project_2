@@ -12,13 +12,14 @@ class TestUserDetailsUpdateFeature {
     @Test
     void testUpdateSuccess() {
 
-        User user1 = new User("susi@gmail.com", "Kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
+        User user1 = new User( "Kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
                 "2003-08-01", "Indian", "Male");
+        User email = new User("susi@gmail.com");
 
         UserService userService = new UserService();
 
         try {
-            assertTrue(userService.updateUser(user1));
+            assertTrue(userService.updateUser(user1, email));
         } catch (ServiceException e) {
             e.printStackTrace();
             fail();
@@ -30,10 +31,11 @@ class TestUserDetailsUpdateFeature {
     void testEmailNotExistInDatabaseUpdate() {
         UserService userService = new UserService();
 
-        User user1 = new User("naan@gmail.com", "Kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
+        User user1 = new User( "Kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
                 "2003-08-01", "Indian", "Male");
+        User email = new User("naan@gmail.com");
         try {
-            assertFalse(userService.updateUser(user1));
+            assertFalse(userService.updateUser(user1, email));
         } catch (ServiceException e) {
             e.printStackTrace();
 
@@ -45,10 +47,11 @@ class TestUserDetailsUpdateFeature {
     void testUpdateInvalidUserName() {
         UserService userService = new UserService();
 
-        User user1 = new User("mani@gmail.com", "", "Susikumar", "Pitchaimuthu", 8870737612L,
+        User user1 = new User( "", "Susikumar", "Pitchaimuthu", 8870737612L,
                 "2003-08-01", "Indian", "Male");
+        User email = new User("susi@gmail.com");
         try {
-            assertFalse(userService.updateUser(user1));
+            assertFalse(userService.updateUser(user1, email));
         } catch (ServiceException e) {
             e.printStackTrace();
         }
@@ -59,10 +62,11 @@ class TestUserDetailsUpdateFeature {
     void testUpdateInvalidGenderDetails() {
         UserService userService = new UserService();
 
-        User user1 = new User("susi@gmail.com", "kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
+        User user1 = new User( "kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
                 "2003-08-01", "Indian", "Male234");
+        User email = new User("susi@gmail.com");
         try {
-            assertFalse(userService.updateUser(user1));
+            assertFalse(userService.updateUser(user1, email));
         } catch (ServiceException e) {
             e.printStackTrace();
 
@@ -74,10 +78,11 @@ class TestUserDetailsUpdateFeature {
     void testInvalidNationalityDetails() {
         UserService userService = new UserService();
 
-        User user1 = new User("mani@gmail.com", "kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
+        User user1 = new User( "kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L,
                 "2003-08-12", "Indian", "Male");
+        User email = new User("susi@gmail.com");
         try {
-            assertFalse(userService.updateUser(user1));
+            assertFalse(userService.updateUser(user1, email));
         } catch (ServiceException e) {
             e.printStackTrace();
 
@@ -89,10 +94,11 @@ class TestUserDetailsUpdateFeature {
     void testInvalidUserFirstNameDetails() {
         UserService userService = new UserService();
 
-        User user1 = new User("mani@gmail.com", "kanipapa", "", "Pitchaimuthu", 8870737612L,
+        User user1 = new User( "kanipapa", "", "Pitchaimuthu", 8870737612L,
                 "2003-08-12", "Indian", "Male");
+        User email = new User("susi@gmail.com");
         try {
-            assertFalse(userService.updateUser(user1));
+            assertFalse(userService.updateUser(user1, email));
         } catch (ServiceException e) {
             e.printStackTrace();
 
@@ -104,10 +110,11 @@ class TestUserDetailsUpdateFeature {
     void testInvalidUserLastNameDetails() {
         UserService userService = new UserService();
 
-        User user1 = new User("mani@gmail.com", "kanipapa", "Susikumar", "", 8870737612L,
+        User user1 = new User( "kanipapa", "Susikumar", "", 8870737612L,
                 "2003-08-12", "Indian", "Male");
+        User email = new User("susi@gmail.com");
         try {
-            assertFalse(userService.updateUser(user1));
+            assertFalse(userService.updateUser(user1, email));
         } catch (ServiceException e) {
             e.printStackTrace();
 

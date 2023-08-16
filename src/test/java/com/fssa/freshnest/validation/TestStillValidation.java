@@ -40,12 +40,7 @@ class TestStillValidation {
     // validate still name
     @Test
     void testValidStillName() {
-        try {
-            assertTrue(StillValidator.validateStillName("Supreme"));
-        } catch (InvalidUserException e) {
-            System.out.println(e.getMessage());
-            fail();
-        }
+        assertTrue(StillValidator.validateStillName("Supreme"));
     }
 
     @Test

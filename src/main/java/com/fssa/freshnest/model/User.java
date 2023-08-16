@@ -47,10 +47,10 @@ public class User {
         this.isDelete = isDelete;
     }
 
+
     // User update constructor
-    public User(String email, String username, String firstName, String lastName,
+    public User( String username, String firstName, String lastName,
                 long mobileNumber, String dob, String nationality, String gender) {
-        this.email = email;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -58,6 +58,12 @@ public class User {
         this.dob = dob;
         this.nationality = nationality;
         this.gender = gender;
+    }
+
+    // Email constructor
+
+    public User(String email){
+        this.email = email;
     }
 
     // User profile update constructor

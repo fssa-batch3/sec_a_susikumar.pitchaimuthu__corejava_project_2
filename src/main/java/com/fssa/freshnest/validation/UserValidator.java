@@ -51,8 +51,8 @@ public class UserValidator {
 
     // Checking the validate update details
 
-    public static boolean validateUpdateUser(User user) throws InvalidUserException {
-        if (user != null && validateFirstName(user.getFirstName()) && validateLastName(user.getLastName()) && validateEmail(user.getEmail())
+    public static boolean validateUpdateUser(User user, User email) throws InvalidUserException {
+        if (user != null && validateFirstName(user.getFirstName()) && validateLastName(user.getLastName()) && validateEmail(email.getEmail())
                 && validateGender(user.getGender()) && validateNationality(user.getNationality()) && validateUserName(user.getUsername())
                 && validateMobileNumber(user.getMobileNumber()) && validateDob(user.getDob())) {
             return true;
