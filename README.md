@@ -43,8 +43,7 @@
 
 ### Purpose
 
-Develop a Java-based Library Management System to efficiently manage the inventory, borrowing, and returning of books
-for a local library.
+Develop a social media platform to make happy the users by the features of Chat, Stories, Still and Invite.
 
 ### Features
 
