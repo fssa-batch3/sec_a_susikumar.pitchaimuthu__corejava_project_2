@@ -6,76 +6,82 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 public class ChatValidator {
 
-	// create chat
-	public static boolean validateCreateChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage)
-			throws InvalidUserException {
+    // create chat
+    public static boolean validateCreateChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage)
+            throws InvalidUserException {
 
-		if (insertChat != null && insertChatParticipant != null && insertMessage != null
-				&& validateChat(insertMessage.getChatMessage()) && validateChatType(insertChat.getChatType())) {
-			return true;
-		} else {
-			throw new InvalidUserException(ChatConstraints.getInvalidChatSendMessage());
-		}
+        if (insertChat != null && insertChatParticipant != null && insertMessage != null
+                && validateChat(insertMessage.getChatMessage()) && validateChatType(insertChat.getChatType())) {
+            return true;
+        } else {
+            throw new InvalidUserException(ChatConstraints.getInvalidChatSendMessage());
+        }
 
-	}
+    }
 
-	// read chat
-	public static boolean validateReadChat(Chat chat) throws InvalidUserException {
+    // read chat
+    public static boolean validateReadChat(Chat chat) throws InvalidUserException {
 
-		if (chat != null) {
-			return true;
-		} else {
-			throw new InvalidUserException(ChatConstraints.getInvalidChatReadMessage());
-		}
+        if (chat != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(ChatConstraints.getInvalidChatReadMessage());
+        }
 
-	}
+    }
 
-	// update chat
+    // update chat
 
-	public static boolean validateUpdateChat(Chat chat) throws InvalidUserException {
+    public static boolean validateUpdateChat(Chat chat) throws InvalidUserException {
 
-		if (chat != null) {
-			return true;
-		} else {
-			throw new InvalidUserException(ChatConstraints.getInvalidChatUpdateMessage());
-		}
+        if (chat != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(ChatConstraints.getInvalidChatUpdateMessage());
+        }
 
-	}
+    }
 
-	// Delete chat
+    // Delete chat
 
-	public static boolean validateDeleteChat(Chat chat) throws InvalidUserException {
+    public static boolean validateDeleteChat(Chat chat) throws InvalidUserException {
 
-		if (chat != null) {
-			return true;
-		} else {
-			throw new InvalidUserException(ChatConstraints.getInvalidChatDeleteMessage());
-		}
+        if (chat != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(ChatConstraints.getInvalidChatDeleteMessage());
+        }
 
-	}
+    }
 
-	public static boolean validateChat(String chat) throws InvalidUserException {
+    public static boolean validateChat(String chat) throws InvalidUserException {
 
-		if (chat == null || chat.isEmpty())
-			throw new InvalidUserException(ChatConstraints.getInvalidChatTextMessage());
-		String regex = "^.+$";
+        if (chat == null || chat.isEmpty())
+         return false;
 
-		String chatMessage = "...";
-		if (chatMessage.matches(regex)) {
-			return true;
-		} else {
-			throw new InvalidUserException(ChatConstraints.getInvalidChatTextMessage());
-		}
+        String regex = "^.+$";
 
-	}
+        String chatMessage = "...";
+        if (chatMessage.matches(regex)) {
+            return true;
+        } else {
+            throw new InvalidUserException(ChatConstraints.getInvalidChatTextMessage());
+        }
 
-	// validate chat type
-	public static boolean validateChatType(String type) throws InvalidUserException {
-		if (type.equals("direct") || type.equals("group")) {
-			return true;
-		} else {
-			throw new InvalidUserException(ChatConstraints.getInvalidChatTypeMessage());
-		}
-	}
+    }
+
+    // validate chat type
+    public static boolean validateChatType(String type) throws InvalidUserException {
+
+        if(type.isEmpty()){
+            return  false;
+        }
+
+        if (type.equals("direct") || type.equals("group")) {
+            return true;
+        } else {
+            throw new InvalidUserException(ChatConstraints.getInvalidChatTypeMessage());
+        }
+    }
 
 }

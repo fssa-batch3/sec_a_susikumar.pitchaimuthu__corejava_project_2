@@ -11,102 +11,105 @@ import java.time.LocalTime;
 
 public class StillValidator {
 
-	public static boolean validateTakeStill(Still still) throws InvalidUserException {
+    public static boolean validateTakeStill(Still still) throws InvalidUserException {
 
-		if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
-				&& validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
-			return true;
-		} else {
-			throw new InvalidUserException(StillConstraints.getInvalidStillTakeMessage());
-		}
+        if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
+                && validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
+            return true;
+        } else {
+            throw new InvalidUserException(StillConstraints.getInvalidStillTakeMessage());
+        }
 
-	}
+    }
 
-	// validate favourite image
+    // validate favourite image
 
-	public static boolean validateFavouriteStill(Still still) throws InvalidUserException {
+    public static boolean validateFavouriteStill(Still still) throws InvalidUserException {
 
-		if (still != null) {
-			return true;
-		} else {
-			throw new InvalidUserException(StillConstraints.getInvalidStillFavouriteMessage());
-		}
+        if (still != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(StillConstraints.getInvalidStillFavouriteMessage());
+        }
 
-	}
+    }
 
-	// validate Update Image
+    // validate Update Image
 
-	public static boolean validateUpdateStill(Still still) throws InvalidUserException {
+    public static boolean validateUpdateStill(Still still) throws InvalidUserException {
 
-		if (still != null && validateStillName(still.getStillName())) {
-			return true;
-		} else {
-			throw new InvalidUserException(StillConstraints.getInvalidStillUpdateMessage());
-		}
+        if (still != null && validateStillName(still.getStillName())) {
+            return true;
+        } else {
+            throw new InvalidUserException(StillConstraints.getInvalidStillUpdateMessage());
+        }
 
-	}
+    }
 
-	// validate Delete image
-	
-	public static boolean validateDeleteStill(Still still) throws InvalidUserException {
+    // validate Delete image
 
-		if (still != null) {
-			return true;
-		} else {
-			throw new InvalidUserException(StillConstraints.getInvalidStillDeleteMessage());
-		}
-	}
+    public static boolean validateDeleteStill(Still still) throws InvalidUserException {
 
-	public static boolean validateReadStill(Still still) throws InvalidUserException {
-		if (still != null) {
-			return true;
-		} else {
-			throw new InvalidUserException(StillConstraints.getInvalidStillReadMessage());
-		}
+        if (still != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(StillConstraints.getInvalidStillDeleteMessage());
+        }
+    }
 
-	}
+    public static boolean validateReadStill(Still still) throws InvalidUserException {
+        if (still != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(StillConstraints.getInvalidStillReadMessage());
+        }
 
-	// validator for the still
+    }
 
-	public static boolean validateStillUrl(String url) throws InvalidUserException {
-		if (url == null || url.isEmpty()) {
-			throw new InvalidUserException(StillConstraints.getInvalidStillUrlMessage());
-		}
-		try {
-			new URL(url);
-		} catch (MalformedURLException e) {
-			throw new InvalidUserException(StillConstraints.getInvalidStillUrlMessage());
-		}
-		return true;
+    // validator for the still
 
-	}
+    public static boolean validateStillUrl(String url) throws InvalidUserException {
+        if (url == null || url.isEmpty()) {
+            return false;
+        }
+        try {
+            new URL(url);
+        } catch (MalformedURLException e) {
+            throw new InvalidUserException(StillConstraints.getInvalidStillUrlMessage());
+        }
+        return true;
 
-	public static boolean validateStillName(String name) throws InvalidUserException {
+    }
 
-		if (name.isEmpty()) {
-			throw new InvalidUserException(StillConstraints.getInvalidStillNameMessage());
-		} else {
-			return true;
-		}
+    public static boolean validateStillName(String name) throws InvalidUserException {
+        return !name.isEmpty();
 
-	} 
+    }
 
-	public static boolean validateStillDate(LocalDate date) throws InvalidUserException {
-		try {
-			LocalDate.parse(date.toString());
-			return true;
-		} catch (Exception e) {
-			throw new InvalidUserException(StillConstraints.getInvalidStillDateMessage());
-		}
-	}
+    public static boolean validateStillDate(LocalDate date) throws InvalidUserException {
 
-	public static boolean validateStillTime(LocalTime time) throws InvalidUserException {
-		try {
-			LocalTime.parse(time.toString());
-			return true;
-		} catch (Exception e) {
-			throw new InvalidUserException(StillConstraints.getInvalidStillTimeMessage());
-		}
-	}
+        if(date == null){
+            return  false;
+        }
+        try {
+            LocalDate.parse(date.toString());
+            return true;
+        } catch (Exception e) {
+            throw new InvalidUserException(StillConstraints.getInvalidStillDateMessage());
+        }
+    }
+
+    public static boolean validateStillTime(LocalTime time) throws InvalidUserException {
+
+        if(time == null){
+            return  false;
+        }
+        try {
+            LocalTime.parse(time.toString());
+            return true;
+        } catch (Exception e) {
+            throw new InvalidUserException(StillConstraints.getInvalidStillTimeMessage());
+        }
+    }
 
 }

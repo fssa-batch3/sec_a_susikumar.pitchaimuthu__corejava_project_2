@@ -95,16 +95,16 @@ public class InviteValidator {
     // validate the invite Explanation
     public static boolean validateInviteExplanation(String explanation) throws InvalidUserException {
         if (explanation.isEmpty()) {
-        	throw new InvalidUserException(InviteConstraints.getInvalidInviteExplanationMessage());
+            throw new InvalidUserException(InviteConstraints.getInvalidInviteExplanationMessage());
         } else {
-        	return true;
+            return true;
         }
     }
 
     // validate the invite message
     public static boolean validateInviteMessage(String message) throws InvalidUserException {
         if (message.isEmpty()) {
-        	throw new InvalidUserException(InviteConstraints.getInvalidInviteChatMessage());
+            throw new InvalidUserException(InviteConstraints.getInvalidInviteChatMessage());
         } else {
             return true;
         }

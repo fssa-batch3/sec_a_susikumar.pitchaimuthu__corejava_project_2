@@ -40,14 +40,14 @@ class TestChatValidation {
     // test the invalid chat type
     @Test
     void testInvalidWrongChatType() {
-     InvalidUserException result =    assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType("Conversation"));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType("Conversation"));
         assertEquals(ChatConstraints.getInvalidChatTypeMessage(), result.getMessage());
     }
 
     // test the null chat type
     @Test
     void testInvalidNullChatType() {
-       InvalidUserException result =  assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType(""));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType(""));
         assertEquals(ChatConstraints.getInvalidChatTypeMessage(), result.getMessage());
     }
 

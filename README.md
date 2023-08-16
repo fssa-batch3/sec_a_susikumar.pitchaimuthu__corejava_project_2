@@ -21,7 +21,7 @@
     - Chat Module
     - Invite Module
     - Still module
-   
+
 6. [Validations](#validations)
     - User Validations
     - Chat Validations
@@ -87,6 +87,7 @@ for a local library.
 ### Entity-Relationship Diagram (ERD)
 
 [![HDWW5Qf.md.png](https://iili.io/HDWW5Qf.md.png)](https://freeimage.host/i/HDWW5Qf)
+
 ### Database Tables
 
 #### Table: users
@@ -119,37 +120,35 @@ for a local library.
 
 #### Table: chat_participants
 
-| Field               | Type         | Null | Key | Default        | Extra |
-|---------------------|--------------|------|-----|----------------|-------|
-| chat_participant_id | INT          | NO   | PRI | auto_increment |       |
-| chat_id             | INT          | NO   | PRI | auto_increment |       |       
-| user_id             | INT          | NO   | PRI | auto_increment |       |
-
+| Field               | Type | Null | Key | Default        | Extra |
+|---------------------|------|------|-----|----------------|-------|
+| chat_participant_id | INT  | NO   | PRI | auto_increment |       |
+| chat_id             | INT  | NO   | PRI | auto_increment |       |       
+| user_id             | INT  | NO   | PRI | auto_increment |       |
 
 #### Table: chat_messages
 
-| Field        | Type       | Null | Key | Default        | Extra |
-|--------------|------------|------|-----|----------------|-------|
-| message_id   | INT        | NO   | PRI | auto_increment |       |
-| chat_id      | INT        | NO   |     |                |       |
-| sender_id    | INT        | NO   |     |                |       |
-| message      | TEXT       | NO   |     |                |       |
-| message_time | TIMESTAMP  | NO   |     |                |       |
+| Field        | Type      | Null | Key | Default        | Extra |
+|--------------|-----------|------|-----|----------------|-------|
+| message_id   | INT       | NO   | PRI | auto_increment |       |
+| chat_id      | INT       | NO   |     |                |       |
+| sender_id    | INT       | NO   |     |                |       |
+| message      | TEXT      | NO   |     |                |       |
+| message_time | TIMESTAMP | NO   |     |                |       |
 
 #### Table: fresh_still
 
-| Field        | Type          | Null   | Key | Default        | Extra |
-|--------------|---------------|--------|-----|----------------|-------|
-| still_id     | INT           | NO     | PRI | auto_increment |       |
-| user_id      | INT           | NO     |     |                |       |
-| still_url    | varchar(2048) | NO     |     |                |       |
-| still_name   | varchar(255)  | NO     |     |                |       |
-| still_date   | DATE          | NO     |     |                |       |
-| still_time   | TIME          | NO     |     |                |       |
-| is_favourite | tinyint(1)    | NO     |     |                |       |
-| is_delete    | tinyint(1)    | NO     |     |                |       |
-| is_update    | tinyint(1)    | NO     |     |                |       |
-
+| Field        | Type          | Null | Key | Default        | Extra |
+|--------------|---------------|------|-----|----------------|-------|
+| still_id     | INT           | NO   | PRI | auto_increment |       |
+| user_id      | INT           | NO   |     |                |       |
+| still_url    | varchar(2048) | NO   |     |                |       |
+| still_name   | varchar(255)  | NO   |     |                |       |
+| still_date   | DATE          | NO   |     |                |       |
+| still_time   | TIME          | NO   |     |                |       |
+| is_favourite | tinyint(1)    | NO   |     |                |       |
+| is_delete    | tinyint(1)    | NO   |     |                |       |
+| is_update    | tinyint(1)    | NO   |     |                |       |
 
 #### Table: fresh_invite
 
@@ -168,15 +167,15 @@ for a local library.
 
 #### Table: invite_react_details
 
-| Field              | Type       | Null   | Key | Default        | Extra |
-|--------------------|------------|--------|-----|----------------|-------|
-| react_id           | INT        | NO     | PRI | auto_increment |       |
-| invite_id          | INT        | NO     |     |                |       |
-| reactor_id         | INT        | NO     |     |                |       |
-| is_accept          | TINYINT(1) | NO     |     |                |       |
-| is_like            | TINYINT(1) | NO     |     |                |       |
-| id_dislike         | TINYINT(1) | NO     |     |                |       |
-| invite_message     | TEXT       | NO     |     |                |       |
+| Field          | Type       | Null | Key | Default        | Extra |
+|----------------|------------|------|-----|----------------|-------|
+| react_id       | INT        | NO   | PRI | auto_increment |       |
+| invite_id      | INT        | NO   |     |                |       |
+| reactor_id     | INT        | NO   |     |                |       |
+| is_accept      | TINYINT(1) | NO   |     |                |       |
+| is_like        | TINYINT(1) | NO   |     |                |       |
+| id_dislike     | TINYINT(1) | NO   |     |                |       |
+| invite_message | TEXT       | NO   |     |                |       |
 
 ## Modules
 
@@ -184,7 +183,7 @@ for a local library.
 
 - Add a user:
     - Allows to register new users.
-- View user details: 
+- View user details:
     - Display detailed information about a specific user when selected.
 - Update user details:
     - Enables to modify user information such as name, password, etc.
@@ -193,13 +192,13 @@ for a local library.
 
 ### Chat Module :
 
-- Send chats: 
+- Send chats:
     - Allow user to send chats to their friends.
 - View chats:
     - Display specify group chats conversation when they selected.
 - Update chat details:
     - Enable to modify chat conversation.
-- Remove a chat: 
+- Remove a chat:
     - Allows to remove a chat.
 - Search user:
     - Enables to find user's friends by the username.
@@ -227,7 +226,6 @@ for a local library.
     - Enable to modify invite details.
 - Delete still:
     - Allow to remove a invite.
-
 
 ## Validations
 
@@ -264,7 +262,6 @@ for a local library.
 - invite time Validation
 - invite explanation Validation
 - invite message Validation
-
 
 ## Testing
 

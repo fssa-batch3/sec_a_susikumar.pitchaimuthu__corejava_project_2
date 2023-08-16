@@ -183,7 +183,6 @@ class TestUserValidation {
         }
     }
 
-   
 
     @Test
     void testNullDateOfBirth() {
