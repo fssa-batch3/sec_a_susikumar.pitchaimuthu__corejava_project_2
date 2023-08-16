@@ -39,19 +39,21 @@ class TestInviteValidation {
 
     @Test
     void testInvalidMonthDetails() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteDate("2032-23-09"));
-        assertEquals(InviteConstraints.getInvalidInviteDateMessage(), result.getMessage());
+        testInvalidInviteDate("2032-23-09");
     }
 
     @Test
     void testInvalidDateDetails() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteDate("2032-03-43"));
-        assertEquals(InviteConstraints.getInvalidInviteDateMessage(), result.getMessage());
+        testInvalidInviteDate("2032-03-43");
     }
 
     @Test
     void testNullDateDetails() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteDate(""));
+        testInvalidInviteDate("");
+    }
+
+    void testInvalidInviteDate(String input) {
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteDate(input));
         assertEquals(InviteConstraints.getInvalidInviteDateMessage(), result.getMessage());
     }
 

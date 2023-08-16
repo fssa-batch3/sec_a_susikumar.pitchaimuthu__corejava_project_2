@@ -81,15 +81,15 @@ public class StillValidator {
 
     }
 
-    public static boolean validateStillName(String name) throws InvalidUserException {
+    public static boolean validateStillName(String name) {
         return !name.isEmpty();
 
     }
 
     public static boolean validateStillDate(LocalDate date) throws InvalidUserException {
 
-        if(date == null){
-            return  false;
+        if (date == null) {
+            return false;
         }
         try {
             LocalDate.parse(date.toString());
@@ -101,8 +101,8 @@ public class StillValidator {
 
     public static boolean validateStillTime(LocalTime time) throws InvalidUserException {
 
-        if(time == null){
-            return  false;
+        if (time == null) {
+            return false;
         }
         try {
             LocalTime.parse(time.toString());

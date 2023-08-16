@@ -57,7 +57,7 @@ public class ChatValidator {
     public static boolean validateChat(String chat) throws InvalidUserException {
 
         if (chat == null || chat.isEmpty())
-         return false;
+            return false;
 
         String regex = "^.+$";
 
@@ -73,8 +73,8 @@ public class ChatValidator {
     // validate chat type
     public static boolean validateChatType(String type) throws InvalidUserException {
 
-        if(type.isEmpty()){
-            return  false;
+        if (type.isEmpty()) {
+            return false;
         }
 
         if (type.equals("direct") || type.equals("group")) {

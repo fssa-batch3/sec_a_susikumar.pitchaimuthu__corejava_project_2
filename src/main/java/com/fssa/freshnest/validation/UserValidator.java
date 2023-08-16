@@ -156,7 +156,7 @@ public class UserValidator {
         boolean match;
 
         if (name.isEmpty())
-               return false;
+            return false;
 
         String regex = "^[a-zA-Z\\s]{3,49}$";
         Pattern p = Pattern.compile(regex);
@@ -172,7 +172,7 @@ public class UserValidator {
 
     public static boolean validateDob(String dob) throws InvalidUserException {
         if (dob.isEmpty())
-             return  false;
+            return false;
 
         LocalDate parsedDate = LocalDate.parse(dob);
         LocalDate currentDate = LocalDate.now();
@@ -191,7 +191,7 @@ public class UserValidator {
         boolean match;
 
         if (dob.isEmpty())
-               return  false;
+            return false;
 
         String regex = "^[a-zA-Z]{3,29}$";
         Pattern p = Pattern.compile(regex);
@@ -206,6 +206,8 @@ public class UserValidator {
     }
 
     public static boolean validateMobileNumber(long number) throws InvalidUserException {
+
+
         boolean match;
         if (number != 0) {
             String numberStr = Long.toString(number);
@@ -219,7 +221,7 @@ public class UserValidator {
                 throw new InvalidUserException(UserConstraints.getInvalidUserMobileNumberMessage());
             }
         } else {
-            throw new InvalidUserException("Invalid mobile number: 0");
+            return false;
         }
     }
 
@@ -227,7 +229,7 @@ public class UserValidator {
         boolean match;
 
         if (dob == null)
-             return false;
+            return false;
 
         String regex = "^[a-zA-Z]{3,15}$";
         Pattern p = Pattern.compile(regex);
@@ -242,7 +244,7 @@ public class UserValidator {
 
     public static boolean validateProfileImageUrl(String url) throws InvalidUserException {
         if (url == null || url.isEmpty()) {
-          return false;
+            return false;
         }
         try {
             new URL(url);
