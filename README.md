@@ -83,9 +83,12 @@ Develop a social media platform to make happy the users by the features of Chat,
 
 ## Database
 
-### Entity-Relationship Diagram (ERD)
+# freshnest
 
-[![HDWW5Qf.md.png](https://iili.io/HDWW5Qf.md.png)](https://freeimage.host/i/HDWW5Qf)
+[Milestones](https://github.com/fssa-batch3/sec_a_susikumar.pitchaimuthu__corejava_project_2/milestones)
+
+### ER Diagram:
+[![HDDeQu1.md.png](https://iili.io/HDDeQu1.md.png)](https://freeimage.host/i/HDDeQu1)
 
 ### Database Tables
 
