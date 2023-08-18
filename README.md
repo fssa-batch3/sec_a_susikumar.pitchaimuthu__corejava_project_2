@@ -305,22 +305,7 @@ Develop a social media platform to make happy the users by the features of Chat,
 
 ## Future Improvements
 
-### Planned Features
 
-- Book Recommendations
-    - Implement a recommendation engine that suggests books based on a user's reading history and preferences.
-- Book Reviews and Ratings
-    - Enable users to leave reviews and ratings for books they have read.
-- Advanced Book Search
-    - Enhance the book search functionality with advanced filters, sorting options, and the ability to search within
-      specific genres or authors.
-
-### Roadmap
-
-- QR Code Integration
-    - Implement QR code generation and scanning for easy book check-ins and check-outs in physical libraries.
-- Data Analytics and Insights:
-    - Integrate data analytics tools to gather insights on user behavior, popular book genres, and borrowing patterns.
 
 ## Resources
 
