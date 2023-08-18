@@ -63,7 +63,7 @@ class TestInviteValidation {
     @Test
     void testValidTimeDetails() {
         try {
-            assertTrue(InviteValidator.validateInviteTime("09:45"));
+            assertTrue(InviteValidator.validateInviteTime("09:45", "2023-10-29"));
         } catch (InvalidUserException e) {
             e.printStackTrace();
             fail();
@@ -72,7 +72,7 @@ class TestInviteValidation {
 
     @Test
     void testInvalidNullTimeDetails() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteTime(""));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteTime("", ""));
         assertEquals(InviteConstraints.getInvalidInviteTimeMessage(), result.getMessage());
     }
 

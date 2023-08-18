@@ -84,7 +84,6 @@ class TestUserValidation {
         }
     }
 
-   
 
     @Test
     void testUserNameLengthLessThanTwo() {

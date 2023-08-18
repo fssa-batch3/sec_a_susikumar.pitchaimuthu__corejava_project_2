@@ -7,6 +7,8 @@ import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.ChatValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
+import java.util.List;
+
 public class ChatService {
 
     public boolean createChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage) throws ServiceException {
@@ -25,18 +27,14 @@ public class ChatService {
     }
 
     // chat read
-    public boolean readChat(Chat chat) throws ServiceException {
-
+    public List<Chat> readChat(Chat chat) throws ServiceException {
         ChatDAO chatDAO = new ChatDAO();
         try {
-
             ChatValidator.validateReadChat(chat);
-            return chatDAO.getChatsByUserId(chat);
-
+            return chatDAO.getChatsByChatId(chat);
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
         }
-
     }
 
     // chat update

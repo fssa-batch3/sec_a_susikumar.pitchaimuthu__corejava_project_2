@@ -31,7 +31,6 @@ class TestStillValidation {
     }
 
 
-
     // validate still name
     @Test
     void testValidStillName() {
@@ -53,7 +52,6 @@ class TestStillValidation {
         }
     }
 
-   
 
     // validate still time
 
@@ -68,6 +66,5 @@ class TestStillValidation {
         }
     }
 
-  
 
 }

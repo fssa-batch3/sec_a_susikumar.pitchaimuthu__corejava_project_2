@@ -1,9 +1,12 @@
 package com.fssa.freshnest.model;
 
+import java.sql.Timestamp;
+
 public class Chat {
 
     private String chatType;
-    private int chatName;
+    private String chatName;
+    private int[] participantsId;
     private int chatId;
     private int userId;
     private int senderId;
@@ -11,11 +14,12 @@ public class Chat {
     private String chatMessage;
     private boolean isDelete;
     private boolean isUpdate;
+    private Timestamp timestamp;
 
     // chat id and user id constructor
-    public Chat(int chatId, int userId) {
+    public Chat(int chatId, int[] participantsId) {
         this.chatId = chatId;
-        this.userId = userId;
+        this.participantsId = participantsId;
     }
 
     // chat and sender id setting constructor
@@ -26,7 +30,7 @@ public class Chat {
     }
 
     // chat data type insert constructor
-    public Chat(String chatType, int chatName) {
+    public Chat(String chatType, String chatName) {
         this.chatType = chatType;
         this.chatName = chatName;
     }
@@ -49,6 +53,15 @@ public class Chat {
         this.messageId = messageId;
     }
 
+    public Chat(int messageId, String message, Timestamp timestamp, int senderId) {
+        this.messageId = messageId;
+        this.senderId = senderId;
+        this.timestamp = timestamp;
+        this.chatMessage = message;
+
+        System.out.println("ChatMessage{" + "messageId=" + messageId + ", message='" + message + '\'' + ", timestamp=" + timestamp + ", senderId=" + senderId + '}');
+    }
+
     // getters and setters
     public String getChatType() {
         return chatType;
@@ -58,11 +71,20 @@ public class Chat {
         this.chatType = chatType;
     }
 
-    public int getChatName() {
+    // Getter for getting participants id
+    public int[] getParticipantsId() {
+        return participantsId;
+    }
+
+    public void setParticipantsId(int[] participantsId) {
+        this.participantsId = participantsId;
+    }
+
+    public String getChatName() {
         return chatName;
     }
 
-    public void setChatName(int chatName) {
+    public void setChatName(String chatName) {
         this.chatName = chatName;
     }
 

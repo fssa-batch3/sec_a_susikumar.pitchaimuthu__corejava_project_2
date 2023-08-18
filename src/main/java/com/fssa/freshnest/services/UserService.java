@@ -14,6 +14,7 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateUser(user);
+            userDAO.checkUserDataExistOrNot(user.getEmail());
             return userDAO.createUser(user);
 
         } catch (DAOException | InvalidUserException e) {

@@ -4,8 +4,7 @@ import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class TestChatReadFeature {
 
@@ -19,21 +18,20 @@ class TestChatReadFeature {
         ChatService chatService = new ChatService();
 
         try {
-            assertTrue(chatService.readChat(chat));
+            chatService.readChat(chat);
         } catch (ServiceException e) {
             e.printStackTrace();
+            fail();
         }
     }
 
     // test the chat null read failure
     @Test
     void testReadChatNullDetails() {
-        Chat chat = null;
-
         ChatService chatService = new ChatService();
 
         try {
-            assertFalse(chatService.readChat(chat));
+            chatService.readChat(null);
         } catch (ServiceException e) {
             e.printStackTrace();
         }

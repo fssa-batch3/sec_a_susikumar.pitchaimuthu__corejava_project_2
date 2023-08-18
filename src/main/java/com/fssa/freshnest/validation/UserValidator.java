@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 public class UserValidator {
 
-    private static final String INVALID_USER_MESSAGE = "invite details are not valid";
-
     public static boolean validateUser(User user) throws InvalidUserException {
 
         if (user != null && validateFirstName(user.getFirstName()) && validateLastName(user.getLastName())

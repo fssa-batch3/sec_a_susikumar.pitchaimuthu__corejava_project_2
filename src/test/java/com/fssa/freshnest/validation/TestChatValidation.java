@@ -19,7 +19,6 @@ class TestChatValidation {
         }
     }
 
-  
 
     // test valid chat type
     @Test
@@ -39,5 +38,5 @@ class TestChatValidation {
         assertEquals(ChatConstraints.getInvalidChatTypeMessage(), result.getMessage());
     }
 
- 
+
 }

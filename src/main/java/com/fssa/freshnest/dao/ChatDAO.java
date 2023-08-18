@@ -4,10 +4,10 @@ import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.utils.ConnectionUtils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class ChatDAO {
@@ -17,7 +17,7 @@ public class ChatDAO {
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(insertChatQuery)) {
             statement.setString(1, chat.getChatType());
-            statement.setInt(2, chat.getChatName());
+            statement.setString(2, chat.getChatName());
             int rows = statement.executeUpdate();
 
             return (rows == 1);
@@ -30,15 +30,24 @@ public class ChatDAO {
         String insertParticipantQuery = "INSERT INTO chat_participants (chat_id, user_id) VALUES (?, ?)";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(insertParticipantQuery)) {
-            statement.setInt(1, chat.getChatId());
-            statement.setInt(2, chat.getUserId());
-            int rows = statement.executeUpdate();
-            return (rows == 1);
+
+            // Getting total chat participants id
+            int[] chatParticipantsId = chat.getParticipantsId();
+
+            for (int id : chatParticipantsId) {
+                statement.setInt(1, chat.getChatId());
+                statement.setInt(2, id);
+                statement.addBatch();  // Add the statement to the batch
+            }
+
+            int[] rows = statement.executeBatch();  // Execute the batch
+            return Arrays.stream(rows).allMatch(row -> row == 1);
 
         } catch (SQLException e) {
             throw new DAOException(e);
         }
     }
+
 
     public boolean insertChatMessage(Chat chat) throws DAOException {
         String insertMessageQuery = "INSERT INTO chat_messages (chat_id, sender_id, message) VALUES (?, ?, ?)";
@@ -56,8 +65,10 @@ public class ChatDAO {
     }
 
     // Read chat details
-    public boolean getChatsByUserId(Chat chat) throws DAOException {
-        String selectChatsQuery = "SELECT cm.message_id, u.username AS sender, cm.message, cm.timestamp "
+    public List<Chat> getChatsByChatId(Chat chat) throws DAOException {
+        List<Chat> chatMessages = new ArrayList<>();
+
+        String selectChatsQuery = "SELECT cm.message_id, cm.message, cm.timestamp, cm.sender_id "
                 + "FROM chat_messages cm " + "JOIN users u ON cm.sender_id = u.user_id " + "WHERE cm.chat_id = ? "
                 + "ORDER BY cm.timestamp;";
 
@@ -66,15 +77,25 @@ public class ChatDAO {
 
             statement.setInt(1, chat.getChatId());
             try (ResultSet resultSet = statement.executeQuery()) {
-                return resultSet.next();
+                while (resultSet.next()) {
+                    int messageId = resultSet.getInt("message_id");
+                    String message = resultSet.getString("message");
+                    Timestamp timestamp = resultSet.getTimestamp("timestamp");
+                    int senderId = resultSet.getInt("sender_id");
+
+                    Chat chatMessage = new Chat(messageId, message, timestamp, senderId);
+                    chatMessages.add(chatMessage);
+                }
             }
         } catch (SQLException e) {
             throw new DAOException(e);
         }
+
+        return chatMessages;
     }
 
-    // Update chat
 
+    // Update chat
     public boolean updateChat(Chat chat) throws DAOException {
         String updateQuery = "UPDATE chat_messages SET message = ? WHERE chat_id = ?  AND message_id = ?";
         try (Connection connection = ConnectionUtils.getConnection();

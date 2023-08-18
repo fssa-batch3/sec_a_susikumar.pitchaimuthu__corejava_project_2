@@ -38,6 +38,27 @@ public class UserDAO {
         }
     }
 
+    // Check the user is already exists or not
+    public boolean checkUserDataExistOrNot(String email) throws DAOException {
+        String selectQuery = "SELECT email FROM users WHERE email = ?";
+        try (Connection connection = ConnectionUtils.getConnection();
+             PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+            statement.setString(1, email);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    throw new DAOException("User details already exist in the database");
+                } else {
+                    return true;
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
+
     // create user DAO
     public boolean createUser(User user) throws DAOException {
         String insertQuery = "Insert INTO users (email,username, password, firstname, lastname, profile_image) VALUES(?, ?,?, ? , ?, ?)";

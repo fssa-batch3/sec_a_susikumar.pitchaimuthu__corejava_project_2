@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestRegisterFeature {
+class TestUserRegisterFeature {
 
 
     @Test
     void testRegistrationSuccess() {
         UserService userService = new UserService();
-        User user1 = new User("susi@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu", "https://example.com/image.jpg");
+        User user1 = new User("pooja@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu", "https://example.com/image.jpg");
         try {
 
             assertTrue(userService.registerUser(user1));

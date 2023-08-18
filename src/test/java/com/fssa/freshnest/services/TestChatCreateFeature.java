@@ -3,9 +3,6 @@ package com.fssa.freshnest.services;
 import com.fssa.freshnest.model.Chat;
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestChatCreateFeature {
@@ -15,16 +12,13 @@ class TestChatCreateFeature {
     @Test
     void testChatSuccess() {
         String chatText = "Hello baby..";
+        int[] participantsId = {1, 2};
 
         // Generate random the user chat name
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        Instant instant = currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant();
-        long currentTimestamp = instant.toEpochMilli();
-        int absoluteX = (int) currentTimestamp;
-        int id = Math.abs(absoluteX);
+        String chatName = "Susi and pooja's conversation";
 
-        Chat insertChat = new Chat("direct", id);
-        Chat insertChatParticipant = new Chat(1, 1);
+        Chat insertChat = new Chat("direct", chatName);
+        Chat insertChatParticipant = new Chat(1, participantsId);
         Chat insertMessage = new Chat(1, 1, chatText);
 
         ChatService chatService = new ChatService();
@@ -41,16 +35,13 @@ class TestChatCreateFeature {
     @Test
     void testChatFailure() {
         String chatText = "";
+        int[] participantsId = {1, 2};
 
         // Generate random the user chat name
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        Instant instant = currentDateTime.atZone(java.time.ZoneId.systemDefault()).toInstant();
-        long currentTimestamp = instant.toEpochMilli();
-        int absoluteX = (int) currentTimestamp;
-        int id = Math.abs(absoluteX);
+        String chatName = "Susi and pooja's conversation";
 
-        Chat insertChat = new Chat("direct", id);
-        Chat insertChatParticipant = new Chat(1, 1);
+        Chat insertChat = new Chat("direct", chatName);
+        Chat insertChatParticipant = new Chat(1, participantsId);
         Chat insertMessage = new Chat(1, 1, chatText);
 
         ChatService chatService = new ChatService();
