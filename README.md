@@ -49,9 +49,10 @@ Develop a social media platform to make happy the users by the features of Chat,
 
 ### Features
 
-- Add, Update, View, Delete,Search and List all Book.
+- Add, Update, View, Delete,Search and List all Users.
 - Register, Login, Update, Delete User.
-- Borrow, Renew, Return and Check availability of a Book.
+- Makes User connection as a followers.
+- Chat,Still and invite.
 
 ### User Persona
 
