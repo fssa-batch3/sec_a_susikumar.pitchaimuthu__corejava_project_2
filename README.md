@@ -1,5 +1,7 @@
 # freshnest
 
+[Milestones](https://github.com/fssa-batch3/sec_a_susikumar.pitchaimuthu__corejava_project_2/milestones)
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
@@ -83,11 +85,7 @@ Develop a social media platform to make happy the users by the features of Chat,
 
 ## Database
 
-# freshnest
-
-[Milestones](https://github.com/fssa-batch3/sec_a_susikumar.pitchaimuthu__corejava_project_2/milestones)
-
-### ER Diagram:
+### Entity-Relationship Diagram (ERD)
 [![HDDeQu1.md.png](https://iili.io/HDDeQu1.md.png)](https://freeimage.host/i/HDDeQu1)
 
 ### Database Tables
