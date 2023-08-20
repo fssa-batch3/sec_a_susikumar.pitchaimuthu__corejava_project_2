@@ -270,13 +270,16 @@ Develop a social media platform to make happy the users by the features of Chat,
 
 - UserServiceUnitTest
     - Register, Login, Update, Delete and List all Users.
-- BookServiceUnitTest
-    - Add, Update, View, Delete and List all Books
-- BorrowServiceUnitTest
-    - Borrow, Return, Borrow History and List all Borrows
+- StillServiceUnitTest
+    - Add, Update, View, Delete and List all stills.
+- ChatServiceUnitTest
+    - Add, Update, View, Delete and List all chats of the particular person or group conversation.
+- InviteServiceUnitTest
+    - Add, Update, View, Delete, List all Invites and show the invite responses.
 - UserValidationUnitTest
-- BookValidationUnitTest
-- BorrowValidationUnitTest
+- ChatValidationUnitTest
+- StillValidationUnitTest
+- InviteValidationUnitTest
 
 ## Exception Handling
 
@@ -293,13 +296,9 @@ Develop a social media platform to make happy the users by the features of Chat,
 - Invalid email address
 - Invalid phone number
 - User already exists
-- Book not found
-- Maximum borrow limit reached
-- Book already borrowed
-- Invalid book id
+- User not found
 - Failed to update user information
-- Failed to update book information
-- Failed to return the book
+- Failed to update chat information
 - Database connection error
 
 ## Future Improvements
