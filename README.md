@@ -1,5 +1,7 @@
 # freshnest
 
+[Milestones](https://github.com/fssa-batch3/sec_a_susikumar.pitchaimuthu__corejava_project_2/milestones)
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
@@ -47,9 +49,10 @@ Develop a social media platform to make happy the users by the features of Chat,
 
 ### Features
 
-- Add, Update, View, Delete,Search and List all Book.
+- Add, Update, View, Delete,Search and List all Users.
 - Register, Login, Update, Delete User.
-- Borrow, Renew, Return and Check availability of a Book.
+- Makes User connection as a followers.
+- Chat,Still and invite.
 
 ### User Persona
 
@@ -83,11 +86,7 @@ Develop a social media platform to make happy the users by the features of Chat,
 
 ## Database
 
-# freshnest
-
-[Milestones](https://github.com/fssa-batch3/sec_a_susikumar.pitchaimuthu__corejava_project_2/milestones)
-
-### ER Diagram:
+### Entity-Relationship Diagram (ERD)
 [![HDDeQu1.md.png](https://iili.io/HDDeQu1.md.png)](https://freeimage.host/i/HDDeQu1)
 
 ### Database Tables
@@ -271,13 +270,16 @@ Develop a social media platform to make happy the users by the features of Chat,
 
 - UserServiceUnitTest
     - Register, Login, Update, Delete and List all Users.
-- BookServiceUnitTest
-    - Add, Update, View, Delete and List all Books
-- BorrowServiceUnitTest
-    - Borrow, Return, Borrow History and List all Borrows
+- StillServiceUnitTest
+    - Add, Update, View, Delete and List all stills.
+- ChatServiceUnitTest
+    - Add, Update, View, Delete and List all chats of the particular person or group conversation.
+- InviteServiceUnitTest
+    - Add, Update, View, Delete, List all Invites and show the invite responses.
 - UserValidationUnitTest
-- BookValidationUnitTest
-- BorrowValidationUnitTest
+- ChatValidationUnitTest
+- StillValidationUnitTest
+- InviteValidationUnitTest
 
 ## Exception Handling
 
@@ -294,33 +296,14 @@ Develop a social media platform to make happy the users by the features of Chat,
 - Invalid email address
 - Invalid phone number
 - User already exists
-- Book not found
-- Maximum borrow limit reached
-- Book already borrowed
-- Invalid book id
+- User not found
 - Failed to update user information
-- Failed to update book information
-- Failed to return the book
+- Failed to update chat information
 - Database connection error
 
 ## Future Improvements
 
-### Planned Features
 
-- Book Recommendations
-    - Implement a recommendation engine that suggests books based on a user's reading history and preferences.
-- Book Reviews and Ratings
-    - Enable users to leave reviews and ratings for books they have read.
-- Advanced Book Search
-    - Enhance the book search functionality with advanced filters, sorting options, and the ability to search within
-      specific genres or authors.
-
-### Roadmap
-
-- QR Code Integration
-    - Implement QR code generation and scanning for easy book check-ins and check-outs in physical libraries.
-- Data Analytics and Insights:
-    - Integrate data analytics tools to gather insights on user behavior, popular book genres, and borrowing patterns.
 
 ## Resources
 
