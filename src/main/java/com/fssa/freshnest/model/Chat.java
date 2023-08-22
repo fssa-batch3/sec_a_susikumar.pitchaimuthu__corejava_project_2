@@ -144,5 +144,4 @@ public class Chat {
         this.isUpdate = isUpdate;
     }
 
-
 }
