@@ -1,6 +1,6 @@
 package com.fssa.freshnest.validation;
 
-import com.fssa.freshnest.constraints.StillConstraints;
+import com.fssa.freshnest.constants.StillConstants;
 import com.fssa.freshnest.model.Still;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
@@ -17,7 +17,7 @@ public class StillValidator {
                 && validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
             return true;
         } else {
-            throw new InvalidUserException(StillConstraints.getInvalidStillTakeMessage());
+            throw new InvalidUserException(StillConstants.getInvalidStillTakeMessage());
         }
 
     }
@@ -29,7 +29,7 @@ public class StillValidator {
         if (still != null) {
             return true;
         } else {
-            throw new InvalidUserException(StillConstraints.getInvalidStillFavouriteMessage());
+            throw new InvalidUserException(StillConstants.getInvalidStillFavouriteMessage());
         }
 
     }
@@ -38,10 +38,11 @@ public class StillValidator {
 
     public static boolean validateUpdateStill(Still still) throws InvalidUserException {
 
-        if (still != null && validateStillName(still.getStillName())) {
+        if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
+                && validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
             return true;
         } else {
-            throw new InvalidUserException(StillConstraints.getInvalidStillUpdateMessage());
+            throw new InvalidUserException(StillConstants.getInvalidStillUpdateMessage());
         }
 
     }
@@ -53,7 +54,7 @@ public class StillValidator {
         if (still != null) {
             return true;
         } else {
-            throw new InvalidUserException(StillConstraints.getInvalidStillDeleteMessage());
+            throw new InvalidUserException(StillConstants.getInvalidStillDeleteMessage());
         }
     }
 
@@ -61,7 +62,7 @@ public class StillValidator {
         if (still != null) {
             return true;
         } else {
-            throw new InvalidUserException(StillConstraints.getInvalidStillReadMessage());
+            throw new InvalidUserException(StillConstants.getInvalidStillReadMessage());
         }
 
     }
@@ -75,16 +76,22 @@ public class StillValidator {
         try {
             new URL(url);
         } catch (MalformedURLException e) {
-            throw new InvalidUserException(StillConstraints.getInvalidStillUrlMessage());
+            throw new InvalidUserException(StillConstants.getInvalidStillUrlMessage());
         }
         return true;
 
     }
 
-    public static boolean validateStillName(String name) {
-        return !name.isEmpty();
+    // Validate the still name
+    public static boolean validateStillName(String name) throws InvalidUserException {
+        name = name.trim();
+        if (name.isEmpty())
+            throw new InvalidUserException(StillConstants.getInvalidStillNameMessage());
+        else
+            return true;
     }
 
+    // Validate the still date
     public static boolean validateStillDate(LocalDate date) throws InvalidUserException {
 
         if (date == null) {
@@ -94,10 +101,11 @@ public class StillValidator {
             LocalDate.parse(date.toString());
             return true;
         } catch (Exception e) {
-            throw new InvalidUserException(StillConstraints.getInvalidStillDateMessage());
+            throw new InvalidUserException(StillConstants.getInvalidStillDateMessage());
         }
     }
 
+    // Validate the still time
     public static boolean validateStillTime(LocalTime time) throws InvalidUserException {
 
         if (time == null) {
@@ -107,8 +115,9 @@ public class StillValidator {
             LocalTime.parse(time.toString());
             return true;
         } catch (Exception e) {
-            throw new InvalidUserException(StillConstraints.getInvalidStillTimeMessage());
+            throw new InvalidUserException(StillConstants.getInvalidStillTimeMessage());
         }
     }
+
 
 }

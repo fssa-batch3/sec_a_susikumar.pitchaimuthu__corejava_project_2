@@ -1,6 +1,6 @@
 package com.fssa.freshnest.validation;
 
-import com.fssa.freshnest.constraints.ChatConstraints;
+import com.fssa.freshnest.constants.ChatConstants;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +35,7 @@ class TestChatValidation {
     @Test
     void testInvalidWrongChatType() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType("Conversation"));
-        assertEquals(ChatConstraints.getInvalidChatTypeMessage(), result.getMessage());
+        assertEquals(ChatConstants.getInvalidChatTypeMessage(), result.getMessage());
     }
 
 

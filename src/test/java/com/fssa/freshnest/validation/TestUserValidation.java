@@ -1,6 +1,6 @@
 package com.fssa.freshnest.validation;
 
-import com.fssa.freshnest.constraints.UserConstraints;
+import com.fssa.freshnest.constants.UserConstants;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 import org.junit.jupiter.api.Test;
 
@@ -22,13 +22,13 @@ class TestUserValidation {
     @Test
     void testInvalidEmailWithoutAtSymbol() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateEmail("susikumar123gmail.com"));
-        assertEquals(UserConstraints.getInvalidUserEmailMessage(), result.getMessage());
+        assertEquals(UserConstants.getInvalidUserEmailMessage(), result.getMessage());
     }
 
     @Test
     void testInvalidEmailWithoutDotCom() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateEmail("susikumar@gmail"));
-        assertEquals(UserConstraints.getInvalidUserEmailMessage(), result.getMessage());
+        assertEquals(UserConstants.getInvalidUserEmailMessage(), result.getMessage());
     }
 
     // Password validation test
@@ -69,7 +69,7 @@ class TestUserValidation {
 
     void testInvalidPassword(String password) {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validatePassword(password));
-        assertEquals(UserConstraints.getInvalidUserPasswordMessage(), result.getMessage());
+        assertEquals(UserConstants.getInvalidUserPasswordMessage(), result.getMessage());
     }
 
 
@@ -88,7 +88,7 @@ class TestUserValidation {
     @Test
     void testUserNameLengthLessThanTwo() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateUserName("ra"));
-        assertEquals(UserConstraints.getInvalidUserUserNameMessage(), result.getMessage());
+        assertEquals(UserConstants.getInvalidUserUserNameMessage(), result.getMessage());
     }
 
 // First name validation test
@@ -126,7 +126,7 @@ class TestUserValidation {
 
     void testInvalidFirstName(String firstName) {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateFirstName(firstName));
-        assertEquals(UserConstraints.getInvalidUserFirstNameMessage(), result.getMessage());
+        assertEquals(UserConstants.getInvalidUserFirstNameMessage(), result.getMessage());
     }
 
 
@@ -165,7 +165,7 @@ class TestUserValidation {
 
     void testInvalidLastName(String lastName) {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateLastName(lastName));
-        assertEquals(UserConstraints.getInvalidUserLastNameMessage(), result.getMessage());
+        assertEquals(UserConstants.getInvalidUserLastNameMessage(), result.getMessage());
     }
 
 
@@ -196,7 +196,7 @@ class TestUserValidation {
     @Test
     void testInvalidNationalityLengthLessThanTwo() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateNationality("I"));
-        assertEquals(UserConstraints.getInvalidUserNationalityMessage(), result.getMessage());
+        assertEquals(UserConstants.getInvalidUserNationalityMessage(), result.getMessage());
     }
 
 
@@ -215,7 +215,7 @@ class TestUserValidation {
     @Test
     void testInvalidProfileImageUrl() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> UserValidator.validateProfileImageUrl("//example.com/"));
-        assertEquals(UserConstraints.getInvalidUserProfileImageUrlMessage(), result.getMessage());
+        assertEquals(UserConstants.getInvalidUserProfileImageUrlMessage(), result.getMessage());
     }
 
 

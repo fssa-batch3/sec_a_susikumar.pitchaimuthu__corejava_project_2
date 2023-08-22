@@ -7,8 +7,11 @@ import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.StillValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
+import java.util.List;
+
 public class StillService {
 
+    // Service layer for the take still
     public boolean takeStill(Still still) throws ServiceException {
         StillDAO stillDAO = new StillDAO();
         try {
@@ -21,8 +24,7 @@ public class StillService {
 
     }
 
-    // Test still favourite
-
+    // Service layer for add still in their favourite list
     public boolean favouriteStill(Still still) throws ServiceException {
         StillDAO stillDAO = new StillDAO();
         try {
@@ -35,8 +37,7 @@ public class StillService {
 
     }
 
-    // Test still Update
-
+    // Service layer for the update the still
     public boolean updateStill(Still still) throws ServiceException {
         StillDAO stillDAO = new StillDAO();
         try {
@@ -49,7 +50,7 @@ public class StillService {
 
     }
 
-    /// Test still Delete
+    // Service layer for the delete the still
     public boolean deleteStill(Still still) throws ServiceException {
         StillDAO stillDAO = new StillDAO();
         try {
@@ -62,7 +63,8 @@ public class StillService {
 
     }
 
-    public boolean readStill(Still still) throws ServiceException {
+    // Service layer for the read still
+    public List<Still> readStill(Still still) throws ServiceException {
 
         StillDAO stillDAO = new StillDAO();
         try {

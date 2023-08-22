@@ -1,6 +1,6 @@
 package com.fssa.freshnest.validation;
 
-import com.fssa.freshnest.constraints.InviteConstraints;
+import com.fssa.freshnest.constants.InviteConstants;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ class TestInviteValidation {
     @Test
     void testNullInviteType() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteType(""));
-        assertEquals(InviteConstraints.getInvalidInviteTypeMessage(), result.getMessage());
+        assertEquals(InviteConstants.getInvalidInviteTypeMessage(), result.getMessage());
     }
 
     // test valid invite date
@@ -54,7 +54,7 @@ class TestInviteValidation {
 
     void testInvalidInviteDate(String input) {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteDate(input));
-        assertEquals(InviteConstraints.getInvalidInviteDateMessage(), result.getMessage());
+        assertEquals(InviteConstants.getInvalidInviteDateMessage(), result.getMessage());
     }
 
 
@@ -73,7 +73,7 @@ class TestInviteValidation {
     @Test
     void testInvalidNullTimeDetails() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteTime("", ""));
-        assertEquals(InviteConstraints.getInvalidInviteTimeMessage(), result.getMessage());
+        assertEquals(InviteConstants.getInvalidInviteTimeMessage(), result.getMessage());
     }
 
     // test the valid explanation
@@ -91,7 +91,7 @@ class TestInviteValidation {
     @Test
     void testNullExplanationDetails() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteExplanation(""));
-        assertEquals(InviteConstraints.getInvalidInviteExplanationMessage(), result.getMessage());
+        assertEquals(InviteConstants.getInvalidInviteExplanationMessage(), result.getMessage());
     }
 
     @Test
@@ -107,7 +107,7 @@ class TestInviteValidation {
     @Test
     void testNullMessageDetails() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteMessage(""));
-        assertEquals(InviteConstraints.getInvalidInviteChatMessage(), result.getMessage());
+        assertEquals(InviteConstants.getInvalidInviteChatMessage(), result.getMessage());
     }
 
 }

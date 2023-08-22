@@ -1,6 +1,6 @@
 package com.fssa.freshnest.validation;
 
-import com.fssa.freshnest.constraints.ChatConstraints;
+import com.fssa.freshnest.constants.ChatConstants;
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
@@ -14,7 +14,7 @@ public class ChatValidator {
                 && validateChat(insertMessage.getChatMessage()) && validateChatType(insertChat.getChatType())) {
             return true;
         } else {
-            throw new InvalidUserException(ChatConstraints.getInvalidChatSendMessage());
+            throw new InvalidUserException(ChatConstants.getInvalidChatSendMessage());
         }
 
     }
@@ -25,7 +25,7 @@ public class ChatValidator {
         if (chat != null) {
             return true;
         } else {
-            throw new InvalidUserException(ChatConstraints.getInvalidChatReadMessage());
+            throw new InvalidUserException(ChatConstants.getInvalidChatReadMessage());
         }
 
     }
@@ -37,7 +37,7 @@ public class ChatValidator {
         if (chat != null) {
             return true;
         } else {
-            throw new InvalidUserException(ChatConstraints.getInvalidChatUpdateMessage());
+            throw new InvalidUserException(ChatConstants.getInvalidChatUpdateMessage());
         }
 
     }
@@ -49,7 +49,7 @@ public class ChatValidator {
         if (chat != null) {
             return true;
         } else {
-            throw new InvalidUserException(ChatConstraints.getInvalidChatDeleteMessage());
+            throw new InvalidUserException(ChatConstants.getInvalidChatDeleteMessage());
         }
 
     }
@@ -65,7 +65,7 @@ public class ChatValidator {
         if (chatMessage.matches(regex)) {
             return true;
         } else {
-            throw new InvalidUserException(ChatConstraints.getInvalidChatTextMessage());
+            throw new InvalidUserException(ChatConstants.getInvalidChatTextMessage());
         }
 
     }
@@ -80,7 +80,7 @@ public class ChatValidator {
         if (type.equals("direct") || type.equals("group")) {
             return true;
         } else {
-            throw new InvalidUserException(ChatConstraints.getInvalidChatTypeMessage());
+            throw new InvalidUserException(ChatConstants.getInvalidChatTypeMessage());
         }
     }
 

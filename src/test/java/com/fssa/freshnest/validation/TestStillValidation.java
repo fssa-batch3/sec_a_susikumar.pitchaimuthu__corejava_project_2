@@ -1,6 +1,6 @@
 package com.fssa.freshnest.validation;
 
-import com.fssa.freshnest.constraints.StillConstraints;
+import com.fssa.freshnest.constants.StillConstants;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 import org.junit.jupiter.api.Test;
 
@@ -27,14 +27,7 @@ class TestStillValidation {
     void testInvalidStillUrl() {
         InvalidUserException result = assertThrows(InvalidUserException.class,
                 () -> StillValidator.validateStillUrl("//www.example"));
-        assertEquals(StillConstraints.getInvalidStillUrlMessage(), result.getMessage());
-    }
-
-
-    // validate still name
-    @Test
-    void testValidStillName() {
-        assertTrue(StillValidator.validateStillName("Supreme"));
+        assertEquals(StillConstants.getInvalidStillUrlMessage(), result.getMessage());
     }
 
 

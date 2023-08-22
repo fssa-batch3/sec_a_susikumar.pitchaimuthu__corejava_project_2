@@ -1,6 +1,6 @@
-package com.fssa.freshnest.constraints;
+package com.fssa.freshnest.constants;
 
-public class ChatConstraints {
+public class ChatConstants {
     private static final String INVALID_CHAT_SEND_MESSAGE = "chat sending details are not valid";
     private static final String INVALID_CHAT_READ_MESSAGE = "chat read details are not valid";
     private static final String INVALID_CHAT_UPDATE_MESSAGE = "chat update details are not valid";

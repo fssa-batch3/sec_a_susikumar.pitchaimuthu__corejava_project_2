@@ -43,8 +43,12 @@ public class Still {
 
     }
 
-    public Still(int id) {
-        userId = id;
+    public Still(int stillId) {
+        this.stillId = stillId;
+    }
+
+    public Still() {
+
     }
 
     public int getStillId() {
@@ -53,7 +57,6 @@ public class Still {
 
     public void setStillId(int stillId) {
         this.stillId = stillId;
-
     }
 
     public String getStillUrl() {
@@ -120,4 +123,18 @@ public class Still {
         this.isDelete = isDelete;
     }
 
+    @Override
+    public String toString() {
+        return "Still{" +
+                "stillUrl='" + stillUrl + '\'' +
+                ", userId=" + userId +
+                ", stillName='" + stillName + '\'' +
+                ", stillDate=" + stillDate +
+                ", stillTime=" + stillTime +
+                ", isFavourite=" + isFavourite +
+                ", isDelete=" + isDelete +
+                ", stillId=" + stillId +
+                ", isUpdate=" + isUpdate +
+                '}';
+    }
 }

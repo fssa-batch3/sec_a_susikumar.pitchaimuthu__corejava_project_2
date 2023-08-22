@@ -1,6 +1,6 @@
 package com.fssa.freshnest.validation;
 
-import com.fssa.freshnest.constraints.UserConstraints;
+import com.fssa.freshnest.constants.UserConstants;
 import com.fssa.freshnest.model.User;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
@@ -20,7 +20,7 @@ public class UserValidator {
                 && validateUserName(user.getUsername()) && validateProfileImageUrl(user.getProfileImage())) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserRegistrationMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserRegistrationMessage());
         }
 
     }
@@ -32,7 +32,7 @@ public class UserValidator {
         if (user != null && validateDob(user.getDob()) && validateGender(user.getGender())) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserSecondPageRegistrationMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserSecondPageRegistrationMessage());
         }
     }
 
@@ -42,7 +42,7 @@ public class UserValidator {
         if (user != null && validateEmail(user.getEmail()) && validatePassword(user.getPassword())) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserLoginMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserLoginMessage());
 
         }
     }
@@ -55,7 +55,7 @@ public class UserValidator {
                 && validateMobileNumber(user.getMobileNumber()) && validateDob(user.getDob())) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserUpdateMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserUpdateMessage());
 
         }
     }
@@ -65,7 +65,7 @@ public class UserValidator {
         if (user != null && validateProfileImageUrl(user.getProfileImage())) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserProfileImageUpdateMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserProfileImageUpdateMessage());
 
         }
     }
@@ -76,7 +76,7 @@ public class UserValidator {
         if (user != null && validateEmail(user.getEmail())) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserDeleteMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserDeleteMessage());
 
         }
     }
@@ -95,7 +95,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserFirstNameMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserFirstNameMessage());
         }
 
     }
@@ -113,7 +113,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserLastNameMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserLastNameMessage());
         }
 
     }
@@ -130,7 +130,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserPasswordMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserPasswordMessage());
         }
 
     }
@@ -145,7 +145,7 @@ public class UserValidator {
         if (isMatch) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserEmailMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserEmailMessage());
         }
     }
 
@@ -163,7 +163,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserUserNameMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserUserNameMessage());
         }
 
     }
@@ -180,7 +180,7 @@ public class UserValidator {
         if (!parsedDate.isAfter(currentDate) && age >= 18) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserDobMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserDobMessage());
         }
 
     }
@@ -198,7 +198,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserNationalityMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserNationalityMessage());
         }
 
     }
@@ -216,7 +216,7 @@ public class UserValidator {
             if (match) {
                 return true;
             } else {
-                throw new InvalidUserException(UserConstraints.getInvalidUserMobileNumberMessage());
+                throw new InvalidUserException(UserConstants.getInvalidUserMobileNumberMessage());
             }
         } else {
             return false;
@@ -236,7 +236,7 @@ public class UserValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstraints.getInvalidUserGenderMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserGenderMessage());
         }
     }
 
@@ -247,7 +247,7 @@ public class UserValidator {
         try {
             new URL(url);
         } catch (MalformedURLException e) {
-            throw new InvalidUserException(UserConstraints.getInvalidUserProfileImageUrlMessage());
+            throw new InvalidUserException(UserConstants.getInvalidUserProfileImageUrlMessage());
         }
         return true;
     }

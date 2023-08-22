@@ -87,6 +87,7 @@ Develop a social media platform to make happy the users by the features of Chat,
 ## Database
 
 ### Entity-Relationship Diagram (ERD)
+
 [![HDDeQu1.md.png](https://iili.io/HDDeQu1.md.png)](https://freeimage.host/i/HDDeQu1)
 
 ### Database Tables
@@ -302,8 +303,6 @@ Develop a social media platform to make happy the users by the features of Chat,
 - Database connection error
 
 ## Future Improvements
-
-
 
 ## Resources
 

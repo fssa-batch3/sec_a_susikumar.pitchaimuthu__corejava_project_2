@@ -1,6 +1,6 @@
 package com.fssa.freshnest.validation;
 
-import com.fssa.freshnest.constraints.InviteConstraints;
+import com.fssa.freshnest.constants.InviteConstants;
 import com.fssa.freshnest.model.Invite;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
@@ -19,7 +19,7 @@ public class InviteValidator {
         if (invite != null && validateInviteType(invite.getInviteType()) && validateInviteDate(invite.getInviteDate()) && validateInviteTime(invite.getInviteTime(), invite.getInviteDate())) {
             return true;
         } else {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteCreateMessage());
+            throw new InvalidUserException(InviteConstants.getInvalidInviteCreateMessage());
         }
 
     }
@@ -29,7 +29,7 @@ public class InviteValidator {
         if (invite != null && validateInviteType(invite.getInviteType())) {
             return true;
         } else {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteUpdateMessage());
+            throw new InvalidUserException(InviteConstants.getInvalidInviteUpdateMessage());
         }
 
     }
@@ -39,7 +39,7 @@ public class InviteValidator {
         if (invite != null) {
             return true;
         } else {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteDeleteMessage());
+            throw new InvalidUserException(InviteConstants.getInvalidInviteDeleteMessage());
         }
     }
 
@@ -48,7 +48,7 @@ public class InviteValidator {
         if (invite != null) {
             return true;
         } else {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteReactMessage());
+            throw new InvalidUserException(InviteConstants.getInvalidInviteReactMessage());
         }
     }
 
@@ -65,7 +65,7 @@ public class InviteValidator {
         if (match) {
             return true;
         } else {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteTypeMessage());
+            throw new InvalidUserException(InviteConstants.getInvalidInviteTypeMessage());
         }
 
     }
@@ -82,7 +82,7 @@ public class InviteValidator {
             LocalDate currentDate = LocalDate.now();
             return date.isAfter(currentDate) || date.isEqual(currentDate);
         } catch (Exception e) {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteDateMessage());
+            throw new InvalidUserException(InviteConstants.getInvalidInviteDateMessage());
 
         }
     }
@@ -102,7 +102,7 @@ public class InviteValidator {
             LocalDateTime currentDateTime = LocalDateTime.now();
             return dateTime.isAfter(currentDateTime) || dateTime.isEqual(currentDateTime);
         } catch (Exception e) {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteTimeMessage());
+            throw new InvalidUserException(InviteConstants.getInvalidInviteTimeMessage());
         }
     }
 
@@ -110,7 +110,7 @@ public class InviteValidator {
     // validate the invite Explanation
     public static boolean validateInviteExplanation(String explanation) throws InvalidUserException {
         if (explanation.isEmpty()) {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteExplanationMessage());
+            throw new InvalidUserException(InviteConstants.getInvalidInviteExplanationMessage());
         } else {
             return true;
         }
@@ -119,7 +119,7 @@ public class InviteValidator {
     // validate the invite message
     public static boolean validateInviteMessage(String message) throws InvalidUserException {
         if (message.isEmpty()) {
-            throw new InvalidUserException(InviteConstraints.getInvalidInviteChatMessage());
+            throw new InvalidUserException(InviteConstants.getInvalidInviteChatMessage());
         } else {
             return true;
         }

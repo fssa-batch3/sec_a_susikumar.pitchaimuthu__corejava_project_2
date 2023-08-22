@@ -1,5 +1,6 @@
 package com.fssa.freshnest.dao;
 
+import com.fssa.freshnest.constants.UserConstants;
 import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.User;
 import com.fssa.freshnest.utils.ConnectionUtils;
@@ -37,27 +38,6 @@ public class UserDAO {
             throw new DAOException(e);
         }
     }
-
-    // Check the user is already exists or not
-    public boolean checkUserDataExistOrNot(String email) throws DAOException {
-        String selectQuery = "SELECT email FROM users WHERE email = ?";
-        try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-            statement.setString(1, email);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    throw new DAOException("User details already exist in the database");
-                } else {
-                    return true;
-                }
-            }
-
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
-
 
     // create user DAO
     public boolean createUser(User user) throws DAOException {
@@ -127,7 +107,11 @@ public class UserDAO {
             int rows = statement.executeUpdate();
 
             // Return successful or not
-            return (rows > 0);
+            if (rows <= 0)
+                throw new DAOException(UserConstants.getEmailIdNotExistsMessage());
+            else
+                return true;
+
         } catch (SQLException e) {
             throw new DAOException(e);
         }
@@ -166,7 +150,10 @@ public class UserDAO {
             int rows = statement.executeUpdate();
 
             // Return successful or not
-            return (rows > 0);
+            if (rows <= 0)
+                throw new DAOException(UserConstants.getEmailIdNotExistsMessage());
+            else
+                return true;
         } catch (SQLException e) {
             throw new DAOException(e);
         }

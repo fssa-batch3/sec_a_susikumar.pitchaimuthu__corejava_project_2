@@ -1,6 +1,6 @@
-package com.fssa.freshnest.constraints;
+package com.fssa.freshnest.constants;
 
-public class InviteConstraints {
+public class InviteConstants {
     private static final String INVALID_INVITE_CREATE_MESSAGE = "invite create details are not valid";
     private static final String INVALID_INVITE_UPDATE_MESSAGE = "invite update details are not valid";
     private static final String INVALID_INVITE_DELETE_MESSAGE = "invite delete details are not valid";

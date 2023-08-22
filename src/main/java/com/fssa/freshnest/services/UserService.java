@@ -14,7 +14,6 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateUser(user);
-            userDAO.checkUserDataExistOrNot(user.getEmail());
             return userDAO.createUser(user);
 
         } catch (DAOException | InvalidUserException e) {
@@ -37,7 +36,6 @@ public class UserService {
     }
 
     // User log in service
-
     public boolean logInUser(User user) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {
@@ -76,6 +74,7 @@ public class UserService {
 
     }
 
+    // User profile image update service
     public boolean profileImageUpdate(User user) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {
