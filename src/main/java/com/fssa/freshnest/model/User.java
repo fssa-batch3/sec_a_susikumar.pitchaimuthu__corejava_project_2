@@ -16,6 +16,14 @@ public class User {
     private boolean isDelete;
     private int userId;
 
+    // Constructor
+
+    // Default Constructor
+
+    public User() {
+
+    }
+
     // User first registration constructor
     public User(String email, String username, String password, String firstName, String lastName,
                 String profileImage) {
@@ -34,7 +42,6 @@ public class User {
         this.email = email;
     }
 
-
     // User login constructor
     public User(String email, String password) {
         this.email = email;
@@ -47,10 +54,9 @@ public class User {
         this.isDelete = isDelete;
     }
 
-
     // User update constructor
-    public User(String username, String firstName, String lastName,
-                long mobileNumber, String dob, String nationality, String gender) {
+    public User(String username, String firstName, String lastName, long mobileNumber, String dob, String nationality,
+                String gender) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

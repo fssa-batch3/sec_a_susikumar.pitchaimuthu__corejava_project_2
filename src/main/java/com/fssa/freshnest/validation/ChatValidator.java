@@ -4,7 +4,23 @@ import com.fssa.freshnest.constants.ChatConstants;
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
+/**
+ * This class provides methods to validate chat-related data and operations.
+ *
+ * @author SusikumarPitchaimuth
+ */
+
 public class ChatValidator {
+
+    /**
+     * Validates the data for creating a chat, adding participants, and sending a message.
+     *
+     * @param insertChat            The Chat object for creating the chat.
+     * @param insertChatParticipant The Chat object for adding participants.
+     * @param insertMessage         The Chat object for sending a message.
+     * @return True if the chat data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the chat data is invalid.
+     */
 
     // create chat
     public static boolean validateCreateChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage)
@@ -19,6 +35,14 @@ public class ChatValidator {
 
     }
 
+    /**
+     * Validates the data for reading chat messages.
+     *
+     * @param chat The Chat object for reading chat messages.
+     * @return True if the chat data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the chat data is invalid.
+     */
+
     // read chat
     public static boolean validateReadChat(Chat chat) throws InvalidUserException {
 
@@ -30,8 +54,14 @@ public class ChatValidator {
 
     }
 
+    /**
+     * Validates the data for updating chat messages.
+     *
+     * @param chat The Chat object for updating chat messages.
+     * @return True if the chat data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the chat data is invalid.
+     */
     // update chat
-
     public static boolean validateUpdateChat(Chat chat) throws InvalidUserException {
 
         if (chat != null) {
@@ -42,8 +72,15 @@ public class ChatValidator {
 
     }
 
-    // Delete chat
+    /**
+     * Validates the data for deleting chat messages.
+     *
+     * @param chat The Chat object for deleting chat messages.
+     * @return True if the chat data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the chat data is invalid.
+     */
 
+    // Delete chat
     public static boolean validateDeleteChat(Chat chat) throws InvalidUserException {
 
         if (chat != null) {
@@ -54,6 +91,14 @@ public class ChatValidator {
 
     }
 
+
+    /**
+     * Validates the chat message content.
+     *
+     * @param chat The chat message to be validated.
+     * @return True if the chat message is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the chat message is invalid.
+     */
     public static boolean validateChat(String chat) throws InvalidUserException {
 
         if (chat == null || chat.isEmpty())
@@ -69,6 +114,15 @@ public class ChatValidator {
         }
 
     }
+
+    /**
+     * Validates the chat type.
+     *
+     * @param type The chat type to be validated.
+     * @return True if the chat type is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the chat type is invalid.
+     */
+
 
     // validate chat type
     public static boolean validateChatType(String type) throws InvalidUserException {

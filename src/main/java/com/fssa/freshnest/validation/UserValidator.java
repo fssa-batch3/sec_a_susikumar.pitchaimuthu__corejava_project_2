@@ -11,8 +11,20 @@ import java.time.Period;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class provides methods to validate user-related data and operations.
+ *
+ * @author SusikumarPitchaimuth
+ */
 public class UserValidator {
 
+    /**
+     * Validates user registration details.
+     *
+     * @param user The User object for registration.
+     * @return True if the user data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the user data is invalid.
+     */
     public static boolean validateUser(User user) throws InvalidUserException {
 
         if (user != null && validateFirstName(user.getFirstName()) && validateLastName(user.getLastName())
@@ -25,8 +37,15 @@ public class UserValidator {
 
     }
 
-    // validate user second registration
+    /**
+     * Validates second page registration details.
+     *
+     * @param user The User object for the second page of registration.
+     * @return True if the user data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the user data is invalid.
+     */
 
+    // validate user second registration
     public static boolean validateUserSecondRegistration(User user) throws InvalidUserException {
 
         if (user != null && validateDob(user.getDob()) && validateGender(user.getGender())) {
@@ -36,8 +55,15 @@ public class UserValidator {
         }
     }
 
-    // Checking the loginUser present or not
 
+    /**
+     * Validates login details.
+     *
+     * @param user The User object for login.
+     * @return True if the user data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the user data is invalid.
+     */
+    // Checking the loginUser present or not
     public static boolean validateLogIn(User user) throws InvalidUserException {
         if (user != null && validateEmail(user.getEmail()) && validatePassword(user.getPassword())) {
             return true;
@@ -47,8 +73,15 @@ public class UserValidator {
         }
     }
 
+    /**
+     * Validates update user details.
+     *
+     * @param user  The User object for updating user details.
+     * @param email The User's email for validation.
+     * @return True if the user data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the user data is invalid.
+     */
     // Checking the validate update details
-
     public static boolean validateUpdateUser(User user, User email) throws InvalidUserException {
         if (user != null && validateFirstName(user.getFirstName()) && validateLastName(user.getLastName()) && validateEmail(email.getEmail())
                 && validateGender(user.getGender()) && validateNationality(user.getNationality()) && validateUserName(user.getUsername())
@@ -60,6 +93,13 @@ public class UserValidator {
         }
     }
 
+    /**
+     * Validates updating a user's profile image URL.
+     *
+     * @param user The User object for updating the profile image URL.
+     * @return True if the profile image URL is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the profile image URL is invalid.
+     */
     // validate the user profile url update
     public static boolean validateProfileImageUpdate(User user) throws InvalidUserException {
         if (user != null && validateProfileImageUrl(user.getProfileImage())) {
@@ -70,8 +110,15 @@ public class UserValidator {
         }
     }
 
-    // validate the user details delete details
 
+    /**
+     * Validates deleting a user's account.
+     *
+     * @param user The User object for account deletion.
+     * @return True if the user data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the user data is invalid.
+     */
+    // validate the user details delete details
     public static boolean validateDeleteUser(User user) throws InvalidUserException {
         if (user != null && validateEmail(user.getEmail())) {
             return true;
@@ -81,6 +128,13 @@ public class UserValidator {
         }
     }
 
+    /**
+     * Validates the format of a user's first name.
+     *
+     * @param name The first name to be validated.
+     * @return True if the first name format is valid.
+     * @throws InvalidUserException If the first name format is invalid.
+     */
     // check the first name and last name details
     public static boolean validateFirstName(String name) throws InvalidUserException {
         boolean match;
@@ -100,6 +154,13 @@ public class UserValidator {
 
     }
 
+    /**
+     * Validates the format of a user's last name.
+     *
+     * @param name The last name to be validated.
+     * @return True if the last name format is valid.
+     * @throws InvalidUserException If the last name format is invalid.
+     */
     public static boolean validateLastName(String name) throws InvalidUserException {
         boolean match;
 
@@ -118,6 +179,13 @@ public class UserValidator {
 
     }
 
+    /**
+     * Validates the format of a user's password.
+     *
+     * @param password The password to be validated.
+     * @return True if the password format is valid.
+     * @throws InvalidUserException If the password format is invalid.
+     */
     public static boolean validatePassword(String password) throws InvalidUserException {
         boolean match;
 
@@ -135,6 +203,13 @@ public class UserValidator {
 
     }
 
+    /**
+     * Validates the format of a user's email.
+     *
+     * @param email The email to be validated.
+     * @return True if the email format is valid.
+     * @throws InvalidUserException If the email format is invalid.
+     */
     public static boolean validateEmail(String email) throws InvalidUserException {
         if (email.isEmpty())
             return false;
@@ -149,6 +224,13 @@ public class UserValidator {
         }
     }
 
+    /**
+     * Validates the format of a user's username.
+     *
+     * @param name The username to be validated.
+     * @return True if the username format is valid.
+     * @throws InvalidUserException If the username format is invalid.
+     */
 
     public static boolean validateUserName(String name) throws InvalidUserException {
         boolean match;
@@ -168,6 +250,14 @@ public class UserValidator {
 
     }
 
+    /**
+     * Validates a user's date of birth and age.
+     *
+     * @param dob The date of birth to be validated.
+     * @return True if the date of birth and age are valid.
+     * @throws InvalidUserException If the date of birth or age is invalid.
+     */
+
     public static boolean validateDob(String dob) throws InvalidUserException {
         if (dob.isEmpty())
             return false;
@@ -185,6 +275,13 @@ public class UserValidator {
 
     }
 
+    /**
+     * Validates the format of a user's nationality.
+     *
+     * @param dob The nationality to be validated.
+     * @return True if the nationality format is valid.
+     * @throws InvalidUserException If the nationality format is invalid.
+     */
     public static boolean validateNationality(String dob) throws InvalidUserException {
         boolean match;
 
@@ -203,6 +300,13 @@ public class UserValidator {
 
     }
 
+    /**
+     * Validates the format of a user's mobile number.
+     *
+     * @param number The mobile number to be validated.
+     * @return True if the mobile number format is valid.
+     * @throws InvalidUserException If the mobile number format is invalid.
+     */
     public static boolean validateMobileNumber(long number) throws InvalidUserException {
 
 
@@ -223,6 +327,13 @@ public class UserValidator {
         }
     }
 
+    /**
+     * Validates the format of a user's gender.
+     *
+     * @param dob The gender to be validated.
+     * @return True if the gender format is valid.
+     * @throws InvalidUserException If the gender format is invalid.
+     */
     public static boolean validateGender(String dob) throws InvalidUserException {
         boolean match;
 
@@ -239,6 +350,14 @@ public class UserValidator {
             throw new InvalidUserException(UserConstants.getInvalidUserGenderMessage());
         }
     }
+
+    /**
+     * Validates the format of a user's profile image URL.
+     *
+     * @param url The profile image URL to be validated.
+     * @return True if the profile image URL format is valid.
+     * @throws InvalidUserException If the profile image URL format is invalid.
+     */
 
     public static boolean validateProfileImageUrl(String url) throws InvalidUserException {
         if (url == null || url.isEmpty()) {

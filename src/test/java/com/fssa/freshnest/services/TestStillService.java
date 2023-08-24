@@ -12,6 +12,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class contains test cases for the StillService class, which handles various still-related operations.
+ *
+ * @author SusikumarPitchaimuth
+ */
 class TestStillService {
 
     // Test still Creation feature
@@ -88,7 +93,7 @@ class TestStillService {
         Still still = new Still(-1);
         StillService stillService = new StillService();
 
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> stillService.readStill(still));
+        ServiceException result = assertThrows(ServiceException.class, () -> stillService.readStill(still));
         assertEquals(StillConstants.getInvalidStillReadMessage(), result.getMessage());
     }
 

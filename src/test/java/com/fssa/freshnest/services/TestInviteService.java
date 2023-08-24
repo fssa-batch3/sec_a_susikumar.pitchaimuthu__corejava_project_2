@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class contains test cases for the InviteService class, which handles various still-related operations.
+ *
+ * @author SusikumarPitchaimuth
+ */
 class TestInviteService {
     // Test invitation create feature
     // test the invite creation success

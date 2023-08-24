@@ -14,6 +14,12 @@ public class Still {
     private int stillId;
     private boolean isUpdate;
 
+    // Constructor
+
+    // Default Constructor
+    public Still() {
+
+    }
 
     public Still(String stillUrl, int userId, String stillName, LocalDate stillDate, LocalTime stillTime,
                  boolean isFavourite, boolean isDelete) {
@@ -45,10 +51,6 @@ public class Still {
 
     public Still(int stillId) {
         this.stillId = stillId;
-    }
-
-    public Still() {
-
     }
 
     public int getStillId() {
@@ -125,16 +127,8 @@ public class Still {
 
     @Override
     public String toString() {
-        return "Still{" +
-                "stillUrl='" + stillUrl + '\'' +
-                ", userId=" + userId +
-                ", stillName='" + stillName + '\'' +
-                ", stillDate=" + stillDate +
-                ", stillTime=" + stillTime +
-                ", isFavourite=" + isFavourite +
-                ", isDelete=" + isDelete +
-                ", stillId=" + stillId +
-                ", isUpdate=" + isUpdate +
-                '}';
+        return "Still{" + "stillUrl='" + stillUrl + '\'' + ", userId=" + userId + ", stillName='" + stillName + '\''
+                + ", stillDate=" + stillDate + ", stillTime=" + stillTime + ", isFavourite=" + isFavourite
+                + ", isDelete=" + isDelete + ", stillId=" + stillId + ", isUpdate=" + isUpdate + '}';
     }
 }

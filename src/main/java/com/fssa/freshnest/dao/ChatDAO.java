@@ -9,8 +9,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * This class provides data access methods to interact with the chat-related database tables.
+ *
+ * @author SusikumarPitchaimuth
+ */
 public class ChatDAO {
+
+    /**
+     * Inserts a new chat record into the database.
+     *
+     * @param chat The Chat object containing chat information to be created.
+     * @return True if the chat is successfully created, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     // Create the chat details
     public boolean insertChat(Chat chat) throws DAOException {
         String insertChatQuery = "INSERT INTO chats (chat_type, chat_name) VALUES (?, ?)";
@@ -26,6 +38,13 @@ public class ChatDAO {
         }
     }
 
+    /**
+     * Inserts participants for a chat record in the database.
+     *
+     * @param chat The Chat object containing chat and participant information.
+     * @return True if the participants are successfully inserted, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     public boolean insertChatParticipant(Chat chat) throws DAOException {
         String insertParticipantQuery = "INSERT INTO chat_participants (chat_id, user_id) VALUES (?, ?)";
         try (Connection connection = ConnectionUtils.getConnection();
@@ -48,7 +67,13 @@ public class ChatDAO {
         }
     }
 
-
+    /**
+     * Inserts a new chat message record into the database.
+     *
+     * @param chat The Chat object containing chat message information to be created.
+     * @return True if the chat message is successfully created, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     public boolean insertChatMessage(Chat chat) throws DAOException {
         String insertMessageQuery = "INSERT INTO chat_messages (chat_id, sender_id, message) VALUES (?, ?, ?)";
         try (Connection connection = ConnectionUtils.getConnection();
@@ -64,6 +89,14 @@ public class ChatDAO {
         }
     }
 
+
+    /**
+     * Retrieves a list of chat messages for a specific chat from the database.
+     *
+     * @param chat The Chat object containing chat ID for which to retrieve messages.
+     * @return A list of Chat objects representing chat messages.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     // Read chat details
     public List<Chat> getChatsByChatId(Chat chat) throws DAOException {
         List<Chat> chatMessages = new ArrayList<>();
@@ -94,7 +127,13 @@ public class ChatDAO {
         return chatMessages;
     }
 
-
+    /**
+     * Updates a chat message in the database.
+     *
+     * @param chat The Chat object containing updated chat message information.
+     * @return True if the chat message is successfully updated, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     // Update chat
     public boolean updateChat(Chat chat) throws DAOException {
         String updateQuery = "UPDATE chat_messages SET message = ? WHERE chat_id = ?  AND message_id = ?";
@@ -116,8 +155,14 @@ public class ChatDAO {
         }
     }
 
+    /**
+     * Deletes a chat message in the database.
+     *
+     * @param chat The Chat object containing information about the message to be deleted.
+     * @return True if the chat message is successfully marked as deleted, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     // Delete chat
-
     public boolean deleteChat(Chat chat) throws DAOException {
         String updateQuery = "UPDATE chat_messages SET message = ? WHERE chat_id = ? AND message_id = ? ";
         try (Connection connection = ConnectionUtils.getConnection();

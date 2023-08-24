@@ -9,10 +9,19 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class contains JUnit test cases for validating the functionality of the {@link StillValidator} class.
+ *
+ * @author SusikumarPitchaimuth
+ */
 class TestStillValidation {
 
+    /**
+     * Test case for validating a valid still URL.
+     * It verifies that the {@link StillValidator#validateStillUrl(String)} method correctly validates a valid still URL.
+     * If the validation fails unexpectedly, the test will fail.
+     */
     // Validate still url
-
     @Test
     void testValidStillUrl() {
         try {
@@ -23,6 +32,12 @@ class TestStillValidation {
         }
     }
 
+    /**
+     * Test case for validating an invalid still URL.
+     * It checks whether the {@link StillValidator#validateStillUrl(String)} method properly handles an invalid still URL
+     * and throws the expected {@link InvalidUserException}.
+     * Additionally, it verifies that the exception message matches the predefined invalid still URL message.
+     */
     @Test
     void testInvalidStillUrl() {
         InvalidUserException result = assertThrows(InvalidUserException.class,
@@ -31,8 +46,12 @@ class TestStillValidation {
     }
 
 
+    /**
+     * Test case for validating a valid still date.
+     * It ensures that the {@link StillValidator#validateStillDate(LocalDate)} method properly validates a valid still date.
+     * If the validation fails unexpectedly, the test will fail.
+     */
     // validate still date
-
     @Test
     void testValidStillDate() {
         LocalDate currentDate = LocalDate.now();
@@ -46,8 +65,12 @@ class TestStillValidation {
     }
 
 
+    /**
+     * Test case for validating a valid still time.
+     * It ensures that the {@link StillValidator#validateStillTime(LocalTime)} method properly validates a valid still time.
+     * If the validation fails unexpectedly, the test will fail.
+     */
     // validate still time
-
     @Test
     void testValidTime() {
         LocalTime currentTime = LocalTime.now();

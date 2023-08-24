@@ -17,6 +17,11 @@ public class Invite {
     private String inviteMessage;
     // Constructor
 
+    // Default Constructor
+    public Invite() {
+
+    }
+
     // Invite create constructor
     public Invite(int userId, String inviteType, String inviteDate, String inviteTime, String specialPerson,
                   String inviteSlogan, String inviteExplanation) {
@@ -30,8 +35,8 @@ public class Invite {
     }
 
     // Invite update constructor
-    public Invite(String inviteType, String inviteDate, String inviteTime, String specialPerson,
-                  String inviteSlogan, String inviteExplanation, int inviteId) {
+    public Invite(String inviteType, String inviteDate, String inviteTime, String specialPerson, String inviteSlogan,
+                  String inviteExplanation, int inviteId) {
         this.inviteType = inviteType;
         this.inviteDate = inviteDate;
         this.inviteTime = inviteTime;
@@ -46,7 +51,7 @@ public class Invite {
     public Invite(int inviteId) {
         this.inviteId = inviteId;
     }
-    // Getters and letters 
+    // Getters and letters
 
     public Invite(int inviteId, int reactorId, boolean isAccept, boolean isLike, boolean isDislike, String message) {
         this.inviteId = inviteId;

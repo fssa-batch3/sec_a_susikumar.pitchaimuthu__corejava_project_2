@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class contains test cases for the UserService class, which handles various user-related operations.
+ *
+ * @author SusikumarPitchaimuth
+ */
 class TestUserService {
 
     // User register feature test

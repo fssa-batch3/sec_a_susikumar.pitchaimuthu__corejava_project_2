@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * This class contains test cases for the ChatService class, which handles various chat-related operations.
+ *
+ * @author SusikumarPitchaimuth
+ */
 class TestChatService {
 
     // Test chat create feature

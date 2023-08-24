@@ -7,7 +7,20 @@ import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.InviteValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
+/**
+ * This class provides services related to invite management, such as take, list, update, favourite, and delete.
+ *
+ * @author SusikumarPitchaimuth
+ */
 public class InviteService {
+
+    /**
+     * Create invitation
+     *
+     * @param invite The invite object to be created
+     * @return A success message if the invitation is successfully created, or and error message if not.
+     * @throws ServiceException If there is an problem with the service
+     */
 
     public boolean createInvite(Invite invite) throws ServiceException {
         InviteDAO inviteDAO = new InviteDAO();
@@ -21,6 +34,14 @@ public class InviteService {
 
     }
 
+    /**
+     * Update the invitation
+     *
+     * @param invite The invitation object of the user containing the updated information.
+     * @return The updated invite object of the user.
+     * @throws ServiceException If there is an issue with the service.
+     */
+
     public boolean updateInvite(Invite invite) throws ServiceException {
         InviteDAO inviteDAO = new InviteDAO();
         try {
@@ -33,6 +54,12 @@ public class InviteService {
 
     }
 
+    /**
+     * @param invite The invite details of the user to be deleted.
+     * @return The message will be true id the invite object of the user is deleted, false otherwise.
+     * @throws ServiceException If there is a problem with the service.
+     */
+
     public boolean deleteInvite(Invite invite) throws ServiceException {
         InviteDAO inviteDAO = new InviteDAO();
         try {
@@ -44,6 +71,12 @@ public class InviteService {
         }
 
     }
+
+    /**
+     * @param invite Get the list of invite of the user.
+     * @return List the invite of the user.
+     * @throws ServiceException If there is a problem with the service.
+     */
 
     public boolean reactionInvite(Invite invite) throws ServiceException {
         InviteDAO inviteDAO = new InviteDAO();

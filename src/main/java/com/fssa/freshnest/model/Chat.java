@@ -2,6 +2,13 @@ package com.fssa.freshnest.model;
 
 import java.sql.Timestamp;
 
+/**
+ * Represents a .
+ *
+ * @author SusikumarPitchaimuthu
+ */
+
+
 public class Chat {
 
     private String chatType;
@@ -15,6 +22,20 @@ public class Chat {
     private boolean isDelete;
     private boolean isUpdate;
     private Timestamp timestamp;
+
+    /**
+     * Default Chat constructor
+     */
+
+    // Default constructor
+    public Chat() {
+
+    }
+
+    /**
+     * @param chatId
+     * @param participantsId
+     */
 
     // chat id and user id constructor
     public Chat(int chatId, int[] participantsId) {

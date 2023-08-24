@@ -10,9 +10,21 @@ import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class provides methods to validate invite-related data and operations.
+ *
+ * @author SusikumarPitchaimuth
+ */
+
 public class InviteValidator {
 
-
+    /**
+     * Validates the data for creating an invite.
+     *
+     * @param invite The Invite object for creating the invite.
+     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite data is invalid.
+     */
     // Invite create details validator
     public static boolean validateInviteCreate(Invite invite) throws InvalidUserException {
 
@@ -24,6 +36,13 @@ public class InviteValidator {
 
     }
 
+    /**
+     * Validates the data for updating an invite.
+     *
+     * @param invite The Invite object for updating the invite.
+     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite data is invalid.
+     */
     // Invite update details
     public static boolean validateInviteUpdate(Invite invite) throws InvalidUserException {
         if (invite != null && validateInviteType(invite.getInviteType())) {
@@ -34,6 +53,14 @@ public class InviteValidator {
 
     }
 
+    /**
+     * Validates the data for deleting an invite.
+     *
+     * @param invite The Invite object for deleting the invite.
+     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite data is invalid.
+     */
+
     // validate delete invite details
     public static boolean validateDeleteInvite(Invite invite) throws InvalidUserException {
         if (invite != null) {
@@ -43,6 +70,13 @@ public class InviteValidator {
         }
     }
 
+    /**
+     * Validates the data for reacting to an invite.
+     *
+     * @param invite The Invite object for reacting to the invite.
+     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite data is invalid.
+     */
     // validate invite reaction
     public static boolean validateInviteReact(Invite invite) throws InvalidUserException {
         if (invite != null) {
@@ -52,6 +86,13 @@ public class InviteValidator {
         }
     }
 
+    /**
+     * Validates the invite type.
+     *
+     * @param inviteType The invite type to be validated.
+     * @return True if the invite type is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite type is invalid.
+     */
     // Invite type validator
     public static boolean validateInviteType(String inviteType) throws InvalidUserException {
 
@@ -70,7 +111,13 @@ public class InviteValidator {
 
     }
 
-
+    /**
+     * Validates the invite date.
+     *
+     * @param stringDate The invite date to be validated.
+     * @return True if the invite date is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite date is invalid.
+     */
     // validate the invite date
     public static boolean validateInviteDate(String stringDate) throws InvalidUserException {
 
@@ -87,6 +134,14 @@ public class InviteValidator {
         }
     }
 
+    /**
+     * Validates the invite time.
+     *
+     * @param stringTime The invite time to be validated.
+     * @param stringDate The invite date for which the time is validated.
+     * @return True if the invite time is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite time is invalid.
+     */
     // validate the invite time
     public static boolean validateInviteTime(String stringTime, String stringDate) throws InvalidUserException {
 
@@ -107,6 +162,13 @@ public class InviteValidator {
     }
 
 
+    /**
+     * Validates the invite explanation.
+     *
+     * @param explanation The invite explanation to be validated.
+     * @return True if the invite explanation is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite explanation is invalid.
+     */
     // validate the invite Explanation
     public static boolean validateInviteExplanation(String explanation) throws InvalidUserException {
         if (explanation.isEmpty()) {
@@ -115,6 +177,14 @@ public class InviteValidator {
             return true;
         }
     }
+
+    /**
+     * Validates the invite message.
+     *
+     * @param message The invite message to be validated.
+     * @return True if the invite message is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite message is invalid.
+     */
 
     // validate the invite message
     public static boolean validateInviteMessage(String message) throws InvalidUserException {

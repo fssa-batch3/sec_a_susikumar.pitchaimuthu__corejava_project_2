@@ -9,8 +9,21 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * This class provides methods to validate still-related data and operations.
+ *
+ * @author SusikumarPitchaimuth
+ */
 public class StillValidator {
 
+
+    /**
+     * Validates the data for taking a still image.
+     *
+     * @param still The Still object for taking the image.
+     * @return True if the still data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the still data is invalid.
+     */
     public static boolean validateTakeStill(Still still) throws InvalidUserException {
 
         if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
@@ -22,8 +35,15 @@ public class StillValidator {
 
     }
 
-    // validate favourite image
 
+    /**
+     * Validates the data for marking an image as a favorite.
+     *
+     * @param still The Still object for marking as a favorite.
+     * @return True if the still data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the still data is invalid.
+     */
+    // validate favourite image
     public static boolean validateFavouriteStill(Still still) throws InvalidUserException {
 
         if (still != null) {
@@ -34,8 +54,15 @@ public class StillValidator {
 
     }
 
-    // validate Update Image
 
+    /**
+     * Validates the data for updating an image.
+     *
+     * @param still The Still object for updating the image.
+     * @return True if the still data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the still data is invalid.
+     */
+    // validate Update Image
     public static boolean validateUpdateStill(Still still) throws InvalidUserException {
 
         if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
@@ -47,8 +74,15 @@ public class StillValidator {
 
     }
 
-    // validate Delete image
+    /**
+     * Validates the data for deleting an image.
+     *
+     * @param still The Still object for deleting the image.
+     * @return True if the still data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the still data is invalid.
+     */
 
+    // validate Delete image
     public static boolean validateDeleteStill(Still still) throws InvalidUserException {
 
         if (still != null) {
@@ -58,6 +92,13 @@ public class StillValidator {
         }
     }
 
+    /**
+     * Validates the data for reading an image.
+     *
+     * @param still The Still object for reading the image.
+     * @return True if the still data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the still data is invalid.
+     */
     public static boolean validateReadStill(Still still) throws InvalidUserException {
         if (still != null) {
             return true;
@@ -67,8 +108,15 @@ public class StillValidator {
 
     }
 
-    // validator for the still
 
+    /**
+     * Validates the URL of a still image.
+     *
+     * @param url The URL to be validated.
+     * @return True if the URL is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the URL is invalid.
+     */
+    // validator for the still
     public static boolean validateStillUrl(String url) throws InvalidUserException {
         if (url == null || url.isEmpty()) {
             return false;
@@ -82,6 +130,13 @@ public class StillValidator {
 
     }
 
+    /**
+     * Validates the name of a still image.
+     *
+     * @param name The name to be validated.
+     * @return True if the name is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the name is invalid.
+     */
     // Validate the still name
     public static boolean validateStillName(String name) throws InvalidUserException {
         name = name.trim();
@@ -91,6 +146,13 @@ public class StillValidator {
             return true;
     }
 
+    /**
+     * Validates the date of a still image.
+     *
+     * @param date The date to be validated.
+     * @return True if the date is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the date is invalid.
+     */
     // Validate the still date
     public static boolean validateStillDate(LocalDate date) throws InvalidUserException {
 
@@ -104,6 +166,14 @@ public class StillValidator {
             throw new InvalidUserException(StillConstants.getInvalidStillDateMessage());
         }
     }
+
+    /**
+     * Validates the time of a still image.
+     *
+     * @param time The time to be validated.
+     * @return True if the time is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the time is invalid.
+     */
 
     // Validate the still time
     public static boolean validateStillTime(LocalTime time) throws InvalidUserException {

@@ -8,10 +8,23 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+/**
+ * This class provides data access methods to interact with the invite database table.
+ *
+ * @author SusikumarPitchaimuth
+ */
 public class InviteDAO {
 
-    // create invite data
+    /**
+     * Creates a new invite record in the database.
+     *
+     * @param invite The Invite object containing invite information to be created.
+     * @return True if the invite is successfully created, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
 
+    // create invite data
     public boolean createInvite(Invite invite) throws DAOException {
         String insertQuery = "INSERT INTO fresh_invite (user_id, invite_type, invite_date, invite_time, special_person, invite_slogan, invite_explanation) VALUES (?,?,?,?,?,?,?)";
 
@@ -40,6 +53,14 @@ public class InviteDAO {
 
     }
 
+    /**
+     * Updates an existing invite record in the database.
+     *
+     * @param invite The Invite object containing updated invite information.
+     * @return True if the invite information is successfully updated, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
+
     public boolean updateInvite(Invite invite) throws DAOException {
         String updateQuery = "UPDATE fresh_invite SET  invite_type = ?, invite_date = ?, invite_time = ?, special_person = ?, invite_slogan = ?, invite_explanation = ? WHERE invite_id = ?";
 
@@ -67,6 +88,13 @@ public class InviteDAO {
         }
     }
 
+    /**
+     * Marks an invite as deleted in the database.
+     *
+     * @param invite The Invite object containing invite information to be deleted.
+     * @return True if the invite is successfully marked as deleted, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     public boolean deleteInvite(Invite invite) throws DAOException {
 
         String updateQuery = "UPDATE fresh_invite SET is_delete = TRUE  WHERE invite_id = ?";
@@ -86,6 +114,13 @@ public class InviteDAO {
         }
     }
 
+    /**
+     * Records a reaction to an invite in the database.
+     *
+     * @param invite The Invite object containing the reaction details.
+     * @return True if the reaction is successfully recorded, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     public boolean reactInvite(Invite invite) throws DAOException {
         String updateQuery = "INSERT INTO invite_react_details ( invite_id, reactor_id , is_accept, is_like  , is_dislike, invite_message) VALUES (?,?,?,?,?,?)";
         try (Connection connection = ConnectionUtils.getConnection();

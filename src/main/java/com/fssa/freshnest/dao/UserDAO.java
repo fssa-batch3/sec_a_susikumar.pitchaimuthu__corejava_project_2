@@ -8,8 +8,21 @@ import com.fssa.freshnest.utils.ConnectionUtils;
 import java.sql.*;
 import java.time.LocalDate;
 
+/**
+ * This class provides data access methods to interact with the user database table.
+ *
+ * @author SusikumarPitchaimuth
+ */
 public class UserDAO {
 
+    /**
+     * Checks if a user's login credentials are valid.
+     *
+     * @param email    The user's email.
+     * @param password The user's password.
+     * @return True if the login credentials are valid, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     // Get user from DB - Login
     public boolean checkUserLogin(String email, String password) throws DAOException {
         String selectQuery = "SELECT * FROM users WHERE email = ?";
@@ -39,6 +52,13 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Creates a new user record in the database.
+     *
+     * @param user The User object containing user information.
+     * @return True if the user is successfully created, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     // create user DAO
     public boolean createUser(User user) throws DAOException {
         String insertQuery = "Insert INTO users (email,username, password, firstname, lastname, profile_image) VALUES(?, ?,?, ? , ?, ?)";
@@ -62,8 +82,15 @@ public class UserDAO {
         }
     }
 
-    // Second page user details adding DAO
 
+    /**
+     * Updates the gender and date of birth information of a user in the database.
+     *
+     * @param user The User object containing updated user information.
+     * @return True if the user information is successfully updated, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
+    // Second page user details adding DAO
     public boolean secondPageUserUpdate(User user) throws DAOException {
         String updateQuery = "UPDATE users SET gender = ?, dob = ? WHERE email = ?";
         try (Connection connection = ConnectionUtils.getConnection();
@@ -85,6 +112,14 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Updates the user's information in the database.
+     *
+     * @param user  The User object containing updated user information.
+     * @param email The email of the user whose information is to be updated.
+     * @return True if the user information is successfully updated, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     // Update user data
     public boolean updateUser(User user, User email) throws DAOException {
         String updateQuery = "UPDATE users SET username = ?, firstname = ?, lastname = ?, gender = ?, nationality = ?, dob = ?, mobile_number = ? WHERE email = ?";
@@ -117,6 +152,14 @@ public class UserDAO {
         }
     }
 
+
+    /**
+     * Updates the user's profile image in the database.
+     *
+     * @param user The User object containing the updated profile image information.
+     * @return True if the profile image is successfully updated, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     // User profile image update check
     public boolean updateProfileImage(User user) throws DAOException {
         String deleteQuery = "Update users SET profile_image = ?  WHERE user_id = ?";
@@ -138,6 +181,13 @@ public class UserDAO {
 
     }
 
+    /**
+     * Marks a user as deleted in the database.
+     *
+     * @param user The User object containing user information to be deleted.
+     * @return True if the user is successfully marked as deleted, otherwise false.
+     * @throws DAOException If there is an issue with the database operation.
+     */
     // Delete user dao
     public boolean deleteUser(User user) throws DAOException {
         String deleteQuery = "Update users SET is_deleted = TRUE  WHERE email = ?";
