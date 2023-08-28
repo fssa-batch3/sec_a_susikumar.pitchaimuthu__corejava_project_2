@@ -4,7 +4,10 @@ import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.utils.ConnectionUtils;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -111,20 +114,22 @@ public class ChatDAO {
             statement.setInt(1, chat.getChatId());
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    int messageId = resultSet.getInt("message_id");
-                    String message = resultSet.getString("message");
-                    Timestamp timestamp = resultSet.getTimestamp("timestamp");
-                    int senderId = resultSet.getInt("sender_id");
+                    Chat chatResult = new Chat();
+                    chatResult.setMessageId(resultSet.getInt("message_id"));
+                    chatResult.setChatMessage(resultSet.getString("message"));
+                    chatResult.setTimestamp(resultSet.getTimestamp("timestamp"));
+                    chatResult.setSenderId(resultSet.getInt("sender_id"));
 
-                    Chat chatMessage = new Chat(messageId, message, timestamp, senderId);
-                    chatMessages.add(chatMessage);
+                    chatMessages.add(chatResult);
                 }
+                return chatMessages;
             }
+
         } catch (SQLException e) {
             throw new DAOException(e);
         }
 
-        return chatMessages;
+
     }
 
     /**

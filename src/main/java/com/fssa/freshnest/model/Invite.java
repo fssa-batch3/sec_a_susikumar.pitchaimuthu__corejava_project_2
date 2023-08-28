@@ -2,7 +2,7 @@ package com.fssa.freshnest.model;
 
 public class Invite {
 
-    private int userId;
+    private User user;
     private String inviteType;
     private String inviteDate;
     private String inviteTime;
@@ -23,9 +23,9 @@ public class Invite {
     }
 
     // Invite create constructor
-    public Invite(int userId, String inviteType, String inviteDate, String inviteTime, String specialPerson,
+    public Invite(User user, String inviteType, String inviteDate, String inviteTime, String specialPerson,
                   String inviteSlogan, String inviteExplanation) {
-        this.userId = userId;
+        this.user = user;
         this.inviteType = inviteType;
         this.inviteDate = inviteDate;
         this.inviteTime = inviteTime;
@@ -110,12 +110,12 @@ public class Invite {
         this.inviteId = inviteId;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getInviteType() {
@@ -166,4 +166,22 @@ public class Invite {
         this.inviteExplanation = inviteExplanation;
     }
 
+    @Override
+    public String toString() {
+        return "Invite{" +
+                "userId=" + user +
+                ", inviteType='" + inviteType + '\'' +
+                ", inviteDate='" + inviteDate + '\'' +
+                ", inviteTime='" + inviteTime + '\'' +
+                ", specialPerson='" + specialPerson + '\'' +
+                ", inviteSlogan='" + inviteSlogan + '\'' +
+                ", inviteExplanation='" + inviteExplanation + '\'' +
+                ", inviteId=" + inviteId +
+                ", reactorId=" + reactorId +
+                ", isLike=" + isLike +
+                ", isAccept=" + isAccept +
+                ", isDislike=" + isDislike +
+                ", inviteMessage='" + inviteMessage + '\'' +
+                '}';
+    }
 }

@@ -7,6 +7,9 @@ import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.InviteValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
+import java.security.Provider;
+import java.util.List;
+
 /**
  * This class provides services related to invite management, such as take, list, update, favourite, and delete.
  *
@@ -77,6 +80,18 @@ public class InviteService {
      * @return List the invite of the user.
      * @throws ServiceException If there is a problem with the service.
      */
+
+
+    public List<Invite> readInvites(Invite invite) throws ServiceException{
+        InviteDAO inviteDAO = new InviteDAO();
+        try {
+            InviteValidator.validateInviteRead(invite);
+            return inviteDAO.readInvite(invite);
+
+        }catch ( DAOException | InvalidUserException e){
+            throw  new ServiceException(e);
+        }
+    }
 
     public boolean reactionInvite(Invite invite) throws ServiceException {
         InviteDAO inviteDAO = new InviteDAO();

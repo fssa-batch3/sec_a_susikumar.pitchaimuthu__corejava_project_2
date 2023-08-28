@@ -37,6 +37,22 @@ public class InviteValidator {
     }
 
     /**
+     *
+     * @param invite The invite object containing the user id to read their invitation.
+     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @throws InvalidUserException If the invite data is invalid.
+     *
+     */
+
+    public  static  boolean validateInviteRead(Invite invite) throws  InvalidUserException{
+        if(invite != null){
+            return  true;
+        }else {
+            throw  new InvalidUserException(InviteConstants.getInvalidInviteReadMessage());
+        }
+    }
+
+    /**
      * Validates the data for updating an invite.
      *
      * @param invite The Invite object for updating the invite.

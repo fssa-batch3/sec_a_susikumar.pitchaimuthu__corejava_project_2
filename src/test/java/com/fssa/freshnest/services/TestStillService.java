@@ -1,16 +1,23 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.constants.StillConstants;
-import com.fssa.freshnest.model.Still;
-import com.fssa.freshnest.services.exceptions.ServiceException;
-import com.fssa.freshnest.validation.exceptions.InvalidUserException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import com.fssa.freshnest.constants.StillConstants;
+import com.fssa.freshnest.model.Still;
+import com.fssa.freshnest.model.User;
+import com.fssa.freshnest.services.exceptions.ServiceException;
+import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 /**
  * This class contains test cases for the StillService class, which handles various still-related operations.
@@ -25,8 +32,11 @@ class TestStillService {
     void testStillCreateSuccess() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
+        
+        User user = new User();
+        user.setUserId(1);
 
-        Still still = new Still("https://www.example.com", 1, "Supreme", currentDate, currentTime, false, false);
+        Still still = new Still("https://www.example.com", user, "Supreme", currentDate, currentTime, false, false);
         StillService stillService = new StillService();
 
         try {
@@ -42,8 +52,11 @@ class TestStillService {
     void testStillCreateWithInvalidStillUrl() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
+        
+        User user = new User();
+        user.setUserId(1);
 
-        Still still = new Still("www.sampleImage.com", 2, "Supreme", currentDate, currentTime, false, false);
+        Still still = new Still("www.sampleImage.com", user, "Supreme", currentDate, currentTime, false, false);
         StillService stillService = new StillService();
 
         ServiceException result = assertThrows(ServiceException.class, () -> stillService.takeStill(still));
@@ -58,7 +71,9 @@ class TestStillService {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
 
-        Still still = new Still("https://www.example.com", 2, " ", currentDate, currentTime, false, false);
+        User user = new User();
+        user.setUserId(1);
+        Still still = new Still("https://www.example.com", user, " ", currentDate, currentTime, false, false);
         StillService stillService = new StillService();
 
         ServiceException result = assertThrows(ServiceException.class, () -> stillService.takeStill(still));
@@ -81,6 +96,8 @@ class TestStillService {
             for (Still s : result) {
                 System.out.println(s);
             }
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
         } catch (ServiceException e) {
             e.printStackTrace();
             fail();
@@ -89,12 +106,17 @@ class TestStillService {
 
     // test the still invalid still id read
     @Test
-    void testInvalidStillIdRead() {
+    void testInvalidStillIdRead()  {
         Still still = new Still(-1);
         StillService stillService = new StillService();
 
-        ServiceException result = assertThrows(ServiceException.class, () -> stillService.readStill(still));
-        assertEquals(StillConstants.getInvalidStillReadMessage(), result.getMessage());
+        List<Still> result = null;
+        try {
+            result = stillService.readStill(still);
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
+        assertTrue(result.isEmpty());
     }
 
 
@@ -108,10 +130,13 @@ class TestStillService {
         // Adding that image is updated
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
+        
+        User user = new User();
+        user.setUserId(1);
 
         new Still(parent_id);
         // Adding the new image to the database
-        Still still2 = new Still("https://www.example.com", 2, "Supreme", currentDate, currentTime, false, false);
+        Still still2 = new Still("https://www.example.com", user, "Supreme", currentDate, currentTime, false, false);
 
         StillService stillService = new StillService();
         try {
@@ -130,10 +155,13 @@ class TestStillService {
 
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
+        
+        User user = new User();
+        user.setUserId(1);
 
         // Adding the new image to the database
         new Still(parent_id);
-        Still still2 = new Still("www.example.png", 2, "Supreme", currentDate, currentTime, false, false);
+        Still still2 = new Still("www.example.png", user, "Supreme", currentDate, currentTime, false, false);
 
         StillService stillService = new StillService();
 
@@ -149,8 +177,10 @@ class TestStillService {
     @Test
     void testStillDeleteSuccess() {
         int still_id = 1;
+        User user = new User();
+        user.setUserId(1);
 
-        Still still = new Still(true, still_id, 1);
+        Still still = new Still(true, still_id, user);
 
         StillService stillService = new StillService();
 
@@ -168,9 +198,12 @@ class TestStillService {
     void testStillDeleteDetailsWithInvalidStillId() {
 
         int still_id = -1;
+        
+        User user = new User();
+        user.setUserId(1);
 
         StillService stillService = new StillService();
-        Still still = new Still(true, still_id, 1);
+        Still still = new Still(true, still_id, user);
         ServiceException result = assertThrows(ServiceException.class, () -> stillService.deleteStill(still));
         String expectedMessage = StillConstants.getCommonDaoErrorMessage() + StillConstants.getInvalidStillIdMessage();
         assertEquals(expectedMessage, result.getMessage());

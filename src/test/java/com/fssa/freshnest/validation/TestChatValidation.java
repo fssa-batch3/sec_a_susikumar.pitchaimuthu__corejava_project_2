@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author SusikumarPitchaimuth
  */
 class TestChatValidation {
-
-
     /**
      * Test case for validating a valid chat message.
      * It ensures that the {@link ChatValidator#validateChat(String)} method properly validates a valid chat message.

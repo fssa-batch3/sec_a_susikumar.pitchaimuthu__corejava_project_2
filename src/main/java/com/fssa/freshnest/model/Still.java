@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class Still {
     private String stillUrl;
-    private int userId;
+    private User user;
     private String stillName;
     private LocalDate stillDate;
     private LocalTime stillTime;
@@ -21,10 +21,10 @@ public class Still {
 
     }
 
-    public Still(String stillUrl, int userId, String stillName, LocalDate stillDate, LocalTime stillTime,
+    public Still(String stillUrl, User user, String stillName, LocalDate stillDate, LocalTime stillTime,
                  boolean isFavourite, boolean isDelete) {
         this.stillUrl = stillUrl;
-        this.userId = userId;
+        this.user = user;
         this.stillName = stillName;
         this.stillDate = stillDate;
         this.stillTime = stillTime;
@@ -42,10 +42,10 @@ public class Still {
         this.isUpdate = isUpdate;
     }
 
-    public Still(boolean isDelete, int stillId, int userId) {
+    public Still(boolean isDelete, int stillId, User user) {
         this.isDelete = isDelete;
         this.stillId = stillId;
-        this.userId = userId;
+        this.user = user;
 
     }
 
@@ -69,12 +69,12 @@ public class Still {
         this.stillUrl = stillUrl;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public boolean getIsUpdate() {
@@ -124,10 +124,10 @@ public class Still {
     public void setIsDelete(boolean isDelete) {
         this.isDelete = isDelete;
     }
-
+ 
     @Override
     public String toString() {
-        return "Still{" + "stillUrl='" + stillUrl + '\'' + ", userId=" + userId + ", stillName='" + stillName + '\''
+        return "Still{" + "stillUrl='" + stillUrl + '\'' + ", userId=" + user + ", stillName='" + stillName + '\''
                 + ", stillDate=" + stillDate + ", stillTime=" + stillTime + ", isFavourite=" + isFavourite
                 + ", isDelete=" + isDelete + ", stillId=" + stillId + ", isUpdate=" + isUpdate + '}';
     }

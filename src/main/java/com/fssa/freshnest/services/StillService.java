@@ -109,6 +109,8 @@ public class StillService {
     // Service layer for the read still
     public List<Still> readStill(Still still) throws ServiceException {
 
+
+
         StillDAO stillDAO = new StillDAO();
         try {
             StillValidator.validateReadStill(still);

@@ -4,6 +4,8 @@ import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -72,7 +74,10 @@ class TestChatService {
         ChatService chatService = new ChatService();
 
         try {
-            chatService.readChat(chat);
+            List<Chat> result = chatService.readChat(chat);
+            for(Chat c : result){
+                System.out.print(c);
+            }
         } catch (ServiceException e) {
             e.printStackTrace();
             fail();

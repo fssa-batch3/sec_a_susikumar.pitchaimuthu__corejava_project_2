@@ -1,0 +1,8 @@
+com\fssa\freshnest\services\TestChatService.class
+com\fssa\freshnest\validation\TestUserValidation.class
+com\fssa\freshnest\services\TestUserService.class
+com\fssa\freshnest\services\TestInviteReactionFeature.class
+com\fssa\freshnest\validation\TestStillValidation.class
+com\fssa\freshnest\validation\TestInviteValidation.class
+com\fssa\freshnest\services\TestStillService.class
+com\fssa\freshnest\validation\TestChatValidation.class
