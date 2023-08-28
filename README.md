@@ -59,6 +59,10 @@ Develop a social media platform to make happy the users by the features of Chat,
 - User
 - Admin
 
+## Java Docs
+
+[Java Documentation](https://fssa-batch3.github.io/sec_a_susikumar.pitchaimuthu__corejava_project_2/)
+
 ## Prerequisites
 
 ### Software Requirements
