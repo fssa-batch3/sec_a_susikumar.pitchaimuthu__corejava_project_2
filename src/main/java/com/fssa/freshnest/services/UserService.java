@@ -161,14 +161,13 @@ public class UserService {
 
 	public List<User> readUserDetails(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
-		try { 
-
+		try {
 			UserValidator.validateUserDetailReadFeature(user);
-			return userDAO.readUser(user);
+			List<User> userList = userDAO.readUser(user);
 
+			return userList;
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e);
 		}
-
 	}
 }

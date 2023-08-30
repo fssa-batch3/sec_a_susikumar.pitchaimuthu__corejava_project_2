@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -22,20 +24,20 @@ class TestInviteService {
     // Test invitation create feature
     // test the invite creation success
     @Test
-    void testInvitationSuccess() {
-
+    void testInvitationCreateSuccess() {
         User user = new User();
         user.setUserId(1);
+        LocalDate date = LocalDate.of(2023, 9, 23);
+        LocalTime time = LocalTime.of(23, 34);
 
-        Invite invite = new Invite(user, "Birthday party", "2023-08-24", "12:34", "Manjal veeran", "Thangam",
+        Invite invite = new Invite(user, "Birthday party", date, time, "Manjal veeran", "Thangam",
                 "Ticket block the vangathinga thangam");
-
         InviteService inviteService = new InviteService();
-
         try {
             assertTrue(inviteService.createInvite(invite));
         } catch (ServiceException e) {
             e.printStackTrace();
+            fail();
         }
     }
 
@@ -44,8 +46,11 @@ class TestInviteService {
     void testInvalidInvitationType() {
         User user = new User();
         user.setUserId(1);
+        LocalDate date = LocalDate.of(2023, 9, 23);
+        LocalTime time = LocalTime.of(23, 34);
 
-        Invite invite = new Invite(user, "", "2023-08-24", "12:34", "Manjal veeran", "Thangam",
+
+        Invite invite = new Invite(user, "", date, time, "Manjal veeran", "Thangam",
                 "Ticket block the vangathinga thangam");
 
         InviteService inviteService = new InviteService();
@@ -61,11 +66,14 @@ class TestInviteService {
 
     @Test
     void testInviteListWithValidInputs() {
-        Invite invite = new Invite(1);
+
+        User user  = new User();
+        user.setUserId(1);
+        Invite invite = new Invite(user);
         InviteService inviteService = new InviteService();
 
         try {
-            List<Invite> result = inviteService.readInvites(invite);
+            List<Invite> result = inviteService.listInvites(invite);
             assertNotNull(result);
             assertFalse(result.isEmpty());
         } catch (ServiceException e) {
@@ -76,11 +84,13 @@ class TestInviteService {
     }
 
     @Test
-    void testInviteReadWithValidInputs() {
-        Invite invite = new Invite(1);
+    void testListUserInvitesWithValidInputs() {
+        User user = new User();
+        user.setUserId(1);
+        Invite invite = new Invite(user);
         InviteService stillService = new InviteService();
         try {
-            List<Invite> result = stillService.readInvites(invite);
+            List<Invite> result = stillService.listInvites(invite);
             for (Invite i : result) {
                 System.out.println(i);
             }
@@ -92,11 +102,57 @@ class TestInviteService {
         }
     }
 
+    
+    // User friends invite list feature
+    @Test
+    void testListUserFriendsInvitesWithValidInputs() {
+        User user = new User();
+        user.setUserId(1);
+        Invite invite = new Invite(user);
+        InviteService stillService = new InviteService();
+        try {
+            List<Invite> result = stillService.listFriendsInvite(invite);
+            for (Invite i : result) {
+                System.out.println(i);
+            }
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    // User invite details showing test feature
+    @Test
+    void testListInviteDetailsShowingSuccess() {
+        User user = new User();
+        user.setUserId(1);
+        Invite invite = new Invite(user);
+        InviteService stillService = new InviteService();
+        try {
+            List<Invite> result = stillService.listInviteDetails(invite);
+            for (Invite i : result) {
+                System.out.println(i);
+            }
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+
+
     // Test invitation update feature
     // test the invitation with correct values
     @Test
     void testInviteUpdateSuccess() {
-        Invite invite = new Invite("Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
+        LocalDate date = LocalDate.of(2023, 9, 23);
+        LocalTime time = LocalTime.of(23, 34);
+
+        Invite invite = new Invite("Love party", date, time, "Manjal veeran", "Thangam",
                 "Ticket block ah vangathinga thangam", 25);
 
         InviteService inviteService = new InviteService();
@@ -111,7 +167,10 @@ class TestInviteService {
     // test the invite update feature with invalid user id
     @Test
     void testUpdateInviteDetailsWithInvalidUserId() {
-        Invite invite = new Invite("Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
+        LocalDate date = LocalDate.of(2023, 9, 23);
+        LocalTime time = LocalTime.of(23, 34);
+
+        Invite invite = new Invite("Love party", date, time, "Manjal veeran", "Thangam",
                 "Ticket block ah vangathinga thangam", 3);
 
         InviteService inviteService = new InviteService();
@@ -126,7 +185,10 @@ class TestInviteService {
     // test the invite update with invalid invite id
     @Test
     void testUpdateInviteDetailsWithInvalidInviteId() {
-        Invite invite = new Invite("Love party", "2023-08-24", "19:36:11", "Manjal veeran", "Thangam",
+        LocalDate date = LocalDate.of(2023, 9, 23);
+        LocalTime time = LocalTime.of(23, 34);
+
+        Invite invite = new Invite("Love party", date, time, "Manjal veeran", "Thangam",
                 "Ticket block ah vangathinga thangam", 3);
 
         InviteService inviteService = new InviteService();

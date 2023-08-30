@@ -22,13 +22,15 @@ public class InviteValidator {
      * Validates the data for creating an invite.
      *
      * @param invite The Invite object for creating the invite.
-     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @return True if the invite data is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite data is invalid.
      */
     // Invite create details validator
     public static boolean validateInviteCreate(Invite invite) throws InvalidUserException {
 
-        if (invite != null && validateInviteType(invite.getInviteType()) && validateInviteDate(invite.getInviteDate()) && validateInviteTime(invite.getInviteTime(), invite.getInviteDate())) {
+        if (invite != null && validateInviteType(invite.getInviteType()) && validateInviteDate(invite.getInviteDate())
+                && validateInviteTime(invite.getInviteTime(), invite.getInviteDate())) {
             return true;
         } else {
             throw new InvalidUserException(InviteConstants.getInvalidInviteCreateMessage());
@@ -37,18 +39,18 @@ public class InviteValidator {
     }
 
     /**
-     *
-     * @param invite The invite object containing the user id to read their invitation.
-     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @param invite The invite object containing the user id to read their
+     *               invitation.
+     * @return True if the invite data is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite data is invalid.
-     *
      */
 
-    public  static  boolean validateInviteRead(Invite invite) throws  InvalidUserException{
-        if(invite != null){
-            return  true;
-        }else {
-            throw  new InvalidUserException(InviteConstants.getInvalidInviteReadMessage());
+    public static boolean validateInviteRead(Invite invite) throws InvalidUserException {
+        if (invite != null) {
+            return true;
+        } else {
+            throw new InvalidUserException(InviteConstants.getInvalidInviteReadMessage());
         }
     }
 
@@ -56,7 +58,8 @@ public class InviteValidator {
      * Validates the data for updating an invite.
      *
      * @param invite The Invite object for updating the invite.
-     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @return True if the invite data is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite data is invalid.
      */
     // Invite update details
@@ -73,7 +76,8 @@ public class InviteValidator {
      * Validates the data for deleting an invite.
      *
      * @param invite The Invite object for deleting the invite.
-     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @return True if the invite data is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite data is invalid.
      */
 
@@ -90,7 +94,8 @@ public class InviteValidator {
      * Validates the data for reacting to an invite.
      *
      * @param invite The Invite object for reacting to the invite.
-     * @return True if the invite data is valid, otherwise throws InvalidUserException.
+     * @return True if the invite data is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite data is invalid.
      */
     // validate invite reaction
@@ -106,7 +111,8 @@ public class InviteValidator {
      * Validates the invite type.
      *
      * @param inviteType The invite type to be validated.
-     * @return True if the invite type is valid, otherwise throws InvalidUserException.
+     * @return True if the invite type is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite type is invalid.
      */
     // Invite type validator
@@ -130,18 +136,20 @@ public class InviteValidator {
     /**
      * Validates the invite date.
      *
-     * @param stringDate The invite date to be validated.
-     * @return True if the invite date is valid, otherwise throws InvalidUserException.
+     * @param date The invite date to be validated.
+     * @return True if the invite date is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite date is invalid.
      */
-    // validate the invite date
-    public static boolean validateInviteDate(String stringDate) throws InvalidUserException {
 
-        if (stringDate == null) {
+
+    // validate the invite date
+    public static boolean validateInviteDate(LocalDate date) throws InvalidUserException {
+
+        if (date == null) {
             return false;
         }
         try {
-            LocalDate date = LocalDate.parse(stringDate);
             LocalDate currentDate = LocalDate.now();
             return date.isAfter(currentDate) || date.isEqual(currentDate);
         } catch (Exception e) {
@@ -154,20 +162,19 @@ public class InviteValidator {
      * Validates the invite time.
      *
      * @param stringTime The invite time to be validated.
-     * @param stringDate The invite date for which the time is validated.
-     * @return True if the invite time is valid, otherwise throws InvalidUserException.
+     * @param date       The invite date for which the time is validated.
+     * @return True if the invite time is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite time is invalid.
      */
     // validate the invite time
-    public static boolean validateInviteTime(String stringTime, String stringDate) throws InvalidUserException {
+    public static boolean validateInviteTime(LocalTime time, LocalDate date) throws InvalidUserException {
 
-        if (stringDate.isEmpty() || stringTime.isEmpty())
+        if (date == null)
             return false;
 
         try {
 
-            LocalDate date = LocalDate.parse(stringDate);
-            LocalTime time = LocalTime.parse(stringTime);
 
             LocalDateTime dateTime = LocalDateTime.of(date, time);
             LocalDateTime currentDateTime = LocalDateTime.now();
@@ -177,16 +184,17 @@ public class InviteValidator {
         }
     }
 
-
     /**
      * Validates the invite explanation.
      *
      * @param explanation The invite explanation to be validated.
-     * @return True if the invite explanation is valid, otherwise throws InvalidUserException.
+     * @return True if the invite explanation is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite explanation is invalid.
      */
     // validate the invite Explanation
     public static boolean validateInviteExplanation(String explanation) throws InvalidUserException {
+        explanation = explanation.trim();
         if (explanation.isEmpty()) {
             throw new InvalidUserException(InviteConstants.getInvalidInviteExplanationMessage());
         } else {
@@ -198,18 +206,19 @@ public class InviteValidator {
      * Validates the invite message.
      *
      * @param message The invite message to be validated.
-     * @return True if the invite message is valid, otherwise throws InvalidUserException.
+     * @return True if the invite message is valid, otherwise throws
+     * InvalidUserException.
      * @throws InvalidUserException If the invite message is invalid.
      */
 
     // validate the invite message
     public static boolean validateInviteMessage(String message) throws InvalidUserException {
+        message = message.trim();
         if (message.isEmpty()) {
             throw new InvalidUserException(InviteConstants.getInvalidInviteChatMessage());
         } else {
             return true;
         }
     }
-
 
 }

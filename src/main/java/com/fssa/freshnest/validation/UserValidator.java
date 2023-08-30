@@ -89,7 +89,7 @@ public class UserValidator {
 		if (user != null && validateFirstName(user.getFirstName()) && validateLastName(user.getLastName())
 				&& validateEmail(email.getEmail()) && validateGender(user.getGender())
 				&& validateNationality(user.getNationality()) && validateUserName(user.getUsername())
-				&& validateMobileNumber(user.getMobileNumber()) && validateDob(user.getDob())) {
+				) {
 			return true;
 		} else {
 			throw new InvalidUserException(UserConstants.getInvalidUserUpdateMessage());
@@ -263,16 +263,15 @@ public class UserValidator {
 	 * @throws InvalidUserException If the date of birth or age is invalid.
 	 */
 
-	public static boolean validateDob(String dob) throws InvalidUserException {
-		if (dob.isEmpty())
+	public static boolean validateDob(LocalDate dob) throws InvalidUserException {
+		if (dob == null)
 			return false;
 
-		LocalDate parsedDate = LocalDate.parse(dob);
 		LocalDate currentDate = LocalDate.now();
 
-		int age = Period.between(parsedDate, currentDate).getYears();
+		int age = Period.between(dob, currentDate).getYears();
 
-		if (!parsedDate.isAfter(currentDate) && age >= 18) {
+		if (!dob.isAfter(currentDate) && age >= 18) {
 			return true;
 		} else {
 			throw new InvalidUserException(UserConstants.getInvalidUserDobMessage());

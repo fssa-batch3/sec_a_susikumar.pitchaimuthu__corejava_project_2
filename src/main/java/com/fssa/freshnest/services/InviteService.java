@@ -7,7 +7,6 @@ import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.InviteValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
-import java.security.Provider;
 import java.util.List;
 
 /**
@@ -82,11 +81,22 @@ public class InviteService {
      */
 
 
-    public List<Invite> readInvites(Invite invite) throws ServiceException{
+    public List<Invite> listInvites(Invite invite) throws ServiceException{
         InviteDAO inviteDAO = new InviteDAO();
         try {
             InviteValidator.validateInviteRead(invite);
-            return inviteDAO.readInvite(invite);
+            return inviteDAO.listInvites(invite);
+
+        }catch ( DAOException | InvalidUserException e){
+            throw  new ServiceException(e);
+        }
+    }
+    
+    public List<Invite> listFriendsInvite(Invite invite) throws ServiceException{
+        InviteDAO inviteDAO = new InviteDAO();
+        try {
+            InviteValidator.validateInviteRead(invite);
+            return inviteDAO.listFriendsInvite(invite);
 
         }catch ( DAOException | InvalidUserException e){
             throw  new ServiceException(e);
@@ -106,4 +116,13 @@ public class InviteService {
 
     }
 
+    public List<Invite> listInviteDetails(Invite invite) throws  ServiceException {
+        InviteDAO inviteDAO = new InviteDAO();
+        try {
+            InviteValidator.validateInviteRead(invite);
+            return inviteDAO.listUserInviteDetails(invite);
+        }catch (DAOException | InvalidUserException e){
+            throw new ServiceException(e);
+        }
+    }
 }

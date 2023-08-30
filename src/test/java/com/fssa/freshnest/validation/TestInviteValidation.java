@@ -4,6 +4,9 @@ import com.fssa.freshnest.constants.InviteConstants;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -46,62 +49,63 @@ class TestInviteValidation {
 
     /**
      * Test case for validating a valid invite date.
-     * It ensures that the {@link InviteValidator#validateInviteDate(String)} method properly validates a valid invite date.
+     * It ensures that the {@link InviteValidator} method properly validates a valid invite date.
      * If the validation fails unexpectedly, the test will fail.
      */
     // test valid invite date
     @Test
     void testValidInviteDate() {
         try {
-            assertTrue(InviteValidator.validateInviteDate("2030-08-23"));
+            // Create a LocalDate object for a specific date, e.g., "2023-08-29"
+            LocalDate date = LocalDate.of(2023, 8, 29);
+            assertTrue(InviteValidator.validateInviteDate(date));
         } catch (InvalidUserException e) {
             e.printStackTrace();
             fail();
         }
     }
 
-    /**
-     * Test case for validating invalid month details in an invite date.
-     * It uses the {@link #testInvalidInviteDate(String)} helper method to validate the handling of invalid date formats.
-     */
+
+
     @Test
     void testInvalidMonthDetails() {
-        testInvalidInviteDate("2032-23-09");
+        LocalDate date = LocalDate.of(2023, 5, 29);
+
+       InvalidUserException result =  assertThrows(InvalidUserException.class, () ->  InviteValidator.validateInviteDate(date));
+
     }
 
-    /**
-     * Test case for validating invalid day details in an invite date.
-     * It uses the {@link #testInvalidInviteDate(String)} helper method to validate the handling of invalid date formats.
-     */
+
     @Test
-    void testInvalidDateDetails() {
-        testInvalidInviteDate("2032-03-43");
+    void testInvalidPastDateDetails() {
+        LocalDate date = LocalDate.of(2023, 9, 23);
+
+        InvalidUserException result =  assertThrows(InvalidUserException.class, () ->  InviteValidator.validateInviteDate(date));
     }
 
-    /**
-     * Test case for validating null date details in an invite date.
-     * It uses the {@link #testInvalidInviteDate(String)} helper method to validate the handling of null date formats.
-     */
+
     @Test
     void testNullDateDetails() {
-        testInvalidInviteDate("");
+        LocalDate date = null;
+
+        InvalidUserException result =  assertThrows(InvalidUserException.class, () ->  InviteValidator.validateInviteDate(date));
     }
 
     /**
      * Helper method to test invalid invite date formats.
-     * It checks whether the {@link InviteValidator#validateInviteDate(String)} method properly handles various invalid
      * date formats and throws the expected {@link InvalidUserException}.
      * Additionally, it verifies that the exception message matches the predefined invalid invite date message.
      */
-    void testInvalidInviteDate(String input) {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteDate(input));
+    @Test
+    void testInvalidPastYearInviteDate() {
+        LocalDate date = LocalDate.of(2002, 9, 23);
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteDate(date));
         assertEquals(InviteConstants.getInvalidInviteDateMessage(), result.getMessage());
     }
 
 
     /**
      * Test case for validating a valid invite time.
-     * It ensures that the {@link InviteValidator#validateInviteTime(String, String)} method properly validates a valid
      * invite time along with a corresponding date.
      * If the validation fails unexpectedly, the test will fail.
      */
@@ -109,7 +113,10 @@ class TestInviteValidation {
     @Test
     void testValidTimeDetails() {
         try {
-            assertTrue(InviteValidator.validateInviteTime("09:45", "2023-10-29"));
+            LocalDate date = LocalDate.of(2023, 9, 23);
+            LocalTime time = LocalTime.of(23,34);
+
+            assertTrue(InviteValidator.validateInviteTime(time, date));
         } catch (InvalidUserException e) {
             e.printStackTrace();
             fail();
@@ -117,14 +124,13 @@ class TestInviteValidation {
     }
 
     /**
-     * Test case for validating invalid null time details in an invite time.
-     * It checks whether the {@link InviteValidator#validateInviteTime(String, String)} method properly handles null
+     * Test case for validating invalid null time details in an invitation time.
      * time and date values and throws the expected {@link InvalidUserException}.
      * Additionally, it verifies that the exception message matches the predefined invalid invite time message.
      */
     @Test
     void testInvalidNullTimeDetails() {
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteTime("", ""));
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteTime(null, null));
         assertEquals(InviteConstants.getInvalidInviteTimeMessage(), result.getMessage());
     }
 

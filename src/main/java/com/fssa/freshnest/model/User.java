@@ -1,5 +1,7 @@
 package com.fssa.freshnest.model;
 
+import java.time.LocalDate;
+
 public class User {
 
 	private String email;
@@ -9,7 +11,7 @@ public class User {
 	private String lastName;
 	private int age;
 	private long mobileNumber;
-	private String dob;
+	private LocalDate dob;
 	private String nationality;
 	private String profileImage;
 	private String gender;
@@ -37,7 +39,7 @@ public class User {
 	}
 
 	// user second page registration constructor
-	public User(String dob, String gender, String email) {
+	public User(LocalDate dob, String gender, String email) {
 		this.dob = dob;
 		this.gender = gender;
 		this.email = email;
@@ -56,7 +58,7 @@ public class User {
 	}
 
 	// User update constructor
-	public User(String username, String firstName, String lastName, long mobileNumber, String dob, String nationality,
+	public User(String username, String firstName, String lastName, long mobileNumber, LocalDate dob, String nationality,
 			String gender) {
 		this.username = username;
 		this.firstName = firstName;
@@ -113,11 +115,11 @@ public class User {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public String getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 
