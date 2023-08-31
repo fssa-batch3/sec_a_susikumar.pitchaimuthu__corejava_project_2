@@ -162,9 +162,7 @@ public class UserService {
         UserDAO userDAO = new UserDAO();
         try {
             UserValidator.validateUserDetailReadFeature(user);
-            List<User> userList = userDAO.readUser(user);
-
-            return userList;
+            return userDAO.readUser(user);
         } catch (DAOException | InvalidUserException e) {
             throw new ServiceException(e);
         }
@@ -173,9 +171,7 @@ public class UserService {
     public List<User> searchUserList(User user) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {
-            List<User> userList = userDAO.searchUserName(user);
-
-            return userList;
+            return userDAO.searchUserName(user);
         } catch (DAOException e) {
             throw new ServiceException(e.getMessage());
         }

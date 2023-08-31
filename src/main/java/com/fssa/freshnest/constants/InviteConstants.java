@@ -17,7 +17,7 @@ public class InviteConstants {
 
     // Each invite details validator message
     private static final String INVALID_INVITE_TYPE_MESSAGE = "invite type is not valid. The invite name should not be empty or length is less than 3. The name should be like this /Birthday/ or/Lovers day/ ";
-    private static final String NULL_INVITE_DATE_MESSAGE = "invite date is not valid. The invite date shuld not be null";
+    private static final String NULL_INVITE_DATE_MESSAGE = "invite date is not valid. The invite date should not be null";
     private static final String INVALID_INVITE_DATE_MESSAGE = "invite date is not valid. The invite date should be in future";
     private static final String INVALID_INVITE_TIME_MESSAGE = "invite time is not valid. The invite time should be in future";
     private static final String INVALID_INVITE_EXPLANATION_MESSAGE = "invite explanation is not valid.";

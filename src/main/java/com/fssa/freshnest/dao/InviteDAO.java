@@ -1,5 +1,6 @@
 package com.fssa.freshnest.dao;
 
+import com.fssa.freshnest.constants.InviteConstants;
 import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Invite;
 import com.fssa.freshnest.utils.ConnectionUtils;
@@ -78,7 +79,12 @@ public class InviteDAO {
 			int rows = statement.executeUpdate();
 
 			// Return successful or not
-			return (rows == 1);
+
+			if (rows > 0) {
+				return true;
+			} else {
+				throw new DAOException(InviteConstants.getInvalidInviteUpdateMessage());
+			}
 
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -105,7 +111,11 @@ public class InviteDAO {
 			int rows = statement.executeUpdate();
 
 			// Return successful or not
-			return (rows > 0);
+			if (rows > 0) {
+				return true;
+			} else {
+				throw new DAOException(InviteConstants.getInvalidInviteDeleteMessage());
+			}
 
 		} catch (SQLException e) {
 			throw new DAOException(e);

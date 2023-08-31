@@ -56,11 +56,10 @@ class TestChatService {
 
         ChatService chatService = new ChatService();
 
-        try {
-            assertFalse(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ServiceException result = assertThrows(ServiceException.class, () -> chatService.createChat(insertChat, insertChatParticipant, insertMessage));
+        assertEquals(ChatConstants.getInvalidChatSendMessage(), result.getMessage());
+
+
     }
 
     // Test chat read feature
@@ -124,11 +123,10 @@ class TestChatService {
 
         ChatService chatService = new ChatService();
 
-        try {
-            assertFalse(chatService.updateChat(chat));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ServiceException result = assertThrows(ServiceException.class, () -> chatService.updateChat(chat));
+        assertEquals(ChatConstants.getInvalidChatUpdateMessage(), result.getMessage());
+
+
     }
 
 
@@ -152,19 +150,17 @@ class TestChatService {
 
     // test the delete user details failure
     @Test
-    void testDeleteFailure() {
-        int chatId = 224;
+    void testDeleteWithInvalidChatIdFailure() {
+        int chatId = 455;
         int messageId = 2;
 
         Chat chat = new Chat(true, chatId, messageId);
 
         ChatService chatService = new ChatService();
 
-        try {
-            assertFalse(chatService.deleteChat(chat));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ServiceException result = assertThrows(ServiceException.class, () -> chatService.deleteChat(chat));
+        assertEquals(ChatConstants.getInvalidChatDeleteMessage(), result.getMessage());
+
     }
 
 }

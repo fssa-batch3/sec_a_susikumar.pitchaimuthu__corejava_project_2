@@ -1,5 +1,6 @@
 package com.fssa.freshnest.services;
 
+import com.fssa.freshnest.constants.InviteConstants;
 import com.fssa.freshnest.model.Invite;
 import com.fssa.freshnest.model.User;
 import com.fssa.freshnest.services.exceptions.ServiceException;
@@ -51,11 +52,10 @@ class TestInviteService {
 
         InviteService inviteService = new InviteService();
 
-        try {
-            assertFalse(inviteService.createInvite(invite));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
+        ServiceException result = assertThrows(ServiceException.class, () -> inviteService.createInvite(invite));
+        assertEquals(InviteConstants.getInvalidInviteTypeMessage(), result.getMessage());
+
+
     }
 
     // Test invitation read feature
@@ -169,12 +169,10 @@ class TestInviteService {
                 "Ticket block ah vangathinga thangam", 3);
 
         InviteService inviteService = new InviteService();
+        ServiceException result = assertThrows(ServiceException.class, () -> inviteService.updateInvite(invite));
+        assertEquals(InviteConstants.getInvalidInviteUpdateMessage(), result.getMessage());
 
-        try {
-            assertFalse(inviteService.updateInvite(invite));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
+
     }
 
     // test the invite update with invalid invite id
@@ -184,15 +182,12 @@ class TestInviteService {
         LocalTime time = LocalTime.of(23, 34);
 
         Invite invite = new Invite("Love party", date, time, "Manjal veeran", "Thangam",
-                "Ticket block ah vangathinga thangam", 3);
+                "Ticket block ah vangathinga thangam", -3);
 
         InviteService inviteService = new InviteService();
 
-        try {
-            assertFalse(inviteService.updateInvite(invite));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
+        ServiceException result = assertThrows(ServiceException.class, () -> inviteService.updateInvite(invite));
+        assertEquals(InviteConstants.getInvalidInviteUpdateMessage(), result.getMessage());
     }
 
 
@@ -214,15 +209,11 @@ class TestInviteService {
     @Test
     void testInvalidIdDelete() {
         Invite invite = new Invite(1);
-
         InviteService inviteService = new InviteService();
 
-        try {
-            assertFalse(inviteService.updateInvite(invite));
-        } catch (ServiceException e) {
-            e.printStackTrace();
+        ServiceException result = assertThrows(ServiceException.class, () -> inviteService.deleteInvite(invite));
+        assertEquals(InviteConstants.getInvalidInviteDeleteMessage(), result.getMessage());
 
-        }
     }
 
 }
