@@ -83,7 +83,6 @@ public class InviteValidator {
 
     // validate delete invite details
     public static boolean validateDeleteInvite(Invite invite) throws InvalidUserException {
-        System.out.println(invite);
         if (invite != null) {
             return true;
         } else {

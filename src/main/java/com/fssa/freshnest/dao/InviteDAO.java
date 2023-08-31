@@ -126,28 +126,17 @@ public class InviteDAO {
 		String insertQuery = "SELECT * FROM fresh_invite WHERE user_id = ? AND is_delete = FALSE";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
-
 			statement.setInt(1, invite.getUser().getUserId());
-
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					Invite inviteResult = new Invite();
-					inviteResult.setInviteId(resultSet.getInt("invite_id"));
-					inviteResult.setInviteType(resultSet.getString("invite_type"));
-					inviteResult.setInviteDate(resultSet.getDate("invite_date").toLocalDate());
-					inviteResult.setInviteTime(resultSet.getTime("invite_time").toLocalTime());
-					inviteResult.setInviteSlogan(resultSet.getString("invite_slogan"));
-					inviteResult.setInviteExplanation(resultSet.getString("invite_explanation"));
+					Invite inviteResult = createInviteFromResultSet(resultSet);
 					inviteList.add(inviteResult);
-
 				}
 				return inviteList;
 			}
-
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-
 	}
 
 	public List<Invite> listFriendsInvite(Invite invite) throws DAOException {
@@ -155,29 +144,17 @@ public class InviteDAO {
 		String selectQuery = "SELECT * FROM fresh_invite WHERE user_id != ? AND is_delete = FALSE";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-			System.out.println(invite.getUser().getUserId());
-
 			statement.setInt(1, invite.getUser().getUserId());
-
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					Invite inviteResult = new Invite();
-					inviteResult.setInviteId(resultSet.getInt("invite_id"));
-					inviteResult.setInviteType(resultSet.getString("invite_type"));
-					inviteResult.setInviteDate(resultSet.getDate("invite_date").toLocalDate());
-					inviteResult.setInviteTime(resultSet.getTime("invite_time").toLocalTime());
-					inviteResult.setInviteSlogan(resultSet.getString("invite_slogan"));
-					inviteResult.setInviteExplanation(resultSet.getString("invite_explanation"));
+					Invite inviteResult = createInviteFromResultSet(resultSet);
 					inviteList.add(inviteResult);
-
 				}
 				return inviteList;
 			}
-
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-
 	}
 
 	public List<Invite> listUserInviteDetails(Invite invite) throws DAOException {
@@ -185,30 +162,29 @@ public class InviteDAO {
 		String selectQuery = "SELECT * FROM fresh_invite WHERE user_id = ? AND invite_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-			System.out.println(invite.getUser().getUserId());
-
 			statement.setInt(1, invite.getUser().getUserId());
 			statement.setInt(2, invite.getInviteId());
-
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					Invite inviteResult = new Invite();
-					inviteResult.setInviteId(resultSet.getInt("invite_id"));
-					inviteResult.setInviteType(resultSet.getString("invite_type"));
-					inviteResult.setInviteDate(resultSet.getDate("invite_date").toLocalDate());
-					inviteResult.setInviteTime(resultSet.getTime("invite_time").toLocalTime());
-					inviteResult.setInviteSlogan(resultSet.getString("invite_slogan"));
-					inviteResult.setInviteExplanation(resultSet.getString("invite_explanation"));
+					Invite inviteResult = createInviteFromResultSet(resultSet);
 					inviteList.add(inviteResult);
-
 				}
 				return inviteList;
 			}
-
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
+	}
 
+	private Invite createInviteFromResultSet(ResultSet resultSet) throws SQLException {
+		Invite inviteResult = new Invite();
+		inviteResult.setInviteId(resultSet.getInt("invite_id"));
+		inviteResult.setInviteType(resultSet.getString("invite_type"));
+		inviteResult.setInviteDate(resultSet.getDate("invite_date").toLocalDate());
+		inviteResult.setInviteTime(resultSet.getTime("invite_time").toLocalTime());
+		inviteResult.setInviteSlogan(resultSet.getString("invite_slogan"));
+		inviteResult.setInviteExplanation(resultSet.getString("invite_explanation"));
+		return inviteResult;
 	}
 
 }
