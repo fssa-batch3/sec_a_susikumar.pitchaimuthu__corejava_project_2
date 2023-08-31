@@ -32,7 +32,7 @@ public class StillService {
             return stillDAO.createStill(still);
 
         } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
 
     }
@@ -53,7 +53,7 @@ public class StillService {
             return stillDAO.favouriteStill(still);
 
         } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
 
     }
@@ -74,7 +74,7 @@ public class StillService {
             return stillDAO.updateStill(still);
 
         } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
 
     }
@@ -95,7 +95,7 @@ public class StillService {
             return stillDAO.deleteStill(still);
 
         } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
 
     }
@@ -108,16 +108,13 @@ public class StillService {
      */
     // Service layer for the read still
     public List<Still> readStill(Still still) throws ServiceException {
-
-
-
         StillDAO stillDAO = new StillDAO();
         try {
             StillValidator.validateReadStill(still);
             return stillDAO.readStill(still);
 
         } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 

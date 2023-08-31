@@ -1,5 +1,6 @@
 package com.fssa.freshnest.services;
 
+import com.fssa.freshnest.constants.ChatConstants;
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 import org.junit.jupiter.api.Test;
@@ -75,7 +76,7 @@ class TestChatService {
 
         try {
             List<Chat> result = chatService.readChat(chat);
-            for(Chat c : result){
+            for (Chat c : result) {
                 System.out.print(c);
             }
         } catch (ServiceException e) {
@@ -91,7 +92,7 @@ class TestChatService {
         ChatService chatService = new ChatService();
         ServiceException exception = assertThrows(ServiceException.class, () -> chatService.readChat(null));
 
-        assertEquals("Null argument passed to readChat", exception.getMessage());
+        assertEquals(ChatConstants.getInvalidChatReadMessage(), exception.getMessage());
     }
     // Test chat update feature
 

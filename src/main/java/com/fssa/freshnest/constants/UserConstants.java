@@ -10,11 +10,6 @@ public class UserConstants {
 
     // Total validator message
 
-
-    private static final String COMMON_SERVICE_ERROR_MESSAGE = "com.fssa.freshnest.validation.exceptions.InvalidUserException: ";
-    private static final String COMMON_DAO_ERROR_MESSAGE = "com.fssa.freshnest.dao.exceptions.DAOException: ";
-
-
     private static final String INVALID_USER_REGISTRATION_MESSAGE = "User registration details are not valid. Please enter the valid information using the error message.";
     private static final String INVALID_USER_LOGIN_MESSAGE = "User log in details are not valid. Please enter the valid information using the error message.";
     private static final String INVALID_USER_SECOND_PAGE_REGISTRATION_MESSAGE = "User second page registration details are not valid. Please enter the valid information using the error message.";
@@ -195,16 +190,6 @@ public class UserConstants {
         return INVALID_USER_PROFILE_IMAGE_URL_MESSAGE;
     }
 
-    /**
-     * Get the message for a common service message.
-     *
-     * @return The common service message.
-     */
-
-    public static String getCommonServiceErrorMessage() {
-        return COMMON_SERVICE_ERROR_MESSAGE;
-    }
-
 
     /**
      * Get the message for an email not exist.
@@ -215,14 +200,6 @@ public class UserConstants {
         return EMAIL_ID_NOT_EXISTS_MESSAGE;
     }
 
-    /**
-     * Get the message for a common dao message.
-     *
-     * @return The common dao message.
-     */
 
-    public static String getCommonDaoErrorMessage() {
-        return COMMON_DAO_ERROR_MESSAGE;
-    }
 
 }

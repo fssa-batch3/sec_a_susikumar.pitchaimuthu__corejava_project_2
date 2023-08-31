@@ -1,16 +1,12 @@
 package com.fssa.freshnest.validation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import com.fssa.freshnest.constants.UserConstants;
+import com.fssa.freshnest.validation.exceptions.InvalidUserException;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import org.junit.jupiter.api.Test;
-
-import com.fssa.freshnest.constants.UserConstants;
-import com.fssa.freshnest.validation.exceptions.InvalidUserException;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class contains JUnit test cases for validating the functionality of the {@link UserValidator} class.
@@ -326,14 +322,14 @@ class TestUserValidation {
 
     /**
      * Test case for validating a valid date of birth.
-     * It verifies that the {@link UserValidator#validateDob(String)} method correctly validates a valid date of birth.
+     * It verifies that the {@link UserValidator#validateDob(LocalDate)} method correctly validates a valid date of birth.
      * If the validation fails unexpectedly, the test will fail.
      */
     // Validate date of birth
     @Test
     void testValidDateOfBirth() {
         try {
-        	LocalDate dob = LocalDate.of(2003, 3, 23);
+            LocalDate dob = LocalDate.of(2003, 3, 23);
             assertTrue(UserValidator.validateDob(dob));
         } catch (InvalidUserException e) {
             e.printStackTrace();

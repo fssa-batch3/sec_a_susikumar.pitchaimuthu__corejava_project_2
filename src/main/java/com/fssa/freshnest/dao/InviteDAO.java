@@ -95,7 +95,7 @@ public class InviteDAO {
 	 */
 	public boolean deleteInvite(Invite invite) throws DAOException {
 
-		String updateQuery = "UPDATE fresh_invite SET is_delete = TRUE  WHERE invite_id = ?";
+		String updateQuery = "UPDATE fresh_invite SET is_delete = 1 WHERE invite_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
@@ -106,36 +106,6 @@ public class InviteDAO {
 
 			// Return successful or not
 			return (rows > 0);
-
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-	}
-
-	/**
-	 * Records a reaction to an invite in the database.
-	 *
-	 * @param invite The Invite object containing the reaction details.
-	 * @return True if the reaction is successfully recorded, otherwise false.
-	 * @throws DAOException If there is an issue with the database operation.
-	 */
-	public boolean reactInvite(Invite invite) throws DAOException {
-		String updateQuery = "INSERT INTO invite_react_details ( invite_id, reactor_id , is_accept, is_like  , is_dislike, invite_message) VALUES (?,?,?,?,?,?)";
-		try (Connection connection = ConnectionUtils.getConnection();
-				PreparedStatement statement = connection.prepareStatement(updateQuery)) {
-
-			statement.setInt(1, invite.getInviteId());
-			statement.setInt(2, invite.getReactorId());
-			statement.setInt(3, invite.getIsAccept() ? 1 : 0);
-			statement.setInt(4, invite.getIsLike() ? 1 : 0);
-			statement.setInt(5, invite.getIsDislike() ? 1 : 0);
-			statement.setString(6, invite.getInviteMessage());
-
-			// Execute the query
-			int rows = statement.executeUpdate();
-
-			// Return successful or not
-			return (rows == 1);
 
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -214,7 +184,7 @@ public class InviteDAO {
 		List<Invite> inviteList = new ArrayList<>();
 		String selectQuery = "SELECT * FROM fresh_invite WHERE user_id = ? AND invite_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
-			 PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
 			System.out.println(invite.getUser().getUserId());
 
 			statement.setInt(1, invite.getUser().getUserId());

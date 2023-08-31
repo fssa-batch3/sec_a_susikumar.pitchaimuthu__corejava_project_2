@@ -37,7 +37,7 @@ public class ChatService {
                     && chatDAO.insertChatMessage(insertMessage);
 
         } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
 
     }
@@ -57,7 +57,7 @@ public class ChatService {
             ChatValidator.validateReadChat(chat);
             return chatDAO.getChatsByChatId(chat);
         } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -79,7 +79,7 @@ public class ChatService {
             return chatDAO.updateChat(chat);
 
         } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
 
     }
@@ -101,7 +101,7 @@ public class ChatService {
             return chatDAO.deleteChat(chat);
 
         } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
 
     }

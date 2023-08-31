@@ -1,19 +1,15 @@
 package com.fssa.freshnest.services;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import com.fssa.freshnest.model.Invite;
+import com.fssa.freshnest.model.User;
+import com.fssa.freshnest.services.exceptions.ServiceException;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import com.fssa.freshnest.model.Invite;
-import com.fssa.freshnest.model.User;
-import com.fssa.freshnest.services.exceptions.ServiceException;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class contains test cases for the InviteService class, which handles various still-related operations.
@@ -67,7 +63,7 @@ class TestInviteService {
     @Test
     void testInviteListWithValidInputs() {
 
-        User user  = new User();
+        User user = new User();
         user.setUserId(1);
         Invite invite = new Invite(user);
         InviteService inviteService = new InviteService();
@@ -102,7 +98,7 @@ class TestInviteService {
         }
     }
 
-    
+
     // User friends invite list feature
     @Test
     void testListUserFriendsInvitesWithValidInputs() {
@@ -128,7 +124,7 @@ class TestInviteService {
     void testListInviteDetailsShowingSuccess() {
         User user = new User();
         user.setUserId(1);
-        Invite invite = new Invite(user);
+        Invite invite = new Invite(user, 4);
         InviteService stillService = new InviteService();
         try {
             List<Invite> result = stillService.listInviteDetails(invite);
@@ -144,16 +140,15 @@ class TestInviteService {
     }
 
 
-
     // Test invitation update feature
     // test the invitation with correct values
     @Test
-    void testInviteUpdateSuccess() {
+    void testInviteDetailsUpdateSuccess() {
         LocalDate date = LocalDate.of(2023, 9, 23);
         LocalTime time = LocalTime.of(23, 34);
 
         Invite invite = new Invite("Love party", date, time, "Manjal veeran", "Thangam",
-                "Ticket block ah vangathinga thangam", 25);
+                "Ticket block ah vangathinga thangam", 4);
 
         InviteService inviteService = new InviteService();
 
@@ -205,10 +200,8 @@ class TestInviteService {
     // test the invitation test success
     @Test
     void testInvitationDeleteSuccess() {
-        Invite invite = new Invite(25);
-
+        Invite invite = new Invite(4);
         InviteService inviteService = new InviteService();
-
         try {
             assertTrue(inviteService.deleteInvite(invite));
         } catch (ServiceException e) {

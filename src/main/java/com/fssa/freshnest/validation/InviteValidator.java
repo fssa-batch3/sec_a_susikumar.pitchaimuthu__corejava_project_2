@@ -83,6 +83,7 @@ public class InviteValidator {
 
     // validate delete invite details
     public static boolean validateDeleteInvite(Invite invite) throws InvalidUserException {
+        System.out.println(invite);
         if (invite != null) {
             return true;
         } else {
@@ -142,16 +143,19 @@ public class InviteValidator {
      * @throws InvalidUserException If the invite date is invalid.
      */
 
-
     // validate the invite date
     public static boolean validateInviteDate(LocalDate date) throws InvalidUserException {
 
         if (date == null) {
-            return false;
+            throw new InvalidUserException(InviteConstants.getInvalidInviteDateMessage());
         }
         try {
             LocalDate currentDate = LocalDate.now();
-            return date.isAfter(currentDate) || date.isEqual(currentDate);
+            if (date.isBefore(currentDate)) {
+                throw new InvalidUserException(InviteConstants.getInvalidInviteDateMessage());
+            } else {
+                return true;
+            }
         } catch (Exception e) {
             throw new InvalidUserException(InviteConstants.getInvalidInviteDateMessage());
 
@@ -161,8 +165,8 @@ public class InviteValidator {
     /**
      * Validates the invite time.
      *
-     * @param stringTime The invite time to be validated.
-     * @param date       The invite date for which the time is validated.
+     * @param time The invite time to be validated.
+     * @param date The invite date for which the time is validated.
      * @return True if the invite time is valid, otherwise throws
      * InvalidUserException.
      * @throws InvalidUserException If the invite time is invalid.
@@ -171,10 +175,9 @@ public class InviteValidator {
     public static boolean validateInviteTime(LocalTime time, LocalDate date) throws InvalidUserException {
 
         if (date == null)
-            return false;
+            throw new InvalidUserException(InviteConstants.getNullInviteDateMessage());
 
         try {
-
 
             LocalDateTime dateTime = LocalDateTime.of(date, time);
             LocalDateTime currentDateTime = LocalDateTime.now();
@@ -197,25 +200,6 @@ public class InviteValidator {
         explanation = explanation.trim();
         if (explanation.isEmpty()) {
             throw new InvalidUserException(InviteConstants.getInvalidInviteExplanationMessage());
-        } else {
-            return true;
-        }
-    }
-
-    /**
-     * Validates the invite message.
-     *
-     * @param message The invite message to be validated.
-     * @return True if the invite message is valid, otherwise throws
-     * InvalidUserException.
-     * @throws InvalidUserException If the invite message is invalid.
-     */
-
-    // validate the invite message
-    public static boolean validateInviteMessage(String message) throws InvalidUserException {
-        message = message.trim();
-        if (message.isEmpty()) {
-            throw new InvalidUserException(InviteConstants.getInvalidInviteChatMessage());
         } else {
             return true;
         }

@@ -18,292 +18,280 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class TestUserService {
 
-    // User register feature test
+	// User register feature test
 
-    // User registration with valid details
-    @Test
-    void testRegistrationSuccess() {
-        UserService userService = new UserService();
-        User user1 = new User("akalya@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu", "imageurl");
-        try {
+	// User registration with valid details
+	@Test
+	void testRegistrationSuccess() {
+		UserService userService = new UserService();
+		User user1 = new User("akalya@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu", "imageurl");
+		try {
 
-            assertTrue(userService.registerUser(user1));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
+			assertTrue(userService.registerUser(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
 
-        }
-    }
+		}
+	}
 
-    // User register with invalid password
-    @Test
-    void testUserRegisterWithInvalidPassword() {
+	// User register with invalid password
+	@Test
+	void testUserRegisterWithInvalidPassword() {
 
-        UserService userService = new UserService();
-        User user1 = new User("Susi@gmail.com", "Kani Papa", "susi123SM", "Susikumar", "Pitchaimuthu", "imageurl");
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.registerUser(user1));
-        String expectedMessage = UserConstants.getCommonServiceErrorMessage()
-                + UserConstants.getInvalidUserPasswordMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+		UserService userService = new UserService();
+		User user1 = new User("Susi@gmail.com", "Kani Papa", "susi123SM", "Susikumar", "Pitchaimuthu", "imageurl");
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.registerUser(user1));
 
-    // User second page registration
+		assertEquals(UserConstants.getInvalidUserPasswordMessage(), result.getMessage());
+	}
 
-    // Second page registration with valid details
-    @Test
-    void validateUserSecondRegistrationSuccess() {
-    	
-    	LocalDate dob = LocalDate.of(2003, 2, 24);
+	// User second page registration
 
-        User user1 = new User(dob, "Male", "susi@gmail.com");
-        UserService userService = new UserService();
+	// Second page registration with valid details
+	@Test
+	void validateUserSecondRegistrationSuccess() {
 
-        try {
-            assertTrue(userService.secondPageRegisterUser(user1));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-        }
+		LocalDate dob = LocalDate.of(2003, 2, 24);
 
-    }
+		User user1 = new User(dob, "Male", "susi@gmail.com");
+		UserService userService = new UserService();
 
-    // User login feature test
+		try {
+			assertTrue(userService.secondPageRegisterUser(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
 
-    // User login with valid details
-    @Test
-    void testLoginSuccess() {
-        UserService userService = new UserService();
-        User user1 = new User("susi@gmail.com", "susi123@SMsm");
-        try {
-            assertTrue(userService.logInUser(user1));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+	}
 
-    // User login with invalid password
-    @Test
-    void testInvalidPasswordLogin() {
-        UserService userService = new UserService();
-        User user1 = new User("susi@gmail.com", "susi123SM");
+	// User login feature test
 
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(user1));
-        String expectedMessage = UserConstants.getCommonServiceErrorMessage()
-                + UserConstants.getInvalidUserPasswordMessage();
-        assertEquals(expectedMessage, result.getMessage());
+	// User login with valid details
+	@Test
+	void testLoginSuccess() {
+		UserService userService = new UserService();
+		User user1 = new User("susi@gmail.com", "susi123@SMsm");
+		try {
+			assertTrue(userService.logInUser(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-    }
+	// User login with invalid password
+	@Test
+	void testInvalidPasswordLogin() {
+		UserService userService = new UserService();
+		User user1 = new User("susi@gmail.com", "susi123SM");
 
-    // User login with invalid email
-    @Test
-    void testLogInUserWithInvalidEmail() {
-        UserService userService = new UserService();
-        User user1 = new User("susigmail.com", "susi123@SM");
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(user1));
-        String expectedMessage = UserConstants.getCommonServiceErrorMessage()
-                + UserConstants.getInvalidUserEmailMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(user1));
 
-    // User update feature test
+		assertEquals(UserConstants.getInvalidUserPasswordMessage(), result.getMessage());
 
-    // User update details with valid details
-    @Test
-    void testUserDetailsUpdateSuccessWithValidDetails() {
-    	LocalDate dob = LocalDate.of(2003, 3, 12);
+	}
 
-        User user1 = new User("Kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male");
-        User email = new User("susi@gmail.com");
+	// User login with invalid email
+	@Test
+	void testLogInUserWithInvalidEmail() {
+		UserService userService = new UserService();
+		User user1 = new User("susigmail.com", "susi123@SM");
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(user1));
 
-        UserService userService = new UserService();
+		assertEquals(UserConstants.getInvalidUserEmailMessage(), result.getMessage());
+	}
 
-        try {
-            assertTrue(userService.updateUser(user1, email));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+	// User update feature test
 
-    // test invalid email address update
-    @Test
-    void testUpdateUserDetailsWithNotExistEmailInDatabase() {
-        UserService userService = new UserService();
-        LocalDate dob = LocalDate.of(2003, 1, 12);
+	// User update details with valid details
+	@Test
+	void testUserDetailsUpdateSuccessWithValidDetails() {
+		LocalDate dob = LocalDate.of(2003, 3, 12);
 
-        User user1 = new User("Kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male");
-        User email = new User("naan@gmail.com");
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
-        String expectedMessage = UserConstants.getCommonDaoErrorMessage() + UserConstants.getEmailIdNotExistsMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+		User user1 = new User("Kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male");
+		User email = new User("susi@gmail.com");
 
-    // test invalid user name update
-    @Test
-    void testUpdateUserDetailsWithInvalidUserName() {
-        UserService userService = new UserService();
-        LocalDate dob = LocalDate.of(2002, 3, 02);
+		UserService userService = new UserService();
 
-        User user1 = new User("er", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male");
-        User email = new User("susi@gmail.com");
+		try {
+			assertTrue(userService.updateUser(user1, email));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
-        String expectedMessage = UserConstants.getCommonServiceErrorMessage()
-                + UserConstants.getInvalidUserUserNameMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+	// test invalid email address update
+	@Test
+	void testUpdateUserDetailsWithNotExistEmailInDatabase() {
+		UserService userService = new UserService();
+		LocalDate dob = LocalDate.of(2003, 1, 12);
 
-    // test invalid user gender details
-    @Test
-    void testUpdateUserDetailsWithInvalidGenderDetails() {
-        UserService userService = new UserService();
-        LocalDate dob = LocalDate.of(2002, 02, 12);
+		User user1 = new User("Kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male");
+		User email = new User("naan@gmail.com");
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
 
-        User user1 = new User("kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male234");
-        User email = new User("susi@gmail.com");
+		assertEquals(UserConstants.getEmailIdNotExistsMessage(), result.getMessage());
+	}
 
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
-        String expectedMessage = UserConstants.getCommonServiceErrorMessage()
-                + UserConstants.getInvalidUserGenderMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+	// test invalid user name update
+	@Test
+	void testUpdateUserDetailsWithInvalidUserName() {
+		UserService userService = new UserService();
+		LocalDate dob = LocalDate.of(2002, 3, 02);
 
-    // test invalid nationality details
-    @Test
-    void testUpdateUserDetailsWithInvalidNationalityDetails() {
-        UserService userService = new UserService();
-        LocalDate dob = LocalDate.of(2002, 04, 20);
+		User user1 = new User("er", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male");
+		User email = new User("susi@gmail.com");
 
-        User user1 = new User("kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "e", "Male");
-        User email = new User("susi@gmail.com");
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
-        String expectedMessage = UserConstants.getCommonServiceErrorMessage()
-                + UserConstants.getInvalidUserNationalityMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
 
-    // test invalid first name details
-    @Test
-    void testUpdateUserDetailsWithInvalidFirstNameDetails() {
-        UserService userService = new UserService();
-        LocalDate dob = LocalDate.of(2000, 02, 10);
+		assertEquals(UserConstants.getInvalidUserUserNameMessage(), result.getMessage());
+	}
 
-        User user1 = new User("kanipapa", "r", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male");
-        User email = new User("susi@gmail.com");
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
-        String expectedMessage = UserConstants.getCommonServiceErrorMessage()
-                + UserConstants.getInvalidUserFirstNameMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+	// test invalid user gender details
+	@Test
+	void testUpdateUserDetailsWithInvalidGenderDetails() {
+		UserService userService = new UserService();
+		LocalDate dob = LocalDate.of(2002, 02, 12);
 
-    // test invalid last name details
-    @Test
-    void testUpdateUserDetailsWithInvalidLastNameDetails() {
-        UserService userService = new UserService();
-        LocalDate dob = LocalDate.of(1999, 2, 23);
+		User user1 = new User("kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male234");
+		User email = new User("susi@gmail.com");
 
-        User user1 = new User("kanipapa", "Susikumar", "m", 8870737612L, dob, "Indian", "Male");
-        User email = new User("susi@gmail.com");
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
 
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
+		assertEquals(UserConstants.getInvalidUserGenderMessage(), result.getMessage());
+	}
 
-        String expectedMessage = UserConstants.getCommonServiceErrorMessage()
-                + UserConstants.getInvalidUserLastNameMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+	// test invalid nationality details
+	@Test
+	void testUpdateUserDetailsWithInvalidNationalityDetails() {
+		UserService userService = new UserService();
+		LocalDate dob = LocalDate.of(2002, 04, 20);
 
-    // User delete feature test
+		User user1 = new User("kanipapa", "Susikumar", "Pitchaimuthu", 8870737612L, dob, "e", "Male");
+		User email = new User("susi@gmail.com");
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
 
-    // test delete the user with valid details
-    @Test
-    void testUserDeleteSuccess() {
-        User user1 = new User("susi@gmail.com", true);
-        UserService userService = new UserService();
-        try {
-            assertTrue(userService.deleteUser(user1));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+		assertEquals(UserConstants.getInvalidUserNationalityMessage(), result.getMessage());
+	}
 
-    // test delete user invalid email
-    @Test
-    void testDeleteUserAccountWithNotExistEmail() {
-        User user1 = new User("naan@gmail.com", true);
-        UserService userService = new UserService();
+	// test invalid first name details
+	@Test
+	void testUpdateUserDetailsWithInvalidFirstNameDetails() {
+		UserService userService = new UserService();
+		LocalDate dob = LocalDate.of(2000, 02, 10);
 
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.deleteUser(user1));
+		User user1 = new User("kanipapa", "r", "Pitchaimuthu", 8870737612L, dob, "Indian", "Male");
+		User email = new User("susi@gmail.com");
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
 
-        String expectedMessage = UserConstants.getCommonDaoErrorMessage() + UserConstants.getInvalidUserDeleteMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+		assertEquals(UserConstants.getInvalidUserFirstNameMessage(), result.getMessage());
+	}
 
-    // Test update the user profile image details
+	// test invalid last name details
+	@Test
+	void testUpdateUserDetailsWithInvalidLastNameDetails() {
+		UserService userService = new UserService();
+		LocalDate dob = LocalDate.of(1999, 2, 23);
 
-    @Test
-    void testUserProfileImageUpdateSuccess() {
-        User user1 = new User("https://example.com/image.jpg", 1);
-        UserService userService = new UserService();
-        try {
-            assertTrue(userService.profileImageUpdate(user1));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
+		User user1 = new User("kanipapa", "Susikumar", "m", 8870737612L, dob, "Indian", "Male");
+		User email = new User("susi@gmail.com");
 
-        }
-    }
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.updateUser(user1, email));
 
-    // test the invalid image url update
+		assertEquals(UserConstants.getInvalidUserLastNameMessage(), result.getMessage());
+	}
 
-    @Test
-    void testProfileInvalidImageUrl() {
-        User user1 = new User("httpexample", 1);
-        UserService userService = new UserService();
-        ServiceException result = assertThrows(ServiceException.class, () -> userService.profileImageUpdate(user1));
+	// User delete feature test
 
-        String expectedMessage = UserConstants.getCommonServiceErrorMessage()
-                + UserConstants.getInvalidUserProfileImageUrlMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+	// test delete the user with valid details
+	@Test
+	void testUserDeleteSuccess() {
+		User user1 = new User("susi@gmail.com", true);
+		UserService userService = new UserService();
+		try {
+			assertTrue(userService.deleteUser(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-    @Test
-    void testReadUserProfileDetails() {
-        User user1 = new User("susi@gmail.com");
-        UserService userService = new UserService();
-        try {
-            List<User> result = userService.readUserDetails(user1);
-            assertNotNull(result);
+	// test delete user invalid email
+	@Test
+	void testDeleteUserAccountWithNotExistEmail() {
+		User user1 = new User("naan@gmail.com", true);
+		UserService userService = new UserService();
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.deleteUser(user1));
 
-        }
-    }
+		assertEquals(UserConstants.getInvalidUserDeleteMessage(), result.getMessage());
+	}
 
-    // List user feature
+	// Test update the user profile image details
 
-    @Test
-    void testListUsersFeatureSuccessWithValidDetails() {
-        User user1 = new User("susi@gmail.com");
-        UserService userService = new UserService();
+	@Test
+	void testUserProfileImageUpdateSuccess() {
+		User user1 = new User("https://example.com/image.jpg", 1);
+		UserService userService = new UserService();
+		try {
+			assertTrue(userService.profileImageUpdate(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
 
-        try {
+		}
+	}
 
-            List<User> result = userService.listUser(user1);
-            for (User u : result) {
-                System.out.println(u);
-            }
+	// test the invalid image url update
 
-            assertNotNull(result);
-            assertFalse(result.isEmpty());
+	@Test
+	void testProfileInvalidImageUrl() {
+		User user1 = new User("httpexample", 1);
+		UserService userService = new UserService();
+		ServiceException result = assertThrows(ServiceException.class, () -> userService.profileImageUpdate(user1));
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
+		assertEquals(UserConstants.getInvalidUserProfileImageUrlMessage(), result.getMessage());
+	}
 
-        }
-    }
+	@Test
+	void testReadUserProfileDetails() {
+		User user1 = new User("susi@gmail.com");
+		UserService userService = new UserService();
+		try {
+			List<User> result = userService.readUserDetails(user1);
+			assertNotNull(result);
+
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+
+		}
+	}
+
+	// List user feature
+
+	@Test
+	void testListUsersFeatureSuccessWithValidDetails() {
+		User user1 = new User("susi@gmail.com");
+		UserService userService = new UserService();
+
+		try {
+
+			List<User> result = userService.listUser(user1);
+			for (User u : result) {
+				System.out.println(u);
+			}
+
+			assertNotNull(result);
+			assertFalse(result.isEmpty());
+
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+
+		}
+	}
 }

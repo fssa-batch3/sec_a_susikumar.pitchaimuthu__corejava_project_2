@@ -9,10 +9,6 @@ package com.fssa.freshnest.constants;
 
 public class StillConstants {
 
-    private static final String COMMON_DAO_ERROR_MESSAGE = "com.fssa.freshnest.dao.exceptions.DAOException: ";
-    private static final String COMMON_SERVICE_ERROR_MESSAGE = "com.fssa.freshnest.validation.exceptions.InvalidUserException: ";
-
-
     private static final String INVALID_STILL_TAKE_MESSAGE = "still create details are not valid";
     private static final String INVALID_STILL_FAVOURITE_MESSAGE = "still favourite details are not valid";
     private static final String INVALID_STILL_UPDATE_MESSAGE = "still update details are not valid";
@@ -128,23 +124,7 @@ public class StillConstants {
         return INVALID_STILL_USERID_MESSAGE;
     }
 
-    /**
-     * Get the common DAO error message.
-     *
-     * @return The common DAO error message.
-     */
-    public static String getCommonDaoErrorMessage() {
-        return COMMON_DAO_ERROR_MESSAGE;
-    }
 
-    /**
-     * Get the common service error message.
-     *
-     * @return The common service error message.
-     */
-    public static String getCommonServiceErrorMessage() {
-        return COMMON_SERVICE_ERROR_MESSAGE;
-    }
 
 
 }

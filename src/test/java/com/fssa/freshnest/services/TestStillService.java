@@ -1,239 +1,228 @@
 package com.fssa.freshnest.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import com.fssa.freshnest.constants.StillConstants;
+import com.fssa.freshnest.model.Still;
+import com.fssa.freshnest.model.User;
+import com.fssa.freshnest.services.exceptions.ServiceException;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import com.fssa.freshnest.constants.StillConstants;
-import com.fssa.freshnest.model.Still;
-import com.fssa.freshnest.model.User;
-import com.fssa.freshnest.services.exceptions.ServiceException;
-import com.fssa.freshnest.validation.exceptions.InvalidUserException;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * This class contains test cases for the StillService class, which handles various still-related operations.
+ * This class contains test cases for the StillService class, which handles
+ * various still-related operations.
  *
  * @author SusikumarPitchaimuth
  */
 class TestStillService {
 
-    // Test still Creation feature
+	// Test still Creation feature
 
-    @Test
-    void testStillCreateSuccess() {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-        
-        User user = new User();
-        user.setUserId(1);
+	@Test
+	void testStillCreateSuccess() {
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
 
-        Still still = new Still("https://www.example.com", user, "Supreme", currentDate, currentTime, false, false);
-        StillService stillService = new StillService();
+		User user = new User();
+		user.setUserId(1);
 
-        try {
-            assertTrue(stillService.takeStill(still));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
+		Still still = new Still("https://www.example.com", user, "Supreme", currentDate, currentTime, false, false);
+		StillService stillService = new StillService();
 
-        }
-    }
+		try {
+			assertTrue(stillService.takeStill(still));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
 
-    @Test
-    void testStillCreateWithInvalidStillUrl() {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-        
-        User user = new User();
-        user.setUserId(1);
+		}
+	}
 
-        Still still = new Still("www.sampleImage.com", user, "Supreme", currentDate, currentTime, false, false);
-        StillService stillService = new StillService();
+	@Test
+	void testStillCreateWithInvalidStillUrl() {
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
 
-        ServiceException result = assertThrows(ServiceException.class, () -> stillService.takeStill(still));
+		User user = new User();
+		user.setUserId(1);
 
-        String expectedMessage = StillConstants.getCommonServiceErrorMessage() + StillConstants.getInvalidStillUrlMessage();
-        assertEquals(expectedMessage, result.getMessage());
+		Still still = new Still("www.sampleImage.com", user, "Supreme", currentDate, currentTime, false, false);
+		StillService stillService = new StillService();
 
-    }
+		ServiceException result = assertThrows(ServiceException.class, () -> stillService.takeStill(still));
 
-    @Test
-    void testStillCreateWithInvalidStillName() {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
+		assertEquals(StillConstants.getInvalidStillUrlMessage(), result.getMessage());
 
-        User user = new User();
-        user.setUserId(1);
-        Still still = new Still("https://www.example.com", user, " ", currentDate, currentTime, false, false);
-        StillService stillService = new StillService();
+	}
 
-        ServiceException result = assertThrows(ServiceException.class, () -> stillService.takeStill(still));
-        String expectedMessage = StillConstants.getCommonServiceErrorMessage() + StillConstants.getInvalidStillNameMessage();
+	@Test
+	void testStillCreateWithInvalidStillName() {
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
 
-        assertEquals(expectedMessage, result.getMessage());
-    }
+		User user = new User();
+		user.setUserId(1);
+		Still still = new Still("https://www.example.com", user, " ", currentDate, currentTime, false, false);
+		StillService stillService = new StillService();
 
+		ServiceException result = assertThrows(ServiceException.class, () -> stillService.takeStill(still));
 
-    // Test still read feature
+		assertEquals(StillConstants.getInvalidStillNameMessage(), result.getMessage());
+	}
 
-    // test the still read success
-    @Test
-    void testStillReadSuccess() {
+	// Test still read feature
 
-        Still still = new Still(1);
-        StillService stillService = new StillService();
-        try {
-            List<Still> result = stillService.readStill(still);
-            for (Still s : result) {
-                System.out.println(s);
-            }
-            assertNotNull(result);
-            assertFalse(result.isEmpty());
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+	// test the still read success
+	@Test
+	void testStillReadSuccess() {
 
-    // test the still invalid still id read
-    @Test
-    void testInvalidStillIdRead()  {
-        Still still = new Still(-1);
-        StillService stillService = new StillService();
+		User user = new User();
+		user.setUserId(1);
 
-        List<Still> result = null;
-        try {
-            result = stillService.readStill(still);
-        } catch (ServiceException e) {
-            throw new RuntimeException(e);
-        }
-        assertTrue(result.isEmpty());
-    }
+		Still still = new Still(user);
+		StillService stillService = new StillService();
+		try {
+			List<Still> result = stillService.readStill(still);
 
+			assertNotNull(result);
+			assertFalse(result.isEmpty());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-    // Test still update feature
+	// test the still invalid still id read
+	@Test
+	void testInvalidStillIdRead() {
+		User user = new User();
+		user.setUserId(-1);
 
-    // test image update details
-    @Test
-    void testStillUpdateSuccess() {
+		Still still = new Still(user);
+		StillService stillService = new StillService();
 
-        int parent_id = 1;
-        // Adding that image is updated
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-        
-        User user = new User();
-        user.setUserId(1);
+		List<Still> result = null;
+		try {
+			result = stillService.readStill(still);
+		} catch (ServiceException e) {
+			throw new RuntimeException(e);
+		}
+		assertTrue(result.isEmpty());
+	}
 
-        new Still(parent_id);
-        // Adding the new image to the database
-        Still still2 = new Still("https://www.example.com", user, "Supreme", currentDate, currentTime, false, false);
+	// Test still update feature
 
-        StillService stillService = new StillService();
-        try {
-            assertTrue(stillService.updateStill(still2));
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+	// test image update details
+	@Test
+	void testStillUpdateSuccess() {
 
-    @Test
-    void testImageUpdateWithInvalidImageUrlFailure() {
-        int parent_id = 2;
+		int parent_id = 1;
+		// Adding that image is updated
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
 
-        // Adding that image is updated
+		User user = new User();
+		user.setUserId(1);
 
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-        
-        User user = new User();
-        user.setUserId(1);
+		new Still(parent_id);
+		// Adding the new image to the database
+		Still still2 = new Still("https://www.example.com", user, "Supreme", currentDate, currentTime, false, false);
 
-        // Adding the new image to the database
-        new Still(parent_id);
-        Still still2 = new Still("www.example.png", user, "Supreme", currentDate, currentTime, false, false);
+		StillService stillService = new StillService();
+		try {
+			assertTrue(stillService.updateStill(still2));
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-        StillService stillService = new StillService();
+	@Test
+	void testImageUpdateWithInvalidImageUrlFailure() {
+		int parent_id = 2;
 
-        ServiceException result = assertThrows(ServiceException.class, () -> stillService.updateStill(still2));
+		// Adding that image is updated
 
-        String expectedMessage = StillConstants.getCommonServiceErrorMessage() + StillConstants.getInvalidStillUrlMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
 
+		User user = new User();
+		user.setUserId(1);
 
-    // Test still delete feature
+		// Adding the new image to the database
+		new Still(parent_id);
+		Still still2 = new Still("www.example.png", user, "Supreme", currentDate, currentTime, false, false);
 
-    @Test
-    void testStillDeleteSuccess() {
-        int still_id = 1;
-        User user = new User();
-        user.setUserId(1);
+		StillService stillService = new StillService();
 
-        Still still = new Still(true, still_id, user);
+		ServiceException result = assertThrows(ServiceException.class, () -> stillService.updateStill(still2));
 
-        StillService stillService = new StillService();
+		assertEquals(StillConstants.getInvalidStillUrlMessage(), result.getMessage());
+	}
 
-        try {
-            assertTrue(stillService.deleteStill(still));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+	// Test still delete feature
 
+	@Test
+	void testStillDeleteSuccess() {
+		int still_id = 1;
+		User user = new User();
+		user.setUserId(1);
 
-    // test still delete with invalid details
-    @Test
-    void testStillDeleteDetailsWithInvalidStillId() {
+		Still still = new Still(true, still_id, user);
 
-        int still_id = -1;
-        
-        User user = new User();
-        user.setUserId(1);
+		StillService stillService = new StillService();
 
-        StillService stillService = new StillService();
-        Still still = new Still(true, still_id, user);
-        ServiceException result = assertThrows(ServiceException.class, () -> stillService.deleteStill(still));
-        String expectedMessage = StillConstants.getCommonDaoErrorMessage() + StillConstants.getInvalidStillIdMessage();
-        assertEquals(expectedMessage, result.getMessage());
-    }
+		try {
+			assertTrue(stillService.deleteStill(still));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
+	// test still delete with invalid details
+	@Test
+	void testStillDeleteDetailsWithInvalidStillId() {
 
-    // Test still favourite feature
+		int still_id = -1;
 
-    @Test
-    void testImageFavouriteSuccess() {
-        Still still = new Still(true, 1);
-        StillService stillService = new StillService();
+		User user = new User();
+		user.setUserId(1);
 
-        try {
-            assertTrue(stillService.favouriteStill(still));
+		StillService stillService = new StillService();
+		Still still = new Still(true, still_id, user);
+		ServiceException result = assertThrows(ServiceException.class, () -> stillService.deleteStill(still));
 
-        } catch (ServiceException e) {
-            e.printStackTrace();
+		assertEquals(StillConstants.getInvalidStillIdMessage(), result.getMessage());
+	}
 
-        }
-    }
+	// Test still favourite feature
 
+	@Test
+	void testImageFavouriteSuccess() {
+		Still still = new Still(true, 1);
+		StillService stillService = new StillService();
 
-    @Test
-    void testImageFavouriteNullDetails() {
-        Still still = null;
-        StillService stillService = new StillService();
+		try {
+			assertTrue(stillService.favouriteStill(still));
 
-        InvalidUserException result = assertThrows(InvalidUserException.class, () -> stillService.favouriteStill(still));
-        assertEquals(StillConstants.getInvalidStillFavouriteMessage(), result.getMessage());
-    }
+		} catch (ServiceException e) {
+			e.printStackTrace();
+
+		}
+	}
+
+	@Test
+	void testImageFavouriteNullDetails() {
+		Still still = null;
+		StillService stillService = new StillService();
+
+		ServiceException result = assertThrows(ServiceException.class, () -> stillService.favouriteStill(still));
+		assertEquals(StillConstants.getInvalidStillFavouriteMessage(), result.getMessage());
+	}
 
 }

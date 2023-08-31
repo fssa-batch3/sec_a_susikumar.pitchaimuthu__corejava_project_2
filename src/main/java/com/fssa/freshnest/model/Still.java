@@ -37,16 +37,16 @@ public class Still {
         this.stillId = stillId;
     }
 
-    public Still(int stillId, boolean isUpdate) {
-        this.stillId = stillId;
-        this.isUpdate = isUpdate;
-    }
 
     public Still(boolean isDelete, int stillId, User user) {
         this.isDelete = isDelete;
         this.stillId = stillId;
         this.user = user;
 
+    }
+
+    public Still(User user) {
+        this.user = user;
     }
 
     public Still(int stillId) {
@@ -124,7 +124,7 @@ public class Still {
     public void setIsDelete(boolean isDelete) {
         this.isDelete = isDelete;
     }
- 
+
     @Override
     public String toString() {
         return "Still{" + "stillUrl='" + stillUrl + '\'' + ", userId=" + user + ", stillName='" + stillName + '\''
