@@ -3,178 +3,377 @@ package com.fssa.freshnest.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Represents an invitation entity that contains information about an invitation
+ * event, including its type, date, time, participants, and associated actions.
+ * This class provides constructors and methods to manage different aspects of
+ * an invitation.
+ * 
+ * @author SusikumarPitchaimuth
+ */
+
 public class Invite {
 
-    private User user;
-    private String inviteType;
-    private LocalDate inviteDate;
-    private LocalTime inviteTime;
-    private String specialPerson;
-    private String inviteSlogan;
-    private String inviteExplanation;
-    private int inviteId;
-    private int reactorId;
-    private boolean isLike;
-    private boolean isAccept;
-    private boolean isDislike;
-    private String inviteMessage;
-    // Constructor
+	private User user;
+	private String inviteType;
+	private LocalDate inviteDate;
+	private LocalTime inviteTime;
+	private String specialPerson;
+	private String inviteSlogan;
+	private String inviteExplanation;
+	private int inviteId;
+	private int reactorId;
+	private boolean isLike;
+	private boolean isAccept;
+	private boolean isDislike;
+	private String inviteMessage;
+	// Constructor
 
-    // Default Constructor
-    public Invite() {
+	/**
+	 * Default constructor for creating an empty Invite object.
+	 */
+	// Default Constructor
+	public Invite() {
 
-    }
+	}
 
-    // Invite create constructor
-    public Invite(User user, String inviteType, LocalDate inviteDate, LocalTime inviteTime, String specialPerson,
-                  String inviteSlogan, String inviteExplanation) {
-        this.user = user;
-        this.inviteType = inviteType;
-        this.inviteDate = inviteDate;
-        this.inviteTime = inviteTime;
-        this.specialPerson = specialPerson;
-        this.inviteSlogan = inviteSlogan;
-        this.inviteExplanation = inviteExplanation;
-    }
+	/**
+	 * Constructor for creating an Invite object with specified user and invitation
+	 * details.
+	 *
+	 * @param user              The user associated with the invitation.
+	 * @param inviteType        The type of the invitation.
+	 * @param inviteDate        The date of the invitation.
+	 * @param inviteTime        The time of the invitation.
+	 * @param specialPerson     Name of the special person (if applicable).
+	 * @param inviteSlogan      Slogan or message for the invitation.
+	 * @param inviteExplanation Explanation or details about the invitation.
+	 */
 
-    // Invite update constructor
-    public Invite(String inviteType, LocalDate inviteDate, LocalTime inviteTime, String specialPerson,
-                  String inviteSlogan, String inviteExplanation, int inviteId) {
-        this.inviteType = inviteType;
-        this.inviteDate = inviteDate;
-        this.inviteTime = inviteTime;
-        this.specialPerson = specialPerson;
-        this.inviteSlogan = inviteSlogan;
-        this.inviteExplanation = inviteExplanation;
-        this.inviteId = inviteId;
-    }
+	// Invite create constructor
+	public Invite(User user, String inviteType, LocalDate inviteDate, LocalTime inviteTime, String specialPerson,
+			String inviteSlogan, String inviteExplanation) {
+		this.user = user;
+		this.inviteType = inviteType;
+		this.inviteDate = inviteDate;
+		this.inviteTime = inviteTime;
+		this.specialPerson = specialPerson;
+		this.inviteSlogan = inviteSlogan;
+		this.inviteExplanation = inviteExplanation;
+	}
 
-    // invite delete constructor
+	/**
+	 * Constructor for updating an existing invitation with new details.
+	 *
+	 * @param inviteType        The updated type of the invitation.
+	 * @param inviteDate        The updated date of the invitation.
+	 * @param inviteTime        The updated time of the invitation.
+	 * @param specialPerson     The updated name of the special person (if
+	 *                          applicable).
+	 * @param inviteSlogan      The updated slogan or message for the invitation.
+	 * @param inviteExplanation The updated explanation or details about the
+	 *                          invitation.
+	 * @param inviteId          The unique identifier of the invitation being
+	 *                          updated.
+	 */
+	// Invite update constructor
+	public Invite(String inviteType, LocalDate inviteDate, LocalTime inviteTime, String specialPerson,
+			String inviteSlogan, String inviteExplanation, int inviteId) {
+		this.inviteType = inviteType;
+		this.inviteDate = inviteDate;
+		this.inviteTime = inviteTime;
+		this.specialPerson = specialPerson;
+		this.inviteSlogan = inviteSlogan;
+		this.inviteExplanation = inviteExplanation;
+		this.inviteId = inviteId;
+	}
 
-    public Invite(int inviteId) {
-        this.inviteId = inviteId;
-    }
+	/**
+	 * Constructor for marking an invitation for deletion.
+	 *
+	 * @param inviteId The unique identifier of the invitation to be deleted.
+	 */
+	public Invite(int inviteId) {
+		this.inviteId = inviteId;
+	}
 
-    public Invite(User user) {
-        this.user = user;
-    }
+	/**
+	 * Constructor for creating an Invite object with a specified user.
+	 *
+	 * @param user The user associated with the invitation.
+	 */
+	public Invite(User user) {
+		this.user = user;
+	}
 
-    public Invite(User user, int inviteId) {
-        this.user = user;
-        this.inviteId = inviteId;
-    }
-    // Getters and setters
+	/**
+	 * Constructor for creating an Invite object with a specified user and
+	 * invitation ID.
+	 *
+	 * @param user     The user associated with the invitation.
+	 * @param inviteId The unique identifier of the invitation.
+	 */
+	public Invite(User user, int inviteId) {
+		this.user = user;
+		this.inviteId = inviteId;
+	}
+	// Getters and setters
 
-    public boolean getIsLike() {
-        return isLike;
-    }
+	/**
+	 * Retrieves the value of the 'isLike' flag, indicating whether the invitation
+	 * has been liked.
+	 *
+	 * @return True if the invitation has been liked, false otherwise.
+	 */
+	public boolean getIsLike() {
+		return isLike;
+	}
 
-    public void setIsLike(boolean isLike) {
-        this.isLike = isLike;
-    }
+	/**
+	 * Sets the 'isLike' flag to indicate whether the invitation has been liked.
+	 *
+	 * @param isLike True to set the invitation as liked, false otherwise.
+	 */
+	public void setIsLike(boolean isLike) {
+		this.isLike = isLike;
+	}
 
-    public boolean getIsAccept() {
-        return isAccept;
-    }
+	/**
+	 * Retrieves the value of the 'isAccept' flag, indicating whether the invitation
+	 * has been accepted.
+	 *
+	 * @return True if the invitation has been accepted, false otherwise.
+	 */
+	public boolean getIsAccept() {
+		return isAccept;
+	}
 
-    public void setIsAccept(boolean isAccept) {
-        this.isAccept = isAccept;
-    }
+	/**
+	 * Sets the 'isAccept' flag to indicate whether the invitation has been
+	 * accepted.
+	 *
+	 * @param isAccept True to set the invitation as accepted, false otherwise.
+	 */
+	public void setIsAccept(boolean isAccept) {
+		this.isAccept = isAccept;
+	}
 
-    public boolean getIsDislike() {
-        return isDislike;
-    }
+	/**
+	 * Retrieves the value of the 'isDislike' flag, indicating whether the
+	 * invitation has been disliked.
+	 *
+	 * @return True if the invitation has been disliked, false otherwise.
+	 */
+	public boolean getIsDislike() {
+		return isDislike;
+	}
 
-    public void setIsDislike(boolean isDislike) {
-        this.isDislike = isDislike;
-    }
+	/**
+	 * Sets the 'isDislike' flag to indicate whether the invitation has been
+	 * disliked.
+	 *
+	 * @param isDislike True to set the invitation as disliked, false otherwise.
+	 */
+	public void setIsDislike(boolean isDislike) {
+		this.isDislike = isDislike;
+	}
 
-    public String getInviteMessage() {
-        return inviteMessage;
-    }
+	/**
+	 * Retrieves the additional message associated with the invitation.
+	 *
+	 * @return The additional message related to the invitation.
+	 */
+	public String getInviteMessage() {
+		return inviteMessage;
+	}
 
-    public void setInviteMessage(String inviteMessage) {
-        this.inviteMessage = inviteMessage;
-    }
+	/**
+	 * Sets the additional message associated with the invitation.
+	 *
+	 * @param inviteMessage The additional message related to the invitation.
+	 */
+	public void setInviteMessage(String inviteMessage) {
+		this.inviteMessage = inviteMessage;
+	}
 
-    public int getReactorId() {
-        return reactorId;
-    }
+	/**
+	 * Retrieves the reactor ID associated with the invitation.
+	 *
+	 * @return The ID of the reactor (participant) of the invitation.
+	 */
+	public int getReactorId() {
+		return reactorId;
+	}
 
-    public void setReactorId(int reactorId) {
-        this.reactorId = reactorId;
-    }
+	/**
+	 * Sets the reactor ID associated with the invitation.
+	 *
+	 * @param reactorId The ID of the reactor (participant) of the invitation.
+	 */
+	public void setReactorId(int reactorId) {
+		this.reactorId = reactorId;
+	}
 
-    public int getInviteId() {
-        return inviteId;
-    }
+	/**
+	 * Retrieves the unique identifier of the invitation.
+	 *
+	 * @return The unique identifier of the invitation.
+	 */
+	public int getInviteId() {
+		return inviteId;
+	}
 
-    public void setInviteId(int inviteId) {
-        this.inviteId = inviteId;
-    }
+	/**
+	 * Sets the unique identifier of the invitation.
+	 *
+	 * @param inviteId The unique identifier of the invitation.
+	 */
+	public void setInviteId(int inviteId) {
+		this.inviteId = inviteId;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	/**
+	 * Retrieve the user object to get the user id.
+	 * 
+	 * @return The object of user details.
+	 */
+	// Getter for user
+	public User getUser() {
+		return user;
+	}
+	
+	/**
+	 * Sets the user object details.
+	 * 
+	 * @param user The object of the user.
+	 */
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	// Setter for user
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public String getInviteType() {
-        return inviteType;
-    }
+	/**
+	 * Retrieves the type of the invitation.
+	 *
+	 * @return The type of the invitation.
+	 */
+	public String getInviteType() {
+		return inviteType;
+	}
 
-    public void setInviteType(String inviteType) {
-        this.inviteType = inviteType;
-    }
+	/**
+	 * Sets the type of the invitation.
+	 *
+	 * @param inviteType The type of the invitation.
+	 */
+	public void setInviteType(String inviteType) {
+		this.inviteType = inviteType;
+	}
 
-    public LocalDate getInviteDate() {
-        return inviteDate;
-    }
+	/**
+	 * Retrieves the date of the invitation.
+	 *
+	 * @return The date of the invitation.
+	 */
+	public LocalDate getInviteDate() {
+		return inviteDate;
+	}
 
-    public void setInviteDate(LocalDate inviteDate) {
-        this.inviteDate = inviteDate;
-    }
+	/**
+	 * Sets the date of the invitation.
+	 *
+	 * @param inviteDate The date of the invitation.
+	 */
+	public void setInviteDate(LocalDate inviteDate) {
+		this.inviteDate = inviteDate;
+	}
 
-    public LocalTime getInviteTime() {
-        return inviteTime;
-    }
+	/**
+	 * Retrieves the time of the invitation.
+	 *
+	 * @return The time of the invitation.
+	 */
+	public LocalTime getInviteTime() {
+		return inviteTime;
+	}
 
-    public void setInviteTime(LocalTime inviteTime) {
-        this.inviteTime = inviteTime;
-    }
+	/**
+	 * Sets the time of the invitation.
+	 *
+	 * @param inviteTime The time of the invitation.
+	 */
+	public void setInviteTime(LocalTime inviteTime) {
+		this.inviteTime = inviteTime;
+	}
 
-    public String getSpecialPerson() {
-        return specialPerson;
-    }
+	/**
+	 * Retrieves the name of the special person associated with the invitation.
+	 *
+	 * @return The name of the special person.
+	 */
+	public String getSpecialPerson() {
+		return specialPerson;
+	}
 
-    public void setSpecialPerson(String specialPerson) {
-        this.specialPerson = specialPerson;
-    }
+	/**
+	 * Sets the name of the special person associated with the invitation.
+	 *
+	 * @param specialPerson The name of the special person.
+	 */
+	public void setSpecialPerson(String specialPerson) {
+		this.specialPerson = specialPerson;
+	}
 
-    public String getInviteSlogan() {
-        return inviteSlogan;
-    }
+	/**
+	 * Retrieves the slogan or message for the invitation.
+	 *
+	 * @return The slogan or message for the invitation.
+	 */
+	public String getInviteSlogan() {
+		return inviteSlogan;
+	}
 
-    public void setInviteSlogan(String inviteSlogan) {
-        this.inviteSlogan = inviteSlogan;
-    }
+	/**
+	 * Sets the slogan or message for the invitation.
+	 *
+	 * @param inviteSlogan The slogan or message for the invitation.
+	 */
+	public void setInviteSlogan(String inviteSlogan) {
+		this.inviteSlogan = inviteSlogan;
+	}
 
-    public String getInviteExplanation() {
-        return inviteExplanation;
-    }
+	/**
+	 * Retrieves the explanation or details about the invitation.
+	 *
+	 * @return The explanation or details about the invitation.
+	 */
+	public String getInviteExplanation() {
+		return inviteExplanation;
+	}
 
-    public void setInviteExplanation(String inviteExplanation) {
-        this.inviteExplanation = inviteExplanation;
-    }
+	/**
+	 * Sets the explanation or details about the invitation.
+	 *
+	 * @param inviteExplanation The explanation or details about the invitation.
+	 */
+	public void setInviteExplanation(String inviteExplanation) {
+		this.inviteExplanation = inviteExplanation;
+	}
 
-    @Override
-    public String toString() {
-        return "Invite{" + "userId=" + user + ", inviteType='" + inviteType + '\'' + ", inviteDate='" + inviteDate
-                + '\'' + ", inviteTime='" + inviteTime + '\'' + ", specialPerson='" + specialPerson + '\''
-                + ", inviteSlogan='" + inviteSlogan + '\'' + ", inviteExplanation='" + inviteExplanation + '\''
-                + ", inviteId=" + inviteId + ", reactorId=" + reactorId + ", isLike=" + isLike + ", isAccept="
-                + isAccept + ", isDislike=" + isDislike + ", inviteMessage='" + inviteMessage + '\'' + '}';
-    }
+	/**
+	 * Generates a string representation of the Invite object, including its
+	 * attributes.
+	 *
+	 * @return A string containing information about the Invite object.
+	 */
+
+	@Override
+	public String toString() {
+		return "Invite{" + "userId=" + user + ", inviteType='" + inviteType + '\'' + ", inviteDate='" + inviteDate
+				+ '\'' + ", inviteTime='" + inviteTime + '\'' + ", specialPerson='" + specialPerson + '\''
+				+ ", inviteSlogan='" + inviteSlogan + '\'' + ", inviteExplanation='" + inviteExplanation + '\''
+				+ ", inviteId=" + inviteId + ", reactorId=" + reactorId + ", isLike=" + isLike + ", isAccept="
+				+ isAccept + ", isDislike=" + isDislike + ", inviteMessage='" + inviteMessage + '\'' + '}';
+	}
 }

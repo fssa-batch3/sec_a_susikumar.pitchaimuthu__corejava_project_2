@@ -222,17 +222,40 @@ public class UserDAO {
         String selectQuery = "SELECT * FROM users WHERE email != ? AND is_deleted = FALSE";
         return fetchUsers(selectQuery, user.getEmail());
     }
+    
+    /**
+     * List the user details once the clicked there profile. 
+     * 
+     * @param user The user object containg the user email id to list the user profile details.
+     * @return List of user details if the information are valid or email is exist otherwise false.
+     * @throws DAOException  If there is an issue with the databse operation.
+     */
 
     public List<User> readUser(User user) throws DAOException {
         String selectQuery = "SELECT * FROM users WHERE email = ?";
         return fetchUsers(selectQuery, user.getEmail());
     }
+    
+    /**
+     * Show the user details which one user searched.
+     * 
+     * @param user The user object containg the user searched name.
+     * @return List the user details If the username is exist in the database, otherwise .
+     * @throws DAOException If there is no user object like that.
+     */
 
     public List<User> searchUserName(User user) throws DAOException {
         String selectQuery = "SELECT * FROM users WHERE  username = ?";
         return fetchUsers(selectQuery, user.getUsername());
     }
 
+    /**
+     * 
+     * @param query The contains the user request query to execute.
+     * @param parameter The parameter contains parameter of the execute query.
+     * @return List the user details if the information is valid else.
+     * @throws DAOException If there is no user object like that.
+     */
     private List<User> fetchUsers(String query, String parameter) throws DAOException {
         List<User> userList = new ArrayList<>();
         try (Connection connection = ConnectionUtils.getConnection();
@@ -250,6 +273,13 @@ public class UserDAO {
             throw new DAOException(e);
         }
     }
+    
+    /**
+     * 
+     * @param resultSet containing the result set object.
+     * @return It will assign the values to the respective attributes.
+     * @throws SQLException If there is any error occur.
+     */
 
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
         User userResult = new User();
