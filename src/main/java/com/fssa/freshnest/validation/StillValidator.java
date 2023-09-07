@@ -64,10 +64,10 @@ public class StillValidator {
 	 */
 	// validate Update Image
 	public static boolean validateUpdateStill(Still still) throws InvalidUserException {
-		System.out.println(still.getStillDate());
-		System.out.println(still.getStillTime());
+		if (still == null)
+			return false;
 
-		if (still != null && validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
+		if (validateStillUrl(still.getStillUrl()) && validateStillName(still.getStillName())
 				&& validateStillDate(still.getStillDate()) && validateStillTime(still.getStillTime())) {
 			return true;
 		} else {
@@ -87,8 +87,11 @@ public class StillValidator {
 
 	// validate Delete image
 	public static boolean validateDeleteStill(Still still) throws InvalidUserException {
+		if (still == null) {
+			return false;
+		}
 
-		if (still != null) {
+		if (validateStillDate(still.getStillDate())) {
 			return true;
 		} else {
 			throw new InvalidUserException(StillConstants.getInvalidStillDeleteMessage());

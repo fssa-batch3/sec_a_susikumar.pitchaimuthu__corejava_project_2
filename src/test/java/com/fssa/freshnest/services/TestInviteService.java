@@ -187,7 +187,7 @@ class TestInviteService {
     // test the invitation test success
     @Test
     void testInvitationDeleteSuccess() {
-        Invite invite = new Invite(4);
+        Invite invite = new Invite(1);
         InviteService inviteService = new InviteService();
         try {
             assertTrue(inviteService.deleteInvite(invite));

@@ -208,10 +208,10 @@ class TestStillService {
 	void testStillDeleteSuccess() {
 		int still_id = 2;
 		User user = new User();
-		user.setUserId(1);
+		user.setUserId(2);
 
 		Still still = new Still(true, still_id, user);
-
+		still.setStillDate(LocalDate.now());
 		StillService stillService = new StillService();
 
 		try {
@@ -226,7 +226,7 @@ class TestStillService {
 	@Test
 	void testStillDeleteDetailsWithInvalidStillId() {
 
-		int still_id = -1;
+		int still_id = 0;
 
 		User user = new User();
 		user.setUserId(1);
@@ -235,7 +235,7 @@ class TestStillService {
 		Still still = new Still(true, still_id, user);
 		ServiceException result = assertThrows(ServiceException.class, () -> stillService.deleteStill(still));
 
-		assertEquals(StillConstants.getInvalidStillIdMessage(), result.getMessage());
+		assertEquals(StillConstants.getInvalidStillDeleteMessage(), result.getMessage());
 	}
 
 	// Test still favourite feature
@@ -293,6 +293,60 @@ class TestStillService {
 		ServiceException result = assertThrows(ServiceException.class, () -> stillService.filterStills(still));
 		assertEquals(StillConstants.getInvalidStillFilterMessage(), result.getMessage());
 
+	}
+	
+	@Test
+	void testFilterStillsFavouriteSuccess() {
+		User user = new User();
+		user.setUserId(2);
+		Still still = new Still( user);
+		StillService stillService = new StillService();
+		
+		try {
+			List<Still> favouriteStills = stillService.filterStillByFavourite(still);
+			assertNotNull(favouriteStills);
+		}catch(ServiceException e) {
+			fail();
+		}	
+	}
+	
+	@Test
+	void testFilterStillsFavouriteByInvalidUserId() {
+		User user = new User();
+		user.setUserId(0);
+		Still still = new Still( user);
+		StillService stillService = new StillService();
+		
+		ServiceException result = assertThrows(ServiceException.class, ()-> stillService.filterStillByFavourite(still));
+		assertEquals(StillConstants.getInvalidStillFilterMessage(), result.getMessage());
+	}
+	
+	
+	@Test
+	void testFilterStillsByRecentlyDeletedSuccess() {
+		User user = new User();
+		user.setUserId(2);
+		Still still = new Still( user);
+		StillService stillService = new StillService();
+		
+		try {
+			List<Still> recentlyDeletedStills = stillService.filterStillByRecentlyDeleted(still);
+			System.out.println(recentlyDeletedStills);
+			assertNotNull(recentlyDeletedStills);
+		}catch(ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	@Test
+	void testFilterRecentlyDeletedStillWithInvalidUserId(){
+		User user = new User();
+		user.setUserId(0);
+		Still still = new Still( user);
+		StillService stillService = new StillService();
+		
+		ServiceException result = assertThrows(ServiceException.class, ()->stillService.filterStillByRecentlyDeleted(still));
+		assertEquals(StillConstants.getInvalidStillFilterMessage(), result.getMessage());
 	}
 
 }

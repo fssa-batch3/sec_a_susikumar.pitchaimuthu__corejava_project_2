@@ -5,6 +5,7 @@ import com.fssa.freshnest.dao.UserDAO;
 import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.User;
 import com.fssa.freshnest.services.exceptions.ServiceException;
+import com.fssa.freshnest.utils.PasswordUtils;
 import com.fssa.freshnest.validation.UserValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
@@ -33,6 +34,8 @@ public class UserService {
 		try {
 			UserValidator.validateUser(user);
 			userDAO.checkUserDataExistOrNot(user.getEmail());
+			String newPassword = PasswordUtils.hashPassword(user.getPassword());
+			user.setPassword(newPassword); 
 			return userDAO.createUser(user);
 
 		} catch (DAOException | InvalidUserException e) {
@@ -41,7 +44,7 @@ public class UserService {
 
 	}
 
-	/**
+	/** 
 	 * Register a new user.
 	 *
 	 * @param user details should be added to the exact users details.
@@ -59,7 +62,7 @@ public class UserService {
 
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());
-		}
+		} 
 
 	}
 
@@ -74,18 +77,15 @@ public class UserService {
 	// User log in service
 	public boolean logInUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
-		System.out.println(user.getPassword());
 		try {
 			UserValidator.validateLogIn(user);
 			User userObject = userDAO.readUserDetailsByEmail(user.getEmail());
-			System.out.println(userObject);
-
+ 
 			if (userObject == null) {
 				throw new ServiceException(UserConstants.getUserDetailsNotFound());
 			}
-			System.out.println("Yes");
 
-			if (!userObject.getPassword().equals(user.getPassword())) {
+			if (!PasswordUtils.checkPassword(user.getPassword(), userObject.getPassword())) {
 				throw new ServiceException(UserConstants.getLoginPasswordInvalid());
 			}
 
@@ -160,6 +160,14 @@ public class UserService {
 
 	}
 
+	/**
+	 * List the all user data.
+	 * 
+	 * @param user The user object containg the profile user email.
+	 * @return If the email is valid The user details of where the email not equal to the user profile email. Otherwise
+	 * @throws ServiceException If there is no data in the database or email is not valid.
+	 * 
+	 */
 	public List<User> listUser(User user) throws ServiceException {
 
 		UserDAO userDAO = new UserDAO();
@@ -172,7 +180,15 @@ public class UserService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * Read the user profile details.
+	 * 
+	 * @param user The user object containg the user email.
+	 * @return If the email is there return the user object with user's information. Otherwise
+	 * @throws ServiceException If the email is not exists in the databse.
+	 * 
+	 */
 	public User readUserDetails(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
@@ -188,26 +204,48 @@ public class UserService {
 			throw new ServiceException(e);
 		}
 	}
+	
+	/**
+	 * Read the user friends or user choosen user's information.
+	 * 
+	 * @param user The user object contains the user id.
+	 * @return If the user id is present in the databse return the choosen user object, Otherwise 
+	 * @throws ServiceException If the user id not exists.
+	 * 
+	 */
 
 	public User readUserFrinedsDetails(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
-			User details = userDAO.readUserFrinedsDetails(user);
+			List<User> details = userDAO.readUserFrinedsDetails(user);
 
-			if (details == null) {
+			if (details.isEmpty()) {
 				throw new ServiceException(UserConstants.getUserDetailsNotFound());
 			}
-			return details;
+			return details.get(0);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
 	}
 
+	/**
+	 * Search the user details by the user name.
+	 * 
+	 * @param user The user object constains the user name.
+	 * @return The object of user details if the username exists in the databse, Otherwise.
+	 * @throws ServiceException throw new serviceException with there is no user in this name.
+	 * 
+	 */
 	public List<User> searchUserList(User user) throws ServiceException {
 
 		UserDAO userDAO = new UserDAO();
 		try {
-			return userDAO.searchUserName(user);
+			List<User> userDetails =  userDAO.searchUserName(user);
+			
+			if(userDetails.isEmpty()) {
+				throw new ServiceException(UserConstants.getUserDetailsNotFound());
+			}
+			return userDetails;
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}

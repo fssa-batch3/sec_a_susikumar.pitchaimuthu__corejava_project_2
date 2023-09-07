@@ -27,6 +27,13 @@ class TestChatValidation {
             fail();
         }
     }
+    
+    
+    @Test
+    void testInvalidChatMessage() {
+    	InvalidUserException result = assertThrows(InvalidUserException.class, ()-> ChatValidator.validateChat(""));
+    	assertEquals(ChatConstants.getInvalidChatTextMessage(), result.getMessage());
+    }
 
     /**
      * Test case for validating a valid chat type.
@@ -56,6 +63,13 @@ class TestChatValidation {
     void testInvalidWrongChatType() {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType("Conversation"));
         assertEquals(ChatConstants.getInvalidChatTypeMessage(), result.getMessage());
+    }
+    
+    
+    @Test
+    void testInvalidChatType() {
+    	InvalidUserException result = assertThrows(InvalidUserException.class, ()-> ChatValidator.validateChatType(""));
+    	assertEquals(ChatConstants.getNullChatType(), result.getMessage());
     }
 
 

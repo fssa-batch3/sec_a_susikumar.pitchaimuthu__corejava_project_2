@@ -163,7 +163,12 @@ public class InviteValidator {
 
 			LocalDateTime dateTime = LocalDateTime.of(date, time);
 			LocalDateTime currentDateTime = LocalDateTime.now();
-			return dateTime.isAfter(currentDateTime) || dateTime.isEqual(currentDateTime);
+			if( dateTime.isAfter(currentDateTime) || dateTime.isEqual(currentDateTime)) {
+				return true;
+			}else {
+				throw new InvalidUserException(InviteConstants.getInvalidInviteTimeMessage());
+
+			}
 		} catch (Exception e) {
 			throw new InvalidUserException(InviteConstants.getInvalidInviteTimeMessage());
 		}

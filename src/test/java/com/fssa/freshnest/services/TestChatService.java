@@ -57,7 +57,7 @@ class TestChatService {
         ChatService chatService = new ChatService();
 
         ServiceException result = assertThrows(ServiceException.class, () -> chatService.createChat(insertChat, insertChatParticipant, insertMessage));
-        assertEquals(ChatConstants.getInvalidChatSendMessage(), result.getMessage());
+        assertEquals(ChatConstants.getInvalidChatTextMessage(), result.getMessage());
 
 
     }
@@ -136,7 +136,7 @@ class TestChatService {
     void testChatDeleteSuccess() {
 
         int chatId = 1;
-        int messageId = 2;
+        int messageId = 1;
 
         Chat chat = new Chat(true, chatId, messageId);
         ChatService chatService = new ChatService();

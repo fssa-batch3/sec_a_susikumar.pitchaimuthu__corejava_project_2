@@ -16,10 +16,11 @@ public class ChatConstants {
     // Each chat details validator
     private static final String INVALID_CHAT_TEXT_MESSAGE = "chat text is not valid";
     private static final String INVALID_CHAT_TYPE_MESSAGE = "chat type is not valid";
-    private static final String INVALID_CHAT_GROUP_NAME_MESSAGE = "chat group is not valid";
+    private static final String NULL_CHAT_TYPE = "chat type is null";
 
 
-    /**
+   
+	/**
      * Gets the error message for invalid chat sending details.
      *
      * @return The error message for invalid chat sending details.
@@ -73,13 +74,9 @@ public class ChatConstants {
         return INVALID_CHAT_TYPE_MESSAGE;
     }
 
-    /**
-     * Gets the error message for invalid chat group name.
-     *
-     * @return The error message for invalid chat group name.
-     */
-    public static String getInvalidChatGroupNameMessage() {
-        return INVALID_CHAT_GROUP_NAME_MESSAGE;
-    }
+    public static String getNullChatType() {
+		return NULL_CHAT_TYPE;
+	}
+
 
 }

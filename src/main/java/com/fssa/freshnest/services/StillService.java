@@ -130,6 +130,14 @@ public class StillService {
 		}
 	}
 
+	/**
+	 * Read the each and every still details.
+	 *  
+	 * @param still The still object contains the still id.
+	 * @return If true return a still object , Otherwise
+	 * @throws ServiceException throw new ServiceExcption if there is any error.
+	 */
+	
 	public Still readStill(Still still) throws ServiceException {
 		StillDAO stillDAO = new StillDAO();
 		try {
@@ -144,13 +152,20 @@ public class StillService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
+	
+	/**
+	 * Filter the still by the two dates.
+	 * 
+	 * @param still The still object contains the form date, to date and user object.
+	 * @return If true return the list of stills, Otherwise
+	 * @throws ServiceException throw new ServiceException "No stills found".
+	 */
 
 	public List<Still> filterStills(Still still) throws ServiceException {
 		StillDAO stillDAO = new StillDAO();
 		try {
 			StillValidator.validateReadStill(still);
 			List<Still> result = stillDAO.filterStills(still);
-			System.out.println(result);
 
 			if (result.isEmpty()) {
 				throw new ServiceException(StillConstants.getInvalidStillFilterMessage());
@@ -158,6 +173,56 @@ public class StillService {
 			return result;
 
 		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	
+	/**
+	 * 
+	 * Filter the stills by the user's favourites.
+	 * 
+	 * @param still The still object contains user id.
+	 * @return If true return the list of stills, Otherwise
+	 * @throws ServiceException throw new ServiceException "No stills found".
+	 */
+	public List<Still> filterStillByFavourite(Still still) throws ServiceException {
+		StillDAO stillDAO = new StillDAO();
+		try {
+			List<Still> result = stillDAO.filterStillsByFavourite(still);
+
+			if (result.isEmpty()) {
+				throw new ServiceException(StillConstants.getInvalidStillFilterMessage());
+			}
+			return result;
+
+		} catch (DAOException  e) {
+			throw new ServiceException(e.getMessage());
+		}
+		
+		
+	}
+	
+	/**
+	 * Filter the stills by the user's recently deleted (15 days).
+	 * 
+	 * @param still The still object constains the user id.
+	 * @return The list of stills if the stills are available, Otherwise
+	 * @throws ServiceException throw new ServiceException "No stills are found"
+	 */
+
+	public List<Still> filterStillByRecentlyDeleted(Still still) throws ServiceException  {
+		StillDAO stillDAO = new StillDAO();
+		try {
+			List<Still> result = stillDAO.filterStillByRecentlyDeleted(still);
+			System.out.println(result);
+
+			if (result.isEmpty()) {
+				throw new ServiceException(StillConstants.getInvalidStillFilterMessage());
+			}
+			return result;
+
+		} catch (DAOException  e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}

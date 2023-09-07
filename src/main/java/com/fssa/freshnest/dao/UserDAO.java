@@ -18,7 +18,7 @@ import java.util.List;
 public class UserDAO {
 
 	/**
-	 * Creates a new user record in the database.
+	 * Creates a new user record in the database. 
 	 *
 	 * @param user The User object containing user information.
 	 * @return True if the user is successfully created, otherwise false.
@@ -298,8 +298,16 @@ public class UserDAO {
 			throw new DAOException(e);
 		}
 	}
+	
+	/**
+	 * Read user friend details or read the use choosen object.
+	 * 
+	 * @param user The user object constains the user id.
+	 * @return If the user id exists return a object of value, Otherwise
+	 * @throws DAOException throw new DAOException "No user details found"
+	 */
 
-	public User readUserFrinedsDetails(User user) throws DAOException {
+	public List<User> readUserFrinedsDetails(User user) throws DAOException {
 		List<User> userList = new ArrayList<>();
 
 		String selectQuery = "SELECT * FROM users WHERE  user_id = ?";
@@ -313,7 +321,7 @@ public class UserDAO {
 					userList.add(userResult);
 				}
 			}
-			return userList.get(0);
+			return userList;
 
 		} catch (SQLException e) {
 			throw new DAOException(e);
