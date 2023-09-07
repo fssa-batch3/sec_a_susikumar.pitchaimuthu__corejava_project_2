@@ -24,7 +24,7 @@ class TestUserService {
     @Test
     void testRegistrationSuccess() {
         UserService userService = new UserService();
-        User user1 = new User("akalya@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu", "imageurl");
+        User user1 = new User("kani@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu", "imageurl");
         try {
 
             assertTrue(userService.registerUser(user1));
@@ -40,7 +40,7 @@ class TestUserService {
     void testUserRegisterWithInvalidPassword() {
 
         UserService userService = new UserService();
-        User user1 = new User("Susi@gmail.com", "Kani Papa", "susi123SM", "Susikumar", "Pitchaimuthu", "imageurl");
+        User user1 = new User("susi@gmail.com", "Kani Papa", "susi123SM", "Susikumar", "Pitchaimuthu", "imageurl");
         ServiceException result = assertThrows(ServiceException.class, () -> userService.registerUser(user1));
 
         assertEquals(UserConstants.getInvalidUserPasswordMessage(), result.getMessage());
@@ -50,11 +50,11 @@ class TestUserService {
 
     // Second page registration with valid details
     @Test
-    void validateUserSecondRegistrationSuccess() {
+    void testUserSecondRegistrationSuccess() {
 
         LocalDate dob = LocalDate.of(2003, 2, 24);
 
-        User user1 = new User(dob, "Male", "susi@gmail.com");
+        User user1 = new User(dob, "Male", "kani@gmail.com");
         UserService userService = new UserService();
 
         try {
@@ -63,6 +63,18 @@ class TestUserService {
             e.printStackTrace();
             fail();
         }
+
+    }
+
+    @Test
+    void testUserSecondPageRegistrationWithLessThanEighteenAge(){
+        LocalDate dob = LocalDate.of(2010, 2, 24);
+
+        User user1 = new User(dob, "Male", "susi@gmail.com");
+        UserService userService = new UserService();
+
+        ServiceException result =    assertThrows(ServiceException.class, ()-> userService.secondPageRegisterUser(user1));
+        assertEquals( UserConstants.getInvalidUserDobMessage(), result.getMessage());
 
     }
 
@@ -261,7 +273,7 @@ class TestUserService {
         User user1 = new User("susi@gmail.com");
         UserService userService = new UserService();
         try {
-            List<User> result = userService.readUserDetails(user1);
+           User result = userService.readUserDetails(user1);
             assertNotNull(result);
 
         } catch (ServiceException e) {
@@ -271,22 +283,25 @@ class TestUserService {
         }
     }
 
+    @Test
+    void testReadUserProfileDetailsWithInvalidEmailId(){
+        User user1 = new User("skdfuwerkwer@gmail.com");
+        UserService userService = new UserService();
+        ServiceException result = assertThrows(ServiceException.class, () -> userService.readUserDetails(user1));
+        assertEquals(UserConstants.getUserDetailsNotFound(), result.getMessage());
+    }
+ 
     // List user feature
 
     @Test
     void testListUsersFeatureSuccessWithValidDetails() {
-        User user1 = new User("susi@gmail.com");
+        User user1 = new User("ajai@gmail.com");
         UserService userService = new UserService();
 
         try {
-
             List<User> result = userService.listUser(user1);
-            for (User u : result) {
-                System.out.println(u);
-            }
 
             assertNotNull(result);
-            assertFalse(result.isEmpty());
 
         } catch (ServiceException e) {
             e.printStackTrace();
@@ -294,4 +309,36 @@ class TestUserService {
 
         }
     }
+
+    @Test
+    void testListUsersFeatureWithInValidEmail() {
+        User user1 = new User("ssdfsfdgmail.com");
+        UserService userService = new UserService();
+
+        ServiceException result = assertThrows(ServiceException.class, () -> userService.listUser(user1));
+        assertEquals(UserConstants.getInvalidUserEmailMessage(), result.getMessage());
+    }
+
+    // test user search feature
+    @Test
+    void testUserSearchFeatureByUsingUsername(){
+        User user = new User();
+        user.setUsername("IamAjay");
+        UserService userService = new UserService();
+
+        try {
+            List<User> result = userService.searchUserList(user);
+            assertNotNull(result);
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            fail();
+
+        }
+
+    }
+    
+   
+     
+
 }

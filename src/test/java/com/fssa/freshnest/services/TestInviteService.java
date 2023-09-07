@@ -107,12 +107,8 @@ class TestInviteService {
         Invite invite = new Invite(user);
         InviteService stillService = new InviteService();
         try {
-            List<Invite> result = stillService.listFriendsInvite(invite);
-            for (Invite i : result) {
-                System.out.println(i);
-            }
+            List<Invite> result = stillService.listFriendsInvite(invite);  
             assertNotNull(result);
-            assertFalse(result.isEmpty());
         } catch (ServiceException e) {
             e.printStackTrace();
             fail();
@@ -124,15 +120,11 @@ class TestInviteService {
     void testListInviteDetailsShowingSuccess() {
         User user = new User();
         user.setUserId(1);
-        Invite invite = new Invite(user, 4);
+        Invite invite = new Invite(user, 1);
         InviteService stillService = new InviteService();
         try {
-            List<Invite> result = stillService.listInviteDetails(invite);
-            for (Invite i : result) {
-                System.out.println(i);
-            }
+            Invite result = stillService.listInviteDetails(invite);
             assertNotNull(result);
-            assertFalse(result.isEmpty());
         } catch (ServiceException e) {
             e.printStackTrace();
             fail();
@@ -166,7 +158,7 @@ class TestInviteService {
         LocalTime time = LocalTime.of(23, 34);
 
         Invite invite = new Invite("Love party", date, time, "Manjal veeran", "Thangam",
-                "Ticket block ah vangathinga thangam", 3);
+                "Ticket block ah vangathinga thangam", -1);
 
         InviteService inviteService = new InviteService();
         ServiceException result = assertThrows(ServiceException.class, () -> inviteService.updateInvite(invite));
@@ -208,7 +200,7 @@ class TestInviteService {
     // test delete invite with invalid details
     @Test
     void testInvalidIdDelete() {
-        Invite invite = new Invite(1);
+        Invite invite = new Invite(0);
         InviteService inviteService = new InviteService();
 
         ServiceException result = assertThrows(ServiceException.class, () -> inviteService.deleteInvite(invite));

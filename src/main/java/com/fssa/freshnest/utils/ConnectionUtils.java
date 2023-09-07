@@ -11,32 +11,33 @@ import java.sql.SQLException;
  */
 public class ConnectionUtils {
 
-    /**
-     * Establishes a connection to the database.
-     *
-     * @return A Connection object representing the database connection.
-     * @throws SQLException If there is an issue with the database connection.
-     */
-    // Connect to database
-    public static Connection getConnection() {
+	/**
+	 * Establishes a connection to the database.
+	 *
+	 * @return A Connection object representing the database connection.
+	 * @throws SQLException If there is an issue with the database connection.
+	 */
+	// Connect to database
+	public static Connection getConnection() {
 
-        final String dbUrl;
-        final String dbUser;
-        final String dbPassword;
+		final String dbUrl;
+		final String dbUser;
+		final String dbPassword;
 
-        dbUrl = System.getenv("DB_URL");
-        dbUser = System.getenv("DB_USER");
-        dbPassword = System.getenv("DB_PASSWORD");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-        } catch (SQLException e) {
-            throw new RuntimeException("Unable to connect database", e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Database driver class not found", e);
+		dbUrl = "jdbc:mysql://localhost:3306/susikumar_pitchaimuthu_corejava_project";
+		dbUser = "root";
+		dbPassword = "root";
 
-        }
-    }
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+		} catch (SQLException e) {
+			throw new RuntimeException("Unable to connect database", e);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Database driver class not found", e);
+
+		}
+	}
 
 }

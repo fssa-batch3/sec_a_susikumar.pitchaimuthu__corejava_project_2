@@ -22,11 +22,9 @@ public class Invite {
 	private String inviteSlogan;
 	private String inviteExplanation;
 	private int inviteId;
-	private int reactorId;
-	private boolean isLike;
-	private boolean isAccept;
-	private boolean isDislike;
-	private String inviteMessage;
+	private String inviteImage;
+
+
 	// Constructor
 
 	/**
@@ -118,101 +116,6 @@ public class Invite {
 		this.inviteId = inviteId;
 	}
 	// Getters and setters
-
-	/**
-	 * Retrieves the value of the 'isLike' flag, indicating whether the invitation
-	 * has been liked.
-	 *
-	 * @return True if the invitation has been liked, false otherwise.
-	 */
-	public boolean getIsLike() {
-		return isLike;
-	}
-
-	/**
-	 * Sets the 'isLike' flag to indicate whether the invitation has been liked.
-	 *
-	 * @param isLike True to set the invitation as liked, false otherwise.
-	 */
-	public void setIsLike(boolean isLike) {
-		this.isLike = isLike;
-	}
-
-	/**
-	 * Retrieves the value of the 'isAccept' flag, indicating whether the invitation
-	 * has been accepted.
-	 *
-	 * @return True if the invitation has been accepted, false otherwise.
-	 */
-	public boolean getIsAccept() {
-		return isAccept;
-	}
-
-	/**
-	 * Sets the 'isAccept' flag to indicate whether the invitation has been
-	 * accepted.
-	 *
-	 * @param isAccept True to set the invitation as accepted, false otherwise.
-	 */
-	public void setIsAccept(boolean isAccept) {
-		this.isAccept = isAccept;
-	}
-
-	/**
-	 * Retrieves the value of the 'isDislike' flag, indicating whether the
-	 * invitation has been disliked.
-	 *
-	 * @return True if the invitation has been disliked, false otherwise.
-	 */
-	public boolean getIsDislike() {
-		return isDislike;
-	}
-
-	/**
-	 * Sets the 'isDislike' flag to indicate whether the invitation has been
-	 * disliked.
-	 *
-	 * @param isDislike True to set the invitation as disliked, false otherwise.
-	 */
-	public void setIsDislike(boolean isDislike) {
-		this.isDislike = isDislike;
-	}
-
-	/**
-	 * Retrieves the additional message associated with the invitation.
-	 *
-	 * @return The additional message related to the invitation.
-	 */
-	public String getInviteMessage() {
-		return inviteMessage;
-	}
-
-	/**
-	 * Sets the additional message associated with the invitation.
-	 *
-	 * @param inviteMessage The additional message related to the invitation.
-	 */
-	public void setInviteMessage(String inviteMessage) {
-		this.inviteMessage = inviteMessage;
-	}
-
-	/**
-	 * Retrieves the reactor ID associated with the invitation.
-	 *
-	 * @return The ID of the reactor (participant) of the invitation.
-	 */
-	public int getReactorId() {
-		return reactorId;
-	}
-
-	/**
-	 * Sets the reactor ID associated with the invitation.
-	 *
-	 * @param reactorId The ID of the reactor (participant) of the invitation.
-	 */
-	public void setReactorId(int reactorId) {
-		this.reactorId = reactorId;
-	}
 
 	/**
 	 * Retrieves the unique identifier of the invitation.
@@ -368,12 +271,19 @@ public class Invite {
 	 * @return A string containing information about the Invite object.
 	 */
 
+	public String getInviteImage() {
+		return inviteImage;
+	}
+
+	public void setInviteImage(String inviteImage) {
+		this.inviteImage = inviteImage;
+	}
+
 	@Override
 	public String toString() {
 		return "Invite{" + "userId=" + user + ", inviteType='" + inviteType + '\'' + ", inviteDate='" + inviteDate
 				+ '\'' + ", inviteTime='" + inviteTime + '\'' + ", specialPerson='" + specialPerson + '\''
 				+ ", inviteSlogan='" + inviteSlogan + '\'' + ", inviteExplanation='" + inviteExplanation + '\''
-				+ ", inviteId=" + inviteId + ", reactorId=" + reactorId + ", isLike=" + isLike + ", isAccept="
-				+ isAccept + ", isDislike=" + isDislike + ", inviteMessage='" + inviteMessage + '\'' + '}';
+				+ ", inviteId=" + inviteId + ", inviteImage="+ inviteImage + '\'' + '}';
 	}
 }

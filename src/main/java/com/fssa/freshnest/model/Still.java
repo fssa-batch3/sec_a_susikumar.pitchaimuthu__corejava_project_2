@@ -8,7 +8,7 @@ import java.time.LocalTime;
  * the FreshNest application. It encapsulates information such as the image URL,
  * user details, name, date, time, and various flags indicating whether the
  * still is a favorite, marked for deletion, or subject to updates.
- * 
+ *
  * @author SusikumarPitchaimuth
  */
 public class Still {
@@ -20,7 +20,10 @@ public class Still {
 	private boolean isFavourite;
 	private boolean isDelete;
 	private int stillId;
-	private boolean isUpdate;
+
+	private LocalDate formDate;
+
+	private LocalDate toDate;
 
 	// Constructors
 	// Default Constructor
@@ -42,6 +45,13 @@ public class Still {
 	public Still(String stillUrl, User user, String stillName, LocalDate stillDate, LocalTime stillTime,
 			boolean isFavourite, boolean isDelete) {
 		// Constructor with specified details
+		this.stillUrl = stillUrl;
+		this.user = user;
+		this.stillName = stillName;
+		this.stillDate = stillDate;
+		this.stillTime = stillTime;
+		this.isFavourite = isFavourite;
+		this.isDelete = isDelete;
 	}
 
 	/**
@@ -52,6 +62,8 @@ public class Still {
 	 */
 	public Still(boolean isFavourite, int stillId) {
 		// Constructor for updating favorite status
+		this.isFavourite = isFavourite;
+		this.stillId = stillId;
 	}
 
 	/**
@@ -63,6 +75,9 @@ public class Still {
 	 */
 	public Still(boolean isDelete, int stillId, User user) {
 		// Constructor for marking for deletion
+		this.isDelete = isDelete;
+		this.stillId = stillId;
+		this.user = user;
 	}
 
 	/**
@@ -72,6 +87,7 @@ public class Still {
 	 */
 	public Still(User user) {
 		// Constructor with associated user
+		this.user = user;
 	}
 
 	/**
@@ -81,6 +97,13 @@ public class Still {
 	 */
 	public Still(int stillId) {
 		// Constructor with specified identifier
+		this.stillId = stillId;
+	}
+
+	public Still(LocalDate from, LocalDate to, User user) {
+		this.formDate = from;
+		this.user = user;
+		this.toDate = to;
 	}
 
 	/**
@@ -135,24 +158,6 @@ public class Still {
 	 */
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	/**
-	 * Gets the flag indicating whether the still is subject to updates.
-	 *
-	 * @return `true` if the still is subject to updates, otherwise `false`
-	 */
-	public boolean getIsUpdate() {
-		return isUpdate;
-	}
-
-	/**
-	 * Sets the flag indicating whether the still is subject to updates.
-	 *
-	 * @param isUpdate `true` if the still is subject to updates, otherwise `false`
-	 */
-	public void setIsUpdate(boolean isUpdate) {
-		this.isUpdate = isUpdate;
 	}
 
 	/**
@@ -252,10 +257,26 @@ public class Still {
 	 * @return A string containing the values of the still's fields
 	 */
 
+	public LocalDate getFormDate() {
+		return formDate;
+	}
+
+	public void setFormDate(LocalDate formDate) {
+		this.formDate = formDate;
+	}
+
+	public LocalDate getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(LocalDate toDate) {
+		this.toDate = toDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Still{" + "stillUrl='" + stillUrl + '\'' + ", userId=" + user + ", stillName='" + stillName + '\''
 				+ ", stillDate=" + stillDate + ", stillTime=" + stillTime + ", isFavourite=" + isFavourite
-				+ ", isDelete=" + isDelete + ", stillId=" + stillId + ", isUpdate=" + isUpdate + '}';
+				+ ", isDelete=" + isDelete + ", stillId=" + stillId;
 	}
 }

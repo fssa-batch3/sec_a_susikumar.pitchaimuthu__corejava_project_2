@@ -412,8 +412,6 @@ public class User {
 				+ ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", userTheme='" + userTheme
 				+ '\'' + ", age=" + age + ", mobileNumber=" + mobileNumber + ", dob='" + dob + '\'' + ", nationality='"
 				+ nationality + '\'' + ", profileImage='" + profileImage + '\'' + ", gender='" + gender + '\''
-				+ ", isDelete=" + isDelete + ", userId=" + userId +
-
-				'}';
+				+ ", isDelete=" + isDelete + ", userId=" + userId + '}';
 	}
 }

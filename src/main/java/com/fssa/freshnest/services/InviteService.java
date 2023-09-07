@@ -106,7 +106,7 @@ public class InviteService {
         }
     }
 
-    public List<Invite> listInviteDetails(Invite invite) throws ServiceException {
+    public Invite listInviteDetails(Invite invite) throws ServiceException {
         InviteDAO inviteDAO = new InviteDAO();
         try {
             InviteValidator.validateInviteRead(invite);

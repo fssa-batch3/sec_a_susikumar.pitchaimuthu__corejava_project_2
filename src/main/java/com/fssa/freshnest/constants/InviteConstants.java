@@ -11,7 +11,6 @@ public class InviteConstants {
     private static final String INVALID_INVITE_CREATE_MESSAGE = "invite create details are not valid";
     private static final String INVALID_INVITE_UPDATE_MESSAGE = "invite update details are not valid";
     private static final String INVALID_INVITE_DELETE_MESSAGE = "invite delete details are not valid";
-    private static final String INVALID_INVITE_REACT_MESSAGE = "invite react details are not valid";
     private static final String INVALID_INVITE_READ_MESSAGE = "invite react details are not valid";
 
 
@@ -55,14 +54,7 @@ public class InviteConstants {
     }
 
 
-    /**
-     * Gets the error message for invalid invite reaction details.
-     *
-     * @return The error message for invalid invite reaction details.
-     */
-    public static String getInvalidInviteReactMessage() {
-        return INVALID_INVITE_REACT_MESSAGE;
-    }
+    
 
     /**
      * Gets the error message for invalid invite type.

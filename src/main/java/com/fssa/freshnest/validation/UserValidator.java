@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
  * @author SusikumarPitchaimuth
  */
 public class UserValidator {
-
     /**
      * Validates user registration details.
      *
@@ -129,6 +128,25 @@ public class UserValidator {
             return true;
         } else {
             throw new InvalidUserException(UserConstants.getInvalidUserDeleteMessage());
+
+        }
+    }
+
+
+    public static boolean validateListUserDetails(User user) throws InvalidUserException {
+        if (user != null && validateEmail(user.getEmail())) {
+            return true;
+        } else {
+            throw new InvalidUserException(UserConstants.getUserDetailsNotFound());
+        }
+
+    } 
+
+    public static boolean validateUserDetailReadFeature(User user) throws InvalidUserException {
+        if (user != null && validateEmail(user.getEmail())) {
+            return true;
+        } else {
+            throw new InvalidUserException(UserConstants.getInvalidUserProfileImageUpdateMessage());
 
         }
     }
@@ -374,22 +392,13 @@ public class UserValidator {
         return true;
     }
 
-    public static boolean validateListUserDetails(User user) throws InvalidUserException {
-        if (user != null && validateEmail(user.getEmail())) {
+    public static boolean validateUserId(int userId) throws InvalidUserException {
+        if (userId < 1) {
             return true;
         } else {
-            throw new InvalidUserException(UserConstants.getInvalidUserProfileImageUpdateMessage());
-
-        }
-
-    }
-
-    public static boolean validateUserDetailReadFeature(User user) throws InvalidUserException {
-        if (user != null && validateEmail(user.getEmail())) {
-            return true;
-        } else {
-            throw new InvalidUserException(UserConstants.getInvalidUserProfileImageUpdateMessage());
-
+            throw new InvalidUserException("Invalid user id");
         }
     }
+
+
 }
