@@ -215,7 +215,6 @@ public class StillService {
 		StillDAO stillDAO = new StillDAO();
 		try {
 			List<Still> result = stillDAO.filterStillByRecentlyDeleted(still);
-			System.out.println(result);
 
 			if (result.isEmpty()) {
 				throw new ServiceException(StillConstants.getInvalidStillFilterMessage());

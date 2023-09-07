@@ -24,7 +24,7 @@ class TestUserService {
 	@Test
 	void testRegistrationSuccess() {
 		UserService userService = new UserService();
-		User user1 = new User("kani123456789012344567890@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu",
+		User user1 = new User("kani1234567890123445678901@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu",
 				"imageurl");
 		try {
 

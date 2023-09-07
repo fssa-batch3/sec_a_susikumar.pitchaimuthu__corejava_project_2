@@ -159,43 +159,79 @@ public class StillDAO {
 		return fetchStillsByQuery(query, still.getUser().getUserId());
 	}
 
+	/**
+	 * Read the each and every stills details
+	 * 
+	 * @param still The still object contains the user object.
+	 * @return The still object if that is true, Otherwise
+	 * @throws DAOException throw new DAOException "No stills are found".
+	 * 
+	 */
 	public Still readStillDetails(Still still) throws DAOException {
 		String query = "SELECT * FROM fresh_still WHERE still_id = ? AND is_delete = FALSE";
 		List<Still> stillList = fetchStillsByQuery(query, still.getStillId());
 		return stillList.isEmpty() ? null : stillList.get(0);
 	}
 
+	/**
+	 * List the still between the two dates.
+	 * 
+	 * @param still The still list contains the user object.
+	 * @return The still list if that is true, Otherwise
+	 * @throws DAOException throw new DAOException "No stills are found".
+	 */
+
 	public List<Still> filterStills(Still still) throws DAOException {
-		String query = "SELECT * FROM fresh_still "
-				+ "WHERE still_date >= ? AND still_date <= ? AND user_id = ? AND is_delete = FALSE";
+		String query = "SELECT * FROM fresh_still WHERE still_date >= ? AND still_date <= ? AND user_id = ? AND is_delete = FALSE";
 
 		return fetchStillsByQuery(query, Date.valueOf(still.getFormDate()), Date.valueOf(still.getToDate()),
 				still.getUser().getUserId());
 	}
+	
+	/**
+	 * List the stills by the user's favourite.
+	 * 
+	 * @param still The still list contains the user object.
+	 * @return The still list if that is true, Otherwise
+	 * @throws DAOException throw new DAOException "No stills are found".
+	 */
+
+	public List<Still> filterStillsByFavourite(Still still) throws DAOException {
+		String favouriteQuery = "SELECT * FROM fresh_still WHERE user_id = ? AND is_favourite = ? AND is_delete = FALSE";
+		return fetchStillsByQuery(favouriteQuery, still.getUser().getUserId(), 1);
+	}
+	
+	/**
+	 * List the still user recently deleted.
+	 * 
+	 * @param still The still list contains the user object.
+	 * @return The still list if that is true, Otherwise
+	 * @throws DAOException throw new DAOException "No stills are found".
+	 */
+
+	public List<Still> filterStillByRecentlyDeleted(Still still) throws DAOException {
+		String recentlyDeletedQuery = "SELECT * FROM fresh_still WHERE user_id = ? AND is_delete = 1 AND deletion_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 15 DAY)";
+		return fetchStillsByQuery(recentlyDeletedQuery, still.getUser().getUserId());
+	}
+	
+	/**
+	 * Fetching the sill querys
+	 * 
+	 * @param query Contains the execute query.
+	 * @param params contains the parameter of the queries.
+	 * @return The list of stills if true, Otherwise 
+	 * @throws DAOException throw new DAOException "No stills are found".
+	 */
 
 	private List<Still> fetchStillsByQuery(String query, Object... params) throws DAOException {
 		List<Still> stillList = new ArrayList<>();
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(query)) {
-
-			for (int i = 0; i < params.length; i++) {
-				if (params[i] instanceof Integer) {
-					statement.setInt(i + 1, (Integer) params[i]);
-				} else if (params[i] instanceof Date) {
-					statement.setDate(i + 1, (Date) params[i]);
-				}
-
-			}
+			setParameters(statement, params);
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					Still stillResult = new Still();
-					stillResult.setStillUrl(resultSet.getString("still_url"));
-					stillResult.setStillId(resultSet.getInt("still_id"));
-					stillResult.setStillName(resultSet.getString("still_name"));
-					stillResult.setStillDate(resultSet.getDate("still_date").toLocalDate());
-					stillResult.setStillTime(resultSet.getTime("still_time").toLocalTime());
-					stillResult.setIsFavourite(resultSet.getBoolean("is_favourite"));
+					Still stillResult = mapResultSetToStill(resultSet);
 					stillList.add(stillResult);
 				}
 				return stillList;
@@ -205,64 +241,41 @@ public class StillDAO {
 		}
 	}
 
-	public List<Still> filterStillsByFavourite(Still still) throws DAOException {
-		String favouriteQuery = "SELECT * FROM fresh_still WHERE user_id = ? AND is_favourite = ? AND is_delete = FALSE";
-		List<Still> stillList = new ArrayList<>();
-		System.out.println("dao");
-		try (Connection connection = ConnectionUtils.getConnection();
-				PreparedStatement statement = connection.prepareStatement(favouriteQuery)) {
-			statement.setInt(1, still.getUser().getUserId());
-			statement.setInt(2, 1);
-
-			try (ResultSet resultSet = statement.executeQuery()) {
-				while (resultSet.next()) {
-					Still stillResult = new Still();
-					stillResult.setStillUrl(resultSet.getString("still_url"));
-					stillResult.setStillId(resultSet.getInt("still_id"));
-					stillResult.setStillName(resultSet.getString("still_name"));
-					stillResult.setStillDate(resultSet.getDate("still_date").toLocalDate());
-					stillResult.setStillTime(resultSet.getTime("still_time").toLocalTime());
-					stillResult.setIsFavourite(resultSet.getBoolean("is_favourite"));
-					stillList.add(stillResult);
-					System.out.println(stillResult);
-				}
-				return stillList;
+	/**
+	 * Set parameter for the statements.
+	 * 
+	 * @param statement constains the prepared statement of the query.
+	 * @param params constains the parameter of the queries.
+	 * @throws SQLException If there is any error in the prepared statement.
+	 */
+	
+	private void setParameters(PreparedStatement statement, Object... params) throws SQLException {
+		for (int i = 0; i < params.length; i++) {
+			if (params[i] instanceof Integer integer) {
+				statement.setInt(i + 1, integer);
+			} else if (params[i] instanceof Date date) {
+				statement.setDate(i + 1, date);
 			}
-
-		} catch (SQLException e) {
-			throw new DAOException(e);
 		}
-
 	}
+	
+	/**
+	 * Map the value for the result sets.
+	 * 
+	 * @param resultSet contains the set of results of the executed queries.
+	 * @return the object if data is present. Otherwise
+	 * @throws SQLException throw new DAOExcption if there any error occurs while gets the values.
+	 */
 
-	public List<Still> filterStillByRecentlyDeleted(Still still) throws DAOException {
-
-		String recentlyDeletedQuery = "SELECT * FROM fresh_still WHERE user_id = ? AND is_delete = 1 AND deletion_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 15 DAY)";
-
-		List<Still> stillList = new ArrayList<>();
-
-		try (Connection connection = ConnectionUtils.getConnection();
-				PreparedStatement statement = connection.prepareStatement(recentlyDeletedQuery)) {
-			statement.setInt(1, still.getUser().getUserId());
-
-			try (ResultSet resultSet = statement.executeQuery()) {
-				while (resultSet.next()) {
-					Still stillResult = new Still();
-					stillResult.setStillUrl(resultSet.getString("still_url"));
-					stillResult.setStillId(resultSet.getInt("still_id"));
-					stillResult.setStillName(resultSet.getString("still_name"));
-					stillResult.setStillDate(resultSet.getDate("still_date").toLocalDate());
-					stillResult.setStillTime(resultSet.getTime("still_time").toLocalTime());
-					stillResult.setIsFavourite(resultSet.getBoolean("is_favourite"));
-					stillList.add(stillResult);
-				}
-				return stillList;
-			}
-
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-
+	private Still mapResultSetToStill(ResultSet resultSet) throws SQLException {
+		Still stillResult = new Still();
+		stillResult.setStillUrl(resultSet.getString("still_url"));
+		stillResult.setStillId(resultSet.getInt("still_id"));
+		stillResult.setStillName(resultSet.getString("still_name"));
+		stillResult.setStillDate(resultSet.getDate("still_date").toLocalDate());
+		stillResult.setStillTime(resultSet.getTime("still_time").toLocalTime());
+		stillResult.setIsFavourite(resultSet.getBoolean("is_favourite"));
+		return stillResult;
 	}
 
 }
