@@ -92,7 +92,7 @@ Develop a social media platform to make happy the users by the features of Chat,
 
 ### Entity-Relationship Diagram (ERD)
 
-[![HDDeQu1.md.png](https://iili.io/HDDeQu1.md.png)](https://freeimage.host/i/HDDeQu1)
+[![J9E0Duf.md.png](https://iili.io/J9E0Duf.md.png)](https://freeimage.host/i/J9E0Duf)
 
 ### Database Tables
 
