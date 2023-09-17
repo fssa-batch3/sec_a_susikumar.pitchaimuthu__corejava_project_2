@@ -75,11 +75,11 @@ class TestStillValidation {
     void testValidTime() {
         LocalTime currentTime = LocalTime.now();
         try {
-			assertTrue(StillValidator.validateStillTime(currentTime));
-		} catch (InvalidUserException e) {
-			e.printStackTrace();
-			fail();
-		}
+            assertTrue(StillValidator.validateStillTime(currentTime));
+        } catch (InvalidUserException e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 
 

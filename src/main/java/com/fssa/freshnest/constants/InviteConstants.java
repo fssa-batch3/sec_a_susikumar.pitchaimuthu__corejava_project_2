@@ -54,8 +54,6 @@ public class InviteConstants {
     }
 
 
-    
-
     /**
      * Gets the error message for invalid invite type.
      *

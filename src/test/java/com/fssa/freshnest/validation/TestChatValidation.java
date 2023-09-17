@@ -27,12 +27,12 @@ class TestChatValidation {
             fail();
         }
     }
-    
-    
+
+
     @Test
     void testInvalidChatMessage() {
-    	InvalidUserException result = assertThrows(InvalidUserException.class, ()-> ChatValidator.validateChat(""));
-    	assertEquals(ChatConstants.getInvalidChatTextMessage(), result.getMessage());
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChat(""));
+        assertEquals(ChatConstants.getInvalidChatTextMessage(), result.getMessage());
     }
 
     /**
@@ -64,12 +64,12 @@ class TestChatValidation {
         InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType("Conversation"));
         assertEquals(ChatConstants.getInvalidChatTypeMessage(), result.getMessage());
     }
-    
-    
+
+
     @Test
     void testInvalidChatType() {
-    	InvalidUserException result = assertThrows(InvalidUserException.class, ()-> ChatValidator.validateChatType(""));
-    	assertEquals(ChatConstants.getNullChatType(), result.getMessage());
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> ChatValidator.validateChatType(""));
+        assertEquals(ChatConstants.getNullChatType(), result.getMessage());
     }
 
 

@@ -107,7 +107,7 @@ class TestInviteService {
         Invite invite = new Invite(user);
         InviteService stillService = new InviteService();
         try {
-            List<Invite> result = stillService.listFriendsInvite(invite);  
+            List<Invite> result = stillService.listFriendsInvite(invite);
             assertNotNull(result);
         } catch (ServiceException e) {
             e.printStackTrace();

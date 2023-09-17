@@ -10,100 +10,169 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 import java.util.List;
 
 /**
- * This class provides services related to chat management, such as register, login, list, update, and delete.
+ * This class provides services related to chat management, such as register,
+ * login, list, update, and delete.
  *
  * @author SusikumarPitchaimuth
  */
 public class ChatService {
 
-    /**
-     * Send the chat message.
-     *
-     * @param insertChat            The chat group to be created.
-     * @param insertChatParticipant The chat participant details like id will be added.
-     * @param insertMessage         The sender message will be added to the database with the chat id.
-     * @return A success message if the message send successfully, or an error message if not.
-     * @throws ServiceException If there is a problem with service.
-     */
+	public boolean insertChatGroup(Chat chat) throws ServiceException {
+		ChatDAO chatDAO = new ChatDAO();
+		try {
+			ChatValidator.validateInsertChatGroup(chat);
+			return chatDAO.insertChat(chat);
+		} catch (InvalidUserException | DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 
-    // Create the chat message service layer.
-    public boolean createChat(Chat insertChat, Chat insertChatParticipant, Chat insertMessage) throws ServiceException {
+	public boolean insertChatParticipants(Chat chat) throws ServiceException {
+		ChatDAO chatDAO = new ChatDAO();
 
-        ChatDAO chatDAO = new ChatDAO();
-        try {
+		try {
+			return chatDAO.insertChatParticipant(chat);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 
-            ChatValidator.validateCreateChat(insertChat, insertChatParticipant, insertMessage);
-            return chatDAO.insertChat(insertChat) && chatDAO.insertChatParticipant(insertChatParticipant)
-                    && chatDAO.insertChatMessage(insertMessage);
+	/**
+	 * Send the chat message.
+	 *
+	 * @param chat The sender message will be added to the database with the chat
+	 *             id.
+	 * @return A success message if the message send successfully, or an error
+	 *         message if not.
+	 * @throws ServiceException If there is a problem with service.
+	 */
 
-        } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e.getMessage());
-        }
+	// Create the chat message service layer.
+	public boolean createChat(Chat chat) throws ServiceException {
 
-    }
+		ChatDAO chatDAO = new ChatDAO();
+		try {
 
-    /**
-     * List the group chats.
-     *
-     * @param chat List the chat message to the group according to the chat group id.
-     * @return A success message if they list the chat message successfully, or an error message.
-     * @throws ServiceException If there is a problem with the service.
-     */
+			ChatValidator.validateChatSendMessage(chat);
+			return chatDAO.insertChatMessage(chat);
 
-    // List the chat message service layer
-    public List<Chat> readChat(Chat chat) throws ServiceException {
-        ChatDAO chatDAO = new ChatDAO();
-        try {
-            ChatValidator.validateReadChat(chat);
-            return chatDAO.getChatsByChatId(chat);
-        } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e.getMessage());
-        }
-    }
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
+		}
 
-    /**
-     * Update the chat message
-     *
-     * @param chat The chat object containing the updated information
-     * @return The updated chat object
-     * @throws ServiceException If there is an issue with the service.
-     */
+	}
 
-    // Update the chat message service layer
-    public boolean updateChat(Chat chat) throws ServiceException {
+	/**
+	 * List the group chats.
+	 *
+	 * @param chat List the chat message to the group according to the chat group
+	 *             id.
+	 * @return A success message if they list the chat message successfully, or an
+	 *         error message.
+	 * @throws ServiceException If there is a problem with the service.
+	 */
 
-        ChatDAO chatDAO = new ChatDAO();
-        try {
+	// List the chat message service layer
+	public List<Chat> readChat(Chat chat) throws ServiceException {
+		ChatDAO chatDAO = new ChatDAO();
+		try {
+			ChatValidator.validateReadChat(chat);
+			return chatDAO.getChatsByChatId(chat);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 
-            ChatValidator.validateUpdateChat(chat);
-            return chatDAO.updateChat(chat);
+	/**
+	 * Update the chat message
+	 *
+	 * @param chat The chat object containing the updated information
+	 * @return The updated chat object
+	 * @throws ServiceException If there is an issue with the service.
+	 */
 
-        } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e.getMessage());
-        }
+	// Update the chat message service layer
+	public boolean updateChat(Chat chat) throws ServiceException {
 
-    }
+		ChatDAO chatDAO = new ChatDAO();
+		try {
 
-    /**
-     * Delete the chat message
-     *
-     * @param chat The chat object containing the deleting chat id and user id information.
-     * @return True if the chat message is deleted, false otherwise.
-     * @throws ServiceException If there's a problem with the service.
-     */
+			ChatValidator.validateUpdateChat(chat);
+			return chatDAO.updateChat(chat);
 
-    public boolean deleteChat(Chat chat) throws ServiceException {
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
+		}
 
-        ChatDAO chatDAO = new ChatDAO();
-        try {
+	}
 
-            ChatValidator.validateDeleteChat(chat);
-            return chatDAO.deleteChat(chat);
+	/**
+	 * Delete the chat message
+	 *
+	 * @param chat The chat object containing the deleting chat id and user id
+	 *             information.
+	 * @return True if the chat message is deleted, false otherwise.
+	 * @throws ServiceException If there's a problem with the service.
+	 */
 
-        } catch (DAOException | InvalidUserException e) {
-            throw new ServiceException(e.getMessage());
-        }
+	public boolean deleteChat(Chat chat) throws ServiceException {
 
-    }
+		ChatDAO chatDAO = new ChatDAO();
+		try {
+
+			ChatValidator.validateDeleteChat(chat);
+			return chatDAO.deleteChat(chat);
+
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
+		}
+
+	}
+
+	public List<Chat> listAllUserChatAccount(Chat chat) throws ServiceException {
+		ChatDAO chatDAO = new ChatDAO();
+
+		try {
+			return chatDAO.getAllUserChatGroupList(chat);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+
+
+	public List<Chat> getSpecificChatGroupChatMessages(Chat chat) throws  ServiceException{
+		ChatDAO chatDAO = new ChatDAO();
+
+		try {
+			return chatDAO.getSpecificChatGroupMessages(chat);
+
+		}catch (DAOException e){
+			throw  new ServiceException(e.getMessage());
+		}
+	}
+
+	public Chat getDirectChatGroupDetails(Chat chat)throws ServiceException {
+		ChatDAO  chatDAO = new ChatDAO();
+		
+		try {
+			return chatDAO.getDirectChatGroupDetails(chat);
+			
+		}catch(DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public Chat getGroupChatDetails(Chat chat) throws ServiceException  {
+		ChatDAO  chatDAO = new ChatDAO();
+
+		try {
+			
+			return chatDAO.getGroupChatDetails(chat);
+			
+		}catch(DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 
 }

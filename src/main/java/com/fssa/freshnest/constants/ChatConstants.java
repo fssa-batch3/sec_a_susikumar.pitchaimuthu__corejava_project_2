@@ -19,8 +19,7 @@ public class ChatConstants {
     private static final String NULL_CHAT_TYPE = "chat type is null";
 
 
-   
-	/**
+    /**
      * Gets the error message for invalid chat sending details.
      *
      * @return The error message for invalid chat sending details.
@@ -75,8 +74,8 @@ public class ChatConstants {
     }
 
     public static String getNullChatType() {
-		return NULL_CHAT_TYPE;
-	}
+        return NULL_CHAT_TYPE;
+    }
 
 
 }

@@ -3,7 +3,7 @@ package com.fssa.freshnest.dao.exceptions;
 /**
  * The `DAOException` class is an exception that can be thrown by data access object (DAO) operations.
  * It provides additional information about errors or issues that occur during database interactions.
- * 
+ *
  * @author SusikumarPitchaimuth
  */
 public class DAOException extends Exception {

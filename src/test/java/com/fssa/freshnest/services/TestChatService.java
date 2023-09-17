@@ -22,19 +22,13 @@ class TestChatService {
     @Test
     void testChatSuccess() {
         String chatText = "Hello baby..";
-        int[] participantsId = {1, 2};
 
-        // Generate random the user chat name
-        String chatName = "Susi and pooja's conversation";
-
-        Chat insertChat = new Chat("direct", chatName);
-        Chat insertChatParticipant = new Chat(1, participantsId);
         Chat insertMessage = new Chat(1, 1, chatText);
 
         ChatService chatService = new ChatService();
 
         try {
-            assertTrue(chatService.createChat(insertChat, insertChatParticipant, insertMessage));
+            assertTrue(chatService.createChat(insertMessage));
         } catch (Exception e) {
             e.printStackTrace();
             fail();
@@ -45,18 +39,12 @@ class TestChatService {
     @Test
     void testChatFailure() {
         String chatText = "";
-        int[] participantsId = {1, 2};
 
-        // Generate random the user chat name
-        String chatName = "Susi and pooja's conversation";
-
-        Chat insertChat = new Chat("direct", chatName);
-        Chat insertChatParticipant = new Chat(1, participantsId);
         Chat insertMessage = new Chat(1, 1, chatText);
 
         ChatService chatService = new ChatService();
 
-        ServiceException result = assertThrows(ServiceException.class, () -> chatService.createChat(insertChat, insertChatParticipant, insertMessage));
+        ServiceException result = assertThrows(ServiceException.class, () -> chatService.createChat(insertMessage));
         assertEquals(ChatConstants.getInvalidChatTextMessage(), result.getMessage());
 
 

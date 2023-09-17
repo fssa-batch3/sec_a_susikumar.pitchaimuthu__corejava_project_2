@@ -171,19 +171,19 @@ class TestInviteValidation {
                 () -> InviteValidator.validateInviteExplanation(""));
         assertEquals(InviteConstants.getInvalidInviteExplanationMessage(), result.getMessage());
     }
-    
+
     @Test
     void testInvalidInviteTimeMessageCheck() {
-    	LocalTime time = LocalTime.of(0, 0);
-    	LocalDate date = LocalDate.of(2004, 10, 10);
-    	InvalidUserException result = assertThrows(InvalidUserException.class, ()-> InviteValidator.validateInviteTime(time, date));
-    	assertEquals(InviteConstants.getInvalidInviteTimeMessage(), result.getMessage());
+        LocalTime time = LocalTime.of(0, 0);
+        LocalDate date = LocalDate.of(2004, 10, 10);
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteTime(time, date));
+        assertEquals(InviteConstants.getInvalidInviteTimeMessage(), result.getMessage());
     }
-    
+
     @Test
     void testNullInviteTimeMessageCheck() {
-    	InvalidUserException result = assertThrows(InvalidUserException.class, ()-> InviteValidator.validateInviteTime(null, null));
-    	assertEquals(InviteConstants.getNullInviteDateMessage(), result.getMessage());
+        InvalidUserException result = assertThrows(InvalidUserException.class, () -> InviteValidator.validateInviteTime(null, null));
+        assertEquals(InviteConstants.getNullInviteDateMessage(), result.getMessage());
     }
 
 }

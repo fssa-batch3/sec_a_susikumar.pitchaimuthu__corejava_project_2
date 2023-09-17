@@ -17,190 +17,222 @@ import java.util.List;
  */
 public class InviteDAO {
 
-    /**
-     * Creates a new invite record in the database.
-     *
-     * @param invite The Invite object containing invite information to be created.
-     * @return True if the invite is successfully created, otherwise false.
-     * @throws DAOException If there is an issue with the database operation.
-     */
+	/**
+	 * Creates a new invite record in the database.
+	 *
+	 * @param invite The Invite object containing invite information to be created.
+	 * @return True if the invite is successfully created, otherwise false.
+	 * @throws DAOException If there is an issue with the database operation.
+	 */
 
-    // create invite data
-    public boolean createInvite(Invite invite) throws DAOException {
-        String insertQuery = "INSERT INTO fresh_invite (user_id, invite_type, invite_date, invite_time, special_person, invite_slogan, invite_explanation,invite_image) VALUES (?,?,?,?,?,?,?, ?)";
+	// create invite data
+	public boolean createInvite(Invite invite) throws DAOException {
+		String insertQuery = "INSERT INTO fresh_invite (user_id, invite_type, invite_date, invite_time, special_person, invite_slogan, invite_explanation,invite_image) VALUES (?,?,?,?,?,?,?, ?)";
 
-        try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
 
-            // Prepare SQL statement
-            statement.setInt(1, invite.getUser().getUserId());
-            statement.setString(2, invite.getInviteType());
-            statement.setDate(3, Date.valueOf(invite.getInviteDate()));
-            statement.setTime(4, Time.valueOf(invite.getInviteTime()));
-            statement.setString(5, invite.getSpecialPerson());
-            statement.setString(6, invite.getInviteSlogan());
-            statement.setString(7, invite.getInviteExplanation());
-            statement.setString(8, invite.getInviteImage());
-            
-            // Execute the query
-            int rows = statement.executeUpdate(); 
+			// Prepare SQL statement
+			statement.setInt(1, invite.getUser().getUserId());
+			statement.setString(2, invite.getInviteType());
+			statement.setDate(3, Date.valueOf(invite.getInviteDate()));
+			statement.setTime(4, Time.valueOf(invite.getInviteTime()));
+			statement.setString(5, invite.getSpecialPerson());
+			statement.setString(6, invite.getInviteSlogan());
+			statement.setString(7, invite.getInviteExplanation());
+			statement.setString(8, invite.getInviteImage());
 
-            // Return successful or not
-            return (rows == 1);
+			// Execute the query
+			int rows = statement.executeUpdate();
 
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
+			// Return successful or not
+			return (rows == 1);
 
-    }
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
 
-    /**
-     * Updates an existing invite record in the database.
-     *
-     * @param invite The Invite object containing updated invite information.
-     * @return True if the invite information is successfully updated, otherwise
-     * false.
-     * @throws DAOException If there is an issue with the database operation.
-     */
+	}
 
-    public boolean updateInvite(Invite invite) throws DAOException {
-        String updateQuery = "UPDATE fresh_invite SET  invite_type = ?, invite_date = ?, invite_time = ?, special_person = ?, invite_slogan = ?, invite_explanation = ?, invite_image = ? WHERE invite_id = ?";
+	/**
+	 * Updates an existing invite record in the database.
+	 *
+	 * @param invite The Invite object containing updated invite information.
+	 * @return True if the invite information is successfully updated, otherwise
+	 *         false.
+	 * @throws DAOException If there is an issue with the database operation.
+	 */
 
-        try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
+	public boolean updateInvite(Invite invite) throws DAOException {
+		String updateQuery = "UPDATE fresh_invite SET  invite_type = ?, invite_date = ?, invite_time = ?, special_person = ?, invite_slogan = ?, invite_explanation = ?, invite_image = ? WHERE invite_id = ?";
 
-            // Prepare SQL statement
-            statement.setString(1, invite.getInviteType());
-            statement.setDate(2, Date.valueOf(invite.getInviteDate()));
-            statement.setTime(3, Time.valueOf(invite.getInviteTime()));
-            statement.setString(4, invite.getSpecialPerson());
-            statement.setString(5, invite.getInviteSlogan());
-            statement.setString(6, invite.getInviteExplanation());
-            statement.setString(7, invite.getInviteImage());
-            statement.setInt(8, invite.getInviteId());
-            // Execute the query
-            int rows = statement.executeUpdate();
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
-            // Return successful or not
+			// Prepare SQL statement
+			statement.setString(1, invite.getInviteType());
+			statement.setDate(2, Date.valueOf(invite.getInviteDate()));
+			statement.setTime(3, Time.valueOf(invite.getInviteTime()));
+			statement.setString(4, invite.getSpecialPerson());
+			statement.setString(5, invite.getInviteSlogan());
+			statement.setString(6, invite.getInviteExplanation());
+			statement.setString(7, invite.getInviteImage());
+			statement.setInt(8, invite.getInviteId());
+			// Execute the query
+			int rows = statement.executeUpdate();
 
-            if (rows > 0) {
-                return true;
-            } else {
-                throw new DAOException(InviteConstants.getInvalidInviteUpdateMessage());
-            }
+			// Return successful or not
 
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
+			if (rows > 0) {
+				return true;
+			} else {
+				throw new DAOException(InviteConstants.getInvalidInviteUpdateMessage());
+			}
 
-    /**
-     * Marks an invite as deleted in the database.
-     *
-     * @param invite The Invite object containing invite information to be deleted.
-     * @return True if the invite is successfully marked as deleted, otherwise
-     * false.
-     * @throws DAOException If there is an issue with the database operation.
-     */
-    public boolean deleteInvite(Invite invite) throws DAOException {
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
 
-        String updateQuery = "UPDATE fresh_invite SET is_delete = 1 WHERE invite_id = ?";
-        try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(updateQuery)) {
+	/**
+	 * Marks an invite as deleted in the database.
+	 *
+	 * @param invite The Invite object containing invite information to be deleted.
+	 * @return True if the invite is successfully marked as deleted, otherwise
+	 *         false.
+	 * @throws DAOException If there is an issue with the database operation.
+	 */
+	public boolean deleteInvite(Invite invite) throws DAOException {
 
-            statement.setInt(1, invite.getInviteId());
+		String updateQuery = "UPDATE fresh_invite SET is_delete = 1 WHERE invite_id = ?";
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
-            // Execute the query
-            int rows = statement.executeUpdate();
+			statement.setInt(1, invite.getInviteId());
 
-            // Return successful or not
-            if (rows > 0) {
-                return true;
-            } else {
-                throw new DAOException(InviteConstants.getInvalidInviteDeleteMessage());
-            }
+			// Execute the query
+			int rows = statement.executeUpdate();
 
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
+			// Return successful or not
+			if (rows > 0) {
+				return true;
+			} else {
+				throw new DAOException(InviteConstants.getInvalidInviteDeleteMessage());
+			}
 
-    /**
-     * Retrieves a List of stills belonging to a specific user from the database.
-     *
-     * @param invite The invite object containing the user id for which to retrieve
-     *               invitation.
-     * @return A list of invitation objects associated with user.
-     * @throws DAOException If there is an issue with the database operation.
-     */
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
 
-    public List<Invite> listInvites(Invite invite) throws DAOException {
-        List<Invite> inviteList = new ArrayList<>();
-        String insertQuery = "SELECT * FROM fresh_invite WHERE user_id = ? AND is_delete = FALSE";
-        try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(insertQuery)) {
-            statement.setInt(1, invite.getUser().getUserId());
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    Invite inviteResult = createInviteFromResultSet(resultSet);
-                    inviteList.add(inviteResult);
-                }
-                return inviteList;
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
+	/**
+	 * Retrieves a List of stills belonging to a specific user from the database.
+	 *
+	 * @param invite The invite object containing the user id for which to retrieve
+	 *               invitation.
+	 * @return A list of invitation objects associated with user.
+	 * @throws DAOException If there is an issue with the database operation.
+	 */
 
-    public List<Invite> listFriendsInvite(Invite invite) throws DAOException {
-        List<Invite> inviteList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM fresh_invite WHERE user_id != ? AND is_delete = FALSE";
-        try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-            statement.setInt(1, invite.getUser().getUserId());
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    Invite inviteResult = createInviteFromResultSet(resultSet);
-                    inviteList.add(inviteResult);
-                }
-                return inviteList;
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
+	public List<Invite> listInvites(Invite invite) throws DAOException {
+		List<Invite> inviteList = new ArrayList<>();
+		String insertQuery = "SELECT * FROM fresh_invite WHERE user_id = ? AND is_delete = FALSE";
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+			statement.setInt(1, invite.getUser().getUserId());
+			try (ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					Invite inviteResult = createInviteFromResultSet(resultSet);
+					inviteList.add(inviteResult);
+				}
+				return inviteList;
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
 
-    public Invite listUserInviteDetails(Invite invite) throws DAOException {
-        List<Invite> inviteList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM fresh_invite WHERE user_id = ? AND invite_id = ?";
-        try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-            statement.setInt(1, invite.getUser().getUserId());
-            statement.setInt(2, invite.getInviteId());
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    Invite inviteResult = createInviteFromResultSet(resultSet);
-                    inviteList.add(inviteResult);
-                }
-                return inviteList.get(0);
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
+	public List<Invite> listFriendsInvite(Invite invite) throws DAOException {
+		List<Invite> inviteList = new ArrayList<>();
+		String selectQuery = "SELECT * FROM fresh_invite WHERE user_id != ? AND is_delete = FALSE";
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+			statement.setInt(1, invite.getUser().getUserId());
+			try (ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					Invite inviteResult = createInviteFromResultSet(resultSet);
+					inviteList.add(inviteResult);
+				}
+				return inviteList;
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
 
-    private Invite createInviteFromResultSet(ResultSet resultSet) throws SQLException {
-        Invite inviteResult = new Invite();
-        inviteResult.setInviteId(resultSet.getInt("invite_id"));
-        inviteResult.setInviteType(resultSet.getString("invite_type"));
-        inviteResult.setInviteDate(resultSet.getDate("invite_date").toLocalDate());
-        inviteResult.setInviteTime(resultSet.getTime("invite_time").toLocalTime());
-        inviteResult.setInviteSlogan(resultSet.getString("invite_slogan"));
-        inviteResult.setInviteExplanation(resultSet.getString("invite_explanation"));
-        inviteResult.setInviteImage(resultSet.getString("invite_image"));
-        inviteResult.setSpecialPerson(resultSet.getString("special_person"));
+	public Invite listUserInviteDetails(Invite invite) throws DAOException {
+		List<Invite> inviteList = new ArrayList<>();
+		String selectQuery = "SELECT * FROM fresh_invite WHERE invite_id = ?";
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+			statement.setInt(1, invite.getInviteId());
+			try (ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					Invite inviteResult = createInviteFromResultSet(resultSet);
+					inviteList.add(inviteResult);
+				}
+				return inviteList.get(0);
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
 
-        return inviteResult;
-    }
+	private Invite createInviteFromResultSet(ResultSet resultSet) throws SQLException {
+		Invite inviteResult = new Invite();
+		inviteResult.setInviteId(resultSet.getInt("invite_id"));
+		inviteResult.setInviteType(resultSet.getString("invite_type"));
+		inviteResult.setInviteDate(resultSet.getDate("invite_date").toLocalDate());
+		inviteResult.setInviteTime(resultSet.getTime("invite_time").toLocalTime());
+		inviteResult.setInviteSlogan(resultSet.getString("invite_slogan"));
+		inviteResult.setInviteExplanation(resultSet.getString("invite_explanation"));
+		inviteResult.setInviteImage(resultSet.getString("invite_image"));
+		inviteResult.setSpecialPerson(resultSet.getString("special_person"));
+
+		return inviteResult;
+	}
+
+	public boolean checkUserActionOnInvite(Invite invite, String column) throws DAOException {
+	    int count = 0;
+	    String checkQuery = "SELECT COUNT(*) FROM invite_react_details WHERE invite_id = ? AND reactor_id = ? AND " + column + " = 1";
+
+	    try (Connection connection = ConnectionUtils.getConnection();
+	         PreparedStatement statement = connection.prepareStatement(checkQuery)) {
+	        statement.setInt(1, invite.getInviteId());
+	        statement.setInt(2, invite.getUser().getUserId());
+
+	        try (ResultSet resultSet = statement.executeQuery()) {
+	            if (resultSet.next()) {
+	                count = resultSet.getInt(1);
+	            }
+	        }
+
+	        return count > 0;
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
+	}
+
+	public boolean checkUserLikedTheInviteOrNot(Invite invite) throws DAOException {
+	    return checkUserActionOnInvite(invite, "is_like");
+	}
+
+	public boolean checkUserSendNoResponseOrNot(Invite invite) throws DAOException {
+	    return checkUserActionOnInvite(invite, "is_no_response");
+	}
+
+	public boolean checkTheUserSendRequestOrNot(Invite invite) throws DAOException {
+	    return checkUserActionOnInvite(invite, "is_send_request");
+	}
 
 }

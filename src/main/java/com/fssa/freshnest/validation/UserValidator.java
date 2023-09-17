@@ -140,7 +140,7 @@ public class UserValidator {
             throw new InvalidUserException(UserConstants.getUserDetailsNotFound());
         }
 
-    } 
+    }
 
     public static boolean validateUserDetailReadFeature(User user) throws InvalidUserException {
         if (user != null && validateEmail(user.getEmail())) {
