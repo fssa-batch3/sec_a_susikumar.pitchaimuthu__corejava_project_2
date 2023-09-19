@@ -3,6 +3,7 @@ package com.fssa.freshnest.services;
 import com.fssa.freshnest.dao.InviteDAO;
 import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Invite;
+import com.fssa.freshnest.model.User;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.InviteValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
@@ -116,35 +117,15 @@ public class InviteService {
 		}
 	}
 
-	public boolean checkUserLikedTheInviteOrNot(Invite invite) throws ServiceException {
-
+	public User getInviteCreatorUserDetails(Invite invite) throws ServiceException{
 		InviteDAO inviteDAO = new InviteDAO();
-
+		
 		try {
-			return inviteDAO.checkUserLikedTheInviteOrNot(invite);
-		} catch (DAOException e) {
+			return inviteDAO.getInviteCreatorUserDetails(invite);
+		} catch (DAOException  e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
-	public boolean checkUserSendNoResponseOrNot(Invite invite) throws ServiceException {
-		InviteDAO inviteDAO = new InviteDAO();
-
-		try {
-			return inviteDAO.checkUserSendNoResponseOrNot(invite);
-		} catch (DAOException e) {
-			throw new ServiceException(e.getMessage());
-		}
-	}
-
-	public boolean checkTheUserSendRequestOrNot(Invite invite) throws ServiceException {
-		InviteDAO inviteDAO = new InviteDAO();
-
-		try {
-			return inviteDAO.checkTheUserSendRequestOrNot(invite);
-		} catch (DAOException e) {
-			throw new ServiceException(e.getMessage());
-		}
-
-	}
+	
 }

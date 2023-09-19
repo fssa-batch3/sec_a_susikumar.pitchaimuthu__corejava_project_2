@@ -1,13 +1,19 @@
 package com.fssa.freshnest.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fssa.freshnest.constants.InviteConstants;
 import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Invite;
+import com.fssa.freshnest.model.User;
 import com.fssa.freshnest.utils.ConnectionUtils;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class provides data access methods to interact with the invite database
@@ -202,37 +208,36 @@ public class InviteDAO {
 		return inviteResult;
 	}
 
-	public boolean checkUserActionOnInvite(Invite invite, String column) throws DAOException {
-	    int count = 0;
-	    String checkQuery = "SELECT COUNT(*) FROM invite_react_details WHERE invite_id = ? AND reactor_id = ? AND " + column + " = 1";
+	public User getInviteCreatorUserDetails(Invite invite) throws DAOException {
+		List<User> creatorUser = new ArrayList<>();
+		String selectQuery = "SELECT u.profile_image, u.user_id, u.username, u.user_theme " + "FROM fresh_invite f "
+				+ "JOIN users u ON f.user_id = u.user_id " + "WHERE f.invite_id = ?";
 
-	    try (Connection connection = ConnectionUtils.getConnection();
-	         PreparedStatement statement = connection.prepareStatement(checkQuery)) {
-	        statement.setInt(1, invite.getInviteId());
-	        statement.setInt(2, invite.getUser().getUserId());
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+			statement.setInt(1, invite.getInviteId());
 
-	        try (ResultSet resultSet = statement.executeQuery()) {
-	            if (resultSet.next()) {
-	                count = resultSet.getInt(1);
-	            }
-	        }
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					creatorUser.add(GetUserDetails(resultSet));
+				}
+			}
 
-	        return count > 0;
-	    } catch (SQLException e) {
-	        throw new DAOException(e);
-	    }
+			return creatorUser.get(0);
+
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
 	}
 
-	public boolean checkUserLikedTheInviteOrNot(Invite invite) throws DAOException {
-	    return checkUserActionOnInvite(invite, "is_like");
-	}
+	private User GetUserDetails(ResultSet resultSet) throws SQLException {
+		User user = new User();
+		user.setProfileImage(resultSet.getString("profile_image"));
+		user.setUserId(resultSet.getInt("user_id"));
+		user.setUsername(resultSet.getString("username"));
+		user.setUserTheme(resultSet.getString("user_theme"));
 
-	public boolean checkUserSendNoResponseOrNot(Invite invite) throws DAOException {
-	    return checkUserActionOnInvite(invite, "is_no_response");
-	}
-
-	public boolean checkTheUserSendRequestOrNot(Invite invite) throws DAOException {
-	    return checkUserActionOnInvite(invite, "is_send_request");
+		return user;
 	}
 
 }

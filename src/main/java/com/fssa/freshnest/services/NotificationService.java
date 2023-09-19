@@ -15,7 +15,7 @@ public class NotificationService {
         NotificationDAO notificationDAO = new NotificationDAO();
 
         try {
-            return notificationDAO.sendFollowRequestNotification(followConnection);
+            return notificationDAO.sendRequestNotification(followConnection);
 
         } catch (DAOException e) {
             throw new ServiceException(e.getMessage());
@@ -75,5 +75,15 @@ public class NotificationService {
             throw new ServiceException(e.getMessage());
         }
 
+    }
+    
+    public boolean sendInviteRequestNotification(RequestAndResponse requestAndResponse) throws ServiceException{
+        NotificationDAO notificationDAO = new NotificationDAO();
+
+    	try {
+    		return notificationDAO.sendRequestNotification(requestAndResponse);
+    	}catch(DAOException e) {
+    		throw new ServiceException(e.getMessage());
+    	}
     }
 }

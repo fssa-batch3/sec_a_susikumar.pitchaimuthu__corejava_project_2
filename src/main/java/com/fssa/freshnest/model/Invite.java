@@ -26,7 +26,9 @@ public class Invite {
 
     // Constructor
 
-    /**
+   
+
+	/**
      * Default constructor for creating an empty Invite object.
      */
     // Default Constructor
@@ -278,11 +280,19 @@ public class Invite {
         this.inviteImage = inviteImage;
     }
 
+
     @Override
     public String toString() {
-        return "Invite{" + "userId=" + user + ", inviteType='" + inviteType + '\'' + ", inviteDate='" + inviteDate
-                + '\'' + ", inviteTime='" + inviteTime + '\'' + ", specialPerson='" + specialPerson + '\''
-                + ", inviteSlogan='" + inviteSlogan + '\'' + ", inviteExplanation='" + inviteExplanation + '\''
-                + ", inviteId=" + inviteId + ", inviteImage=" + inviteImage + '\'' + '}';
+        return "Invite{" +
+                "user=" + user +
+                ", inviteType='" + inviteType + '\'' +
+                ", inviteDate=" + inviteDate +
+                ", inviteTime=" + inviteTime +
+                ", specialPerson='" + specialPerson + '\'' +
+                ", inviteSlogan='" + inviteSlogan + '\'' +
+                ", inviteExplanation='" + inviteExplanation + '\'' +
+                ", inviteId=" + inviteId +
+                ", inviteImage='" + inviteImage + '\'' +
+                '}';
     }
 }
