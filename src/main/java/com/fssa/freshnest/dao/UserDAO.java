@@ -302,13 +302,13 @@ public class UserDAO {
      * @throws DAOException throw new DAOException "No user details found"
      */
 
-    public List<User> readUserFrinedsDetails(User user) throws DAOException {
+    public User readUserFrinedsDetailsByUserId(int userId) throws DAOException {
         List<User> userList = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM users WHERE  user_id = ?";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-            statement.setInt(1, user.getUserId());
+            statement.setInt(1, userId);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -316,7 +316,7 @@ public class UserDAO {
                     userList.add(userResult);
                 }
             }
-            return userList;
+            return userList.get(0); 
 
         } catch (SQLException e) {
             throw new DAOException(e);

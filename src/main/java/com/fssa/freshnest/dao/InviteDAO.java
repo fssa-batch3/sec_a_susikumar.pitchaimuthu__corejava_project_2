@@ -176,12 +176,12 @@ public class InviteDAO {
 		}
 	}
 
-	public Invite listUserInviteDetails(Invite invite) throws DAOException {
+	public Invite readUserInviteDetailsByInviteId(int inviteId) throws DAOException {
 		List<Invite> inviteList = new ArrayList<>();
 		String selectQuery = "SELECT * FROM fresh_invite WHERE invite_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-			statement.setInt(1, invite.getInviteId());
+			statement.setInt(1, inviteId);
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					Invite inviteResult = createInviteFromResultSet(resultSet);

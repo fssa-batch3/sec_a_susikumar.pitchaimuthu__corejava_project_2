@@ -214,12 +214,12 @@ public class UserService {
     public User readUserFrinedsDetails(User user) throws ServiceException {
         UserDAO userDAO = new UserDAO();
         try {
-            List<User> details = userDAO.readUserFrinedsDetails(user);
+            User details = userDAO.readUserFrinedsDetailsByUserId(user.getUserId());
 
-            if (details.isEmpty()) {
+            if (details == null) {
                 throw new ServiceException(UserConstants.getUserDetailsNotFound());
             }
-            return details.get(0);
+            return details;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

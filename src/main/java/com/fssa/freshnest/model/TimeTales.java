@@ -3,6 +3,7 @@ package com.fssa.freshnest.model;
 import java.sql.Timestamp;
 
 public class TimeTales {
+	private User user;
     private int taleId;
     private int userId;
     private String media_url;
@@ -11,8 +12,17 @@ public class TimeTales {
     private Timestamp expireAt;
     private Double taleDuration;
     private Timestamp createdAt;
+    
 
-    public Timestamp getCreatedAt() {
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Timestamp getCreatedAt() {
         return createdAt;
     }
 

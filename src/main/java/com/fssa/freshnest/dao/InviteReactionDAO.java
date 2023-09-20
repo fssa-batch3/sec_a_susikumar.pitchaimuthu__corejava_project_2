@@ -198,4 +198,51 @@ public class InviteReactionDAO {
 		}
 	}
 
+	public InviteReaction getUserUserReactionDetailsByReactId(int reactId) throws DAOException {
+		String getQuery = "SELECT * FROM invite_react_details WHERE react_id = ?";
+
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(getQuery)) {
+
+			statement.setInt(1, reactId);
+			InviteReaction inviteReaction = new InviteReaction();
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+                    inviteReaction.setReactId(resultSet.getInt("react_id")); 
+					inviteReaction.setInviteId(resultSet.getInt("invite_id"));
+					inviteReaction.setUserId(resultSet.getInt("user_id"));
+					inviteReaction.setSendRequest(resultSet.getBoolean("is_send_request"));
+					inviteReaction.setLike(resultSet.getBoolean("is_like"));
+					inviteReaction.setReject(resultSet.getBoolean("is_reject"));
+					inviteReaction.setInviteMessage(resultSet.getString("invite_message"));
+					
+				}
+			}
+
+			return inviteReaction;
+
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+
+	}
+
+	public boolean sendBackTheInviteRequestResponse(InviteReaction inviteReaction) throws DAOException {
+	    String updateQuery = "UPDATE invite_react_details SET invite_request_reaction = ? WHERE react_id = ?";
+	    
+	    try (Connection connection = ConnectionUtils.getConnection();
+	         PreparedStatement statement = connection.prepareStatement(updateQuery)) {
+	        
+	        statement.setString(1, inviteReaction.getInviteRequsestReaction());
+	        statement.setInt(2, inviteReaction.getReactId());
+	        int rows = statement.executeUpdate();
+	        
+	        return (rows == 1);
+	        
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
+	}
+
+
 }

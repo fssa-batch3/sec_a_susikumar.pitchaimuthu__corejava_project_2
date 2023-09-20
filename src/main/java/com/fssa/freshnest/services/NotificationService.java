@@ -15,7 +15,7 @@ public class NotificationService {
         NotificationDAO notificationDAO = new NotificationDAO();
 
         try {
-            return notificationDAO.sendRequestNotification(followConnection);
+            return notificationDAO.sendFollowRequestNotification(followConnection);
 
         } catch (DAOException e) {
             throw new ServiceException(e.getMessage());
@@ -64,7 +64,7 @@ public class NotificationService {
 
     }
 
-    public RequestAndResponse readNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException {
+    public RequestAndResponse readFollowRequestNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException {
 
         NotificationDAO notificationDAO = new NotificationDAO();
         try {
@@ -81,9 +81,37 @@ public class NotificationService {
         NotificationDAO notificationDAO = new NotificationDAO();
 
     	try {
-    		return notificationDAO.sendRequestNotification(requestAndResponse);
+    		if(notificationDAO.checkWhetherTheInviteRequestPresentOrNot(requestAndResponse)) {
+    			
+    		}
+    		return notificationDAO.sendInviteRequestNotification(requestAndResponse);
     	}catch(DAOException e) {
     		throw new ServiceException(e.getMessage());
     	}
     }
+    
+    public RequestAndResponse readInvteSendRequestNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException{
+        NotificationDAO notificationDAO = new NotificationDAO();
+
+        try {
+        	return notificationDAO.readInvteSendRequestNotificationDetails(requestAndResponse);
+        }catch(DAOException e) {
+        	throw new ServiceException(e.getMessage());
+        }
+    }
+
+	public RequestAndResponse readFollowAcceptNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException{
+		return null;
+	}
+
+	public RequestAndResponse readInviteRequestAcceptNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException{
+		return null;
+	}
+
+	public RequestAndResponse readOtherNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException {
+		return null;
+	}
+    
+    
+    
 }

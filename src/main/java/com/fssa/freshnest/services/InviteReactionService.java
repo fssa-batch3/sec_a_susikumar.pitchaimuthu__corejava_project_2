@@ -80,4 +80,14 @@ public class InviteReactionService {
 
 	}
 
+	public boolean sendBackTheInviteRequestResponse(InviteReaction inviteReaction) throws ServiceException {
+		InviteReactionDAO inviteReactionDAO = new InviteReactionDAO();
+
+		try {
+			return inviteReactionDAO.sendBackTheInviteRequestResponse(inviteReaction);
+		}catch(DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
 }

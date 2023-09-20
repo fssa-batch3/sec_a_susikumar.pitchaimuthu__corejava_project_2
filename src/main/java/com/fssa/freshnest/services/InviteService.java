@@ -111,7 +111,7 @@ public class InviteService {
 		InviteDAO inviteDAO = new InviteDAO();
 		try {
 			InviteValidator.validateInviteRead(invite);
-			return inviteDAO.listUserInviteDetails(invite);
+			return inviteDAO.readUserInviteDetailsByInviteId(invite.getInviteId());
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());
 		}

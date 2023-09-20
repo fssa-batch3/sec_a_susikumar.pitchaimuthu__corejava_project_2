@@ -8,6 +8,16 @@ public class InviteReaction {
 	private boolean isReject;
 	private String inviteMessage;
 	private int reactId;
+	private String inviteRequsestReaction;
+	
+
+	public String getInviteRequsestReaction() {
+		return inviteRequsestReaction;
+	}
+
+	public void setInviteRequsestReaction(String inviteRequsestReaction) {
+		this.inviteRequsestReaction = inviteRequsestReaction;
+	}
 
 	public int getReactId() {
 		return reactId;
