@@ -8,21 +8,26 @@ package com.fssa.freshnest.constants;
  * @author SusikumarPitchaimuth
  */
 public class InviteConstants {
-    private static final String INVALID_INVITE_CREATE_MESSAGE = "invite create details are not valid";
-    private static final String INVALID_INVITE_UPDATE_MESSAGE = "invite update details are not valid";
-    private static final String INVALID_INVITE_DELETE_MESSAGE = "invite delete details are not valid";
-    private static final String INVALID_INVITE_READ_MESSAGE = "invite react details are not valid";
+    private static final String INVALID_INVITE_CREATE_MESSAGE = "Invite create details are not valid";
+    private static final String INVALID_INVITE_UPDATE_MESSAGE = "Invite update details are not valid";
+    private static final String INVALID_INVITE_DELETE_MESSAGE = "Invite delete details are not valid";
+    private static final String INVALID_INVITE_READ_MESSAGE = "Invite react details are not valid";
 
 
     // Each invite details validator message
-    private static final String INVALID_INVITE_TYPE_MESSAGE = "invite type is not valid. The invite name should not be empty or length is less than 3. The name should be like this /Birthday/ or/Lovers day/ ";
-    private static final String NULL_INVITE_DATE_MESSAGE = "invite date is not valid. The invite date should not be null";
-    private static final String INVALID_INVITE_DATE_MESSAGE = "invite date is not valid. The invite date should be in future";
-    private static final String INVALID_INVITE_TIME_MESSAGE = "invite time is not valid. The invite time should be in future";
-    private static final String INVALID_INVITE_EXPLANATION_MESSAGE = "invite explanation is not valid.";
+    private static final String INVALID_INVITE_TYPE_MESSAGE = "The invite name should not be empty or length is less than 3. Example /Birthday/ or/Reunion party/ ";
+    private static final String NULL_INVITE_DATE_MESSAGE = "Invite date is not valid. The invite date should not be null";
+    private static final String INVALID_INVITE_DATE_MESSAGE = "Invite date is not valid. The invite date should be in future";
+    private static final String INVALID_INVITE_TIME_MESSAGE = "Invite time is not valid. The invite time should be in future";
+    private static final String INVALID_INVITE_EXPLANATION_MESSAGE = "Invite explanation is not valid.";
+    private static final String  CREATOR_DETAIL_NOT_FOUND = "Invite creator details not found";
 
 
-    public static String getNullInviteDateMessage() {
+    public static String getCreatorDetailNotFound() {
+		return CREATOR_DETAIL_NOT_FOUND;
+	}
+
+	public static String getNullInviteDateMessage() {
         return NULL_INVITE_DATE_MESSAGE;
     }
 

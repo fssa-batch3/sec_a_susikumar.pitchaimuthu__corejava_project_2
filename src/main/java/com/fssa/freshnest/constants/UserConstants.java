@@ -17,7 +17,7 @@ public class UserConstants {
     private static final String INVALID_USER_PROFILE_IMAGE_UPDATE_MESSAGE = "User user profile image update details are not valid. Please enter the valid information using the error message.";
     private static final String INVALID_USER_DELETE_MESSAGE = "User account delete details are not valid. Please enter the valid information using the error message.";
     private static final String EMAIL_ID_NOT_EXISTS_MESSAGE = "User account delete details are not valid. Please enter the valid information using the error message.";
-    private static final String USER_DETAILS_NOT_FOUND = "User Details not exixts.";
+    private static final String USER_DETAILS_NOT_FOUND = "User Details not exists.";
     private static final String LOGIN_PASSWORD_INVALID = "Invalid Password";
 
     // Each validator message

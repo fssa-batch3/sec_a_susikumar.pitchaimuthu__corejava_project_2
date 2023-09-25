@@ -1,5 +1,6 @@
 package com.fssa.freshnest.services;
 
+import com.fssa.freshnest.constants.ChatConstants;
 import com.fssa.freshnest.dao.ChatDAO;
 import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Chat;
@@ -20,9 +21,8 @@ public class ChatService {
 	public boolean insertChatGroup(Chat chat) throws ServiceException {
 		ChatDAO chatDAO = new ChatDAO();
 		try {
-			ChatValidator.validateInsertChatGroup(chat);
 			return chatDAO.insertChat(chat);
-		} catch (InvalidUserException | DAOException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -119,58 +119,100 @@ public class ChatService {
 
 		ChatDAO chatDAO = new ChatDAO();
 		try {
-
-			ChatValidator.validateDeleteChat(chat);
-			return chatDAO.deleteChat(chat);
-
-		} catch (DAOException | InvalidUserException e) {
+			if (chatDAO.deleteChat(chat)) {
+				return true;
+			} else {
+				throw new DAOException(ChatConstants.getInvalidChatDeleteMessage());
+			}
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 
 	}
 
-	public List<Chat> listAllUserChatAccount(Chat chat) throws ServiceException {
+	public List<Chat> listAllUserChatGroupsByUserId(int userId) throws ServiceException {
 		ChatDAO chatDAO = new ChatDAO();
 
 		try {
-			return chatDAO.getAllUserChatGroupList(chat);
+			return chatDAO.getAllUserChatGroupList(userId);
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
-
-
-	public List<Chat> getSpecificChatGroupChatMessages(Chat chat) throws  ServiceException{
+	public List<Chat> getSpecificChatGroupChatMessages(Chat chat) throws ServiceException {
 		ChatDAO chatDAO = new ChatDAO();
 
 		try {
 			return chatDAO.getSpecificChatGroupMessages(chat);
 
-		}catch (DAOException e){
-			throw  new ServiceException(e.getMessage());
-		}
-	}
-
-	public Chat getDirectChatGroupDetails(Chat chat)throws ServiceException {
-		ChatDAO  chatDAO = new ChatDAO();
-		
-		try {
-			return chatDAO.getDirectChatGroupDetails(chat);
-			
-		}catch(DAOException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
-	public Chat getGroupChatDetails(Chat chat) throws ServiceException  {
-		ChatDAO  chatDAO = new ChatDAO();
+	public Chat getDirectChatGroupDetails(Chat chat) throws ServiceException {
+		ChatDAO chatDAO = new ChatDAO();
 
 		try {
-			
+			return chatDAO.getDirectChatGroupDetails(chat);
+
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public Chat getGroupChatDetails(Chat chat) throws ServiceException {
+		ChatDAO chatDAO = new ChatDAO();
+
+		try {
+
 			return chatDAO.getGroupChatDetails(chat);
-			
-		}catch(DAOException e) {
+
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public boolean createChatGroup(Chat chat) throws ServiceException {
+
+		ChatDAO chatDAO = new ChatDAO();
+
+		try {
+			return chatDAO.createChatGroup(chat);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public List<Chat> getUserChatGroups(Integer userId) throws ServiceException {
+
+		ChatDAO chatDAO = new ChatDAO();
+
+		try {
+			return chatDAO.getUserChatGroups(userId);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+
+	}
+
+	public Chat getUserDirectConversationGroupDetails(int chatId) throws ServiceException {
+		ChatDAO chatDAO = new ChatDAO();
+
+		try {
+			return chatDAO.getDirectConversationDetails(chatId);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public Chat getUserGroupConversationGroupDetails(int chatId) throws ServiceException {
+		ChatDAO chatDAO = new ChatDAO();
+
+		try {
+			return chatDAO.getGroupConversationDetails(chatId);
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}

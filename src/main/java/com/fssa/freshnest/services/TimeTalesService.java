@@ -41,4 +41,15 @@ public class TimeTalesService {
             throw  new ServiceException(e.getMessage());
         }
     }
+
+	public boolean deleteTimeTalesByTaleId(TimeTales timeTale) throws ServiceException {
+
+		TimeTalesDAO timeTalesDAO = new TimeTalesDAO();
+		
+		try {
+			return timeTalesDAO.deleteTimeTalesByTaleId(timeTale.getTaleId());
+		}catch(DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 }

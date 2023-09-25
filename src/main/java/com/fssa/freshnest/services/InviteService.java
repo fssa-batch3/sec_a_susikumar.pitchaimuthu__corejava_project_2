@@ -1,5 +1,6 @@
 package com.fssa.freshnest.services;
 
+import com.fssa.freshnest.constants.InviteConstants;
 import com.fssa.freshnest.dao.InviteDAO;
 import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.Invite;
@@ -85,13 +86,12 @@ public class InviteService {
 	 * @throws ServiceException If there is a problem with the service.
 	 */
 
-	public List<Invite> listInvites(Invite invite) throws ServiceException {
+	public List<Invite> listInvites(int userId) throws ServiceException {
 		InviteDAO inviteDAO = new InviteDAO();
 		try {
-			InviteValidator.validateInviteRead(invite);
-			return inviteDAO.listInvites(invite);
+			return inviteDAO.listInvites(userId);
 
-		} catch (DAOException | InvalidUserException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -99,33 +99,40 @@ public class InviteService {
 	public List<Invite> listFriendsInvite(Invite invite) throws ServiceException {
 		InviteDAO inviteDAO = new InviteDAO();
 		try {
-			InviteValidator.validateInviteRead(invite);
 			return inviteDAO.listFriendsInvite(invite);
 
-		} catch (DAOException | InvalidUserException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
-	public Invite listInviteDetails(Invite invite) throws ServiceException {
+	public Invite readInviteDetails(int inviteId) throws ServiceException {
 		InviteDAO inviteDAO = new InviteDAO();
 		try {
-			InviteValidator.validateInviteRead(invite);
-			return inviteDAO.readUserInviteDetailsByInviteId(invite.getInviteId());
-		} catch (DAOException | InvalidUserException e) {
+			Invite inviteDetail = inviteDAO.readUserInviteDetailsByInviteId(inviteId);
+			System.out.println(inviteDetail);
+			if (inviteDetail == null) {
+				throw new ServiceException(InviteConstants.getInvalidInviteReadMessage());
+			}
+			return inviteDetail;
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
-	public User getInviteCreatorUserDetails(Invite invite) throws ServiceException{
+	public User getInviteCreatorUserDetails(int inviteId) throws ServiceException {
 		InviteDAO inviteDAO = new InviteDAO();
-		
+
 		try {
-			return inviteDAO.getInviteCreatorUserDetails(invite);
-		} catch (DAOException  e) {
+			User creator = inviteDAO.getInviteCreatorUserDetails(inviteId);
+			if (creator == null) {
+				throw new ServiceException(InviteConstants.getCreatorDetailNotFound());
+			}
+			return creator;
+
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
-	
 }

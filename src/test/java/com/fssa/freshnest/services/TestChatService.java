@@ -9,146 +9,193 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 /**
- * This class contains test cases for the ChatService class, which handles various chat-related operations.
+ * This class contains test cases for the ChatService class, which handles
+ * various chat-related operations.
  *
  * @author SusikumarPitchaimuth
  */
 class TestChatService {
+	// Chat group creation for direct conversation
+	@Test
+	void testCreateChatGroupForDirectConversation() {
+		Chat chat = new Chat();
+		chat.setChatType("direct");
+		chat.setChatName("direct conversation");
+		int[] participant = { 1, 2 };
+		chat.setParticipantsId(participant);
 
-    // Test chat create feature
-    // test the chat success
-    @Test
-    void testChatSuccess() {
-        String chatText = "Hello baby..";
+		ChatService chatService = new ChatService();
+		try {
+			assertTrue(chatService.insertChatGroup(chat) && chatService.insertChatParticipants(chat));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-        Chat insertMessage = new Chat(1, 1, chatText);
+	// Chat group creation for group
 
-        ChatService chatService = new ChatService();
+	@Test
+	void testCreateChatGroupForGroupConversation() {
+		Chat chat = new Chat();
+		chat.setChatType("group");
+		chat.setChatName("Naangalam Apdithan");
+		chat.setGroupTheme("Hey there we are in the freshnest");
+		chat.setGroupImage("https://about.fb.com/wp-content/uploads/2014/11/groupslogo2.jpg");
+		int[] participant = { 1, 2 };
+		chat.setParticipantsId(participant);
 
-        try {
-            assertTrue(chatService.createChat(insertMessage));
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+		ChatService chatService = new ChatService();
+		try {
+			assertTrue(chatService.createChatGroup(chat) && chatService.insertChatParticipants(chat));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-    // test invalid chat details create
-    @Test
-    void testChatFailure() {
-        String chatText = "";
+	// Test the chat success
+	@Test
+	void testChatSuccess() {
+		String chatText = "Hello baby..";
 
-        Chat insertMessage = new Chat(1, 1, chatText);
+		Chat insertMessage = new Chat(1, 1, chatText);
 
-        ChatService chatService = new ChatService();
+		ChatService chatService = new ChatService();
 
-        ServiceException result = assertThrows(ServiceException.class, () -> chatService.createChat(insertMessage));
-        assertEquals(ChatConstants.getInvalidChatTextMessage(), result.getMessage());
+		try {
+			assertTrue(chatService.createChat(insertMessage));
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
+	// test invalid chat details create
+	@Test
+	void testChatFailure() {
+		String chatText = "";
 
-    }
+		Chat insertMessage = new Chat(1, 1, chatText);
 
-    // Test chat read feature
+		ChatService chatService = new ChatService();
 
-    // test the chat read success
-    @Test
-    void testChatReadSuccess() {
-        int chat_id = 1;
+		ServiceException result = assertThrows(ServiceException.class, () -> chatService.createChat(insertMessage));
+		assertEquals(ChatConstants.getInvalidChatTextMessage(), result.getMessage());
 
-        Chat chat = new Chat(chat_id);
+	}
 
-        ChatService chatService = new ChatService();
+	// Test chat read feature
 
-        try {
-            List<Chat> result = chatService.readChat(chat);
-            for (Chat c : result) {
-                System.out.print(c);
-            }
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+	// test the chat read success
+	@Test
+	void testChatReadSuccess() {
+		int chat_id = 1;
 
-    // test the chat null read failure
+		Chat chat = new Chat(chat_id);
 
-    @Test
-    void testReadChatNullDetails() {
-        ChatService chatService = new ChatService();
-        ServiceException exception = assertThrows(ServiceException.class, () -> chatService.readChat(null));
+		ChatService chatService = new ChatService();
 
-        assertEquals(ChatConstants.getInvalidChatReadMessage(), exception.getMessage());
-    }
-    // Test chat update feature
+		try {
+			List<Chat> result = chatService.readChat(chat);
+			for (Chat c : result) {
+				System.out.print(c);
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-    // test the chat update success details
-    @Test
-    void testChatUpdateSuccess() {
-        String chatText = "Hello chellam..";
-        int chatId = 1;
-        int messageId = 1;
+	// test the chat null read failure
 
-        Chat chat = new Chat(chatText, chatId, messageId);
+	@Test
+	void testReadChatNullDetails() {
+		ChatService chatService = new ChatService();
+		ServiceException exception = assertThrows(ServiceException.class, () -> chatService.readChat(null));
 
-        ChatService chatService = new ChatService();
+		assertEquals(ChatConstants.getInvalidChatReadMessage(), exception.getMessage());
+	}
+	// Test chat update feature
 
-        try {
-            assertTrue(chatService.updateChat(chat));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
+	// test the chat update success details
+	@Test
+	void testChatUpdateSuccess() {
+		String chatText = "Hello chellam..";
+		int chatId = 1;
+		int messageId = 1;
 
-    // test the chat update failure
-    @Test
-    void testChatUpdateInvalidMessageIdFailure() {
-        String chatText = "Hello chellam..";
-        int chatId = 1;
-        int messageId = -3;
-        Chat chat = new Chat(chatText, chatId, messageId);
+		Chat chat = new Chat(chatText, chatId, messageId);
 
-        ChatService chatService = new ChatService();
+		ChatService chatService = new ChatService();
 
-        ServiceException result = assertThrows(ServiceException.class, () -> chatService.updateChat(chat));
-        assertEquals(ChatConstants.getInvalidChatUpdateMessage(), result.getMessage());
+		try {
+			assertTrue(chatService.updateChat(chat));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 
+	// test the chat update failure
+	@Test
+	void testChatUpdateInvalidMessageIdFailure() {
+		String chatText = "Hello chellam..";
+		int chatId = 1;
+		int messageId = -3;
+		Chat chat = new Chat(chatText, chatId, messageId);
 
-    }
+		ChatService chatService = new ChatService();
 
+		ServiceException result = assertThrows(ServiceException.class, () -> chatService.updateChat(chat));
+		assertEquals(ChatConstants.getInvalidChatUpdateMessage(), result.getMessage());
 
-    // Test chat delete feature
-    // test the delete chat success or all details correct
-    @Test
-    void testChatDeleteSuccess() {
+	}
 
-        int chatId = 1;
-        int messageId = 1;
+	// Test chat delete feature
+	// test the delete chat success or all details correct
+	@Test
+	void testChatDeleteSuccess() {
 
-        Chat chat = new Chat(true, chatId, messageId);
-        ChatService chatService = new ChatService();
-        try {
-            assertTrue(chatService.deleteChat(chat));
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+		int messageId = 3;
+		Chat chat = new Chat();
+		chat.setMessageId(messageId);
+		ChatService chatService = new ChatService();
+		try {
+			assertTrue(chatService.deleteChat(chat));
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
-    // test the delete user details failure
-    @Test
-    void testDeleteWithInvalidChatIdFailure() {
-        int chatId = 455;
-        int messageId = 2;
+	// test the delete user details failure
+	@Test
+	void testDeleteWithInvalidChatIdFailure() {
+		int messageId = 0;
 
-        Chat chat = new Chat(true, chatId, messageId);
+		Chat chat = new Chat();
+		chat.setMessageId(messageId);
+		ChatService chatService = new ChatService();
 
-        ChatService chatService = new ChatService();
+		ServiceException result = assertThrows(ServiceException.class, () -> chatService.deleteChat(chat));
+		assertEquals(ChatConstants.getInvalidChatDeleteMessage(), result.getMessage());
 
-        ServiceException result = assertThrows(ServiceException.class, () -> chatService.deleteChat(chat));
-        assertEquals(ChatConstants.getInvalidChatDeleteMessage(), result.getMessage());
-
-    }
+	}
+	
+	
+	@Test
+	void testUserChatAccount() {
+		int userId = 1;
+		ChatService chatService = new ChatService();
+		
+		try {
+			chatService.listAllUserChatGroupsByUserId(userId);
+			
+		}catch(ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
 }

@@ -254,7 +254,6 @@ class TestUserValidation {
     void testValidUserLastname() {
         try {
             assertTrue(UserValidator.validateFirstName("Pitchaimuthu"));
-            System.out.println("username is valid");
         } catch (InvalidUserException e) {
             e.printStackTrace();
             fail();

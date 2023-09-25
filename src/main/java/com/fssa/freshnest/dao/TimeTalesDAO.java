@@ -54,15 +54,14 @@ public class TimeTalesDAO {
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-
 	}
 
 	public List<TimeTales> listUserTimeTales(TimeTales timeTales) throws DAOException {
 		UserDAO userDAO = new UserDAO();
-		String insertQuery = "SELECT " + "u.user_id, " + "u.username, " + "u.profile_image, " + "tt.tale_id, "
-				+ "tt.media_url, " + "tt.duration, " + "tt.created_at, " + "tt.expires_at " + "FROM " + "users u "
-				+ "LEFT JOIN " + "time_tales tt ON u.user_id = tt.user_id " + "WHERE " + "u.user_id = ? "
-				+ "AND tt.is_delete = FALSE " + "AND tt.expires_at >= NOW();";
+		String insertQuery = "SELECT " + "u.user_id, " + "tt.tale_id, " + "tt.media_url, " + "tt.duration, "
+				+ "tt.created_at, " + "tt.expires_at " + "FROM " + "users u " + "LEFT JOIN "
+				+ "time_tales tt ON u.user_id = tt.user_id " + "WHERE " + "u.user_id = ? " + "AND tt.is_delete = FALSE "
+				+ "AND tt.expires_at >= NOW();";
 
 		List<TimeTales> timeTaleDetails = new ArrayList<>();
 		try (Connection connection = ConnectionUtils.getConnection();
@@ -70,7 +69,7 @@ public class TimeTalesDAO {
 
 			statement.setInt(1, timeTales.getUserId());
 			try (ResultSet resultSet = statement.executeQuery()) {
-				if (resultSet.next()) {
+				while (resultSet.next()) {
 					TimeTales timeTales1 = new TimeTales();
 					int userId = resultSet.getInt("user_id");
 					timeTales1.setTaleId(resultSet.getInt("tale_id"));
@@ -85,6 +84,22 @@ public class TimeTalesDAO {
 				}
 			}
 			return timeTaleDetails;
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+
+	public boolean deleteTimeTalesByTaleId(int taleId) throws DAOException {
+		String deleteQuery = "DELETE FROM time_tales WHERE tale_id = ?";
+
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(deleteQuery)) {
+			statement.setInt(1, taleId);
+
+			int rows = statement.executeUpdate();
+
+			return (rows == 1);
+
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}

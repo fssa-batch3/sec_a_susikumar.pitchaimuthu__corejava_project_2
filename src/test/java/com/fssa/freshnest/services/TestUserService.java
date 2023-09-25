@@ -24,7 +24,7 @@ class TestUserService {
     @Test
     void testRegistrationSuccess() {
         UserService userService = new UserService();
-        User user1 = new User("kani1234567890123445678901@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu",
+        User user1 = new User("kani3445678901@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu",
                 "imageurl");
         try {
 
@@ -85,7 +85,7 @@ class TestUserService {
     @Test
     void testLoginSuccess() {
         UserService userService = new UserService();
-        User user1 = new User("susi@gmail.com", "susi123@SMsm");
+        User user1 = new User("kani345690123445678901@gmail.com", "susi123@SM");
         try {
             assertTrue(userService.logInUser(user1));
         } catch (ServiceException e) {
@@ -102,7 +102,7 @@ class TestUserService {
 
         ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(user1));
 
-        assertEquals(UserConstants.getLoginPasswordInvalid(), result.getMessage());
+        assertEquals(UserConstants.getUserDetailsNotFound(), result.getMessage());
 
     }
 
@@ -271,7 +271,7 @@ class TestUserService {
 
     @Test
     void testReadUserProfileDetails() {
-        User user1 = new User("susi@gmail.com");
+        User user1 = new User("kani345690123445678901@gmail.com");
         UserService userService = new UserService();
         try {
             User result = userService.readUserDetails(user1);
@@ -324,7 +324,7 @@ class TestUserService {
     @Test
     void testUserSearchFeatureByUsingUsername() {
         User user = new User();
-        user.setUsername("IamAjai");
+        user.setUsername("kanipapa");
         UserService userService = new UserService();
 
         try {

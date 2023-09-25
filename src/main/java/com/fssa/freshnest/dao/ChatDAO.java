@@ -65,10 +65,10 @@ public class ChatDAO {
 			for (int id : chatParticipantsId) {
 				statement.setInt(1, chat.getChatId());
 				statement.setInt(2, id);
-				statement.addBatch(); // Add the statement to the batch
+				statement.addBatch();
 			}
 
-			int[] rows = statement.executeBatch(); // Execute the batch
+			int[] rows = statement.executeBatch();
 			return Arrays.stream(rows).allMatch(row -> row == 1);
 
 		} catch (SQLException e) {
@@ -91,6 +91,8 @@ public class ChatDAO {
 			statement.setInt(1, chat.getChatId());
 			statement.setInt(2, chat.getSenderId());
 			statement.setString(3, chat.getChatMessage());
+
+			System.out.println("emoji :" + chat.getChatMessage());
 			int rows = statement.executeUpdate();
 
 			return (rows == 1);
@@ -181,31 +183,57 @@ public class ChatDAO {
 	 */
 	// Delete chat
 	public boolean deleteChat(Chat chat) throws DAOException {
-		String updateQuery = "UPDATE chat_messages SET is_delete = 1 WHERE message_id = ? ";
+		String updateQuery = "UPDATE chat_messages SET is_delete = 1 WHERE message_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery)) {
 
 			// Prepare SQL statement
+			System.out.println(chat.getMessageId());
 			statement.setInt(1, chat.getMessageId());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
 
 			// Return successful or not
-			if (rows > 0) {
-				return true;
-			} else {
-				throw new DAOException(ChatConstants.getInvalidChatDeleteMessage());
-			}
+			return (rows == 1);
 
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
 
-	public List<Chat> getAllUserChatGroupList(Chat chat) throws DAOException {
+	// Get user chat groups
+
+	public List<Chat> getUserChatGroups(int userId) throws DAOException {
+
+		List<Chat> userChatGroups = new ArrayList<>();
+		String getQuery = "SELECT c.chat_id, c.chat_type" + " FROM chats c "
+				+ "JOIN chat_participants cp ON c.chat_id = cp.chat_id" + " WHERE cp.user_id = ? AND is_active = 0";
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(getQuery)) {
+			statement.setInt(1, userId);
+
+			try (ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					Chat chat = new Chat();
+					chat.setChatId(resultSet.getInt("chat_id"));
+					chat.setChatType(resultSet.getString("chat_type"));
+					userChatGroups.add(chat);
+				}
+			}
+			return userChatGroups;
+
+		}
+
+		catch (SQLException e) {
+			throw new DAOException(e);
+		}
+
+	}
+
+	public List<Chat> getAllUserChatGroupList(int userId) throws DAOException {
 		List<Chat> chatGroups = new ArrayList<>();
-		String chatGroupGetQuery = "SELECT cu.username AS other_user_username, cu.profile_image AS other_user_profile_image, c.chat_id, c.chat_name, c.chat_type, cm.message AS last_message, latest_messages.max_timestamp AS last_message_timestamp "
+		String chatGroupGetQuery = "SELECT cu.username AS other_user_username, cu.profile_image AS other_user_profile_image, cu.user_theme AS user_theme, c.chat_id, c.chat_name, c.chat_type, cm.message AS last_message, latest_messages.max_timestamp AS last_message_timestamp "
 				+ "FROM chat_participants cp " + "JOIN chats c ON cp.chat_id = c.chat_id "
 				+ "JOIN users u ON cp.user_id = u.user_id "
 				+ "LEFT JOIN chat_participants cp2 ON c.chat_id = cp2.chat_id AND u.user_id != cp2.user_id "
@@ -217,7 +245,7 @@ public class ChatDAO {
 
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(chatGroupGetQuery)) {
-			statement.setInt(1, chat.getUser().getUserId());
+			statement.setInt(1, userId);
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					Chat chatResult = new Chat();
@@ -226,6 +254,7 @@ public class ChatDAO {
 					chatResult.setChatType(resultSet.getString("chat_type"));
 					chatResult.setProfileImage(resultSet.getString("other_user_profile_image"));
 					chatResult.setUsername(resultSet.getString("other_user_username"));
+					chatResult.setUserTheme(resultSet.getString("user_theme"));
 					String latestMessage = resultSet.getString("last_message");
 					Timestamp lastTimeStamp = resultSet.getTimestamp("last_message_timestamp");
 
@@ -318,6 +347,93 @@ public class ChatDAO {
 			return chat;
 		} catch (SQLException e) {
 			throw new DAOException(e);
+		}
+	}
+
+	public boolean createChatGroup(Chat chat) throws DAOException {
+		String insertChatQuery = "INSERT INTO chats (chat_type, chat_name, group_image, group_name, group_theme, is_active) VALUES (?, ?, ?, ?, ?, ?)";
+		String getLastChatId = "SELECT LAST_INSERT_ID() AS chat_id";
+
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement chatStatement = connection.prepareStatement(insertChatQuery)) {
+
+			chatStatement.setString(1, "group");
+			chatStatement.setString(2, chat.getChatName());
+			chatStatement.setString(3, chat.getGroupImage());
+			chatStatement.setString(4, chat.getChatName());
+			chatStatement.setString(5, chat.getGroupTheme());
+			chatStatement.setInt(6, 0);
+
+			int affectedRows = chatStatement.executeUpdate();
+
+			try (ResultSet resultSet = chatStatement.executeQuery(getLastChatId)) {
+				if (resultSet.next()) {
+					chat.setChatId(resultSet.getInt("chat_id"));
+				}
+			}
+			return (affectedRows == 1);
+
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+
+	}
+
+	public Chat getGroupConversationDetails(int chatId) throws DAOException {
+
+		String query = "SELECT c.chat_id, c.group_name, c.group_image, cm.message, cm.timestamp AS last_message_time, 'group' AS chat_type "
+				+ "FROM chats c " + "LEFT JOIN chat_messages cm ON c.chat_id = cm.chat_id " + "WHERE c.chat_id = ? "
+				+ "ORDER BY cm.timestamp DESC " + "LIMIT 1";
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, chatId);
+			Chat chat = new Chat();
+			System.out.println("I am enter");
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+
+					System.out.println("group message");
+					chat.setChatId(resultSet.getInt("chat_id"));
+					chat.setChatName(resultSet.getString("group_name"));
+					chat.setGroupImage(resultSet.getString("group_image"));
+					chat.setChatMessage(resultSet.getString("message"));
+					chat.setTimestamp(resultSet.getTimestamp("last_message_time"));
+					chat.setChatType(resultSet.getString("chat_type"));
+				}
+				return chat;
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e.getMessage());
+		}
+	}
+
+	public Chat getDirectConversationDetails(int chatId) throws DAOException {
+		String query = "SELECT" + "    cp.chat_id," + "    u2.profile_image AS profile_image,"
+				+ "    u2.username AS username," + "    cm.message," + "    cm.timestamp AS last_message_time,"
+				+ "    'direct' AS chat_type " + "FROM " + "    chat_participants cp " + "JOIN "
+				+ "    users u2 ON cp.user_id != ? AND cp.user_id = u2.user_id " + "LEFT JOIN "
+				+ "    chat_messages cm ON cp.chat_id = cm.chat_id " + "WHERE " + "    cp.chat_id = ? " + "ORDER BY "
+				+ "    cm.timestamp DESC " + "LIMIT 1;";
+
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, chatId);
+			statement.setInt(2, chatId);
+			Chat chat = new Chat();
+
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					chat.setChatId(resultSet.getInt("chat_id"));
+					chat.setGroupImage(resultSet.getString("profile_image"));
+					chat.setChatName(resultSet.getString("username"));
+					chat.setChatMessage(resultSet.getString("message"));
+					chat.setTimestamp(resultSet.getTimestamp("last_message_time"));
+					chat.setChatType(resultSet.getString("chat_type"));
+				}
+				return chat;
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e.getMessage());
 		}
 	}
 

@@ -24,11 +24,39 @@ public class Chat {
     private boolean isDelete;
     private boolean isUpdate;
     private Timestamp timestamp;
-
+    private String groupTheme;
     private String profileImage;
     private String username;
     private  int userId;
-    public int getUserId() {
+    private String userTheme;
+    private String groupImage;
+    
+    
+    public String getGroupImage() {
+		return groupImage;
+	}
+
+	public void setGroupImage(String groupImage) {
+		this.groupImage = groupImage;
+	}
+
+	public String getGroupTheme() {
+		return groupTheme;
+	}
+
+	public void setGroupTheme(String groupTheme) {
+		this.groupTheme = groupTheme;
+	}
+
+	public String getUserTheme() {
+		return userTheme;
+	}
+
+	public void setUserTheme(String userTheme) {
+		this.userTheme = userTheme;
+	}
+
+	public int getUserId() {
         return userId;
     }
 

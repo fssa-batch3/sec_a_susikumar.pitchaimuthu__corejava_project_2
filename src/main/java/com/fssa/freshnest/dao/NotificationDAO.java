@@ -57,7 +57,7 @@ public class NotificationDAO {
 
 		List<RequestAndResponse> notificaitonList = new ArrayList<>();
 
-		String selectQuery = "SELECT u.*, n.* FROM notifications n JOIN users u ON n.sender_id = u.user_id WHERE n.receiver_id = ?";
+		String selectQuery = "SELECT u.*, n.* FROM notifications n JOIN users u ON n.sender_id = u.user_id WHERE n.receiver_id = ? AND n.is_read = 0";
 
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
@@ -185,7 +185,7 @@ public class NotificationDAO {
 					InviteReaction inviteReaction = inviteReactionDAO.getUserUserReactionDetailsByReactId(reactId);
 					requestAndResponse1.setUser(user);
 					requestAndResponse1.setInvite(invite);
-					requestAndResponse1.setInviteReaction(inviteReaction); 
+					requestAndResponse1.setInviteReaction(inviteReaction);
 					requestAndResponse1.setInviteRequestReaction(resultSet.getString("invite_request_reaction"));
 				}
 			}
@@ -195,6 +195,40 @@ public class NotificationDAO {
 			throw new DAOException(e);
 		}
 
+	}
+
+	public boolean sendTimeTaleMessage(RequestAndResponse requestAndResponse) throws DAOException {
+
+		String insertQuery = "INSERT INTO notifications (sender_id, receiver_id, notification_type, notification_text) VALUES (?, ?, ?, ?)";
+
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+
+			statement.setInt(1, requestAndResponse.getRequestSenderId());
+			statement.setInt(2, requestAndResponse.getRequestReceiverId());
+			statement.setString(3, requestAndResponse.getRequestType());
+			statement.setString(4, requestAndResponse.getRequestText());
+
+			int rows = statement.executeUpdate();
+
+			return (rows == 1);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+
+	}
+
+	public boolean makeNotificationAsRead(RequestAndResponse requestAndResponse) throws DAOException {
+		String query = "UPDATE notifications SET is_read = 1 WHERE receiver_id = ? AND notify_at < ?";
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, requestAndResponse.getRequestSenderId());
+			statement.setTimestamp(2, requestAndResponse.getNotifyAt());
+			int rowsUpdated = statement.executeUpdate();
+			return (rowsUpdated > 0);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
 	}
 
 }

@@ -12,13 +12,7 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 public class ChatValidator {
 
-    public static boolean validateInsertChatGroup(Chat chat) throws InvalidUserException {
-        if (chat != null && validateChatType(chat.getChatType())) {
-            return true;
-        } else {
-            throw new InvalidUserException(ChatConstants.getInvalidChatTypeMessage());
-        }
-    }
+  
 
     /**
      * Validates the data for creating a chat, adding participants, and sending a
@@ -80,25 +74,6 @@ public class ChatValidator {
 
     }
 
-    /**
-     * Validates the data for deleting chat messages.
-     *
-     * @param chat The Chat object for deleting chat messages.
-     * @return True if the chat data is valid, otherwise throws
-     * InvalidUserException.
-     * @throws InvalidUserException If the chat data is invalid.
-     */
-
-    // Delete chat
-    public static boolean validateDeleteChat(Chat chat) throws InvalidUserException {
-
-        if (chat != null) {
-            return true;
-        } else {
-            throw new InvalidUserException(ChatConstants.getInvalidChatDeleteMessage());
-        }
-
-    }
 
     /**
      * Validates the chat message content.

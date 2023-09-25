@@ -1,13 +1,13 @@
 package com.fssa.freshnest.services;
 
+import java.util.List;
+
 import com.fssa.freshnest.dao.NotificationDAO;
 import com.fssa.freshnest.dao.exceptions.DAOException;
 import com.fssa.freshnest.model.RequestAndResponse;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.NotificationValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
-
-import java.util.List;
 
 public class NotificationService {
 
@@ -110,6 +110,29 @@ public class NotificationService {
 
 	public RequestAndResponse readOtherNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException {
 		return null;
+	}
+
+	public boolean sendTimeTaleMessage(RequestAndResponse requestAndResponse) throws ServiceException {
+        NotificationDAO notificationDAO = new NotificationDAO();
+
+		try {
+			return notificationDAO.sendTimeTaleMessage(requestAndResponse);
+		}catch(DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+		
+	}
+
+	public boolean makeNoticationAsRead(RequestAndResponse requestAndResponse) throws ServiceException{
+
+		NotificationDAO notificationDAO = new NotificationDAO();
+		
+		try {
+			return notificationDAO.makeNotificationAsRead(requestAndResponse);
+		}catch(DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+		
 	}
     
     

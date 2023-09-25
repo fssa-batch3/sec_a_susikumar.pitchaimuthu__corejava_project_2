@@ -127,7 +127,7 @@ public class StillDAO {
             statement.setInt(3, still.getStillId());
             statement.setInt(4, still.getUser().getUserId());
 
-            // Execute the query
+            // Execute the query 
             int rows = statement.executeUpdate();
 
             // Return successful or not
@@ -149,9 +149,9 @@ public class StillDAO {
      * @throws DAOException If there is an issue with the database operation.
      */
     // read still feature by the user id
-    public List<Still> listStills(Still still) throws DAOException {
+    public List<Still> listStills(int userId ) throws DAOException {
         String query = "SELECT * FROM fresh_still WHERE user_id = ? AND is_delete = FALSE";
-        return fetchStillsByQuery(query, still.getUser().getUserId());
+        return fetchStillsByQuery(query, userId);
     }
 
     /**
@@ -203,9 +203,9 @@ public class StillDAO {
      * @throws DAOException throw new DAOException "No stills are found".
      */
 
-    public List<Still> filterStillByRecentlyDeleted(Still still) throws DAOException {
+    public List<Still> filterStillByRecentlyDeleted(int userId) throws DAOException {
         String recentlyDeletedQuery = "SELECT * FROM fresh_still WHERE user_id = ? AND is_delete = 1 AND deletion_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 15 DAY)";
-        return fetchStillsByQuery(recentlyDeletedQuery, still.getUser().getUserId());
+        return fetchStillsByQuery(recentlyDeletedQuery, userId);
     }
 
     /**

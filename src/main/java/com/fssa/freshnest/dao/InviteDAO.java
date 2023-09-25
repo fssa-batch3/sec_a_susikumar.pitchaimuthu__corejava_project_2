@@ -140,12 +140,12 @@ public class InviteDAO {
 	 * @throws DAOException If there is an issue with the database operation.
 	 */
 
-	public List<Invite> listInvites(Invite invite) throws DAOException {
+	public List<Invite> listInvites(int userId) throws DAOException {
 		List<Invite> inviteList = new ArrayList<>();
 		String insertQuery = "SELECT * FROM fresh_invite WHERE user_id = ? AND is_delete = FALSE";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
-			statement.setInt(1, invite.getUser().getUserId());
+			statement.setInt(1, userId);
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					Invite inviteResult = createInviteFromResultSet(resultSet);
@@ -177,17 +177,16 @@ public class InviteDAO {
 	}
 
 	public Invite readUserInviteDetailsByInviteId(int inviteId) throws DAOException {
-		List<Invite> inviteList = new ArrayList<>();
 		String selectQuery = "SELECT * FROM fresh_invite WHERE invite_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
 			statement.setInt(1, inviteId);
 			try (ResultSet resultSet = statement.executeQuery()) {
-				while (resultSet.next()) {
-					Invite inviteResult = createInviteFromResultSet(resultSet);
-					inviteList.add(inviteResult);
+				if (resultSet.next()) {
+					return createInviteFromResultSet(resultSet);
+				} else {
+					return null;
 				}
-				return inviteList.get(0);
 			}
 		} catch (SQLException e) {
 			throw new DAOException(e);
@@ -208,36 +207,27 @@ public class InviteDAO {
 		return inviteResult;
 	}
 
-	public User getInviteCreatorUserDetails(Invite invite) throws DAOException {
-		List<User> creatorUser = new ArrayList<>();
+	public User getInviteCreatorUserDetails(int inviteId) throws DAOException {
+		UserDAO userDAO = new UserDAO();
 		String selectQuery = "SELECT u.profile_image, u.user_id, u.username, u.user_theme " + "FROM fresh_invite f "
 				+ "JOIN users u ON f.user_id = u.user_id " + "WHERE f.invite_id = ?";
 
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-			statement.setInt(1, invite.getInviteId());
+			statement.setInt(1, inviteId);
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
-					creatorUser.add(GetUserDetails(resultSet));
+					int userId = resultSet.getInt("user_id");
+					return userDAO.readUserFrinedsDetailsByUserId(userId);
+				} else {
+					return null;
 				}
 			}
-
-			return creatorUser.get(0);
 
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-	}
-
-	private User GetUserDetails(ResultSet resultSet) throws SQLException {
-		User user = new User();
-		user.setProfileImage(resultSet.getString("profile_image"));
-		user.setUserId(resultSet.getInt("user_id"));
-		user.setUsername(resultSet.getString("username"));
-		user.setUserTheme(resultSet.getString("user_theme"));
-
-		return user;
 	}
 
 }
