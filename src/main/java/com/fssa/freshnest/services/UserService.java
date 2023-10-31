@@ -8,8 +8,8 @@ import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.utils.PasswordUtils;
 import com.fssa.freshnest.validation.UserValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
-import java.util.Collections;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -220,7 +220,6 @@ public class UserService {
 		UserDAO userDAO = new UserDAO();
 		try {
 			User details = userDAO.readUserFrinedsDetailsByUserId(user.getUserId());
-			System.out.println(details);
 
 			if (details == null) {
 				throw new ServiceException(UserConstants.getUserDetailsNotFound());
@@ -255,6 +254,14 @@ public class UserService {
 		}
 	}
 
+	/**
+	 * Retrieves the total count of users in the system.
+	 *
+	 * @return The total count of users.
+	 * @throws ServiceException If there is an issue while retrieving the user
+	 *                          count.
+	 */
+
 	public int getTotalUserCount() throws ServiceException {
 
 		UserDAO userDAO = new UserDAO();
@@ -266,13 +273,22 @@ public class UserService {
 		}
 	}
 
+	/**
+	 * Retrieves a list of all user friends for a specific user.
+	 *
+	 * @param userId The ID of the user for whom to retrieve friends.
+	 * @return A list of User objects representing the user's friends.
+	 * @throws ServiceException If there is an issue while retrieving the user's
+	 *                          friends.
+	 */
+
 	public List<User> getAllUserFriends(Integer userId) throws ServiceException {
 		UserDAO useDAO = new UserDAO();
 		try {
 			List<User> userFriends = useDAO.getAllUserFriends(userId);
 
 			if (userFriends.isEmpty()) {
-				return Collections.emptyList();
+				return null;
 			}
 			return userFriends;
 		} catch (DAOException e) {
@@ -280,24 +296,67 @@ public class UserService {
 		}
 	}
 
+	/**
+	 * Retrieves a list of users who are blocked by the specified user.
+	 *
+	 * @param userId The ID of the user for whom to retrieve blocked friends.
+	 * @return A list of User objects representing users who are blocked by the
+	 *         specified user.
+	 * @throws ServiceException If there is an issue while retrieving the blocked
+	 *                          friends.
+	 */
 	public List<User> getUserBlockedFriends(Integer userId) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 
 		try {
-
 			return userDAO.getUserBlockedFriends(userId);
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
+	/**
+	 * Retrieves a list of user friend suggestions for the specified user.
+	 *
+	 * @param userId The ID of the user for whom to retrieve friend suggestions.
+	 * @return A list of User objects representing friend suggestions for the user.
+	 * @throws ServiceException If there is an issue while retrieving friend
+	 *                          suggestions.
+	 */
+
 	public List<User> getUserFriendsSuggestions(Integer userId) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 
 		try {
-
 			return userDAO.getUserFriendsSuggestions(userId);
 		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	/**
+	 * Checks whether a username already exists in the system.
+	 *
+	 * @param username The username to be checked for existence.
+	 * @return True if the username already exists, false otherwise.
+	 * @throws ServiceException If there is an issue while checking the username.
+	 */
+	
+	public boolean checkWhetherTheUsernameIsExistOrNot(String username) throws ServiceException {
+		UserDAO userDAO = new UserDAO();
+
+		try {
+			UserValidator.validateUserName(username);
+			List<String> userNameList = userDAO.getAllUsernames();
+
+			for (String name : userNameList) {
+				if (username.equalsIgnoreCase(name)) {
+					throw new ServiceException(
+							"Username '" + username + "' is already taken. Please choose a different username.");
+				}
+			}
+			return false;
+		} catch (InvalidUserException | DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}

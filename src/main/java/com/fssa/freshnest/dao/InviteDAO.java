@@ -158,8 +158,18 @@ public class InviteDAO {
 		}
 	}
 
+	/**
+	 * Retrieves a list of non-deleted friend invites excluding the user's own
+	 * invites.
+	 *
+	 * @param invite The Invite object associated with the user.
+	 * @return A list of friend invites that are not deleted.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public List<Invite> listFriendsInvite(Invite invite) throws DAOException {
 		List<Invite> inviteList = new ArrayList<>();
+
 		String selectQuery = "SELECT * FROM fresh_invite WHERE user_id != ? AND is_delete = FALSE";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
@@ -176,6 +186,14 @@ public class InviteDAO {
 		}
 	}
 
+	/**
+	 * Reads the details of a user invite by its invite ID.
+	 *
+	 * @param inviteId The ID of the invite to retrieve details for.
+	 * @return The Invite object with the specified invite ID, or null if not found.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public Invite readUserInviteDetailsByInviteId(int inviteId) throws DAOException {
 		String selectQuery = "SELECT * FROM fresh_invite WHERE invite_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
@@ -193,6 +211,13 @@ public class InviteDAO {
 		}
 	}
 
+	/**
+	 * Creates an Invite object from the ResultSet obtained from a query.
+	 *
+	 * @param resultSet The ResultSet containing invite details.
+	 * @return The constructed Invite object.
+	 * @throws SQLException If there's an issue with ResultSet data retrieval.
+	 */
 	private Invite createInviteFromResultSet(ResultSet resultSet) throws SQLException {
 		Invite inviteResult = new Invite();
 		inviteResult.setInviteId(resultSet.getInt("invite_id"));
@@ -203,10 +228,19 @@ public class InviteDAO {
 		inviteResult.setInviteExplanation(resultSet.getString("invite_explanation"));
 		inviteResult.setInviteImage(resultSet.getString("invite_image"));
 		inviteResult.setSpecialPerson(resultSet.getString("special_person"));
-
 		return inviteResult;
 	}
 
+	/**
+	 * Retrieves details about the user who created a specific invite.
+	 *
+	 * @param inviteId The ID of the invite for which to retrieve the creator's
+	 *                 details.
+	 * @return The User object representing the creator of the invite, or null if
+	 *         not found.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public User getInviteCreatorUserDetails(int inviteId) throws DAOException {
 		UserDAO userDAO = new UserDAO();
 		String selectQuery = "SELECT u.profile_image, u.user_id, u.username, u.user_theme " + "FROM fresh_invite f "
@@ -215,7 +249,6 @@ public class InviteDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
 			statement.setInt(1, inviteId);
-
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
 					int userId = resultSet.getInt("user_id");
@@ -224,7 +257,6 @@ public class InviteDAO {
 					return null;
 				}
 			}
-
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}

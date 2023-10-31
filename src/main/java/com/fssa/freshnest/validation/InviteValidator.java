@@ -150,7 +150,6 @@ public class InviteValidator {
 		try {
 
 			LocalDateTime dateTime = LocalDateTime.of(date, time);
-			System.out.println(dateTime);
 			LocalDateTime currentDateTime = LocalDateTime.now();
 			if (dateTime.isAfter(currentDateTime) || dateTime.isEqual(currentDateTime)) {
 				return true;

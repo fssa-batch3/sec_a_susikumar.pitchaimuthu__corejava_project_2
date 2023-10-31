@@ -16,8 +16,17 @@ import com.fssa.freshnest.utils.ConnectionUtils;
 
 public class NotificationDAO {
 
+	/**
+	 * Sends a follow request notification to a user.
+	 * 
+	 * @param followConnection The RequestAndResponse object containing sender,
+	 *                         receiver, and notification type.
+	 * @return True if the notification was successfully sent, false otherwise.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public boolean sendFollowRequestNotification(RequestAndResponse followConnection) throws DAOException {
-
+		// SQL query to insert a notification
 		String insertQuery = "INSERT INTO notifications (sender_id, receiver_id, notification_type) VALUES (?, ?, ?)";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
@@ -25,18 +34,27 @@ public class NotificationDAO {
 			statement.setInt(1, followConnection.getRequestSenderId());
 			statement.setInt(2, followConnection.getRequestReceiverId());
 			statement.setString(3, followConnection.getRequestType());
-			// Execute the query
+
 			int rows = statement.executeUpdate();
 
-			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
 
+	/**
+	 * Counts the number of unread notifications for a user.
+	 * 
+	 * @param receiverUserId The ID of the user whose unread notifications are
+	 *                       counted.
+	 * @return The count of unread notifications.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public int countNotIsReadNotificationCounts(int receiverUserId) throws DAOException {
 		int count = 0;
+		// SQL query to count the unread notifications
 		String countQuery = "SELECT COUNT(*) FROM notifications WHERE receiver_id = ? AND is_read = 0";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(countQuery)) {
@@ -53,12 +71,19 @@ public class NotificationDAO {
 		}
 	}
 
+	/**
+	 * Retrieves all notifications for a user, including sender and user details.
+	 * 
+	 * @param requestAndResponse The RequestAndResponse object containing the user
+	 *                           ID.
+	 * @return A list of RequestAndResponse objects representing notifications.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public List<RequestAndResponse> getAllUserNotifications(RequestAndResponse requestAndResponse) throws DAOException {
-
-		List<RequestAndResponse> notificaitonList = new ArrayList<>();
-
-		String selectQuery = "SELECT u.*, n.* FROM notifications n JOIN users u ON n.sender_id = u.user_id WHERE n.receiver_id = ? AND n.is_read = 0";
-
+		List<RequestAndResponse> notificationList = new ArrayList<>();
+		// SQL query to retrieve notifications with sender details
+		String selectQuery = "SELECT u.*, n.* FROM notifications n JOIN users u ON n.sender_id = u.user_id WHERE n.receiver_id = ?";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
 			statement.setInt(1, requestAndResponse.getRequestSenderId());
@@ -75,23 +100,29 @@ public class NotificationDAO {
 					requestAndResponse1.setUsername(resultSet.getString("username"));
 					requestAndResponse1.setUserTheme(resultSet.getString("user_theme"));
 					requestAndResponse1.setProfileImage(resultSet.getString("profile_image"));
-					notificaitonList.add(requestAndResponse1);
-					System.out.println(requestAndResponse1);
+					notificationList.add(requestAndResponse1);
 				}
 			}
-			return notificaitonList;
-
+			return notificationList;
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
 
+	/**
+	 * Reads notification details by notification ID and retrieves sender and user
+	 * information.
+	 * 
+	 * @param requestAndResponse The RequestAndResponse object containing the
+	 *                           notification ID.
+	 * @return A RequestAndResponse object representing the notification details.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public RequestAndResponse readNotificationDetails(RequestAndResponse requestAndResponse) throws DAOException {
-
-		List<RequestAndResponse> notificaitonList = new ArrayList<>();
-
+		List<RequestAndResponse> notificationList = new ArrayList<>();
+		// SQL query to retrieve notification details with sender and user information
 		String selectQuery = "SELECT u.*, n.* FROM notifications n JOIN users u ON n.sender_id = u.user_id WHERE n.notification_id = ?";
-
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
 			statement.setInt(1, requestAndResponse.getNotificationId());
@@ -106,21 +137,29 @@ public class NotificationDAO {
 					requestAndResponse1.setUsername(resultSet.getString("username"));
 					requestAndResponse1.setUserTheme(resultSet.getString("user_theme"));
 					requestAndResponse1.setProfileImage(resultSet.getString("profile_image"));
-					notificaitonList.add(requestAndResponse1);
+					notificationList.add(requestAndResponse1);
 				}
 			}
-			return notificaitonList.get(0);
-
+			return notificationList.get(0);
 		} catch (SQLException e) {
 			throw new DAOException(e);
-
 		}
 	}
 
+	/**
+	 * Checks whether an invite request notification is present for a specific
+	 * sender and invite.
+	 * 
+	 * @param requestAndResponse The RequestAndResponse object containing sender and
+	 *                           invite details.
+	 * @return True if an invite request notification is present, false otherwise.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public boolean checkWhetherTheInviteRequestPresentOrNot(RequestAndResponse requestAndResponse) throws DAOException {
 		Invite invite = new Invite();
+		// SQL query to count invite request notifications
 		String selectQuery = "SELECT COUNT(*) FROM notifications WHERE sender_id = ? AND invite_id = ?  AND notification_type = 'invite_request'";
-
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
 			statement.setInt(1, requestAndResponse.getRequestSenderId());
@@ -138,8 +177,18 @@ public class NotificationDAO {
 		}
 	}
 
+	/**
+	 * Sends an invite request notification to a user.
+	 * 
+	 * @param followConnection The RequestAndResponse object containing sender,
+	 *                         receiver, notification type, and invite ID.
+	 * @return True if the invite request notification was successfully sent, false
+	 *         otherwise.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public boolean sendInviteRequestNotification(RequestAndResponse followConnection) throws DAOException {
-
+		// SQL query to insert an invite request notification
 		String insertQuery = "INSERT INTO notifications (sender_id, receiver_id, notification_type, invite_id) VALUES (?, ?, ?, ?)";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
@@ -149,31 +198,37 @@ public class NotificationDAO {
 			statement.setString(3, followConnection.getRequestType());
 			statement.setInt(4, followConnection.getInviteId());
 
-			// Execute the query
 			int rows = statement.executeUpdate();
 
-			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
 
-	public RequestAndResponse readInvteSendRequestNotificationDetails(RequestAndResponse requestAndResponse)
+	/**
+	 * Reads invite send request notification details, including user, invite, and
+	 * reaction information.
+	 * 
+	 * @param requestAndResponse The RequestAndResponse object containing the
+	 *                           notification ID.
+	 * @return A RequestAndResponse object representing the notification details.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
+	public RequestAndResponse readInviteSendRequestNotificationDetails(RequestAndResponse requestAndResponse)
 			throws DAOException {
-
 		UserDAO userDAO = new UserDAO();
 		InviteDAO inviteDAO = new InviteDAO();
 		InviteReactionDAO inviteReactionDAO = new InviteReactionDAO();
+		// SQL query to retrieve invite send request notification details with related
+		// data
 		String insertQuery = "SELECT n.*, u.user_id, i.* " + "FROM notifications n "
 				+ "JOIN users u ON n.receiver_id = u.user_id "
 				+ "LEFT JOIN invite_react_details i ON n.invite_id = i.invite_id " + "WHERE n.notification_id = ?";
-
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
-
 			statement.setInt(1, requestAndResponse.getNotificationId());
-
 			RequestAndResponse requestAndResponse1 = new RequestAndResponse();
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
@@ -190,35 +245,49 @@ public class NotificationDAO {
 				}
 			}
 			return requestAndResponse1;
-
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-
 	}
 
+	/**
+	 * Sends a time-tale message notification to a user.
+	 * 
+	 * @param requestAndResponse The RequestAndResponse object containing sender,
+	 *                           receiver, notification type, and message text.
+	 * @return True if the message notification was successfully sent, false
+	 *         otherwise.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public boolean sendTimeTaleMessage(RequestAndResponse requestAndResponse) throws DAOException {
-
+		// SQL query to insert a message notification
 		String insertQuery = "INSERT INTO notifications (sender_id, receiver_id, notification_type, notification_text) VALUES (?, ?, ?, ?)";
-
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
-
 			statement.setInt(1, requestAndResponse.getRequestSenderId());
 			statement.setInt(2, requestAndResponse.getRequestReceiverId());
 			statement.setString(3, requestAndResponse.getRequestType());
 			statement.setString(4, requestAndResponse.getRequestText());
-
 			int rows = statement.executeUpdate();
-
 			return (rows == 1);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-
 	}
 
+	/**
+	 * Marks notifications as read for a user with a specific timestamp.
+	 * 
+	 * @param requestAndResponse The RequestAndResponse object containing the user
+	 *                           ID and timestamp.
+	 * @return True if the notifications were successfully marked as read, false
+	 *         otherwise.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public boolean makeNotificationAsRead(RequestAndResponse requestAndResponse) throws DAOException {
+		// SQL query to update notifications as read
 		String query = "UPDATE notifications SET is_read = 1 WHERE receiver_id = ? AND notify_at < ?";
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(query)) {

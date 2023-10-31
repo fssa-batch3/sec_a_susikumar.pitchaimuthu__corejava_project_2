@@ -1,6 +1,5 @@
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\dao\FollowConnectionDAO.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\validation\FollowConnectionValidator.java
-C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\dao\AvatarDAO.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\model\Chat.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\constants\FollowConnectionConstants.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\model\Still.java
@@ -19,15 +18,12 @@ C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\constants\ChatConstants.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\services\exceptions\ServiceException.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\services\NotificationService.java
-C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\constants\Emoji.java
-C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\services\AvatarService.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\constants\StillConstants.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\services\ChatService.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\constants\NotificationConstants.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\services\StillService.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\services\TimeTalesService.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\constants\UserConstants.java
-C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\model\Avatar.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\dao\InviteReactionDAO.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\validation\InviteValidator.java
 C:\Users\SusikumarPitchaimuth\eclipse-workspace\susikumar.pitchaimuthu__corejava_project_2\src\main\java\com\fssa\freshnest\model\User.java

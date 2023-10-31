@@ -114,7 +114,6 @@ public class ChatValidator {
 
     // validate chat type
     public static boolean validateChatType(String type) throws InvalidUserException {
-        System.out.println(type);
         if (type == null) {
             return false;
         }

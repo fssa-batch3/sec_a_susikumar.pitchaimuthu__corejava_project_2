@@ -81,7 +81,7 @@ public class InviteService {
 	}
 
 	/**
-	 * @param invite Get the list of invite of the user.
+	 * @param userId Get the list of invite of the user.
 	 * @return List the invite of the user.
 	 * @throws ServiceException If there is a problem with the service.
 	 */
@@ -96,21 +96,34 @@ public class InviteService {
 		}
 	}
 
+	/**
+	 * Lists the invites sent by the user's friends.
+	 *
+	 * @param invite The Invite object containing user and invite details.
+	 * @return A list of invites sent by user's friends.
+	 * @throws ServiceException If there's an issue while retrieving the list of
+	 *                          invites.
+	 */
 	public List<Invite> listFriendsInvite(Invite invite) throws ServiceException {
 		InviteDAO inviteDAO = new InviteDAO();
 		try {
 			return inviteDAO.listFriendsInvite(invite);
-
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
+	/**
+	 * Reads and retrieves the details of a specific invite.
+	 *
+	 * @param inviteId The ID of the invite to retrieve details for.
+	 * @return The Invite object containing invite details.
+	 * @throws ServiceException If the invite with the provided ID is not found.
+	 */
 	public Invite readInviteDetails(int inviteId) throws ServiceException {
 		InviteDAO inviteDAO = new InviteDAO();
 		try {
 			Invite inviteDetail = inviteDAO.readUserInviteDetailsByInviteId(inviteId);
-			System.out.println(inviteDetail);
 			if (inviteDetail == null) {
 				throw new ServiceException(InviteConstants.getInvalidInviteReadMessage());
 			}
@@ -120,16 +133,22 @@ public class InviteService {
 		}
 	}
 
+	/**
+	 * Retrieves the details of the user who created a specific invite.
+	 *
+	 * @param inviteId The ID of the invite to retrieve the creator's details for.
+	 * @return The User object containing creator details.
+	 * @throws ServiceException If the creator details are not found for the given
+	 *                          invite.
+	 */
 	public User getInviteCreatorUserDetails(int inviteId) throws ServiceException {
 		InviteDAO inviteDAO = new InviteDAO();
-
 		try {
 			User creator = inviteDAO.getInviteCreatorUserDetails(inviteId);
 			if (creator == null) {
 				throw new ServiceException(InviteConstants.getCreatorDetailNotFound());
 			}
 			return creator;
-
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}

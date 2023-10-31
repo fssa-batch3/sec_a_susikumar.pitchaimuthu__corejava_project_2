@@ -82,9 +82,6 @@ class TestInviteService {
 		InviteService stillService = new InviteService();
 		try {
 			List<Invite> result = stillService.listInvites(userId);
-			for (Invite i : result) {
-				System.out.println(i);
-			}
 			assertNotNull(result);
 			assertFalse(result.isEmpty());
 		} catch (ServiceException e) {

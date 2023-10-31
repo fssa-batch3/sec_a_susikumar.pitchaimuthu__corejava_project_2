@@ -1,13 +1,21 @@
 package com.fssa.freshnest.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import com.fssa.freshnest.constants.ChatConstants;
 import com.fssa.freshnest.model.Chat;
 import com.fssa.freshnest.services.exceptions.ServiceException;
-import org.junit.jupiter.api.Test;
 
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class contains test cases for the ChatService class, which handles
@@ -27,7 +35,7 @@ class TestChatService {
 
 		ChatService chatService = new ChatService();
 		try {
-			assertTrue(chatService.insertChatGroup(chat) && chatService.insertChatParticipants(chat));
+			assertTrue(chatService.insertDirectGroup(chat) && chatService.insertChatParticipants(chat));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
@@ -85,39 +93,6 @@ class TestChatService {
 		assertEquals(ChatConstants.getInvalidChatTextMessage(), result.getMessage());
 
 	}
-
-	// Test chat read feature
-
-	// test the chat read success
-	@Test
-	void testChatReadSuccess() {
-		int chat_id = 1;
-
-		Chat chat = new Chat(chat_id);
-
-		ChatService chatService = new ChatService();
-
-		try {
-			List<Chat> result = chatService.readChat(chat);
-			for (Chat c : result) {
-				System.out.print(c);
-			}
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	// test the chat null read failure
-
-	@Test
-	void testReadChatNullDetails() {
-		ChatService chatService = new ChatService();
-		ServiceException exception = assertThrows(ServiceException.class, () -> chatService.readChat(null));
-
-		assertEquals(ChatConstants.getInvalidChatReadMessage(), exception.getMessage());
-	}
-	// Test chat update feature
 
 	// test the chat update success details
 	@Test
@@ -182,16 +157,83 @@ class TestChatService {
 		assertEquals(ChatConstants.getInvalidChatDeleteMessage(), result.getMessage());
 
 	}
+
+	// Get specific chat group details
+
+	@Test
+	void testGetSpecificChatGroupDetails() {
+		int chatId = 1;
+		int userId = 1;
+		ChatService chatService = new ChatService();
+		Chat chat = new Chat();
+		chat.setChatId(chatId);
+		String chatType = "group";
+		chat.setUserId(userId);
+		
+		try {
+			Chat chatGroupDetails;
+
+			if (chatType.equals("direct")) {
+				chatGroupDetails = chatService.getDirectChatGroupDetails(chat);
+			} else {
+				chatGroupDetails = chatService.getGroupChatDetails(chat);
+			}
+
+			List<Chat> chatMessages = chatService.getSpecificChatGroupChatMessages(chatGroupDetails);
+			assertNotNull(chatMessages);
+		}catch(ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	@Test
+	void testGetDirectConversationChatGroupDetails() {
+		int chatId = 1;
+		int userId = 1;
+		ChatService chatService = new ChatService();
+		Chat chat = new Chat();
+		chat.setChatId(chatId);
+		String chatType = "direct";
+		chat.setUserId(userId);
+		
+		try {
+			Chat chatGroupDetails;
+
+			if (chatType.equals("direct")) {
+				chatGroupDetails = chatService.getDirectChatGroupDetails(chat);
+			} else {
+				chatGroupDetails = chatService.getGroupChatDetails(chat);
+			}
+
+			List<Chat> chatMessages = chatService.getSpecificChatGroupChatMessages(chatGroupDetails);
+			assertNotNull(chatMessages);
+		}catch(ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 	
 	
 	@Test
-	void testUserChatAccount() {
-		int userId = 1;
+	void getUserChatGroupsAndDetails() {
 		ChatService chatService = new ChatService();
+		int userId = 1;
 		
 		try {
-			chatService.listAllUserChatGroupsByUserId(userId);
-			
+		List<Chat> chatGroups = chatService.getUserChatGroups(userId);
+		List<Chat> groups = new ArrayList<>(); 
+		
+		for (Chat ch : chatGroups) {
+		    String chatType = ch.getChatType(); 
+		    int chatId = ch.getChatId();
+		    if(chatType.equals("direct")) {
+		    	groups.add(chatService.getUserDirectConversationGroupDetails(chatId, userId));
+		    }else {
+		    	groups.add(chatService.getUserGroupConversationGroupDetails(chatId, userId));
+		    }
+		}
+		assertNotNull(groups);
 		}catch(ServiceException e) {
 			e.printStackTrace();
 			fail();

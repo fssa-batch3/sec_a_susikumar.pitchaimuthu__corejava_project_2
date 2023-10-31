@@ -200,10 +200,9 @@ public class UserDAO {
 	public User readUserDetailsByEmail(String email) throws DAOException {
 		String selectQuery = "SELECT * FROM users WHERE email = ? AND is_deleted = FALSE";
 		List<User> userList = fetchUsers(selectQuery, email);
-		System.out.println(userList);
 		if (userList.isEmpty()) {
 			return null;
-		} 
+		}
 		return userList.get(0);
 	}
 
@@ -312,38 +311,51 @@ public class UserDAO {
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
-					 return createUserFromResultSet(resultSet);
+					return createUserFromResultSet(resultSet);
 				}
 			}
-			 
 
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-		
+
 		return null;
 	}
 
+	/**
+	 * Retrieves the total count of users in the database.
+	 * 
+	 * @return The total count of users.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public int getTotalUserCount() throws DAOException {
+		// SQL query to count the number of users
 		String countQuery = "SELECT COUNT(*) FROM users";
 		int userCount = 0;
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(countQuery)) {
-
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					userCount = resultSet.getInt(1);
 				}
 			}
 			return userCount;
-
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
-
 	}
 
+	/**
+	 * Retrieves a list of all user friends for a given user ID.
+	 * 
+	 * @param userId The user ID for whom friends are to be retrieved.
+	 * @return A list of User objects representing the user's friends.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public List<User> getAllUserFriends(int userId) throws DAOException {
+		// SQL query to retrieve all user friends for the given user
 		String query = "SELECT u.* " + "FROM users u "
 				+ "INNER JOIN user_followers uf1 ON u.user_id = uf1.following_id "
 				+ "INNER JOIN user_followers uf2 ON u.user_id = uf2.follower_id " + "WHERE uf1.follower_id = ? "
@@ -358,11 +370,7 @@ public class UserDAO {
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					User user = new User();
-					user.setUserId(resultSet.getInt("user_id"));
-					user.setUsername(resultSet.getString("username"));
-					user.setUserTheme(resultSet.getString("user_theme"));
-					user.setProfileImage(resultSet.getString("profile_image"));
+					User user = createUserFromResultSet(resultSet);
 					userFriends.add(user);
 				}
 			}
@@ -372,10 +380,20 @@ public class UserDAO {
 		}
 	}
 
+	/**
+	 * Retrieves a list of user friends who have been blocked by the given user.
+	 * 
+	 * @param userId The user ID for whom blocked friends are to be retrieved.
+	 * @return A list of User objects representing the user's blocked friends.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public List<User> getUserBlockedFriends(Integer userId) throws DAOException {
-		List<User> userBlockedFriends = new ArrayList<>();
+		// SQL query to retrieve user friends who have been blocked
 		String query = "SELECT u.* " + "FROM users u " + "WHERE EXISTS ( " + "SELECT 1 " + "FROM user_followers uf "
 				+ "WHERE uf.following_id = u.user_id " + "AND uf.follower_id = ? " + "AND uf.is_active = 0" + ");";
+
+		List<User> userBlockedFriends = new ArrayList<>();
 
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(query)) {
@@ -394,16 +412,27 @@ public class UserDAO {
 		}
 	}
 
+	/**
+	 * Retrieves a list of user friend suggestions for the given user, excluding
+	 * users who are already friends.
+	 * 
+	 * @param userId The user ID for whom friend suggestions are to be retrieved.
+	 * @return A list of User objects representing friend suggestions.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
 	public List<User> getUserFriendsSuggestions(int userId) throws DAOException {
-		List<User> userFriendsSuggestions = new ArrayList<>();
-		String getQury = "SELECT u.* " + "FROM users u "
+		// SQL query to retrieve friend suggestions for the user
+		String getQuery = "SELECT u.* " + "FROM users u "
 				+ "LEFT JOIN user_followers uf1 ON u.user_id = uf1.following_id AND uf1.follower_id = ? "
 				+ "LEFT JOIN user_followers uf2 ON u.user_id = uf2.follower_id AND uf2.following_id = ? "
 				+ "WHERE uf1.follower_id IS NULL " + "AND uf2.follower_id IS NULL " + "AND uf1.is_active = 1 "
 				+ "AND uf2.is_active = 1 " + "AND u.user_id != ?";
 
+		List<User> userFriendsSuggestions = new ArrayList<>();
+
 		try (Connection connection = ConnectionUtils.getConnection();
-				PreparedStatement statement = connection.prepareStatement(getQury)) {
+				PreparedStatement statement = connection.prepareStatement(getQuery)) {
 
 			statement.setInt(1, userId);
 			statement.setInt(2, userId);
@@ -411,11 +440,7 @@ public class UserDAO {
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					User user = new User();
-					user.setUserId(resultSet.getInt("user_id"));
-					user.setUsername(resultSet.getString("username"));
-					user.setUserTheme(resultSet.getString("user_theme"));
-					user.setProfileImage(resultSet.getString("profile_image"));
+					User user = createUserFromResultSet(resultSet);
 					userFriendsSuggestions.add(user);
 				}
 			}
@@ -424,7 +449,33 @@ public class UserDAO {
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
+	}
 
+	/**
+	 * Retrieves a list of all usernames in the database.
+	 * 
+	 * @return A list of usernames as strings.
+	 * @throws DAOException If there's an issue with the database connection or
+	 *                      query.
+	 */
+	public List<String> getAllUsernames() throws DAOException {
+		// SQL query to retrieve all usernames
+		List<String> usernameList = new ArrayList<>();
+		String query = "SELECT username FROM users";
+
+		try (Connection connection = ConnectionUtils.getConnection();
+				PreparedStatement statement = connection.prepareStatement(query);
+				ResultSet resultSet = statement.executeQuery()) {
+
+			while (resultSet.next()) {
+				String username = resultSet.getString("username");
+				usernameList.add(username);
+			}
+
+			return usernameList;
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
 	}
 
 }

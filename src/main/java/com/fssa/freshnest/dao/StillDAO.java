@@ -272,6 +272,5 @@ public class StillDAO {
         return stillResult;
     }
 
-    public static class FollowConnectionDAO {
-    }
+    
 }

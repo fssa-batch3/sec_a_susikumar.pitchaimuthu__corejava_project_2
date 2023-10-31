@@ -319,7 +319,6 @@ class TestStillService {
 
 		try {
 			List<Still> recentlyDeletedStills = stillService.filterStillByRecentlyDeleted(userId);
-			System.out.println(recentlyDeletedStills);
 			assertNotNull(recentlyDeletedStills);
 		} catch (ServiceException e) {
 			e.printStackTrace();

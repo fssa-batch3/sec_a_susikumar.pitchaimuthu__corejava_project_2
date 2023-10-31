@@ -31,6 +31,7 @@ public class Invite {
 	/**
      * Default constructor for creating an empty Invite object.
      */
+    
     // Default Constructor
     public Invite() {
 
@@ -103,18 +104,6 @@ public class Invite {
      */
     public Invite(User user) {
         this.user = user;
-    }
-
-    /**
-     * Constructor for creating an Invite object with a specified user and
-     * invitation ID.
-     *
-     * @param user     The user associated with the invitation.
-     * @param inviteId The unique identifier of the invitation.
-     */
-    public Invite(User user, int inviteId) {
-        this.user = user;
-        this.inviteId = inviteId;
     }
     // Getters and setters
 

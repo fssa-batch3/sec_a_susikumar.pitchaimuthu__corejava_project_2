@@ -117,7 +117,7 @@ class TestInviteValidation {
     @Test
     void testValidTimeDetails() {
         try {
-            LocalDate date = LocalDate.of(2023, 9, 23);
+            LocalDate date = LocalDate.now();
             LocalTime time = LocalTime.of(23, 34);
 
             assertTrue(InviteValidator.validateInviteTime(time, date));

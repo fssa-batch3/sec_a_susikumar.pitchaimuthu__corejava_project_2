@@ -7,8 +7,17 @@ import com.fssa.freshnest.services.exceptions.ServiceException;
 
 public class InviteReactionService {
 
+	/**
+	 * Retrieves the details of a user's reaction to an invite.
+	 *
+	 * @param inviteReaction The InviteReaction object containing the user's
+	 *                       reaction details.
+	 * @return The InviteReaction object with the user's reaction details, or null
+	 *         if no reaction found.
+	 * @throws ServiceException If there's an issue while retrieving the user's
+	 *                          invite reaction details.
+	 */
 	public InviteReaction getUserInviteReaction(InviteReaction inviteReaction) throws ServiceException {
-
 		InviteReactionDAO inviteReactionDAO = new InviteReactionDAO();
 
 		try {
@@ -23,11 +32,20 @@ public class InviteReactionService {
 		}
 	}
 
+	/**
+	 * Allows a user to like or react to an invite.
+	 *
+	 * @param inviteReaction The InviteReaction object containing the user's
+	 *                       reaction details.
+	 * @return True if the reaction was successfully updated or created; otherwise,
+	 *         false.
+	 * @throws ServiceException If there's an issue while updating or creating the
+	 *                          invite reaction.
+	 */
 	public boolean userInviteLikeReaction(InviteReaction inviteReaction) throws ServiceException {
 		InviteReactionDAO inviteReactionDAO = new InviteReactionDAO();
 
 		try {
-
 			if (inviteReactionDAO.checkWhetherTheUserInviteReactionAlreadyPresentOrNot(inviteReaction)) {
 				return inviteReactionDAO.setInviteLikeUsingReactId(inviteReaction);
 			} else {
@@ -37,6 +55,17 @@ public class InviteReactionService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
+
+	/**
+	 * Allows a user to send an invite request.
+	 *
+	 * @param inviteReaction The InviteReaction object containing the user's invite
+	 *                       request details.
+	 * @return True if the request was successfully updated or created; otherwise,
+	 *         false.
+	 * @throws ServiceException If there's an issue while updating or creating the
+	 *                          invite request.
+	 */
 
 	public boolean userInviteSendRequest(InviteReaction inviteReaction) throws ServiceException {
 		InviteReactionDAO inviteReactionDAO = new InviteReactionDAO();
@@ -48,8 +77,7 @@ public class InviteReactionService {
 				if (inviteReactionDAO.checkTheUserSendRejectResponseOrNot(inviteReaction)) {
 					inviteReactionDAO.changeTheInviteRejectResponseIntoFalse(inviteReaction.getReactId());
 				}
-				
-				
+
 				return inviteReactionDAO.setUserInviteRequestUsingReactId(inviteReaction);
 			} else {
 				return inviteReactionDAO.userInviteReactionCreate(inviteReaction);
@@ -59,6 +87,17 @@ public class InviteReactionService {
 		}
 
 	}
+
+	/**
+	 * Allows a user to send a reject response to an invite.
+	 *
+	 * @param inviteReaction The InviteReaction object containing the user's reject
+	 *                       response details.
+	 * @return True if the response was successfully updated or created; otherwise,
+	 *         false.
+	 * @throws ServiceException If there's an issue while updating or creating the
+	 *                          reject response.
+	 */
 
 	public boolean userSendRejectResponse(InviteReaction inviteReaction) throws ServiceException {
 		InviteReactionDAO inviteReactionDAO = new InviteReactionDAO();
@@ -80,12 +119,21 @@ public class InviteReactionService {
 
 	}
 
+	/**
+	 * Sends a response to an invite request, updating the database.
+	 *
+	 * @param inviteReaction The InviteReaction object containing the user's
+	 *                       response details.
+	 * @return True if the response was successfully updated; otherwise, false.
+	 * @throws ServiceException If there's an issue while updating the invite
+	 *                          request response.
+	 */
 	public boolean sendBackTheInviteRequestResponse(InviteReaction inviteReaction) throws ServiceException {
 		InviteReactionDAO inviteReactionDAO = new InviteReactionDAO();
 
 		try {
 			return inviteReactionDAO.sendBackTheInviteRequestResponse(inviteReaction);
-		}catch(DAOException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}

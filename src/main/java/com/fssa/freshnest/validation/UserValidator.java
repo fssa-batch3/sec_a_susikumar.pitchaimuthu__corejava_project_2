@@ -1,16 +1,15 @@
 package com.fssa.freshnest.validation;
 
-import com.fssa.freshnest.constants.StillConstants;
-import com.fssa.freshnest.constants.UserConstants;
-import com.fssa.freshnest.model.User;
-import com.fssa.freshnest.validation.exceptions.InvalidUserException;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.fssa.freshnest.constants.UserConstants;
+import com.fssa.freshnest.model.User;
+import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 /**
  * This class provides methods to validate user-related data and operations.
@@ -133,6 +132,16 @@ public class UserValidator {
 		}
 	}
 
+	/**
+	 * Validates a user's details by checking if the provided user object is not
+	 * null and if the email is valid.
+	 *
+	 * @param user The user object whose details are to be validated.
+	 * @return true if the user details are valid, false otherwise.
+	 * @throws InvalidUserException If the user details are invalid, this exception
+	 *                              is thrown with an appropriate message.
+	 */
+
 	public static boolean validateListUserDetails(User user) throws InvalidUserException {
 		if (user != null && validateEmail(user.getEmail())) {
 			return true;
@@ -141,6 +150,17 @@ public class UserValidator {
 		}
 
 	}
+
+	/**
+	 * Validates the user detail read feature by checking if the provided user
+	 * object is not null and if the email is valid.
+	 *
+	 * @param user The user object for which the detail read feature is to be
+	 *             validated.
+	 * @return true if the detail read feature is valid, false otherwise.
+	 * @throws InvalidUserException If the detail read feature is invalid, this
+	 *                              exception is thrown with an appropriate message.
+	 */
 
 	public static boolean validateUserDetailReadFeature(User user) throws InvalidUserException {
 		if (user != null && validateEmail(user.getEmail())) {
@@ -396,6 +416,17 @@ public class UserValidator {
 			throw new InvalidUserException(UserConstants.getInvalidUserProfileImageUrlMessage());
 		}
 	}
+
+	/**
+	 * Validates a user ID by checking if it is a positive integer (greater than or
+	 * equal to 1).
+	 *
+	 * @param userId The user ID to be validated.
+	 * @return true if the user ID is valid, false otherwise.
+	 * @throws InvalidUserException If the user ID is invalid (not a positive
+	 *                              integer), this exception is thrown with an
+	 *                              appropriate message.
+	 */
 
 	public static boolean validateUserId(int userId) throws InvalidUserException {
 		if (userId < 1) {

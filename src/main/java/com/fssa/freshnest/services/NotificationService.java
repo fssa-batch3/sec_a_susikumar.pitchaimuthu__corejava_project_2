@@ -10,131 +10,207 @@ import com.fssa.freshnest.validation.NotificationValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 public class NotificationService {
+	/**
+	 * Sends a follow request notification to a user.
+	 *
+	 * @param followConnection The RequestAndResponse object containing follow
+	 *                         request details.
+	 * @return True if the notification was sent successfully, false otherwise.
+	 * @throws ServiceException If there is an issue while sending the notification.
+	 */
+	public boolean followRequestSendService(RequestAndResponse followConnection) throws ServiceException {
+		NotificationDAO notificationDAO = new NotificationDAO();
 
-    public boolean followRequestSendService(RequestAndResponse followConnection) throws ServiceException {
-        NotificationDAO notificationDAO = new NotificationDAO();
+		try {
+			return notificationDAO.sendFollowRequestNotification(followConnection);
 
-        try {
-            return notificationDAO.sendFollowRequestNotification(followConnection);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 
-        } catch (DAOException e) {
-            throw new ServiceException(e.getMessage());
-        }
-    }
+	/**
+	 * Counts the number of unread notifications for a user.
+	 *
+	 * @param requestAndResponse The RequestAndResponse object containing the user
+	 *                           ID.
+	 * @return The count of unread notifications.
+	 * @throws ServiceException If there is an issue while counting the
+	 *                          notifications.
+	 */
 
-    public int countNotIsReadNotificationCounts(RequestAndResponse requestAndResponse) throws ServiceException {
-        NotificationDAO notificationDAO = new NotificationDAO();
+	public int countNotIsReadNotificationCounts(RequestAndResponse requestAndResponse) throws ServiceException {
+		NotificationDAO notificationDAO = new NotificationDAO();
 
-        try {
-            NotificationValidator.validateNotIsReadCount(requestAndResponse);
-            System.out.println("userId " + requestAndResponse.getRequestSenderId());
-            System.out.println(notificationDAO.countNotIsReadNotificationCounts(requestAndResponse.getRequestReceiverId()));
+		try {
+			NotificationValidator.validateNotIsReadCount(requestAndResponse);
+			int counts = notificationDAO.countNotIsReadNotificationCounts(requestAndResponse.getRequestSenderId());
 
-            int counts = notificationDAO.countNotIsReadNotificationCounts(requestAndResponse.getRequestSenderId());
+			if (counts == 0) {
+				throw new ServiceException("No notification available");
+			}
 
-            if (counts == 0) {
-                throw new ServiceException("No notification available");
-            }
+			return counts;
 
-            return counts;
+		} catch (InvalidUserException | DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 
-        } catch (InvalidUserException | DAOException e) {
-            throw new ServiceException(e.getMessage());
-        }
-    }
+	/**
+	 * Retrieves all notifications for a specific user.
+	 *
+	 * @param requestAndResponse The RequestAndResponse object containing the user's
+	 *                           ID.
+	 * @return A list of notifications.
+	 * @throws ServiceException If there is an issue while retrieving the
+	 *                          notifications.
+	 */
 
-    public List<RequestAndResponse> getAllUserNotifications(RequestAndResponse requestAndResponse)
-            throws ServiceException {
+	public List<RequestAndResponse> getAllUserNotifications(RequestAndResponse requestAndResponse)
+			throws ServiceException {
 
-        NotificationDAO notificationDAO = new NotificationDAO();
+		NotificationDAO notificationDAO = new NotificationDAO();
 
-        try {
-            NotificationValidator.validateNotIsReadCount(requestAndResponse);
+		try {
+			NotificationValidator.validateNotIsReadCount(requestAndResponse);
 
-            List<RequestAndResponse> notification = notificationDAO.getAllUserNotifications(requestAndResponse);
+			List<RequestAndResponse> notification = notificationDAO.getAllUserNotifications(requestAndResponse);
 
-            if (notification.isEmpty()) {
-                throw new ServiceException("No Notificaitons available");
-            }
+			if (notification.isEmpty()) {
+				throw new ServiceException("No Notificaitons available");
+			}
 
-            return notification;
-        } catch (InvalidUserException | DAOException e) {
-            throw new ServiceException(e.getMessage());
-        }
+			return notification;
+		} catch (InvalidUserException | DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
 
-    }
+	}
 
-    public RequestAndResponse readFollowRequestNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException {
+	/**
+	 * Retrieves details of a specific follow request notification.
+	 *
+	 * @param requestAndResponse The RequestAndResponse object containing the
+	 *                           notification ID.
+	 * @return The details of the follow request notification.
+	 * @throws ServiceException If there is an issue while retrieving the
+	 *                          notification details.
+	 */
 
-        NotificationDAO notificationDAO = new NotificationDAO();
-        try {
-            NotificationValidator.validateNotificationId(requestAndResponse.getNotificationId());
+	public RequestAndResponse readFollowRequestNotificationDetails(RequestAndResponse requestAndResponse)
+			throws ServiceException {
 
-            return notificationDAO.readNotificationDetails(requestAndResponse);
-        } catch (InvalidUserException | DAOException e) {
-            throw new ServiceException(e.getMessage());
-        }
+		NotificationDAO notificationDAO = new NotificationDAO();
+		try {
+			NotificationValidator.validateNotificationId(requestAndResponse.getNotificationId());
 
-    }
-    
-    public boolean sendInviteRequestNotification(RequestAndResponse requestAndResponse) throws ServiceException{
-        NotificationDAO notificationDAO = new NotificationDAO();
+			return notificationDAO.readNotificationDetails(requestAndResponse);
+		} catch (InvalidUserException | DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
 
-    	try {
-    		if(notificationDAO.checkWhetherTheInviteRequestPresentOrNot(requestAndResponse)) {
-    			
-    		}
-    		return notificationDAO.sendInviteRequestNotification(requestAndResponse);
-    	}catch(DAOException e) {
-    		throw new ServiceException(e.getMessage());
-    	}
-    }
-    
-    public RequestAndResponse readInvteSendRequestNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException{
-        NotificationDAO notificationDAO = new NotificationDAO();
+	}
 
-        try {
-        	return notificationDAO.readInvteSendRequestNotificationDetails(requestAndResponse);
-        }catch(DAOException e) {
-        	throw new ServiceException(e.getMessage());
-        }
-    }
+	/**
+	 * Sends an invite request notification to a user. If a request with the same
+	 * sender, receiver, and type already exists, it will not be sent.
+	 *
+	 * @param requestAndResponse The RequestAndResponse object containing details of
+	 *                           the notification.
+	 * @return true if the notification was sent successfully, false otherwise.
+	 * @throws ServiceException If there is an issue while sending the notification.
+	 */
 
-	public RequestAndResponse readFollowAcceptNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException{
+	public boolean sendInviteRequestNotification(RequestAndResponse requestAndResponse) throws ServiceException {
+		NotificationDAO notificationDAO = new NotificationDAO();
+
+		try {
+			if (notificationDAO.checkWhetherTheInviteRequestPresentOrNot(requestAndResponse)) {
+
+			}
+			return notificationDAO.sendInviteRequestNotification(requestAndResponse);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	/**
+	 * Retrieves details of an invite send request notification.
+	 *
+	 * @param requestAndResponse The RequestAndResponse object containing the
+	 *                           notification ID.
+	 * @return The details of the invite send request notification.
+	 * @throws ServiceException If there is an issue while retrieving the
+	 *                          notification details.
+	 */
+
+	public RequestAndResponse readInvteSendRequestNotificationDetails(RequestAndResponse requestAndResponse)
+			throws ServiceException {
+		NotificationDAO notificationDAO = new NotificationDAO();
+
+		try {
+			return notificationDAO.readInviteSendRequestNotificationDetails(requestAndResponse);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public RequestAndResponse readFollowAcceptNotificationDetails(RequestAndResponse requestAndResponse)
+			throws ServiceException {
 		return null;
 	}
 
-	public RequestAndResponse readInviteRequestAcceptNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException{
+	public RequestAndResponse readInviteRequestAcceptNotificationDetails(RequestAndResponse requestAndResponse)
+			throws ServiceException {
 		return null;
 	}
 
-	public RequestAndResponse readOtherNotificationDetails(RequestAndResponse requestAndResponse) throws ServiceException {
+	public RequestAndResponse readOtherNotificationDetails(RequestAndResponse requestAndResponse)
+			throws ServiceException {
 		return null;
 	}
 
+	/**
+	 * Sends a time-tale message as a notification to a user.
+	 *
+	 * @param requestAndResponse The RequestAndResponse object containing the
+	 *                           time-tale message.
+	 * @return true if the notification was sent successfully, false otherwise.
+	 * @throws ServiceException If there is an issue while sending the notification.
+	 */
 	public boolean sendTimeTaleMessage(RequestAndResponse requestAndResponse) throws ServiceException {
-        NotificationDAO notificationDAO = new NotificationDAO();
+		NotificationDAO notificationDAO = new NotificationDAO();
 
 		try {
 			return notificationDAO.sendTimeTaleMessage(requestAndResponse);
-		}catch(DAOException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
-		
+
 	}
 
-	public boolean makeNoticationAsRead(RequestAndResponse requestAndResponse) throws ServiceException{
+	/**
+	 * Marks a notification as read for the user.
+	 *
+	 * @param requestAndResponse The RequestAndResponse object containing details of
+	 *                           the notification to be marked as read.
+	 * @return true if the notification was successfully marked as read, false
+	 *         otherwise.
+	 * @throws ServiceException If there is an issue while marking the notification
+	 *                          as read.
+	 */
+
+	public boolean makeNoticationAsRead(RequestAndResponse requestAndResponse) throws ServiceException {
 
 		NotificationDAO notificationDAO = new NotificationDAO();
-		
+
 		try {
 			return notificationDAO.makeNotificationAsRead(requestAndResponse);
-		}catch(DAOException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
-		
+
 	}
-    
-    
-    
+
 }

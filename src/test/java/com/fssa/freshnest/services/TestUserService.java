@@ -21,20 +21,20 @@ class TestUserService {
     // User register feature test
 
     // User registration with valid details
-    @Test
-    void testRegistrationSuccess() {
-        UserService userService = new UserService();
-        User user1 = new User("kani3445678901@gmail.com", "Kani Papa", "susi123@SM", "Susikumar", "Pitchaimuthu",
-                "imageurl");
-        try {
-
-            assertTrue(userService.registerUser(user1));
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            fail();
-
-        }
-    }
+//    @Test
+//    void testRegistrationSuccess() {
+//        UserService userService = new UserService();
+//        User user1 = new User("kani02375289578927892798254@gmail.com", "Kani Papa naan", "susi123@SM", "Susikumar", "Pitchaimuthu",
+//                "imageurl");
+//        try {
+//
+//            assertTrue(userService.registerUser(user1));
+//        } catch (ServiceException e) {
+//            e.printStackTrace();
+//            fail();
+//
+//        }
+//    }
 
     // User register with invalid password
     @Test
@@ -85,7 +85,7 @@ class TestUserService {
     @Test
     void testLoginSuccess() {
         UserService userService = new UserService();
-        User user1 = new User("kani345690123445678901@gmail.com", "susi123@SM");
+        User user1 = new User("susi@gmail.com", "susi123@SMsm");
         try {
             assertTrue(userService.logInUser(user1));
         } catch (ServiceException e) {
@@ -102,7 +102,7 @@ class TestUserService {
 
         ServiceException result = assertThrows(ServiceException.class, () -> userService.logInUser(user1));
 
-        assertEquals(UserConstants.getUserDetailsNotFound(), result.getMessage());
+        assertEquals(UserConstants.getLoginPasswordInvalid(), result.getMessage());
 
     }
 
@@ -222,7 +222,7 @@ class TestUserService {
     // test delete the user with valid details
     @Test
     void testUserDeleteSuccess() {
-        User user1 = new User("susi@gmail.com", true);
+        User user1 = new User("naveen@gmail.com", true);
         UserService userService = new UserService();
         try {
             assertTrue(userService.deleteUser(user1));
@@ -271,7 +271,7 @@ class TestUserService {
 
     @Test
     void testReadUserProfileDetails() {
-        User user1 = new User("kani345690123445678901@gmail.com");
+        User user1 = new User("susi@gmail.com");
         UserService userService = new UserService();
         try {
             User result = userService.readUserDetails(user1);

@@ -20,7 +20,6 @@ class TestUserValidation {
      * It verifies that the {@link UserValidator#validateEmail(String)} method correctly validates a valid email.
      * If the validation fails unexpectedly, the test will fail.
      */
-    // Email validation test
     @Test
     void testValidEmail() {
         try {
@@ -179,7 +178,6 @@ class TestUserValidation {
     void testValidUserFirstname() {
         try {
             assertTrue(UserValidator.validateFirstName("Susikumar"));
-            System.out.println("username is valid");
         } catch (InvalidUserException e) {
             e.printStackTrace();
             fail();

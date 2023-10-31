@@ -11,6 +11,15 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 
 public class FollowConnectionService {
 
+	/**
+	 * Sends a follow request from one user to another.
+	 *
+	 * @param requestAndResponse The request and response object containing follow
+	 *                           request details.
+	 * @return True if the follow request is successfully sent; otherwise, false.
+	 * @throws ServiceException If there's an issue while sending the follow
+	 *                          request.
+	 */
 	public boolean followRequestSendService(RequestAndResponse requestAndResponse) throws ServiceException {
 		FollowConnectionDAO followConnectionDAO = new FollowConnectionDAO();
 		NotificationService notificationService = new NotificationService();
@@ -36,6 +45,17 @@ public class FollowConnectionService {
 
 	}
 
+	/**
+	 * Accepts a follow request from one user to another.
+	 *
+	 * @param requestAndResponse The request and response object containing follow
+	 *                           request details.
+	 * @return True if the follow request is successfully accepted; otherwise,
+	 *         false.
+	 * @throws ServiceException If there's an issue while accepting the follow
+	 *                          request.
+	 */
+
 	public boolean followRequestAcceptService(RequestAndResponse requestAndResponse) throws ServiceException {
 
 		FollowConnectionDAO followConnectionDAO = new FollowConnectionDAO();
@@ -56,7 +76,7 @@ public class FollowConnectionService {
 			chat.setChatType("direct");
 			chat.setChatName("direct conversation");
 			chat.setParticipantsId(participantArr);
-			chatService.insertChatGroup(chat);
+			chatService.insertDirectGroup(chat);
 			chatService.insertChatParticipants(chat);
 
 			return followConnectionDAO.sendFollowRequestResponse(requestAndResponse);
@@ -65,6 +85,15 @@ public class FollowConnectionService {
 		}
 	}
 
+	/**
+	 * Checks whether a user is following another user.
+	 *
+	 * @param requestAndResponse The request and response object containing the user
+	 *                           follow details.
+	 * @return True if the user is following the other user; otherwise, false.
+	 * @throws ServiceException If there's an issue while checking the user follow
+	 *                          status.
+	 */
 	public boolean checkWhetherUserFollowingOrNot(RequestAndResponse requestAndResponse) throws ServiceException {
 		FollowConnectionDAO followConnectionDAO = new FollowConnectionDAO();
 
@@ -75,11 +104,17 @@ public class FollowConnectionService {
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());
 		}
-
 	}
 
+	/**
+	 * Unfollows a user, ending the following relationship.
+	 *
+	 * @param requestAndResponse The request and response object containing unfollow
+	 *                           details.
+	 * @return True if the user is successfully unfollowed; otherwise, false.
+	 * @throws ServiceException If there's an issue while unfollowing the user.
+	 */
 	public boolean userUnFollow(RequestAndResponse requestAndResponse) throws ServiceException {
-
 		FollowConnectionDAO followConnectionDAO = new FollowConnectionDAO();
 
 		try {

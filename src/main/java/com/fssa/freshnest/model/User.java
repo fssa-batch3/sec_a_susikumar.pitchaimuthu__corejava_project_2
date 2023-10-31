@@ -18,7 +18,6 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
-	private int age;
 	private long mobileNumber;
 	private LocalDate dob;
 	private String nationality;
@@ -193,24 +192,7 @@ public class User {
 	public void setIsDelete(boolean isDelete) {
 		this.isDelete = isDelete;
 	}
-
-	/**
-	 * Gets the user's age.
-	 *
-	 * @return The user's age
-	 */
-	public int getAge() {
-		return age;
-	}
-
-	/**
-	 * Sets the user's age.
-	 *
-	 * @param age The user's age
-	 */
-	public void setAge(int age) {
-		this.age = age;
-	}
+	
 
 	/**
 	 * Gets the user's mobile number.
@@ -427,7 +409,7 @@ public class User {
 	@Override 
 	public String toString() {
 		return "User [email=" + email + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", age=" + age + ", mobileNumber=" + mobileNumber + ", dob=" + dob
+				+ ", lastName=" + lastName + ", mobileNumber=" + mobileNumber + ", dob=" + dob
 				+ ", nationality=" + nationality + ", profileImage=" + profileImage + ", gender=" + gender
 				+ ", isDelete=" + isDelete + ", userId=" + userId + ", userTheme=" + userTheme + ", registerAt="
 				+ registerAt + "]";
