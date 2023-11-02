@@ -221,9 +221,10 @@ class TestStillService {
 
 		StillService stillService = new StillService();
 		Still still = new Still(true, still_id, user);
+		still.setStillDate(LocalDate.now());
 		ServiceException result = assertThrows(ServiceException.class, () -> stillService.deleteStill(still));
 
-		assertEquals(StillConstants.getInvalidStillDeleteMessage(), result.getMessage());
+		assertEquals(StillConstants.getInvalidStillIdMessage(), result.getMessage());
 	}
 
 	// Test still favourite feature

@@ -27,14 +27,7 @@ public class ConnectionUtils {
 		dbUrl = System.getenv("LOCAL_DB_HOST");
 		dbUser = System.getenv("LOCAL_DB_USERNAME");
 		dbPassword = System.getenv("LOCAL_DB_PASSWORD");
-//		
-//		dbUrl = System.getenv("CLOUD_DB_HOST");
-//		dbUser = System.getenv("CLOUD_DB_USERNAME");
-//		dbPassword = System.getenv("CLOUD_DB_PASSWORD");
 
-//		dbUrl = System.getenv("DATABASE_HOST");
-//		dbUser = System.getenv("DATABASE_USERNAME");
-//		dbPassword = System.getenv("DATABASE_PASSWORD");
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

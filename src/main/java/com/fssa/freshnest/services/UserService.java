@@ -1,5 +1,7 @@
 package com.fssa.freshnest.services;
 
+import java.util.List;
+
 import com.fssa.freshnest.constants.UserConstants;
 import com.fssa.freshnest.dao.UserDAO;
 import com.fssa.freshnest.dao.exceptions.DAOException;
@@ -8,9 +10,6 @@ import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.utils.PasswordUtils;
 import com.fssa.freshnest.validation.UserValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * This class provides services related to user management, such as register,

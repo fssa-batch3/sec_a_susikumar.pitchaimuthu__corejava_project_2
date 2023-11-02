@@ -119,13 +119,12 @@ public class StillDAO {
 
     // add delete still feature
     public boolean deleteStill(Still still) throws DAOException {
-        String insertQuery = "UPDATE fresh_still SET is_delete = ? , deletion_date = ? WHERE still_id = ? AND user_id =?  ";
+        String insertQuery = "UPDATE fresh_still SET is_delete = 1 , deletion_date = ? WHERE still_id = ? AND user_id =?  ";
         try (Connection connection = ConnectionUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(insertQuery)) {
-            statement.setInt(1, still.getIsDelete() ? 1 : 0);
-            statement.setDate(2, Date.valueOf(still.getStillDate()));
-            statement.setInt(3, still.getStillId());
-            statement.setInt(4, still.getUser().getUserId());
+            statement.setDate(1, Date.valueOf(still.getStillDate()));
+            statement.setInt(2, still.getStillId());
+            statement.setInt(3, still.getUser().getUserId());
 
             // Execute the query 
             int rows = statement.executeUpdate();

@@ -486,8 +486,8 @@ public class ChatDAO {
 					chat.setChatMessage(resultSet.getString("message"));
 					chat.setTimestamp(resultSet.getTimestamp("last_message_time"));
 					chat.setChatType(resultSet.getString("chat_type"));
-					int lastMessageSenderId = resultSet.getInt("sender_id");
-					chat.setUsername(userDAO.readUserFrinedsDetailsByUserId(lastMessageSenderId).getUsername());
+					//int lastMessageSenderId = resultSet.getInt("sender_id");
+					//chat.setUsername(userDAO.readUserFrinedsDetailsByUserId(lastMessageSenderId).getUsername());
 					chat.setUnReadMessageCount(getUnReadChatMessageCount(chatId, userId));
 				}
 				return chat;
@@ -529,8 +529,9 @@ public class ChatDAO {
 					chat.setChatMessage(resultSet.getString("message"));
 					chat.setTimestamp(resultSet.getTimestamp("last_message_time"));
 					chat.setChatType(resultSet.getString("chat_type"));
-					int lastMessageSenderId = resultSet.getInt("sender_id");
-					chat.setUsername(userDAO.readUserFrinedsDetailsByUserId(lastMessageSenderId).getUsername());
+				//	int lastMessageSenderId = resultSet.getInt("sender_id");
+
+				//	chat.setUsername(userDAO.readUserFrinedsDetailsByUserId(lastMessageSenderId).getUsername());
 					chat.setUnReadMessageCount(getUnReadChatMessageCount(chatId, userId));
 
 					if (resultSet.getInt("last_messsage_sender") == userId) {

@@ -37,6 +37,5 @@ com\fssa\freshnest\services\FollowConnectionService.class
 com\fssa\freshnest\validation\TimeTalesValidator.class
 com\fssa\freshnest\utils\PasswordUtils.class
 com\fssa\freshnest\validation\UserValidator.class
-com\fssa\freshnest\dao\StillDAO$FollowConnectionDAO.class
 com\fssa\freshnest\services\TimeTalesService.class
 com\fssa\freshnest\constants\InviteConstants.class

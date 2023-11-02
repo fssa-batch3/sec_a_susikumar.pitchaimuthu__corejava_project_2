@@ -130,4 +130,18 @@ public class FollowConnectionValidator {
 		return true;
 	}
 
+	public static boolean validatedFollowrequestId(int userId) throws InvalidUserException {
+		if (userId <= 0) {
+			throw new InvalidUserException(FollowConnectionConstants.getInvalidFollowRequestId());
+		}
+		return true;
+	}
+
+	public static boolean validateFollowReciverId(int userId) throws InvalidUserException {
+		if (userId <= 0) {
+			throw new InvalidUserException(FollowConnectionConstants.getInvalidFollowReceiverId());
+		}
+		return true;
+	}
+
 }

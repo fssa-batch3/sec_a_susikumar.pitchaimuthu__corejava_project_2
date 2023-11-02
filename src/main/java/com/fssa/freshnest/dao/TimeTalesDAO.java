@@ -29,7 +29,7 @@ public class TimeTalesDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertQuery)) {
 			statement.setInt(1, timeTales.getUserId());
-			statement.setString(2, timeTales.getMedia_url());
+			statement.setString(2, timeTales.getMediaUrl());
 			statement.setDouble(3, timeTales.getTaleDuration());
 			int rows = statement.executeUpdate();
 			return (rows > 0);
@@ -60,7 +60,7 @@ public class TimeTalesDAO {
 					timeTales1.setTaleDuration(resultSet.getDouble("duration"));
 					timeTales1.setUsername(resultSet.getString("username"));
 					timeTales1.setUserId(resultSet.getInt("user_id"));
-					timeTales1.setMedia_url(resultSet.getString("media_url"));
+					timeTales1.setMediaUrl(resultSet.getString("media_url"));
 					timeTales1.setExpireAt(resultSet.getTimestamp("expire_at"));
 					timeTales1.setProfileImage(resultSet.getString("profile_image"));
 					timeTaleDetails.add(timeTales1);
@@ -98,7 +98,7 @@ public class TimeTalesDAO {
 					int userId = resultSet.getInt("user_id");
 					timeTales1.setTaleId(resultSet.getInt("tale_id"));
 					timeTales1.setTaleDuration(resultSet.getDouble("duration"));
-					timeTales1.setMedia_url(resultSet.getString("media_url"));
+					timeTales1.setMediaUrl(resultSet.getString("media_url"));
 					timeTales1.setExpireAt(resultSet.getTimestamp("expires_at"));
 					timeTales1.setCreatedAt(resultSet.getTimestamp("created_at"));
 					User user = userDAO.readUserFrinedsDetailsByUserId(userId);
@@ -159,7 +159,7 @@ public class TimeTalesDAO {
 					TimeTales timeTale = new TimeTales();
 					timeTale.setTaleId(resultSet.getInt("tale_id"));
 					timeTale.setUserId(resultSet.getInt("user_id"));
-					timeTale.setMedia_url(resultSet.getString("media_url"));
+					timeTale.setMediaUrl(resultSet.getString("media_url"));
 					timeTale.setTaleDuration(resultSet.getDouble("duration"));
 					timeTale.setCreatedAt(resultSet.getTimestamp("created_at"));
 					timeTale.setUser(userDAO.readUserFrinedsDetailsByUserId(id));

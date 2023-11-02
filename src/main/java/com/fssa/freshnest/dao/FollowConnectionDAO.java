@@ -43,7 +43,7 @@ public class FollowConnectionDAO {
 		}
 	}
 
-	/**
+	/** 
 	 * Sends a follow request response by inserting the relationship into the
 	 * database.
 	 * 

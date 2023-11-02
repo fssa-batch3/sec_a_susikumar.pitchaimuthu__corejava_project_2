@@ -23,7 +23,7 @@ class TestFollowConnectionValidation {
 				() -> FollowConnectionValidator.validateUserId(0));
 
 		InvalidUserException result2 = assertThrows(InvalidUserException.class,
-				() -> FollowConnectionValidator.validateUserId(-1));
+				() -> FollowConnectionValidator.validateUserId(-2));
 
 		assertEquals(result.getMessage(), FollowConnectionConstants.getInvalidUserId());
 		assertEquals(result2.getMessage(), FollowConnectionConstants.getInvalidUserId());
@@ -57,6 +57,35 @@ class TestFollowConnectionValidation {
 	}
 
 	@Test
+	void testValidateUserIdValidTwo() throws InvalidUserException {
+		assertTrue(FollowConnectionValidator.validateUserId(11));
+		assertTrue(FollowConnectionValidator.validateUserId(15));
+	}
+
+	@Test
+	void testValidateUserIdInvalidThree() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validateUserId(0));
+
+		InvalidUserException result2 = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validateUserId(-5));
+
+		assertEquals(result.getMessage(), FollowConnectionConstants.getInvalidUserId());
+		assertEquals(result2.getMessage(), FollowConnectionConstants.getInvalidUserId());
+	}
+
+	@Test
+	void testValidateFollowAcceptTypeValidTwo() throws InvalidUserException {
+		assertTrue(FollowConnectionValidator.validateFollowAcceptType("follow_accept"));
+	}
+
+	@Test
+	void testValidateUserIdValidThree() throws InvalidUserException {
+		assertTrue(FollowConnectionValidator.validateUserId(12));
+		assertTrue(FollowConnectionValidator.validateUserId(10));
+	}
+
+	@Test
 	void testValidateFollowAcceptTypeInvalid() {
 		try {
 			assertNotNull(FollowConnectionValidator.validateFollowAcceptType(null));
@@ -70,5 +99,79 @@ class TestFollowConnectionValidation {
 
 		assertEquals(result.getMessage(), FollowConnectionConstants.getInvalidFollowRequestType());
 		assertEquals(result2.getMessage(), FollowConnectionConstants.getInvalidFollowRequestType());
+	}
+
+	@Test
+	void testValidateFollowAcceptTypeValidThree() throws InvalidUserException {
+		assertTrue(FollowConnectionValidator.validateFollowAcceptType("follow_accept"));
+	}
+
+	@Test
+	void testValidateUserIdInvalidTwo() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validateUserId(0));
+
+		InvalidUserException result2 = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validateUserId(-7));
+
+		assertEquals(result.getMessage(), FollowConnectionConstants.getInvalidUserId());
+		assertEquals(result2.getMessage(), FollowConnectionConstants.getInvalidUserId());
+	}
+
+	@Test
+	void testValidateFollowAcceptTypeValidFour() throws InvalidUserException {
+		assertTrue(FollowConnectionValidator.validateFollowAcceptType("follow_accept"));
+	}
+
+	@Test
+	void testValidateUserIdInvalidFour() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validateUserId(0));
+
+		InvalidUserException result2 = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validateUserId(-9));
+
+		assertEquals(result.getMessage(), FollowConnectionConstants.getInvalidUserId());
+		assertEquals(result2.getMessage(), FollowConnectionConstants.getInvalidUserId());
+	}
+
+	@Test
+	void testValidateFollowAcceptTypeValidFive() throws InvalidUserException {
+		assertTrue(FollowConnectionValidator.validateFollowAcceptType("follow_accept"));
+	}
+
+	@Test
+	void testValidateRequestSenderId() throws InvalidUserException {
+		assertTrue(FollowConnectionValidator.validatedFollowrequestId(12));
+		assertTrue(FollowConnectionValidator.validatedFollowrequestId(10));
+	}
+
+	@Test
+	void testValidateInvalidRequestSenderId() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validatedFollowrequestId(-12));
+		InvalidUserException result2 = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validatedFollowrequestId(-10));
+		assertEquals(result.getMessage(), FollowConnectionConstants.getInvalidFollowRequestId());
+		assertEquals(result2.getMessage(), FollowConnectionConstants.getInvalidFollowRequestId());
+
+	}
+
+	@Test
+	void testValidateRequestReceiverId() throws InvalidUserException {
+		assertTrue(FollowConnectionValidator.validateFollowReciverId(12));
+		assertTrue(FollowConnectionValidator.validateFollowReciverId(10));
+	}
+
+	@Test
+	void testValidateInvalidRequestReceiverId() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validateFollowReciverId(-12));
+		InvalidUserException result2 = assertThrows(InvalidUserException.class,
+				() -> FollowConnectionValidator.validateFollowReciverId(-10));
+
+		assertEquals(result.getMessage(), FollowConnectionConstants.getInvalidFollowReceiverId());
+		assertEquals(result2.getMessage(), FollowConnectionConstants.getInvalidFollowReceiverId());
+
 	}
 }

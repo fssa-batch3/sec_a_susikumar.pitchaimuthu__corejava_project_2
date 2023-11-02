@@ -18,7 +18,7 @@ public class TimeTalesValidator {
 	 *                              exception is thrown with an appropriate message.
 	 */
 	public static boolean validateCreateTimeTales(TimeTales timeTales) throws InvalidUserException {
-		if (timeTales != null && validateMediaUrl(timeTales.getMedia_url())) {
+		if (timeTales != null && validateMediaUrl(timeTales.getMediaUrl())) {
 			return true;
 		} else {
 			throw new InvalidUserException("Invalid time tales creation details");

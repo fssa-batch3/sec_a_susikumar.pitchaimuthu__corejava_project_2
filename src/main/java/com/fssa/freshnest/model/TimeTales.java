@@ -6,7 +6,7 @@ public class TimeTales {
 	private User user;
     private int taleId;
     private int userId;
-    private String media_url;
+    private String mediaUrl;
     private String profileImage;
     private String username;
     private Timestamp expireAt;
@@ -65,12 +65,12 @@ public class TimeTales {
         this.userId = userId;
     }
 
-    public String getMedia_url() {
-        return media_url;
+    public String getMediaUrl() {
+        return mediaUrl;
     }
 
-    public void setMedia_url(String media_url) {
-        this.media_url = media_url;
+    public void setMediaUrl(String mediaUrl) {
+        this.mediaUrl = mediaUrl;
     }
 
     public String getProfileImage() {
@@ -94,7 +94,7 @@ public class TimeTales {
         return "TimeTales{" +
                 "taleId=" + taleId +
                 ", userId=" + userId +
-                ", media_url='" + media_url + '\'' +
+                ", media_url='" + mediaUrl + '\'' +
                 ", profileImage='" + profileImage + '\'' +
                 ", username='" + username + '\'' +
                 ", expireAt=" + expireAt +

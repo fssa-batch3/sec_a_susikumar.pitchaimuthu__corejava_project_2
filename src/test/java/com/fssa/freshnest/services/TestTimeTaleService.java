@@ -1,13 +1,16 @@
 package com.fssa.freshnest.services;
 
-import com.fssa.freshnest.model.RequestAndResponse;
-import com.fssa.freshnest.model.TimeTales;
-import com.fssa.freshnest.services.exceptions.ServiceException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import com.fssa.freshnest.model.RequestAndResponse;
+import com.fssa.freshnest.model.TimeTales;
+import com.fssa.freshnest.services.exceptions.ServiceException;
 
 class TestTimeTaleService {
 
@@ -18,7 +21,7 @@ class TestTimeTaleService {
         double duration = 12.3;
         TimeTalesService timeTalesService = new TimeTalesService();
         TimeTales timeTales = new TimeTales();
-        timeTales.setMedia_url(mediaUrl);
+        timeTales.setMediaUrl(mediaUrl);
         timeTales.setTaleDuration(duration);
         timeTales.setUserId(userId);
 
@@ -32,7 +35,7 @@ class TestTimeTaleService {
 
     @Test
     void testTimeTaleDeleteSuccess() {
-        int taleId = 3;
+        int taleId = 1;
         TimeTalesService timeTalesService = new TimeTalesService();
         TimeTales timeTale = new TimeTales();
         timeTale.setTaleId(taleId);

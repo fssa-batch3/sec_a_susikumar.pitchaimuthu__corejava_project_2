@@ -164,6 +164,10 @@ public class Chat {
 		this.messageId = messageId;
 	}
 
+	public Chat(String chatMessage) {
+		this.chatMessage = chatMessage;
+	}
+
 	/**
 	 * Getter for retrieving the chat type.
 	 *

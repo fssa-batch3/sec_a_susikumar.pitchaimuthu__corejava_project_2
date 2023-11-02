@@ -1,5 +1,7 @@
 package com.fssa.freshnest.services;
 
+import java.util.List;
+
 import com.fssa.freshnest.constants.StillConstants;
 import com.fssa.freshnest.dao.StillDAO;
 import com.fssa.freshnest.dao.exceptions.DAOException;
@@ -7,9 +9,6 @@ import com.fssa.freshnest.model.Still;
 import com.fssa.freshnest.services.exceptions.ServiceException;
 import com.fssa.freshnest.validation.StillValidator;
 import com.fssa.freshnest.validation.exceptions.InvalidUserException;
-import java.util.Collections;
-
-import java.util.List;
 
 /**
  * This class provides services related to still management, such as take, list,

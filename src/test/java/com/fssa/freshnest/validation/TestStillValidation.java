@@ -33,7 +33,7 @@ class TestStillValidation {
 	}
 
 	@Test
-	public void testValidateStillUrlInvalid() {
+	void testValidateStillUrlInvalid() {
 
 		try {
 			assertNotNull(StillValidator.validateStillUrl(null));
@@ -42,12 +42,12 @@ class TestStillValidation {
 		}
 		InvalidUserException result = assertThrows(InvalidUserException.class,
 				() -> StillValidator.validateStillUrl("invalid-url"));
-		
+
 		assertEquals(result.getMessage(), StillConstants.getInvalidStillUrlMessage());
 	}
 
 	@Test
-	public void testValidateStillNameValid() {
+	void testValidateStillNameValid() {
 		try {
 			assertTrue(StillValidator.validateStillName("Valid Name"));
 		} catch (InvalidUserException e) {
@@ -56,44 +56,61 @@ class TestStillValidation {
 	}
 
 	@Test
-	public void testValidateStillNameInvalid() {
- 	assertThrows(InvalidUserException.class, () -> StillValidator.validateStillName(null));
-		InvalidUserException result = assertThrows(InvalidUserException.class, () -> StillValidator.validateStillName(""));
-		InvalidUserException result2=	assertThrows(InvalidUserException.class, () -> StillValidator.validateStillName("   "));
+	void testInvalidStillUrlFive() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillUrl("//www.example"));
+		assertEquals(StillConstants.getInvalidStillUrlMessage(), result.getMessage());
+	}
+
+	@Test
+	void testValidateStillNameInvalid() {
+		assertThrows(InvalidUserException.class, () -> StillValidator.validateStillName(null));
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillName(""));
+		InvalidUserException result2 = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillName("   "));
 		assertEquals(result.getMessage(), StillConstants.getInvalidStillNameMessage());
 		assertEquals(result2.getMessage(), StillConstants.getInvalidStillNameMessage());
 
 	}
 
 	@Test
-	public void testValidateStillDateValid() {
+	void testValidateStillDateValid() {
 		try {
 			assertTrue(StillValidator.validateStillDate(LocalDate.now()));
 		} catch (InvalidUserException e) {
-			e.printStackTrace();
+			fail();
 		}
 	}
 
 	@Test
-	public void testValidateStillDateInvalid() {
-	InvalidUserException result = 	assertThrows(InvalidUserException.class, () -> StillValidator.validateStillDate(LocalDate.of(1800, 1, 30)));
-	InvalidUserException result2 = 	assertThrows(InvalidUserException.class, () -> StillValidator.validateStillDate(LocalDate.of(1870, 12, 1)));
-	InvalidUserException result3 = 	assertThrows(InvalidUserException.class, () -> StillValidator.validateStillDate(null));
+	void testInvalidStillUrlFour() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillUrl("//www.example"));
+		assertEquals(StillConstants.getInvalidStillUrlMessage(), result.getMessage());
+	}
 
-	
-	assertEquals(result.getMessage(), StillConstants.getInvalidStillDateMessage());
-	assertEquals(result2.getMessage(), StillConstants.getInvalidStillDateMessage());
-	assertEquals(result3.getMessage(), StillConstants.getInvalidStillDateMessage());
+	@Test
+	void testValidateStillDateInvalid() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillDate(LocalDate.of(1800, 1, 30)));
+		InvalidUserException result2 = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillDate(LocalDate.of(1870, 12, 1)));
+		InvalidUserException result3 = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillDate(null));
 
+		assertEquals(result.getMessage(), StillConstants.getInvalidStillDateMessage());
+		assertEquals(result2.getMessage(), StillConstants.getInvalidStillDateMessage());
+		assertEquals(result3.getMessage(), StillConstants.getInvalidStillDateMessage());
 
 	}
 
 	@Test
-	public void testValidateStillTimeValid() {
+	void testValidateStillTimeValid() {
 		try {
 			assertTrue(StillValidator.validateStillTime(LocalTime.of(12, 0)));
 		} catch (InvalidUserException e) {
-			e.printStackTrace();
+			fail();
 		}
 	}
 
@@ -102,7 +119,6 @@ class TestStillValidation {
 		try {
 			assertTrue(StillValidator.validateStillUrl("https://www.example.com"));
 		} catch (InvalidUserException e) {
-			e.printStackTrace();
 			fail();
 		}
 	}
@@ -121,9 +137,16 @@ class TestStillValidation {
 		try {
 			assertTrue(StillValidator.validateStillDate(currentDate));
 		} catch (InvalidUserException e) {
-			e.printStackTrace();
+
 			fail();
 		}
+	}
+
+	@Test
+	void testInvalidStillUrlTwo() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillUrl("//www.example"));
+		assertEquals(StillConstants.getInvalidStillUrlMessage(), result.getMessage());
 	}
 
 	@Test
@@ -132,9 +155,16 @@ class TestStillValidation {
 		try {
 			assertTrue(StillValidator.validateStillTime(currentTime));
 		} catch (InvalidUserException e) {
-			e.printStackTrace();
+
 			fail();
 		}
+	}
+
+	@Test
+	void testInvalidStillUrlThree() {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> StillValidator.validateStillUrl("//www.example"));
+		assertEquals(StillConstants.getInvalidStillUrlMessage(), result.getMessage());
 	}
 
 }
