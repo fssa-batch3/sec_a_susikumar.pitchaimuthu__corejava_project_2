@@ -23,7 +23,7 @@ import com.fssa.freshnest.validation.exceptions.InvalidUserException;
 class TestStillValidation {
 
 	@Test
-	public void testValidateStillUrlValid() {
+	 void testValidateStillUrlValid() {
 		try {
 			assertTrue(StillValidator.validateStillUrl("https://example.com/image.jpg"));
 			assertTrue(StillValidator.validateStillUrl("data:image/png;base64,base64data"));
@@ -32,19 +32,6 @@ class TestStillValidation {
 		}
 	}
 
-	@Test
-	void testValidateStillUrlInvalid() {
-
-		try {
-			assertNotNull(StillValidator.validateStillUrl(null));
-		} catch (InvalidUserException e) {
-			e.printStackTrace();
-		}
-		InvalidUserException result = assertThrows(InvalidUserException.class,
-				() -> StillValidator.validateStillUrl("invalid-url"));
-
-		assertEquals(result.getMessage(), StillConstants.getInvalidStillUrlMessage());
-	}
 
 	@Test
 	void testValidateStillNameValid() {

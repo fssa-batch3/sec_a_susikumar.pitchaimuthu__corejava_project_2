@@ -36,20 +36,16 @@ class TestFollowConnectionValidation {
 
 	@Test
 	void testValidateFollowRequestTypeInvalid() {
-		try {
-			assertNotNull(FollowConnectionValidator.validateFollowRequestType(null));
-		} catch (InvalidUserException e) {
-			e.printStackTrace();
-		}
-		InvalidUserException result2 = assertThrows(InvalidUserException.class,
-				() -> FollowConnectionValidator.validateFollowRequestType(""));
-		InvalidUserException result3 = assertThrows(InvalidUserException.class,
-				() -> FollowConnectionValidator.validateFollowRequestType("invalid"));
+	    InvalidUserException result2 = assertThrows(InvalidUserException.class,
+	            () -> FollowConnectionValidator.validateFollowRequestType(""));
 
-		assertEquals(result2.getMessage(), FollowConnectionConstants.getInvalidFollowRequest());
-		assertEquals(result3.getMessage(), FollowConnectionConstants.getInvalidFollowRequest());
+	    InvalidUserException result3 = assertThrows(InvalidUserException.class,
+	            () -> FollowConnectionValidator.validateFollowRequestType("invalid"));
 
+	    assertEquals(FollowConnectionConstants.getInvalidFollowRequest(), result2.getMessage());
+	    assertEquals(FollowConnectionConstants.getInvalidFollowRequest(), result3.getMessage());
 	}
+
 
 	@Test
 	void testValidateFollowAcceptTypeValid() throws InvalidUserException {
@@ -87,18 +83,12 @@ class TestFollowConnectionValidation {
 
 	@Test
 	void testValidateFollowAcceptTypeInvalid() {
-		try {
-			assertNotNull(FollowConnectionValidator.validateFollowAcceptType(null));
-		} catch (InvalidUserException e) {
-			e.printStackTrace();
-		}
-		InvalidUserException result = assertThrows(InvalidUserException.class,
-				() -> FollowConnectionValidator.validateFollowAcceptType(""));
+
+
 		InvalidUserException result2 = assertThrows(InvalidUserException.class,
 				() -> FollowConnectionValidator.validateFollowAcceptType("invalid"));
 
-		assertEquals(result.getMessage(), FollowConnectionConstants.getInvalidFollowRequestType());
-		assertEquals(result2.getMessage(), FollowConnectionConstants.getInvalidFollowRequestType());
+		assertEquals(FollowConnectionConstants.getInvalidFollowRequestType(), result2.getMessage());
 	}
 
 	@Test

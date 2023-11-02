@@ -18,7 +18,7 @@ public class UserConstants {
     private static final String INVALID_USER_DELETE_MESSAGE = "User account delete details are not valid. Please enter the valid information using the error message.";
     private static final String EMAIL_ID_NOT_EXISTS_MESSAGE = "User account delete details are not valid. Please enter the valid information using the error message.";
     private static final String USER_DETAILS_NOT_FOUND = "User Details not exists.";
-    private static final String LOGIN_PASSWORD_INVALID = "Invalid User Credentials";
+    private static final String INVALID_USER_CRENTIALS = "Invalid User Credentials";
 
     // Each validator message
 
@@ -205,6 +205,6 @@ public class UserConstants {
     }
 
     public static String getLoginPasswordInvalid() {
-        return LOGIN_PASSWORD_INVALID;
+        return INVALID_USER_CRENTIALS;
     }
 }

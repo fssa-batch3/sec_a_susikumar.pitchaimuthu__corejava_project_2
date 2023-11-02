@@ -402,7 +402,7 @@ class TestUserService {
 	}
 
 	@Test
-	public void testUsernameDoesNotExist() {
+	 void testUsernameDoesNotExist() {
 		UserService userService = new UserService();
 		boolean result;
 		try {
@@ -414,7 +414,7 @@ class TestUserService {
 	}
 
 	@Test
-	public void testUsernameExists() {
+	 void testUsernameExists() {
 		UserService userService = new UserService();
 		String username = "Aarthi";
 		ServiceException result = assertThrows(ServiceException.class,
@@ -424,7 +424,7 @@ class TestUserService {
 	}
 
 	@Test
-	public void testUsernameExistsWithDifferentCasing() {
+	 void testUsernameExistsWithDifferentCasing() {
 		UserService userService = new UserService();
 		String username = "aaRThi";
 		ServiceException result = assertThrows(ServiceException.class,
@@ -434,7 +434,7 @@ class TestUserService {
 	}
 
 	@Test
-	public void testInvalidUsername() {
+	 void testInvalidUsername() {
 		UserService userService = new UserService();
 
 		String username = "se";

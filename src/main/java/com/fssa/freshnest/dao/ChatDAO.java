@@ -475,7 +475,6 @@ public class ChatDAO {
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setInt(1, chatId);
-			UserDAO userDAO = new UserDAO();
 			Chat chat = new Chat();
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
@@ -519,7 +518,6 @@ public class ChatDAO {
 			statement.setInt(1, userId);
 			statement.setInt(2, chatId);
 			Chat chat = new Chat();
-			UserDAO userDAO = new UserDAO();
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {

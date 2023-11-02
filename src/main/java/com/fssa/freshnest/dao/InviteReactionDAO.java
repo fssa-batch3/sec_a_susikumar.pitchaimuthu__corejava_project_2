@@ -28,8 +28,6 @@ public class InviteReactionDAO {
 	 *                      query.
 	 */
 	public boolean checkUserReaction(InviteReaction inviteReaction, String columnName) throws DAOException {
-		// SQL query to count the number of rows where the user has the specified
-		// reaction
 		String inviteReactionGetQuery = "SELECT COUNT(*) AS request_count FROM invite_react_details WHERE user_id = ? AND invite_id = ? AND "
 				+ columnName + " = 1";
 
@@ -158,7 +156,7 @@ public class InviteReactionDAO {
 					inviteReaction1.setReject(resultSet.getBoolean("is_reject"));
 					inviteReaction1.setSendRequest(resultSet.getBoolean("is_send_request"));
 					inviteReaction1.setInviteMessage(resultSet.getString("invite_message"));
-				}else {
+				} else {
 					return null;
 				}
 			}
