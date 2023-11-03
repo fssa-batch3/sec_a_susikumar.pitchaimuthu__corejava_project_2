@@ -87,17 +87,18 @@ public class StillValidator {
 	 */
 
 	// validate Delete image
+	
 	public static boolean validateDeleteStill(Still still) throws InvalidUserException {
-		if (still == null) {
-			return false;
-		}
-
-		if (validateStillDate(still.getStillDate())) {
-			return true;
-		} else {
-			throw new InvalidUserException(StillConstants.getInvalidStillDeleteMessage());
-		}
+	    if (still == null) {
+	        return false;
+	    }
+	    
+	    if (!validateStillDate(still.getStillDate())) {
+	        throw new InvalidUserException(StillConstants.getInvalidStillDeleteMessage());
+	    } 
+	    return true; 
 	}
+
 
 	/**
 	 * Validates the data for reading an image.

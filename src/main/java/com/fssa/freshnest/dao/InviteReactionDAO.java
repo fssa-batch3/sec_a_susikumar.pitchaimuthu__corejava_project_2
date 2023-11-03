@@ -31,10 +31,14 @@ public class InviteReactionDAO {
 		String inviteReactionGetQuery = "SELECT COUNT(*) AS request_count FROM invite_react_details WHERE user_id = ? AND invite_id = ? AND "
 				+ columnName + " = 1";
 
+		return executeQuery(inviteReactionGetQuery, inviteReaction.getUserId(), inviteReaction.getInviteId());
+	}
+
+	private boolean executeQuery(String query, int userId, int inviteId) throws DAOException {
 		try (Connection connection = ConnectionUtils.getConnection();
-				PreparedStatement statement = connection.prepareStatement(inviteReactionGetQuery)) {
-			statement.setInt(1, inviteReaction.getUserId());
-			statement.setInt(2, inviteReaction.getInviteId());
+				PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, userId);
+			statement.setInt(2, inviteId);
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {

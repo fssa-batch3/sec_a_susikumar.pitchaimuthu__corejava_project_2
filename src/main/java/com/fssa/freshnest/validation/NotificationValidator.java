@@ -15,11 +15,10 @@ public class NotificationValidator {
 	 *                              is thrown with an appropriate message.
 	 */
 	public static boolean validateNotIsReadCount(RequestAndResponse requestAndResponse) throws InvalidUserException {
-		if (validateNotificationReadUserId(requestAndResponse.getRequestSenderId())) {
-			return true;
-		} else {
+		if (!validateNotificationReadUserId(requestAndResponse.getRequestSenderId())) {
 			throw new InvalidUserException("Invalid user notification checking");
 		}
+		return true;
 	}
 
 	/**
