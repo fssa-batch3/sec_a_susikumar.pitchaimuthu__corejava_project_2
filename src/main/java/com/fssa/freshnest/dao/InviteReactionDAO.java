@@ -90,9 +90,7 @@ public class InviteReactionDAO {
 	 * @throws DAOException If there's an issue with the database connection or
 	 *                      query.
 	 */
-	public boolean changeReactionStatus(int reactId, String columnName) throws DAOException {
-		// SQL query to set the specified reaction column to false
-		String updateQuery = "UPDATE invite_react_details SET " + columnName + " = 0 WHERE react_id = ?";
+	public boolean changeReactionStatus(int reactId, String updateQuery) throws DAOException {
 
 		try (Connection connection = ConnectionUtils.getConnection();
 				PreparedStatement statement = connection.prepareStatement(updateQuery)) {
@@ -106,6 +104,8 @@ public class InviteReactionDAO {
 		}
 	}
 
+	
+
 	/**
 	 * Changes the status of the "send request" reaction to false for a specific
 	 * reaction.
@@ -117,7 +117,9 @@ public class InviteReactionDAO {
 	 *                      query.
 	 */
 	public boolean changeTheInviteSendRequestIntoFalse(int reactId) throws DAOException {
-		return changeReactionStatus(reactId, "is_send_request");
+		String updateQuery = "UPDATE invite_react_details SET is_send_request = 0 WHERE react_id = ?";
+
+		return changeReactionStatus(reactId, updateQuery);
 	}
 
 	/**
@@ -130,7 +132,9 @@ public class InviteReactionDAO {
 	 *                      query.
 	 */
 	public boolean changeTheInviteRejectResponseIntoFalse(int reactId) throws DAOException {
-		return changeReactionStatus(reactId, "is_reject");
+		String updateQuery = "UPDATE invite_react_details SET is_reject = 0 WHERE react_id = ?";
+
+		return changeReactionStatus(reactId, updateQuery);
 	}
 
 	/**
