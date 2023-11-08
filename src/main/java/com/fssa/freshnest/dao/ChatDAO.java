@@ -23,6 +23,16 @@ import com.fssa.freshnest.utils.ConnectionUtils;
  */
 public class ChatDAO {
 
+	private static final String USER_ID = "user_id";
+	private static final String USERNAME = "username";
+	private static final String PROFILE_IMAGE = "profile_image";
+	private static final String SENDER_ID = "sender_id";
+	private static final String TIMESTAMP = "timestamp";
+	private static final String MESSAGE = "message";
+	private static final String CHAT_TYPE = "chat_type";
+	private static final String MESSAGE_ID = "message_id";
+	private static final String CHAT_ID = "chat_id";
+
 	/**
 	 * Inserts a new chat record into the database.
 	 *
@@ -41,7 +51,7 @@ public class ChatDAO {
 
 			try (ResultSet resultSet = statement.executeQuery(getLastChatId)) {
 				if (resultSet.next()) {
-					chat.setChatId(resultSet.getInt("chat_id"));
+					chat.setChatId(resultSet.getInt(CHAT_ID));
 				}
 			}
 
@@ -127,10 +137,10 @@ public class ChatDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					Chat chatResult = new Chat();
-					chatResult.setMessageId(resultSet.getInt("message_id"));
-					chatResult.setChatMessage(resultSet.getString("message"));
-					chatResult.setTimestamp(resultSet.getTimestamp("timestamp"));
-					chatResult.setSenderId(resultSet.getInt("sender_id"));
+					chatResult.setMessageId(resultSet.getInt(MESSAGE_ID));
+					chatResult.setChatMessage(resultSet.getString(MESSAGE));
+					chatResult.setTimestamp(resultSet.getTimestamp(TIMESTAMP));
+					chatResult.setSenderId(resultSet.getInt(SENDER_ID));
 
 					chatMessages.add(chatResult);
 				}
@@ -220,8 +230,8 @@ public class ChatDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					Chat chat = new Chat();
-					chat.setChatId(resultSet.getInt("chat_id"));
-					chat.setChatType(resultSet.getString("chat_type"));
+					chat.setChatId(resultSet.getInt(CHAT_ID));
+					chat.setChatType(resultSet.getString(CHAT_TYPE));
 					userChatGroups.add(chat);
 				}
 			}
@@ -260,9 +270,9 @@ public class ChatDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					Chat chatResult = new Chat();
-					chatResult.setChatId(resultSet.getInt("chat_id"));
+					chatResult.setChatId(resultSet.getInt(CHAT_ID));
 					chatResult.setChatName(resultSet.getString("chat_name"));
-					chatResult.setChatType(resultSet.getString("chat_type"));
+					chatResult.setChatType(resultSet.getString(CHAT_TYPE));
 					chatResult.setProfileImage(resultSet.getString("other_user_profile_image"));
 					chatResult.setUsername(resultSet.getString("other_user_username"));
 					chatResult.setUserTheme(resultSet.getString("user_theme"));
@@ -311,13 +321,13 @@ public class ChatDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					Chat message = new Chat();
-					message.setMessageId(resultSet.getInt("message_id"));
-					message.setChatId(resultSet.getInt("chat_id"));
-					message.setSenderId(resultSet.getInt("sender_id"));
-					message.setChatMessage(resultSet.getString("message"));
-					message.setTimestamp(resultSet.getTimestamp("timestamp"));
-					message.setProfileImage(resultSet.getString("profile_image"));
-					message.setUsername(resultSet.getString("username"));
+					message.setMessageId(resultSet.getInt(MESSAGE_ID));
+					message.setChatId(resultSet.getInt(CHAT_ID));
+					message.setSenderId(resultSet.getInt(SENDER_ID));
+					message.setChatMessage(resultSet.getString(MESSAGE));
+					message.setTimestamp(resultSet.getTimestamp(TIMESTAMP));
+					message.setProfileImage(resultSet.getString(PROFILE_IMAGE));
+					message.setUsername(resultSet.getString(USERNAME));
 
 					chatMessages.add(message);
 				}
@@ -347,8 +357,8 @@ public class ChatDAO {
 			statement.setInt(2, chat.getUserId());
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
-					chat.setUsername(resultSet.getString("username"));
-					chat.setProfileImage(resultSet.getString("profile_image"));
+					chat.setUsername(resultSet.getString(USERNAME));
+					chat.setProfileImage(resultSet.getString(PROFILE_IMAGE));
 					return chat;
 				} else {
 					return null;
@@ -445,7 +455,7 @@ public class ChatDAO {
 
 			try (ResultSet resultSet = chatStatement.executeQuery(getLastChatId)) {
 				if (resultSet.next()) {
-					chat.setChatId(resultSet.getInt("chat_id"));
+					chat.setChatId(resultSet.getInt(CHAT_ID));
 				}
 			}
 			return (affectedRows == 1);
@@ -479,12 +489,12 @@ public class ChatDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
 
-					chat.setChatId(resultSet.getInt("chat_id"));
+					chat.setChatId(resultSet.getInt(CHAT_ID));
 					chat.setChatName(resultSet.getString("group_name"));
 					chat.setGroupImage(resultSet.getString("group_image"));
-					chat.setChatMessage(resultSet.getString("message"));
+					chat.setChatMessage(resultSet.getString(MESSAGE));
 					chat.setTimestamp(resultSet.getTimestamp("last_message_time"));
-					chat.setChatType(resultSet.getString("chat_type"));
+					chat.setChatType(resultSet.getString(CHAT_TYPE));
 					//int lastMessageSenderId = resultSet.getInt("sender_id");
 					//chat.setUsername(userDAO.readUserFrinedsDetailsByUserId(lastMessageSenderId).getUsername());
 					chat.setUnReadMessageCount(getUnReadChatMessageCount(chatId, userId));
@@ -521,12 +531,12 @@ public class ChatDAO {
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
-					chat.setChatId(resultSet.getInt("chat_id"));
-					chat.setGroupImage(resultSet.getString("profile_image"));
-					chat.setChatName(resultSet.getString("username"));
-					chat.setChatMessage(resultSet.getString("message"));
+					chat.setChatId(resultSet.getInt(CHAT_ID));
+					chat.setGroupImage(resultSet.getString(PROFILE_IMAGE));
+					chat.setChatName(resultSet.getString(USERNAME));
+					chat.setChatMessage(resultSet.getString(MESSAGE));
 					chat.setTimestamp(resultSet.getTimestamp("last_message_time"));
-					chat.setChatType(resultSet.getString("chat_type"));
+					chat.setChatType(resultSet.getString(CHAT_TYPE));
 				//	int lastMessageSenderId = resultSet.getInt("sender_id");
 
 				//	chat.setUsername(userDAO.readUserFrinedsDetailsByUserId(lastMessageSenderId).getUsername());
@@ -534,7 +544,7 @@ public class ChatDAO {
 
 					if (resultSet.getInt("last_messsage_sender") == userId) {
 						chat.setLastMessageSender("user");
-						int messageId = resultSet.getInt("message_id");
+						int messageId = resultSet.getInt(MESSAGE_ID);
 						chat.setDoesEveryoneReadMessage(checkDoesEveryOneReadMessageOrNOt(chatId, messageId));
 					} else {
 						chat.setLastMessageSender("others");
@@ -565,7 +575,7 @@ public class ChatDAO {
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					int userId = resultSet.getInt("user_id");
+					int userId = resultSet.getInt(USER_ID);
 					User user = userDAO.readUserFrinedsDetailsByUserId(userId);
 					if (user != null) {
 						Chat participant = new Chat();
@@ -760,7 +770,7 @@ public class ChatDAO {
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					int userId = resultSet.getInt("user_id");
+					int userId = resultSet.getInt(USER_ID);
 					if (participants.contains(userId)) {
 						return false;
 					}
@@ -783,7 +793,7 @@ public class ChatDAO {
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					participants.add(resultSet.getInt("user_id"));
+					participants.add(resultSet.getInt(USER_ID));
 				}
 			}
 		} catch (SQLException e) {

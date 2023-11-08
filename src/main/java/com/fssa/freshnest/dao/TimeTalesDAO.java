@@ -13,6 +13,11 @@ import com.fssa.freshnest.model.User;
 import com.fssa.freshnest.utils.ConnectionUtils;
 
 public class TimeTalesDAO {
+	private static final String USER_ID = "user_id";
+	private static final String MEDIA_URL = "media_url";
+	private static final String DURATION = "duration";
+	private static final String TALE_ID = "tale_id";
+
 	/**
 	 * Creates a time tale record in the database.
 	 * 
@@ -56,11 +61,11 @@ public class TimeTalesDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
 					TimeTales timeTales1 = new TimeTales();
-					timeTales1.setTaleId(resultSet.getInt("tale_id"));
-					timeTales1.setTaleDuration(resultSet.getDouble("duration"));
+					timeTales1.setTaleId(resultSet.getInt(TALE_ID));
+					timeTales1.setTaleDuration(resultSet.getDouble(DURATION));
 					timeTales1.setUsername(resultSet.getString("username"));
-					timeTales1.setUserId(resultSet.getInt("user_id"));
-					timeTales1.setMediaUrl(resultSet.getString("media_url"));
+					timeTales1.setUserId(resultSet.getInt(USER_ID));
+					timeTales1.setMediaUrl(resultSet.getString(MEDIA_URL));
 					timeTales1.setExpireAt(resultSet.getTimestamp("expire_at"));
 					timeTales1.setProfileImage(resultSet.getString("profile_image"));
 					timeTaleDetails.add(timeTales1);
@@ -95,10 +100,10 @@ public class TimeTalesDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					TimeTales timeTales1 = new TimeTales();
-					int userId = resultSet.getInt("user_id");
-					timeTales1.setTaleId(resultSet.getInt("tale_id"));
-					timeTales1.setTaleDuration(resultSet.getDouble("duration"));
-					timeTales1.setMediaUrl(resultSet.getString("media_url"));
+					int userId = resultSet.getInt(USER_ID);
+					timeTales1.setTaleId(resultSet.getInt(TALE_ID));
+					timeTales1.setTaleDuration(resultSet.getDouble(DURATION));
+					timeTales1.setMediaUrl(resultSet.getString(MEDIA_URL));
 					timeTales1.setExpireAt(resultSet.getTimestamp("expires_at"));
 					timeTales1.setCreatedAt(resultSet.getTimestamp("created_at"));
 					User user = userDAO.readUserFrinedsDetailsByUserId(userId);
@@ -157,10 +162,10 @@ public class TimeTalesDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					TimeTales timeTale = new TimeTales();
-					timeTale.setTaleId(resultSet.getInt("tale_id"));
-					timeTale.setUserId(resultSet.getInt("user_id"));
-					timeTale.setMediaUrl(resultSet.getString("media_url"));
-					timeTale.setTaleDuration(resultSet.getDouble("duration"));
+					timeTale.setTaleId(resultSet.getInt(TALE_ID));
+					timeTale.setUserId(resultSet.getInt(USER_ID));
+					timeTale.setMediaUrl(resultSet.getString(MEDIA_URL));
+					timeTale.setTaleDuration(resultSet.getDouble(DURATION));
 					timeTale.setCreatedAt(resultSet.getTimestamp("created_at"));
 					timeTale.setUser(userDAO.readUserFrinedsDetailsByUserId(id));
 					timeTalesList.add(timeTale);

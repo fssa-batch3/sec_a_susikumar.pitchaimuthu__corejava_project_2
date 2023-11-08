@@ -16,6 +16,8 @@ import com.fssa.freshnest.utils.ConnectionUtils;
 
 public class NotificationDAO {
 
+	private static final String USER_ID = "user_id";
+
 	/**
 	 * Sends a follow request notification to a user.
 	 * 
@@ -96,7 +98,7 @@ public class NotificationDAO {
 					requestAndResponse1.setRequestSenderId(resultSet.getInt("sender_id"));
 					requestAndResponse1.setRequestType(resultSet.getString("notification_type"));
 					requestAndResponse1.setNotifyAt(resultSet.getTimestamp("notify_at"));
-					requestAndResponse1.setUserId(resultSet.getInt("user_id"));
+					requestAndResponse1.setUserId(resultSet.getInt(USER_ID));
 					requestAndResponse1.setUsername(resultSet.getString("username"));
 					requestAndResponse1.setUserTheme(resultSet.getString("user_theme"));
 					requestAndResponse1.setProfileImage(resultSet.getString("profile_image"));
@@ -133,7 +135,7 @@ public class NotificationDAO {
 					requestAndResponse1.setRequestSenderId(resultSet.getInt("sender_id"));
 					requestAndResponse1.setRequestType(resultSet.getString("notification_type"));
 					requestAndResponse1.setNotifyAt(resultSet.getTimestamp("notify_at"));
-					requestAndResponse1.setUserId(resultSet.getInt("user_id"));
+					requestAndResponse1.setUserId(resultSet.getInt(USER_ID));
 					requestAndResponse1.setUsername(resultSet.getString("username"));
 					requestAndResponse1.setUserTheme(resultSet.getString("user_theme"));
 					requestAndResponse1.setProfileImage(resultSet.getString("profile_image"));
@@ -232,7 +234,7 @@ public class NotificationDAO {
 			RequestAndResponse requestAndResponse1 = new RequestAndResponse();
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					int userId = resultSet.getInt("user_id");
+					int userId = resultSet.getInt(USER_ID);
 					int inviteId = resultSet.getInt("invite_id");
 					int reactId = resultSet.getInt("react_id");
 					User user = userDAO.readUserFrinedsDetailsByUserId(userId);

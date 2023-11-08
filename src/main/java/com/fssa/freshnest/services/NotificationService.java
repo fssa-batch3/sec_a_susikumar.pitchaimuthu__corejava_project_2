@@ -124,11 +124,10 @@ public class NotificationService {
 
 	public boolean sendInviteRequestNotification(RequestAndResponse requestAndResponse) throws ServiceException {
 		NotificationDAO notificationDAO = new NotificationDAO();
-
+ 
 		try {
-			if (notificationDAO.checkWhetherTheInviteRequestPresentOrNot(requestAndResponse)) {
-
-			}
+			notificationDAO.checkWhetherTheInviteRequestPresentOrNot(requestAndResponse);
+			
 			return notificationDAO.sendInviteRequestNotification(requestAndResponse);
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());

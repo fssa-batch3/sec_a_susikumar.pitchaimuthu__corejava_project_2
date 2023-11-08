@@ -57,14 +57,14 @@ class TestNotificationValidation {
 	void testValidateNotificationReadUserIdInvalidUserId() {
 		int userId = -1;
 		InvalidUserException result = assertThrows(InvalidUserException.class, () -> NotificationValidator.validateNotificationReadUserId(userId));
-		assertEquals(result.getMessage(),"Invalid user notification checking" );
+		assertEquals("Invalid user notification checking", result.getMessage() );
 	}
 	
 	@Test
 	void testValidateNotificationReadUserIdInvalidUserIdTwo() {
 		int userId = -1;
 		InvalidUserException result = assertThrows(InvalidUserException.class, () -> NotificationValidator.validateNotificationReadUserId(userId));
-		assertEquals(result.getMessage(),"Invalid user notification checking" );
+		assertEquals("Invalid user notification checking",result.getMessage() );
 	}
 
 
@@ -83,13 +83,13 @@ class TestNotificationValidation {
 	void testValidateNotificationIdInvalidNotificationId() {
 		int notificationId = 0;
 		InvalidUserException result = 	assertThrows(InvalidUserException.class, () -> NotificationValidator.validateNotificationId(notificationId));
-		assertEquals(result.getMessage(), "Invalid notificaiton id");
+		assertEquals( "Invalid notificaiton id", result.getMessage());
 	}
 	
 	@Test
 	void testValidateNotificationIdInvalidNotificationIdTwo() {
 		int notificationId = 0;
 		InvalidUserException result = 	assertThrows(InvalidUserException.class, () -> NotificationValidator.validateNotificationId(notificationId));
-		assertEquals(result.getMessage(), "Invalid notificaiton id");
+		assertEquals( "Invalid notificaiton id", result.getMessage());
 	}
 }

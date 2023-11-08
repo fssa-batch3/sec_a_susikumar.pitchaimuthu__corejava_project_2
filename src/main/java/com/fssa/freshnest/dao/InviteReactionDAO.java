@@ -16,6 +16,9 @@ import com.fssa.freshnest.utils.ConnectionUtils;
  */
 public class InviteReactionDAO {
 
+	private static final String IS_REJECT = "is_reject";
+	private static final String IS_SEND_REQUEST = "is_send_request";
+
 	/**
 	 * Checks if a user has a specific reaction in the invite reaction details.
 	 * 
@@ -63,7 +66,7 @@ public class InviteReactionDAO {
 	 *                      query.
 	 */
 	public boolean checkTheUserSendRequestOrNot(InviteReaction inviteReaction) throws DAOException {
-		return checkUserReaction(inviteReaction, "is_send_request");
+		return checkUserReaction(inviteReaction, IS_SEND_REQUEST);
 	}
 
 	/**
@@ -76,7 +79,7 @@ public class InviteReactionDAO {
 	 *                      query.
 	 */
 	public boolean checkTheUserSendRejectResponseOrNot(InviteReaction inviteReaction) throws DAOException {
-		return checkUserReaction(inviteReaction, "is_reject");
+		return checkUserReaction(inviteReaction, IS_REJECT);
 	}
 
 	/**
@@ -159,8 +162,8 @@ public class InviteReactionDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				if (resultSet.next()) {
 					inviteReaction1.setLike(resultSet.getBoolean("is_like"));
-					inviteReaction1.setReject(resultSet.getBoolean("is_reject"));
-					inviteReaction1.setSendRequest(resultSet.getBoolean("is_send_request"));
+					inviteReaction1.setReject(resultSet.getBoolean(IS_REJECT));
+					inviteReaction1.setSendRequest(resultSet.getBoolean(IS_SEND_REQUEST));
 					inviteReaction1.setInviteMessage(resultSet.getString("invite_message"));
 				}
 			}
@@ -341,9 +344,9 @@ public class InviteReactionDAO {
 					inviteReaction.setReactId(resultSet.getInt("react_id"));
 					inviteReaction.setInviteId(resultSet.getInt("invite_id"));
 					inviteReaction.setUserId(resultSet.getInt("user_id"));
-					inviteReaction.setSendRequest(resultSet.getBoolean("is_send_request"));
+					inviteReaction.setSendRequest(resultSet.getBoolean(IS_SEND_REQUEST));
 					inviteReaction.setLike(resultSet.getBoolean("is_like"));
-					inviteReaction.setReject(resultSet.getBoolean("is_reject"));
+					inviteReaction.setReject(resultSet.getBoolean(IS_REJECT));
 					inviteReaction.setInviteMessage(resultSet.getString("invite_message"));
 				}
 			}
