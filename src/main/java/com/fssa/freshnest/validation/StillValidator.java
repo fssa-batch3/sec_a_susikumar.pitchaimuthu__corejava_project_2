@@ -88,16 +88,16 @@ public class StillValidator {
 
 	// validate Delete image
 	
-	public static boolean validateDeleteStill(Still still) throws InvalidUserException {
-	    if (still == null) {
-	        return false;
-	    }
-	    
-	    if (!validateStillDate(still.getStillDate())) {
-	        throw new InvalidUserException(StillConstants.getInvalidStillDeleteMessage());
-	    } 
-	    return true; 
-	}
+//	public static boolean validateDeleteStill(Still still) throws InvalidUserException {
+//	    if (still == null) {
+//	        return false;
+//	    }
+//	    
+//	    if (!validateStillDate(still.getStillDate())) {
+//	        throw new InvalidUserException(StillConstants.getInvalidStillDeleteMessage());
+//	    } 
+//	    return true; 
+//	}
 
 
 	/**

@@ -1,9 +1,0 @@
-com.fssa.freshnest.constants
-com.fssa.freshnest.dao
-com.fssa.freshnest.dao.exceptions
-com.fssa.freshnest.model
-com.fssa.freshnest.services
-com.fssa.freshnest.services.exceptions
-com.fssa.freshnest.utils
-com.fssa.freshnest.validation
-com.fssa.freshnest.validation.exceptions

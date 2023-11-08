@@ -104,8 +104,6 @@ public class InviteReactionDAO {
 		}
 	}
 
-	
-
 	/**
 	 * Changes the status of the "send request" reaction to false for a specific
 	 * reaction.
@@ -164,8 +162,6 @@ public class InviteReactionDAO {
 					inviteReaction1.setReject(resultSet.getBoolean("is_reject"));
 					inviteReaction1.setSendRequest(resultSet.getBoolean("is_send_request"));
 					inviteReaction1.setInviteMessage(resultSet.getString("invite_message"));
-				} else {
-					return null;
 				}
 			}
 			return inviteReaction1;

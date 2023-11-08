@@ -23,9 +23,6 @@ public class InviteReactionService {
 		try {
 			InviteReaction details = inviteReactionDAO.getUserInviteReaction(inviteReaction);
 
-			if (details == null) {
-				return null;
-			}
 			return details;
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());

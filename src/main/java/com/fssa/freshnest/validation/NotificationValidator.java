@@ -14,12 +14,12 @@ public class NotificationValidator {
 	 * @throws InvalidUserException If the "isReadCount" is invalid, this exception
 	 *                              is thrown with an appropriate message.
 	 */
-	public static boolean validateNotIsReadCount(RequestAndResponse requestAndResponse) throws InvalidUserException {
-		if (!validateNotificationReadUserId(requestAndResponse.getRequestSenderId())) {
-			throw new InvalidUserException("Invalid user notification checking");
-		}
-		return true;
-	}
+//	public static boolean validateNotIsReadCount(RequestAndResponse requestAndResponse) throws InvalidUserException {
+//		if (!validateNotificationReadUserId(requestAndResponse.getRequestSenderId())) {
+//			throw new InvalidUserException("Invalid user notification checking");
+//		}
+//		return true;
+//	}
 
 	/**
 	 * Validates a user's ID for notification purposes by checking if it is a
